@@ -45,13 +45,13 @@ export const signin = (username, password) => dispatch => {
     grant_type: "password",
     username: `${username}`,
     password: `${password}`,
-    client_id: `${process.env.CLIENT_ID}`,
-    client_secret: `${process.env.CLIENT_SECRET}`,
+    client_id: `${process.env.REACT_APP_CLIENT_ID}`,
+    client_secret: `${process.env.REACT_APP_CLIENT_SECRET}`,
   });
 
   axios({
     method: "post",
-    url: `${process.env.ROOT_URL}/o/token/`,
+    url: `${process.env.REACT_APP_ROOT_URL}/o/token/`,
     headers: {
       "Content-Type": "application/x-www-form-urlencoded",
       "Cache-Control": "no-cache",
