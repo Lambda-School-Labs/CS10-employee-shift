@@ -1,6 +1,6 @@
 import axios from "axios";
 
-// Action to get user and their data when the token is saved in local storage
+// Action to get user the token is saved in local storage (WIP: and data?)
 export const getUser = () => (dispatch, getState) => {
   dispatch({ type: "FETCHING_USER" });
 
@@ -14,28 +14,32 @@ export const getUser = () => (dispatch, getState) => {
     headers["Authorization"] = `Bearer ${token}`;
   }
 
-  axios
-    // Dummy URL
-    .get("http://djangodashboard.herokuapp.com//rest-auth/login/", { headers })
-    .then(res => {
-      if (res.status < 500) {
-        return res.json().then(data => {
-          return { status: res.status, data };
-        });
-      } else {
-        console.log("Server Error!");
-        throw res;
-      }
-    })
-    .then(res => {
-      if (res.status === 200) {
-        dispatch({ type: "FETCHED_USER", user: res.data });
-        return res.data;
-      } else if (res.status >= 400 && res.status < 500) {
-        dispatch({ type: "ERROR", data: res.data });
-        throw res.data;
-      }
-    });
+  // DEVELOPMENT workaround until get user endpoint works REMOVE ME
+  dispatch({ type: "AUTH_ERROR", data: "dur" });
+
+  //   axios
+  //     .get(`${process.env.REACT_APP_ROOT_URL}/users/`, {
+  //       headers,
+  //     })
+  //     .then(res => {
+  //       if (res.status < 500) {
+  //         return res.json().then(data => {
+  //           return { status: res.status, data };
+  //         });
+  //       } else {
+  //         console.log("Server Error!");
+  //         throw res;
+  //       }
+  //     })
+  //     .then(res => {
+  //       if (res.status === 200) {
+  //         dispatch({ type: "FETCHED_USER", user: res.data });
+  //         return res.data;
+  //       } else if (res.status >= 400 && res.status < 500) {
+  //         dispatch({ type: "AUTH_ERROR", data: res.data });
+  //         throw res.data;
+  //       }
+  //     });
 };
 
 export const signin = (username, password) => dispatch => {
@@ -72,6 +76,7 @@ export const signin = (username, password) => dispatch => {
         dispatch({ type: "ERROR", data: res.data });
         throw res.data;
       }
+      // TODO: More error checking?
     });
 };
 
@@ -123,7 +128,7 @@ export const signup = token => dispatch => {
 
   axios({
     method: "post",
-    // fix dis below
+    // fix dis URL below with correct endpoint
     url: `${process.env.REACT_APP_ROOT_URL}/???`,
     headers: {
       "Content-Type": "application/x-www-form-urlencoded",

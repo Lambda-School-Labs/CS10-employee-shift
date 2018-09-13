@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import { Link, Redirect } from "react-router-dom";
 import { connect } from "react-redux";
 
 import { signup } from "../../store/User/actions.js";
@@ -23,6 +24,11 @@ class Signup extends Component {
   };
 
   render() {
+    if (this.props.isAuthenticated) {
+      // TODO: employee redirect
+      return <Redirect to="/calendar" />;
+    }
+
     return (
       <div className="card">
         <h1>Register a new user</h1>
@@ -51,6 +57,9 @@ class Signup extends Component {
             </div>
           </div>
         </form>
+        <p>
+          Already have an account? <Link to="/signin">Login</Link>
+        </p>
       </div>
     );
   }

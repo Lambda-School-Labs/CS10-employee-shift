@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
+import { Link, Redirect } from "react-router-dom";
 import "../../styles/signin.css";
 
 import { signin } from "../../store/User/actions.js";
@@ -22,6 +23,11 @@ class Signin extends Component {
   };
 
   render() {
+    if (this.props.isAuthenticated) {
+      // TODO: employee redirect
+      return <Redirect to="/calendar" />;
+    }
+
     return (
       <div className="card">
         <form onSubmit={this.submitHandler}>
@@ -49,6 +55,9 @@ class Signin extends Component {
             </div>
           </div>
         </form>
+        <p>
+          New user? <Link to="/signup">Register</Link>
+        </p>
       </div>
     );
   }

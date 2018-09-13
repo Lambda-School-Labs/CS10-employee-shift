@@ -31,7 +31,7 @@ class App extends Component {
             // TODO: better loading screen, seperate component
             return <em>Loading...</em>;
           } else if (!this.props.user.isAuthenticated) {
-            return <Redirect to="/login" />;
+            return <Redirect to="/signin" />;
           } else {
             return <ChildComponent {...props} />;
           }
@@ -46,14 +46,14 @@ class App extends Component {
       <div className="App">
         <BrowserRouter>
           <Switch>
-            <Route exact path="/" component={Landing} />
             <PrivateRoute exact path="/calendar" component={Calendar} />
             <PrivateRoute exact path="/billing" component={Billing} />
             <PrivateRoute exact path="/dashboard" component={Dashboard} />
-            <Route exact path="/signin" component={Signin} />
-            <Route exact path="/signup" component={Signup} />
             <PrivateRoute exact path="/employees" component={Employees} />
             <PrivateRoute exact path="/settings" component={Settings} />
+            <Route exact path="/" component={Landing} />
+            <Route exact path="/signin" component={Signin} />
+            <Route exact path="/signup" component={Signup} />
           </Switch>
         </BrowserRouter>
       </div>
