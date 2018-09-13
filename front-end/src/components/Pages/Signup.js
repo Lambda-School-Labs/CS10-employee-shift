@@ -1,11 +1,12 @@
 import React, { Component } from "react";
-import { connect } from "react-redux";
 import { Link, Redirect } from "react-router-dom";
-import "../../styles/signin.css";
+import { connect } from "react-redux";
 
-import { signin } from "../../store/User/actions.js";
+import { signup } from "../../store/User/actions.js";
 
-class Signin extends Component {
+// NOTE: WIP
+
+class Signup extends Component {
   state = {
     email: "",
     password: "",
@@ -13,7 +14,7 @@ class Signin extends Component {
 
   submitHandler = e => {
     e.preventDefault();
-    this.props.signin(this.state.email, this.state.password);
+    this.props.signup(this.state.email, this.state.password);
   };
 
   inputChangeHandler = event => {
@@ -30,6 +31,7 @@ class Signin extends Component {
 
     return (
       <div className="card">
+        <h1>Register a new user</h1>
         <form onSubmit={this.submitHandler}>
           <div className="card_body">
             <div>
@@ -56,7 +58,7 @@ class Signin extends Component {
           </div>
         </form>
         <p>
-          New user? <Link to="/signup">Register</Link>
+          Already have an account? <Link to="/signin">Login</Link>
         </p>
       </div>
     );
@@ -78,8 +80,8 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
   return {
-    signin: (username, password) => {
-      return dispatch(signin(username, password));
+    signup: (username, password) => {
+      return dispatch(signup(username, password));
     },
   };
 };
@@ -87,4 +89,4 @@ const mapDispatchToProps = dispatch => {
 export default connect(
   mapStateToProps,
   mapDispatchToProps
-)(Signin);
+)(Signup);

@@ -1,6 +1,7 @@
 const initialState = {
   token: localStorage.getItem("token"),
-  isAuthenticated: null,
+  isAuthenticated: false,
+  isEmployee: null,
   isLoading: true,
   user: null,
   errors: {},
@@ -16,9 +17,11 @@ export default (state = initialState, action) => {
         ...state,
         isAuthenticated: true,
         isLoading: false,
+        // TODO: user data WIP
         user: action.user,
       };
 
+    // TODO: Employee check
     case "SIGNIN_SUCCESS":
       localStorage.setItem("token", action.data.token);
       return {
@@ -29,6 +32,9 @@ export default (state = initialState, action) => {
         errors: null,
       };
 
+    case "AUTH_ERROR":
+    // fall through to signout
+
     case "SIGNOUT_SUCCESS":
       localStorage.removeItem("token");
       return {
@@ -36,8 +42,20 @@ export default (state = initialState, action) => {
         errors: action.data,
         token: null,
         user: null,
+        isEmployee: null,
         isAuthenticated: false,
         isLoading: false,
+      };
+
+    // TODO: employee check
+    case "REGISTRATION_SUCCESS":
+      localStorage.setItem("token", action.data.token);
+      return {
+        ...state,
+        ...action.data,
+        isAuthenticated: true,
+        isLoading: false,
+        errors: null,
       };
 
     case "ERROR":

@@ -1,13 +1,13 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import "../../styles/LandingRef.css"
+import "../../styles/LandingRef.css";
 
 const Landing = () => {
   return (
     <div className="container">
       <div className="background-holder">
         <div className="nav-bar">
-          <Link to="">
+          <Link to="/signup">
             <button>Sign up</button>
           </Link>
           <Link to="/signin">
@@ -26,7 +26,6 @@ const Landing = () => {
           <span>Copyright 2018</span>
         </footer>
       </div>
-
     </div>
   );
 };
