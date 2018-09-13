@@ -53,6 +53,10 @@ class Day(models.Model):
       return self.name
       
 class Availability(models.Model):
+    
+    class Meta:
+        verbose_name_plural = "Availabilities"
+    
     id = models.UUIDField(primary_key=True, default=uuid4, editable=False)
     employee = models.ForeignKey(Employee, on_delete=models.CASCADE)
     
