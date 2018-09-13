@@ -25,7 +25,7 @@ class Settings extends Component {
           <CardBody className="card_body">
             <div>
               <label>Email</label>
-              <input value={this.state.email} onChange={this.inputChangeHandler} name="email" type="text" />
+              <input className='textbox' value={this.state.email} onChange={this.inputChangeHandler} name="email" type="text" />
             </div>
             <div>
               <label> Phone</label>

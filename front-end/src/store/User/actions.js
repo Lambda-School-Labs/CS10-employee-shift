@@ -4,42 +4,42 @@ import axios from "axios";
 
 // Action to get user when the token is saved in local storage
 
-// export const getUser = () => (dispatch, getState) => {
-//   dispatch({ type: "FETCHING_USER" });
+export const getUser = () => (dispatch, getState) => {
+  dispatch({ type: "FETCHING_USER" });
 
-//   const token = getState().user.token;
+  const token = getState().user.token;
 
-//   const headers = {
-//     "Content-Type": "application/json",
-//   };
+  const headers = {
+    "Content-Type": "application/json",
+  };
 
-//   if (token) {
-//     headers["Authorization"] = `Token ${token}`;
-//   }
+  if (token) {
+    headers["Authorization"] = `Token ${token}`;
+  }
 
-//   axios
-//     // Dummy URL
-//     .get("http://djangodashboard.herokuapp.com//rest-auth/login/", { headers })
-//     .then(res => {
-//       if (res.status < 500) {
-//         return res.json().then(data => {
-//           return { status: res.status, data };
-//         });
-//       } else {
-//         console.log("Server Error!");
-//         throw res;
-//       }
-//     })
-//     .then(res => {
-//       if (res.status === 200) {
-//         dispatch({ type: "FETCHED_USER", user: res.data });
-//         return res.data;
-//       } else if (res.status >= 400 && res.status < 500) {
-//         dispatch({ type: "ERROR", data: res.data });
-//         throw res.data;
-//       }
-//     });
-// };
+  axios
+    // Dummy URL
+    .get("http://djangodashboard.herokuapp.com/rest-auth/login/", { headers })
+    .then(res => {
+      if (res.status < 500) {
+        return res.json().then(data => {
+          return { status: res.status, data };
+        });
+      } else {
+        console.log("Server Error!");
+        throw res;
+      }
+    })
+    .then(res => {
+      if (res.status === 200) {
+        dispatch({ type: "FETCHED_USER", user: res.data });
+        return res.data;
+      } else if (res.status >= 400 && res.status < 500) {
+        dispatch({ type: "ERROR", data: res.data });
+        throw res.data;
+      }
+    });
+};
 
 export const signin = (username, password) => dispatch => {
   const headers = {

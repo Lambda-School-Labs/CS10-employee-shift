@@ -16,3 +16,8 @@
     margin-bottom: 25px;
     margin-left: 30px;
 }
+
+.textbox {
+    justify-content: center;
+    margin: auto;
+}
