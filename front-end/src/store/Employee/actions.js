@@ -3,7 +3,7 @@ import axios from "axios";
 /* TODO: fill with actions
 
 format:
-export const getUser = () => dispatch => {
+export const addEmployee = () => dispatch => {
     dispatch({ type: 'FETCHING_USER' });
 
     axios.get('endpoint URL').then(response => {

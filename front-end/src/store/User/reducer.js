@@ -20,6 +20,7 @@ export default (state = initialState, action) => {
         user: action.user,
       };
 
+    // TODO: Employee check
     case "SIGNIN_SUCCESS":
       localStorage.setItem("token", action.data.token);
       return {
@@ -40,6 +41,17 @@ export default (state = initialState, action) => {
         isEmployee: null,
         isAuthenticated: false,
         isLoading: false,
+      };
+
+    // TODO: employee check
+    case "REGISTRATION_SUCCESS":
+      localStorage.setItem("token", action.data.token);
+      return {
+        ...state,
+        ...action.data,
+        isAuthenticated: true,
+        isLoading: false,
+        errors: null,
       };
 
     case "ERROR":

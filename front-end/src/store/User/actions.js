@@ -108,3 +108,43 @@ export const signout = token => dispatch => {
       }
     });
 };
+
+// TODO: signup action
+
+export const signup = token => dispatch => {
+  const body = JSON.stringify({
+    token: token,
+    client_id: `${process.env.REACT_APP_CLIENT_ID}`,
+    client_secret: `${process.env.REACT_APP_CLIENT_SECRET}`,
+  });
+
+  // dev console log REMOVE ME
+  console.log("WIP: Not yet functional");
+
+  axios({
+    method: "post",
+    // fix dis below
+    url: `${process.env.REACT_APP_ROOT_URL}/???`,
+    headers: {
+      "Content-Type": "application/x-www-form-urlencoded",
+    },
+    data: body,
+  })
+    .then(res => {
+      if (res.status < 500) {
+        return { status: res.status, data: res.data };
+      } else {
+        console.log("Server Error!");
+        throw res;
+      }
+    })
+    .then(res => {
+      if (res.status === 200) {
+        dispatch({ type: "SIGNUP_SUCCESS", data: res.data });
+        return res.data;
+      } else if (res.status === 403 || res.status === 401) {
+        dispatch({ type: "ERROR", data: res.data });
+        throw res.data;
+      }
+    });
+};
