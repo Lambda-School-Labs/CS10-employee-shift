@@ -15,19 +15,29 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
-from shiftapp.api import UserList, UserDetails, GroupList
+from shiftapp.api import UserList, UserDetails, GroupList, EmployeeList, EmployerList, AvailabilityList, DayList, CalendarDayList, RequestedTimeOffList, ShiftList, HourOfOperationList
 from django.contrib.auth.models import User, Group
 admin.autodiscover()
+from rest_framework import generics, permissions, serializers, routers
+from oauth2_provider.contrib.rest_framework import TokenHasReadWriteScope, TokenHasScope 
 
-from rest_framework import generics, permissions, serializers
+router = routers.DefaultRouter()
+router.register(r'employees', EmployeeList)
+router.register(r'availabilities', AvailabilityList)
+router.register(r'day', DayList)
+router.register(r'employers', EmployerList)
+router.register(r'calendar', CalendarDayList)
+router.register(r'requestoff', RequestedTimeOffList)
+router.register(r'shifts', ShiftList)
+router.register(r'hoo', HourOfOperationList)
 
-from oauth2_provider.contrib.rest_framework import TokenHasReadWriteScope, TokenHasScope
 
 
 urlpatterns = [
-    path('admin/', admin.site.urls),
-    path('o/', include('oauth2_provider.urls', namespace='oauth2_provider')),
-    path('users/', UserList.as_view()),
-    path('users/<pk>/', UserDetails.as_view()),
-    path('groups/', GroupList.as_view())
+   path('admin/', admin.site.urls),
+   path('o/', include('oauth2_provider.urls', namespace='oauth2_provider')),
+   path('users/', UserList.as_view()),
+   path('users/<pk>/', UserDetails.as_view()),
+   path('groups/', GroupList.as_view()),
+   path('api/', include(router.urls))
 ]
