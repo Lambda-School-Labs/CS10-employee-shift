@@ -1,44 +1,42 @@
 import axios from "axios";
-// TODO: Refactor to use OAuth2
 
-// Action to get user when the token is saved in local storage
+// Action to get user and their data when the token is saved in local storage
+export const getUser = () => (dispatch, getState) => {
+  dispatch({ type: "FETCHING_USER" });
 
-// export const getUser = () => (dispatch, getState) => {
-//   dispatch({ type: "FETCHING_USER" });
+  const token = getState().user.token;
 
-//   const token = getState().user.token;
+  const headers = {
+    "Content-Type": "application/json",
+  };
 
-//   const headers = {
-//     "Content-Type": "application/json",
-//   };
+  if (token) {
+    headers["Authorization"] = `Bearer ${token}`;
+  }
 
-//   if (token) {
-//     headers["Authorization"] = `Token ${token}`;
-//   }
-
-//   axios
-//     // Dummy URL
-//     .get("http://djangodashboard.herokuapp.com//rest-auth/login/", { headers })
-//     .then(res => {
-//       if (res.status < 500) {
-//         return res.json().then(data => {
-//           return { status: res.status, data };
-//         });
-//       } else {
-//         console.log("Server Error!");
-//         throw res;
-//       }
-//     })
-//     .then(res => {
-//       if (res.status === 200) {
-//         dispatch({ type: "FETCHED_USER", user: res.data });
-//         return res.data;
-//       } else if (res.status >= 400 && res.status < 500) {
-//         dispatch({ type: "ERROR", data: res.data });
-//         throw res.data;
-//       }
-//     });
-// };
+  axios
+    // Dummy URL
+    .get("http://djangodashboard.herokuapp.com//rest-auth/login/", { headers })
+    .then(res => {
+      if (res.status < 500) {
+        return res.json().then(data => {
+          return { status: res.status, data };
+        });
+      } else {
+        console.log("Server Error!");
+        throw res;
+      }
+    })
+    .then(res => {
+      if (res.status === 200) {
+        dispatch({ type: "FETCHED_USER", user: res.data });
+        return res.data;
+      } else if (res.status >= 400 && res.status < 500) {
+        dispatch({ type: "ERROR", data: res.data });
+        throw res.data;
+      }
+    });
+};
 
 export const signin = (username, password) => dispatch => {
   const body = JSON.stringify({
@@ -68,13 +66,44 @@ export const signin = (username, password) => dispatch => {
     })
     .then(res => {
       if (res.status === 200) {
-        dispatch({ type: "SIGNIN_SUCCESSFUL", data: res.data });
+        dispatch({ type: "SIGNIN_SUCCESS", data: res.data });
         return res.data;
       } else if (res.status === 403 || res.status === 401) {
         dispatch({ type: "ERROR", data: res.data });
         throw res.data;
+      }
+    });
+};
+
+export const signout = token => dispatch => {
+  const body = JSON.stringify({
+    token: token,
+    client_id: `${process.env.REACT_APP_CLIENT_ID}`,
+    client_secret: `${process.env.REACT_APP_CLIENT_SECRET}`,
+  });
+
+  axios({
+    method: "post",
+    url: `${process.env.REACT_APP_ROOT_URL}/o/revoke_token/`,
+    headers: {
+      "Content-Type": "application/x-www-form-urlencoded",
+    },
+    data: body,
+  })
+    .then(res => {
+      if (res.status < 500) {
+        return { status: res.status, data: res.data };
       } else {
-        dispatch({ type: "SIGNIN_FAILED", data: res.data });
+        console.log("Server Error!");
+        throw res;
+      }
+    })
+    .then(res => {
+      if (res.status === 200) {
+        dispatch({ type: "SIGNOUT_SUCCESS", data: res.data });
+        return res.data;
+      } else if (res.status === 403 || res.status === 401) {
+        dispatch({ type: "ERROR", data: res.data });
         throw res.data;
       }
     });

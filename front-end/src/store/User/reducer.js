@@ -1,6 +1,7 @@
 const initialState = {
   token: localStorage.getItem("token"),
   isAuthenticated: null,
+  isEmployee: null,
   isLoading: true,
   user: null,
   errors: {},
@@ -36,6 +37,7 @@ export default (state = initialState, action) => {
         errors: action.data,
         token: null,
         user: null,
+        isEmployee: null,
         isAuthenticated: false,
         isLoading: false,
       };
