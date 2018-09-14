@@ -1,5 +1,7 @@
 import React, { Component } from "react";
 import { Card,CardTitle,CardBody } from 'reactstrap';
+import { Route} from "react-router-dom";
+
 import '../../styles/settings.css';
 
 class Settings extends Component {
@@ -20,7 +22,8 @@ class Settings extends Component {
   }
 
   render() {
-    return <Card className="card">
+    return 
+    <Card className="card">
         <form onSubmit={this.submitForm}>
           <CardBody className="card_body">
             <div>
@@ -50,8 +53,10 @@ class Settings extends Component {
             </div>
           </CardBody>
         </form>
-      </Card>;
-  }  
+      </Card>
+      < Route exact path = "../navbar/sidebar.js" component = { Sidebar }
+      />
+  };
 }
 
 export default Settings;
