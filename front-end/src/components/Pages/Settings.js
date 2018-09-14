@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Card, CardTitle, CardBody } from "reactstrap";
+import { Card, CardBody } from "reactstrap";
 import "../../styles/settings.css";
 
 class Settings extends Component {
@@ -75,3 +75,5 @@ class Settings extends Component {
     );
   }
 }
+
+export default Settings;
