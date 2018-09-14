@@ -114,8 +114,8 @@ export const signout = token => dispatch => {
 // TODO: signup action
 export const signup = (username, password) => dispatch => {
   const body = JSON.stringify({
-    client_id: `${process.env.REACT_APP_CLIENT_ID}`,
-    client_secret: `${process.env.REACT_APP_CLIENT_SECRET}`,
+    username: username,
+    password: password,
   });
 
   // dev console log REMOVE ME
@@ -124,7 +124,7 @@ export const signup = (username, password) => dispatch => {
   axios({
     method: "post",
     // fix dis URL below with correct endpoint
-    url: `${process.env.REACT_APP_ROOT_URL}/users`,
+    url: `${process.env.REACT_APP_ROOT_URL}/api/sign_up/`,
     headers: {
       "Content-Type": "application/x-www-form-urlencoded",
     },
