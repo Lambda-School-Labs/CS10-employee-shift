@@ -5,13 +5,11 @@ export const getUser = () => (dispatch, getState) => {
   dispatch({ type: "FETCHING_USER" });
 
   const token = getState().user.token;
-
-  const headers = {
-    "Content-Type": "application/json",
-  };
-
   if (token) {
-    headers["Authorization"] = `Bearer ${token}`;
+    const headers = {
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${token}`,
+    };
 
     // TODO: Redo with correct endpoint to get user (not list of users)
     axios
@@ -19,21 +17,13 @@ export const getUser = () => (dispatch, getState) => {
         headers,
       })
       .then(res => {
-        if (res.status < 500) {
-          return { status: res.status };
-        } else {
-          console.log("Server Error!");
-          throw res;
-        }
-      })
-      .then(res => {
         if (res.status === 200) {
           dispatch({ type: "FETCHED_USER", user: res.data });
           return res.data;
-        } else if (res.status >= 400 && res.status < 500) {
-          dispatch({ type: "AUTH_ERROR", data: res.data });
-          throw res.data;
         }
+      })
+      .catch(err => {
+        dispatch({ type: "AUTH_ERROR" });
       });
   } else dispatch({ type: "AUTH_ERROR" });
 };
@@ -72,11 +62,11 @@ export const signin = (username, password) => dispatch => {
         dispatch({ type: "ERROR", data: res.data });
         throw res.data;
       }
-      // TODO: More error checking?
+      // TODO: More error checking? Re-do with catch?
     });
 };
 
-// TODO: not functional
+// TODO: needs more testing
 export const signout = token => dispatch => {
   const body = JSON.stringify({
     token: token,
@@ -112,7 +102,11 @@ export const signout = token => dispatch => {
 };
 
 // TODO: signup action
-export const signup = (username, password) => dispatch => {
+export const signup = (
+  username,
+  password,
+  passwordConfirmation
+) => dispatch => {
   const body = JSON.stringify({
     username: username,
     password: password,
