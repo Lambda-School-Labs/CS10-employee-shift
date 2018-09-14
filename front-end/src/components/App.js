@@ -29,6 +29,7 @@ class App extends Component {
         render={props => {
           if (this.props.user.isLoading) {
             // TODO: better loading screen, seperate component
+            console.log(this.props);
             return <em>Loading...</em>;
           } else if (!this.props.user.isAuthenticated) {
             return <Redirect to="/signin" />;
