@@ -12,34 +12,30 @@ export const getUser = () => (dispatch, getState) => {
 
   if (token) {
     headers["Authorization"] = `Bearer ${token}`;
-  }
 
-  // DEVELOPMENT workaround until get user endpoint works REMOVE ME
-  dispatch({ type: "AUTH_ERROR", data: "dur" });
-
-  //   axios
-  //     .get(`${process.env.REACT_APP_ROOT_URL}/users/`, {
-  //       headers,
-  //     })
-  //     .then(res => {
-  //       if (res.status < 500) {
-  //         return res.json().then(data => {
-  //           return { status: res.status, data };
-  //         });
-  //       } else {
-  //         console.log("Server Error!");
-  //         throw res;
-  //       }
-  //     })
-  //     .then(res => {
-  //       if (res.status === 200) {
-  //         dispatch({ type: "FETCHED_USER", user: res.data });
-  //         return res.data;
-  //       } else if (res.status >= 400 && res.status < 500) {
-  //         dispatch({ type: "AUTH_ERROR", data: res.data });
-  //         throw res.data;
-  //       }
-  //     });
+    // TODO: Redo with correct endpoint to get user (not list of users)
+    axios
+      .get(`${process.env.REACT_APP_ROOT_URL}/users/`, {
+        headers,
+      })
+      .then(res => {
+        if (res.status < 500) {
+          return { status: res.status };
+        } else {
+          console.log("Server Error!");
+          throw res;
+        }
+      })
+      .then(res => {
+        if (res.status === 200) {
+          dispatch({ type: "FETCHED_USER", user: res.data });
+          return res.data;
+        } else if (res.status >= 400 && res.status < 500) {
+          dispatch({ type: "AUTH_ERROR", data: res.data });
+          throw res.data;
+        }
+      });
+  } else dispatch({ type: "AUTH_ERROR" });
 };
 
 export const signin = (username, password) => dispatch => {
@@ -80,6 +76,7 @@ export const signin = (username, password) => dispatch => {
     });
 };
 
+// TODO: not functional
 export const signout = token => dispatch => {
   const body = JSON.stringify({
     token: token,
@@ -115,10 +112,8 @@ export const signout = token => dispatch => {
 };
 
 // TODO: signup action
-
-export const signup = token => dispatch => {
+export const signup = (username, password) => dispatch => {
   const body = JSON.stringify({
-    token: token,
     client_id: `${process.env.REACT_APP_CLIENT_ID}`,
     client_secret: `${process.env.REACT_APP_CLIENT_SECRET}`,
   });
@@ -129,7 +124,7 @@ export const signup = token => dispatch => {
   axios({
     method: "post",
     // fix dis URL below with correct endpoint
-    url: `${process.env.REACT_APP_ROOT_URL}/???`,
+    url: `${process.env.REACT_APP_ROOT_URL}/users`,
     headers: {
       "Content-Type": "application/x-www-form-urlencoded",
     },
