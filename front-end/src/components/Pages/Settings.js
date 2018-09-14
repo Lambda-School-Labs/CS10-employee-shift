@@ -1,6 +1,9 @@
 import React, { Component } from "react";
-import { Card, CardTitle, CardBody } from "reactstrap";
+import { Card, CardBody } from "reactstrap";
 import "../../styles/settings.css";
+
+import Sidebar from "../navbar/sidebar.js";
+
 
 class Settings extends Component {
   constructor(props) {
@@ -53,7 +56,7 @@ class Settings extends Component {
             </CardBody>
           </form>
         </Card>
-      < Route exact path = "../navbar/sidebar.js" component = { Sidebar } />
+      < Sidebar/>
       </div>
     )
   };

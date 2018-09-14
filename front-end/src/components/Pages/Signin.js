@@ -3,6 +3,8 @@ import { connect } from "react-redux";
 import { Link, Redirect } from "react-router-dom";
 import "../../styles/signin.css";
 
+import Sidebar from "../navbar/sidebar.js";
+
 import { signin } from "../../store/User/actions.js";
 
 class Signin extends Component {
@@ -58,6 +60,7 @@ class Signin extends Component {
         <p>
           New user? <Link to="/signup">Register</Link>
         </p>
+        <Sidebar/>
       </div>
     );
   }
