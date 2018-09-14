@@ -58,6 +58,7 @@ export default (state = initialState, action) => {
         errors: null,
       };
 
+    // TODO: double check this
     case "ERROR":
       return { ...state, error: action.errorMessage };
 

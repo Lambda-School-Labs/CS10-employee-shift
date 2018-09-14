@@ -105,11 +105,18 @@ export const signout = token => dispatch => {
 export const signup = (
   username,
   password,
-  passwordConfirmation
+  passwordConfirmation,
+  email,
+  firstName,
+  lastName
 ) => dispatch => {
   const body = JSON.stringify({
     username: username,
     password: password,
+    passwordConfirmation: passwordConfirmation,
+    email: email,
+    firstName: firstName,
+    lastName: lastName,
   });
 
   // dev console log REMOVE ME
