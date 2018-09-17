@@ -8,7 +8,9 @@ function NewEmp() {
   return (
     <div className="new-employee-card">
       <form action="">
-        Name: <input type="text" name="name" placeholder="full name" /><br />
+        First Name: <input type="text" name="firstName" placeholder="first name" /><br />
+        Middle Name: <input type="text" name="middleName" placeholder="middle name" /><br />
+        Last Name: <input type="text" name="lastName" placeholder="last name" /><br />
         Email: <input type="text" name="email" placeholder="email" /><br />
         Phone: <input type="text" name="Phone" placeholder="phone" /><br />
         Working Days: <input type="text" name="days" placeholder="working days" /><br />
@@ -31,7 +33,7 @@ class Welcome extends Component {
 
         <div className="bottom">
           <div className="left">
-          <Sidebar />
+            <Sidebar />
           </div>
 
           <Employees />
