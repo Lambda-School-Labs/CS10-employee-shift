@@ -1,0 +1,22 @@
+/* .main-container{
+    background-color: red;
+    top: 200px;
+} */
+
+.sidebar-container{
+    background-color: red;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    position:fixed;
+    width: 20%;
+    top: 100px;
+   
+}
+
+.nav-sidebar {
+    flex-direction: column;
+    flex-grow: 1; 
+    flex-wrap: wrap;
+    margin: 10%
+}
