@@ -1,10 +1,10 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { Link, Redirect } from "react-router-dom";
+import { Redirect } from "react-router-dom";
 import Sidebar from "../navbar/sidebar.js";
 
 import "../../styles/sidebar.css";
-
+import "../../styles/billing.css";
 
 
 class Billing extends Component {
@@ -20,7 +20,7 @@ class Billing extends Component {
   }
 
   inputChangeHandler = event => {
-    const { CC, EXP, CCV } = event.target;
+    const { name, value } = event.target;
     this.setState({ [name]: value });
   };
 
