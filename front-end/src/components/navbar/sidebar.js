@@ -1,27 +1,27 @@
 import React from 'react';
-import { Link  } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
-import "../../styles/sidebar.css"
+// import {
+//     Billing,
+//     Calendar,
+//     Dashboard,
+//     Employees,
+//     Settings,
+// } from "../Pages";
+
 
 const Sidebar = () => {
     return (
         <div className="container">
-            <div className="nav-sidebar">
-                <Link to="/calendar">
-                    <button>Calendar</button>
-                </Link>
-                < Link to="/employees" >
-                    <button > Employee </button> 
-                </Link>
-                 < Link to="/schedules" >
-                    <button> Create Schedule </button> 
-                </Link>
-                <Link to="/billing">
-                    <button>Billing</button>
-                </Link>
-                <Link to="/setting">
-                    <button>Settings</button>
-                </Link>
+            <div className="sidebar-container">
+                <div className="nav-sidebar">
+                    <div className="nav-sidebar"><Link to="/calendar"><button>Calendar</button></Link></div>
+                    <div className="nav-sidebar"><Link to="/employees" ><button > Employee </button></Link></div>
+                    <div className="nav-sidebar"><Link to="/dashboard" ><button> Create Schedule </button></Link></div>
+                    <div className="nav-sidebar"><Link to="/billing"><button>Billing</button></Link></div>
+                    <div className="nav-sidebar"><Link to="/settings"><button>Settings</button></Link></div>
+                    <div className="nav-sidebar"><Link to="/" > < button > Home </button></Link ></div>
+                </div>
             </div>
         </div>
     );

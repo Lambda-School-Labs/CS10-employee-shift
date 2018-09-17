@@ -24,7 +24,7 @@ class Settings extends Component {
 
   render() {
     return (
-    <div>
+    <div className="main-continer">
       <Card className="card">
           <form onSubmit={this.submitForm}>
             <CardBody className="card_body">
