@@ -15,47 +15,43 @@ class GroupSerializer(serializers.HyperlinkedModelSerializer):
 class EmployerSerializer(serializers.ModelSerializer):
     class Meta:
         model = Employer
-        fields = '__all__'
+        fields = ('id', 'user', 'name', 'telephone')
         
 
 class DaySerializer(serializers.ModelSerializer):
     class Meta:
         model = Day
-        fields = '__all__'
+        fields = ('id', 'name', 'abbreviation_name')
 
 
 class EmployeeSerializer(serializers.ModelSerializer):
     class Meta:
         model = Employee
-        fields = '__all__'
-        depth = 10
+        fields = ('id', 'user', 'employer', 'telephone')
+  
 
 class AvailabilitySerializer(serializers.ModelSerializer):
     class Meta:
         model = Availability
-        fields = '__all__'
-        depth = 10
-
+        fields = ('id', 'employee', 'day', 'start_hour', 'end_hour')
+    
 class CalendarDaySerializer(serializers.ModelSerializer):
     class Meta:
         model = CalendarDay
-        fields = '__all__'
-        depth = 10
+        fields = ('id', 'employer', 'hour_of_operation', 'date', 'is_active', 'is_holiday', 'is_weekend')
 
 class RequestedTimeOffSerializer(serializers.ModelSerializer):
     class Meta:
         model = RequestedTimeOff
-        fields = '__all__'
-        depth = 10
+        fields = ('id', 'employee', 'date', 'reason', 'is_approved')
 
 class ShiftSerializer(serializers.ModelSerializer):
     class Meta:
         model = Shift
-        fields = '__all__'
-        depth = 10
-
+        fields = ('id', 'calendar_day', 'employee', 'start_hour', 'end_hour' 'status')
+        
 class HourOfOperationSerializer(serializers.ModelSerializer):
     class Meta:
         model = HourOfOperation
-        fields = '__all__'
-        depth = 10
+        fields = ('id', 'start_hour', 'end_hour')
+    

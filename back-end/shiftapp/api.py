@@ -47,9 +47,9 @@ class DayList(viewsets.ModelViewSet):
     """
     API endpoint that allows groups to be viewed or edited.
     """
-    serializer_class = DaySerializer
     queryset = Day.objects.all()
-
+    serializer_class = DaySerializer
+    
 class AvailabilityList(viewsets.ModelViewSet):
     """
     API endpoint that allows groups to be viewed or edited.

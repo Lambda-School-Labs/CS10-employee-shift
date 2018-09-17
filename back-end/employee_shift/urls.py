@@ -24,7 +24,7 @@ from oauth2_provider.contrib.rest_framework import TokenHasReadWriteScope, Token
 router = routers.DefaultRouter()
 router.register(r'employees', EmployeeList)
 router.register(r'availabilities', AvailabilityList)
-router.register(r'day', DayList)
+router.register(r'days', DayList)
 router.register(r'employers', EmployerList)
 router.register(r'calendar', CalendarDayList)
 router.register(r'requestoff', RequestedTimeOffList)
