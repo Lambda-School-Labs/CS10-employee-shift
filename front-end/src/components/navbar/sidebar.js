@@ -12,7 +12,7 @@ import { Link } from 'react-router-dom';
 
 const Sidebar = () => {
     return (
-        <div className="container">
+        <div className="main-container">
             <div className="sidebar-container">
                 <div className="nav-sidebar">
                     <div className="nav-sidebar"><Link to="/calendar"><button>Calendar</button></Link></div>
