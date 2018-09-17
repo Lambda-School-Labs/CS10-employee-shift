@@ -33,39 +33,41 @@ class Signin extends Component {
     }
 
     return (
-    <div>
-      <Sidebar/>
-        <div className="card">
-          <form onSubmit={this.submitHandler}>
-            <div className="card_body">
-              <div>
-                <h3>Username</h3>
-                <input
-                  value={this.state.email}
-                  onChange={this.inputChangeHandler}
-                  name="email"
-                  type="text"
-                />
-              </div>
-              <div>
-                <h3>Password</h3>
-                <input
-                  value={this.state.password}
-                  onChange={this.inputChangeHandler}
-                  name="password"
-                  type="password"
-                />
-              </div>
-              <div>
-                <button type="submit">Sign in</button>
-              </div>
-            </div>
-          </form>
-          <p>
-            New user? <Link to="/signup">Register</Link>
-          </p>
+      <div>
+        <Sidebar/>
+          <div className="main-container">
           
-        </div>
+            <div className="card">
+              <form onSubmit={this.submitHandler}>
+                <div className="card_body">
+                  <div>
+                    <h3>Username</h3>
+                    <input
+                      value={this.state.email}
+                      onChange={this.inputChangeHandler}
+                      name="email"
+                      type="text"
+                    />
+                  </div>
+                  <div>
+                    <h3>Password</h3>
+                    <input
+                      value={this.state.password}
+                      onChange={this.inputChangeHandler}
+                      name="password"
+                      type="password"
+                    />
+                  </div>
+                  <div>
+                    <button type="submit">Sign in</button>
+                  </div>
+                </div>
+              </form>
+              <p>
+                New user? <Link to="/signup">Register</Link>
+              </p>
+            </div>
+          </div>
       </div>
     );
   }

@@ -1,16 +1,22 @@
-.container{
-    border: solid blue 1px;
-}
+/* .main-container{
+    background-color: red;
+    top: 200px;
+} */
 
 .sidebar-container{
+    background-color: red;
     display: flex;
-    border: solid red 1px;
     flex-direction: column;
     justify-content: flex-start;
-    width: 25%;
+    position:fixed;
+    width: 20%;
+    top: 100px;
+   
 }
 
 .nav-sidebar {
     flex-direction: column;
     flex-grow: 1; 
+    flex-wrap: wrap;
+    margin: 10%
 }
