@@ -24,39 +24,40 @@ class Settings extends Component {
 
   render() {
     return (
-    <div className="main-container">
-      <Card className="card">
-          <form onSubmit={this.submitForm}>
-            <CardBody className="card_body">
-              <div>
-                <label>Email</label>
-                <input className='textbox' value={this.state.email} onChange={this.inputChangeHandler} name="email" type="text" />
-              </div>
-              <div>
-                <label> Phone</label>
-                <input value={this.state.phone} onChange={this.inputChangeHandler} name="email" type="text" />
-              </div>
+      <div>
+        < Sidebar/>
+        <div className="main-container">
+          <Card className="card">
+              <form onSubmit={this.submitForm}>
+                <CardBody className="card_body">
+                  <div>
+                    <label>Email</label>
+                    <input className='textbox' value={this.state.email} onChange={this.inputChangeHandler} name="email" type="text" />
+                  </div>
+                  <div>
+                    <label> Phone</label>
+                    <input value={this.state.phone} onChange={this.inputChangeHandler} name="email" type="text" />
+                  </div>
+                  <label>email</label>
+                  <input type="checkbox" name="msg" value="Email" />
+                  <label>text</label>
+                  <input type="checkbox" name="msg" value="text" />
 
-              <label>email</label>
-              <input type="checkbox" name="msg" value="Email" />
-              <label>text</label>
-              <input type="checkbox" name="msg" value="text" />
-
-              <div>
-                <label>Old Password</label>
-                <input value={this.state.old_password} onChange={this.inputChangeHandler} name="old_password" type="password" />
-              </div>
-              <div>
-                <label>New Password</label>
-                <input value={this.state.new_password} onChange={this.inputChangeHandler} name="new_password" type="password" />
-              </div>
-              <div>
-                <button type="submit">Save</button>
-              </div>
-            </CardBody>
-          </form>
-        </Card>
-      < Sidebar/>
+                  <div>
+                    <label>Old Password</label>
+                    <input value={this.state.old_password} onChange={this.inputChangeHandler} name="old_password" type="password" />
+                  </div>
+                  <div>
+                    <label>New Password</label>
+                    <input value={this.state.new_password} onChange={this.inputChangeHandler} name="new_password" type="password" />
+                  </div>
+                  <div>
+                    <button type="submit">Save</button>
+                  </div>
+                </CardBody>
+              </form>
+            </Card>
+          </div>
       </div>
     )
   };

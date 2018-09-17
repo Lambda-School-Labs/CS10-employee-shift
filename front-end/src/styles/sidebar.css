@@ -1,11 +1,8 @@
-/* .main-container{
-    background-color: red;
-    top: 200px;
-} */
+
 
 .sidebar-container{
-    background-color: red;
     display: flex;
+    border: solid red 1px;
     flex-direction: column;
     justify-content: flex-start;
     position:fixed;

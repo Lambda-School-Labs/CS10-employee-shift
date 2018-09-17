@@ -36,7 +36,6 @@ class Signin extends Component {
       <div>
         <Sidebar/>
           <div className="main-container">
-          
             <div className="card">
               <form onSubmit={this.submitHandler}>
                 <div className="card_body">
