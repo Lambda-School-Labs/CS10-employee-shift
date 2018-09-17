@@ -5,41 +5,27 @@ export const getUser = () => (dispatch, getState) => {
   dispatch({ type: "FETCHING_USER" });
 
   const token = getState().user.token;
-
-  const headers = {
-    "Content-Type": "application/json",
-  };
-
   if (token) {
-    headers["Authorization"] = `Bearer ${token}`;
-  }
+    const headers = {
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${token}`,
+    };
 
-  // DEVELOPMENT workaround until get user endpoint works REMOVE ME
-  dispatch({ type: "AUTH_ERROR", data: "dur" });
-
-  //   axios
-  //     .get(`${process.env.REACT_APP_ROOT_URL}/users/`, {
-  //       headers,
-  //     })
-  //     .then(res => {
-  //       if (res.status < 500) {
-  //         return res.json().then(data => {
-  //           return { status: res.status, data };
-  //         });
-  //       } else {
-  //         console.log("Server Error!");
-  //         throw res;
-  //       }
-  //     })
-  //     .then(res => {
-  //       if (res.status === 200) {
-  //         dispatch({ type: "FETCHED_USER", user: res.data });
-  //         return res.data;
-  //       } else if (res.status >= 400 && res.status < 500) {
-  //         dispatch({ type: "AUTH_ERROR", data: res.data });
-  //         throw res.data;
-  //       }
-  //     });
+    // TODO: Redo with correct endpoint to get user (not list of users)
+    axios
+      .get(`${process.env.REACT_APP_ROOT_URL}/users/`, {
+        headers,
+      })
+      .then(res => {
+        if (res.status === 200) {
+          dispatch({ type: "FETCHED_USER", user: res.data });
+          return res.data;
+        }
+      })
+      .catch(err => {
+        dispatch({ type: "AUTH_ERROR" });
+      });
+  } else dispatch({ type: "AUTH_ERROR" });
 };
 
 export const signin = (username, password) => dispatch => {
@@ -76,10 +62,11 @@ export const signin = (username, password) => dispatch => {
         dispatch({ type: "ERROR", data: res.data });
         throw res.data;
       }
-      // TODO: More error checking?
+      // TODO: More error checking? Re-do with catch?
     });
 };
 
+// TODO: needs more testing
 export const signout = token => dispatch => {
   const body = JSON.stringify({
     token: token,
@@ -115,12 +102,21 @@ export const signout = token => dispatch => {
 };
 
 // TODO: signup action
-
-export const signup = token => dispatch => {
+export const signup = (
+  username,
+  password,
+  passwordConfirmation,
+  email,
+  firstName,
+  lastName
+) => dispatch => {
   const body = JSON.stringify({
-    token: token,
-    client_id: `${process.env.REACT_APP_CLIENT_ID}`,
-    client_secret: `${process.env.REACT_APP_CLIENT_SECRET}`,
+    username: username,
+    password: password,
+    passwordConfirmation: passwordConfirmation,
+    email: email,
+    firstName: firstName,
+    lastName: lastName,
   });
 
   // dev console log REMOVE ME
@@ -129,7 +125,7 @@ export const signup = token => dispatch => {
   axios({
     method: "post",
     // fix dis URL below with correct endpoint
-    url: `${process.env.REACT_APP_ROOT_URL}/???`,
+    url: `${process.env.REACT_APP_ROOT_URL}/api/sign_up/`,
     headers: {
       "Content-Type": "application/x-www-form-urlencoded",
     },

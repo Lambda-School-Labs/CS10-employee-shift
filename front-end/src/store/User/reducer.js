@@ -18,12 +18,12 @@ export default (state = initialState, action) => {
         isAuthenticated: true,
         isLoading: false,
         // TODO: user data WIP
-        user: action.user,
+        // user: action.user,
       };
 
     // TODO: Employee check
     case "SIGNIN_SUCCESS":
-      localStorage.setItem("token", action.data.token);
+      localStorage.setItem("token", action.data.access_token);
       return {
         ...state,
         ...action.data,
@@ -49,7 +49,7 @@ export default (state = initialState, action) => {
 
     // TODO: employee check
     case "REGISTRATION_SUCCESS":
-      localStorage.setItem("token", action.data.token);
+      localStorage.setItem("token", action.data.access_token);
       return {
         ...state,
         ...action.data,
@@ -58,6 +58,7 @@ export default (state = initialState, action) => {
         errors: null,
       };
 
+    // TODO: double check this
     case "ERROR":
       return { ...state, error: action.errorMessage };
 
