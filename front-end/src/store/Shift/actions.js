@@ -21,14 +21,14 @@ export const getShifts = () => (dispatch, getState) => {
         dispatch({ type: "AUTHENTICATION_ERROR", data: err.data });
         throw err.data;
       } else {
-        dispatch({ type: "ERROR", data: res.data });
+        dispatch({ type: "ERROR", data: err.data });
         throw err.data;
       }
     });
 };
 
 // TODO: fill in correct data to send
-export const postShift = data => (dispatch, getState) => {
+export const postShift = (startTime, endTime) => (dispatch, getState) => {
   const { token } = getState().auth;
   const headers = { "Content-Type": "application/x-www-form-urlencoded" };
 
@@ -36,8 +36,10 @@ export const postShift = data => (dispatch, getState) => {
     headers["Authorization"] = `Bearer ${token}`;
   }
 
-  // fill me
-  const body = JSON.stringify({ data });
+  const body = JSON.stringify({
+    startTime: startTime,
+    endTime: endTime,
+  });
 
   axios({
     method: "post",
@@ -56,14 +58,13 @@ export const postShift = data => (dispatch, getState) => {
         dispatch({ type: "AUTHENTICATION_ERROR", data: err.data });
         throw err.data;
       } else {
-        dispatch({ type: "ERROR", data: res.data });
+        dispatch({ type: "ERROR", data: err.data });
         throw err.data;
       }
     });
 };
 
-// TODO: fill in correct data to send
-export const updateShift = data => (dispatch, getState) => {
+export const updateShift = (id, startTime, endTime) => (dispatch, getState) => {
   const { token } = getState().auth;
   const headers = { "Content-Type": "application/x-www-form-urlencoded" };
 
@@ -71,8 +72,11 @@ export const updateShift = data => (dispatch, getState) => {
     headers["Authorization"] = `Bearer ${token}`;
   }
 
-  // fill me
-  const body = JSON.stringify({ data });
+  const body = JSON.stringify({
+    id: id,
+    startTime: startTime,
+    endTime: endTime,
+  });
 
   axios({
     method: "update",
@@ -91,14 +95,13 @@ export const updateShift = data => (dispatch, getState) => {
         dispatch({ type: "AUTHENTICATION_ERROR", data: err.data });
         throw err.data;
       } else {
-        dispatch({ type: "ERROR", data: res.data });
+        dispatch({ type: "ERROR", data: err.data });
         throw err.data;
       }
     });
 };
 
-// TODO: fill in correct data to send
-export const deleteShift = data => (dispatch, getState) => {
+export const deleteShift = id => (dispatch, getState) => {
   const { token } = getState().auth;
   const headers = { "Content-Type": "application/x-www-form-urlencoded" };
 
@@ -106,8 +109,7 @@ export const deleteShift = data => (dispatch, getState) => {
     headers["Authorization"] = `Bearer ${token}`;
   }
 
-  // fill me
-  const body = JSON.stringify({ data });
+  const body = JSON.stringify({ id: id });
 
   axios({
     method: "delete",
@@ -126,7 +128,7 @@ export const deleteShift = data => (dispatch, getState) => {
         dispatch({ type: "AUTHENTICATION_ERROR", data: err.data });
         throw err.data;
       } else {
-        dispatch({ type: "ERROR", data: res.data });
+        dispatch({ type: "ERROR", data: err.data });
         throw err.data;
       }
     });
