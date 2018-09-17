@@ -15,7 +15,7 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
-from shiftapp.api import UserList, UserDetails, GroupList, EmployeeList, EmployerList, AvailabilityList, DayList, CalendarDayList, RequestedTimeOffList, ShiftList, HourOfOperationList
+from shiftapp.api import UserList, UserDetails, GroupList, SignUp, EmployeeList, EmployerList, AvailabilityList, DayList, CalendarDayList, RequestedTimeOffList, ShiftList, HourOfOperationList
 from django.contrib.auth.models import User, Group
 admin.autodiscover()
 from rest_framework import generics, permissions, serializers, routers
@@ -32,12 +32,13 @@ router.register(r'shifts', ShiftList)
 router.register(r'hoo', HourOfOperationList)
 
 
-
 urlpatterns = [
    path('admin/', admin.site.urls),
    path('o/', include('oauth2_provider.urls', namespace='oauth2_provider')),
    path('users/', UserList.as_view()),
    path('users/<pk>/', UserDetails.as_view()),
    path('groups/', GroupList.as_view()),
-   path('api/', include(router.urls))
+   path('api/', include(router.urls)),
+   path('api/sign_up/', SignUp.as_view())
+
 ]
