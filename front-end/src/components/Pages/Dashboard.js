@@ -1,5 +1,13 @@
 import React from "react";
 
-const Dashboard = () => {};
+class Dashboard extends Component {
+  render() {
+    return (
+      <div>
+      </div>
+
+    )
+  }
+}
 
 export default Dashboard;

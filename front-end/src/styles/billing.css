@@ -1,11 +1,11 @@
 .main-container {
-    opacity:0.8;
-    position:fixed;
-    width:95%;
-    height:100%;
-    top:150px;
-    right:0px;
-    z-index:1000;
+    opacity: 0.8;
+    position: fixed;
+    width: 95%;
+    height: 100%;
+    top: 150px;
+    right: 0px;
+    z-index: 1000;
 }
 
 .card {
@@ -24,4 +24,8 @@
     margin-bottom: 25px;
     margin-left: 30px;
     border-radius: 35px;
+}
+
+.billing_btn {
+    
 }
