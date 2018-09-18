@@ -108,6 +108,7 @@ export const signout = token => dispatch => {
 export const signup = (
   username,
   password,
+  re_password,
   email,
   firstName,
   lastName
@@ -116,15 +117,11 @@ export const signup = (
     // TODO: validate me
     username: username,
     password: password,
-    re_password: password,
+    re_password: re_password,
     email: email,
     first_name: firstName,
     last_name: lastName,
-    is_staff: "true",
   });
-
-  // dev console log REMOVE ME
-  console.log("WIP: Not yet functional");
 
   axios({
     method: "post",
@@ -145,8 +142,8 @@ export const signup = (
     })
     .then(res => {
       if (res.status === 201) {
-        dispatch({ type: "SIGNUP_SUCCESS", data: res.data });
-        // TODO: Log In
+        // depreciated: dispatch({ type: "SIGNUP_SUCCESS", data: res.data });
+        console.log(res.data);
         return res.data;
       } else if (res.status === 403 || res.status === 401) {
         dispatch({ type: "ERROR", data: res.data });

@@ -7,7 +7,7 @@ const SideNav = () => {
   return (
     <div className="sidebar-container">
       <Link to="/calendar">Calendar</Link>
-      <Link to="/employees">Employee</Link>
+      <Link to="/employees">Employees</Link>
       <Link to="/schedules">Create Schedule</Link>
       <Link to="/billing">Billing</Link>
       <Link to="/setting">Settings</Link>

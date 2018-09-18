@@ -13,7 +13,7 @@ const TopNav = () => {
   return (
     <div
       style={{
-        width: "100%",
+        width: "90%",
         display: "flex",
         justifyContent: "space-between",
         margin: "0 5%",
@@ -26,7 +26,7 @@ const TopNav = () => {
         }}
       >
         <Link to="/">Home</Link>
-        <p>> Component</p>
+        <p> > Component</p>
       </div>
       <Link to="/" onClick={clickSignout}>
         Sign Out

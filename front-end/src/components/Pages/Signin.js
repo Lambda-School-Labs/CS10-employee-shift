@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import { Link, Redirect } from "react-router-dom";
 
-import "../../styles/signin.css";
+import { Container, FormItem, Form } from "../../styles/signin.js";
 
 import { signin } from "../../store/User/actions.js";
 
@@ -18,7 +18,6 @@ class Signin extends Component {
   };
 
   inputChangeHandler = event => {
-    // render user input
     const { name, value } = event.target;
     this.setState({ [name]: value });
   };
@@ -28,40 +27,37 @@ class Signin extends Component {
       // TODO: employee redirect
       return <Redirect to="/calendar" />;
     }
-    // change all this
+
+    // TODO: Restyle all this
     return (
-      <div className="main-container">
-        <div className="card">
-          <form onSubmit={this.submitHandler}>
-            <div className="card_body">
-              <div>
-                <h3>Username</h3>
-                <input
-                  value={this.state.email}
-                  onChange={this.inputChangeHandler}
-                  name="email"
-                  type="text"
-                />
-              </div>
-              <div>
-                <h3>Password</h3>
-                <input
-                  value={this.state.password}
-                  onChange={this.inputChangeHandler}
-                  name="password"
-                  type="password"
-                />
-              </div>
-              <div>
-                <button type="submit">Sign in</button>
-              </div>
-            </div>
-          </form>
-          <p>
-            New user? <Link to="/signup">Register</Link>
-          </p>
-        </div>
-      </div>
+      <Container>
+        <Form onSubmit={this.submitHandler}>
+          <FormItem>
+            <h3>Username</h3>
+            <input
+              value={this.state.email}
+              onChange={this.inputChangeHandler}
+              name="email"
+              type="text"
+            />
+          </FormItem>
+          <FormItem>
+            <h3>Password</h3>
+            <input
+              value={this.state.password}
+              onChange={this.inputChangeHandler}
+              name="password"
+              type="password"
+            />
+          </FormItem>
+          <FormItem>
+            <button type="submit">Sign in</button>
+          </FormItem>
+        </Form>
+        <p>
+          New user? <Link to="/signup">Register</Link>
+        </p>
+      </Container>
     );
   }
 }

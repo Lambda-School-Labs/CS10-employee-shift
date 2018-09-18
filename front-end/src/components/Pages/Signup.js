@@ -2,23 +2,33 @@ import React, { Component } from "react";
 import { Link, Redirect } from "react-router-dom";
 import { connect } from "react-redux";
 
-import { signup } from "../../store/User/actions.js";
+import { Container, FormItem, Form } from "../../styles/signin.js";
 
-// NOTE: WIP
+import { signup } from "../../store/User/actions.js";
 
 class Signup extends Component {
   state = {
-    email: "",
+    username: "",
     password: "",
+    re_password: "",
+    email: "",
+    firstName: "",
+    lastName: "",
   };
 
   submitHandler = e => {
     e.preventDefault();
-    this.props.signup(this.state.email, this.state.password);
+    this.props.signup(
+      this.state.username,
+      this.state.password,
+      this.state.re_password,
+      this.state.email,
+      this.state.firstName,
+      this.state.lastName
+    );
   };
 
   inputChangeHandler = event => {
-    // render user input
     const { name, value } = event.target;
     this.setState({ [name]: value });
   };
@@ -30,37 +40,70 @@ class Signup extends Component {
     }
 
     return (
-      <div className="card">
-        <h1>Register a new user</h1>
-        <form onSubmit={this.submitHandler}>
-          <div className="card_body">
-            <div>
-              <h3>Username</h3>
-              <input
-                value={this.state.email}
-                onChange={this.inputChangeHandler}
-                name="email"
-                type="text"
-              />
-            </div>
-            <div>
-              <h3>Password</h3>
-              <input
-                value={this.state.password}
-                onChange={this.inputChangeHandler}
-                name="password"
-                type="password"
-              />
-            </div>
-            <div>
-              <button type="submit">Sign in</button>
-            </div>
-          </div>
-        </form>
+      <Container>
+        <Form onSubmit={this.submitHandler}>
+          <FormItem>
+            <h3>Username</h3>
+            <input
+              value={this.state.username}
+              onChange={this.inputChangeHandler}
+              name="username"
+              type="text"
+            />
+          </FormItem>
+          <FormItem>
+            <h3>Password</h3>
+            <input
+              value={this.state.password}
+              onChange={this.inputChangeHandler}
+              name="password"
+              type="password"
+            />
+          </FormItem>
+          <FormItem>
+            <h3>Confirm Password</h3>
+            <input
+              value={this.state.re_password}
+              onChange={this.inputChangeHandler}
+              name="re_password"
+              type="password"
+            />
+          </FormItem>
+          <FormItem>
+            <h3>Email</h3>
+            <input
+              value={this.state.email}
+              onChange={this.inputChangeHandler}
+              name="email"
+              type="text"
+            />
+          </FormItem>
+          <FormItem>
+            <h3>First Name</h3>
+            <input
+              value={this.state.firstName}
+              onChange={this.inputChangeHandler}
+              name="firstName"
+              type="text"
+            />
+          </FormItem>
+          <FormItem>
+            <h3>Last Name</h3>
+            <input
+              value={this.state.lastName}
+              onChange={this.inputChangeHandler}
+              name="lastName"
+              type="text"
+            />
+          </FormItem>
+          <FormItem>
+            <button type="submit">Register</button>
+          </FormItem>
+        </Form>
         <p>
           Already have an account? <Link to="/signin">Login</Link>
         </p>
-      </div>
+      </Container>
     );
   }
 }

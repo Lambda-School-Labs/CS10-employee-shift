@@ -19,13 +19,13 @@ const CalendarTopNav = () => {
         }}
       >
         {/* TODO: how will these handle state? */}
-        <button>Previous week</button>
-        <button>Next week</button>
+        <button>&lt; Previous week</button>
+        <button>Next week &gt;</button>
       </div>
-      <p style={{ fontSize: "30px", fontWeight: "300" }}>
+      <div style={{ fontSize: "30px", fontWeight: "300" }}>
         {/* TODO: figure out dynamic date */}
         September 17 - 23, 2018
-      </p>
+      </div>
       <p
         style={{
           display: "flex",
