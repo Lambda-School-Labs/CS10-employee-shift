@@ -1,6 +1,6 @@
 import React, { Component } from "react";
-import { Card,CardTitle,CardBody } from 'reactstrap';
-import '../../styles/settings.css';
+
+import { Container, FormItem, Form } from "../../styles/signin.js";
 
 class Settings extends Component {
   constructor(props){
@@ -20,9 +20,10 @@ class Settings extends Component {
   }
 
   render() {
-    return <Card className="card">
-        <form onSubmit={this.submitForm}>
-          <CardBody className="card_body">
+    return ( 
+    <Container className = "card" >
+        <Form onSubmit={this.submitForm}>
+          <FormItem>
             <div>
               <label>Email</label>
               <input value={this.state.email} onChange={this.inputChangeHandler} name="email" type="text" />
@@ -48,9 +49,10 @@ class Settings extends Component {
             <div>
               <button type="submit">Save</button>
             </div>
-          </CardBody>
-        </form>
-      </Card>;
+          </FormItem>
+        </Form>
+      </Container>
+    );
   }  
 }
 
