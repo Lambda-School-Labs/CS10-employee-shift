@@ -67,7 +67,6 @@ export const signin = (username, password) => dispatch => {
     });
 };
 
-// TODO: needs more testing
 export const signout = token => dispatch => {
   if (token) {
     const body = JSON.stringify({
@@ -114,21 +113,20 @@ export const signup = (
   lastName
 ) => dispatch => {
   const body = JSON.stringify({
-    // TODO: validate me
     username: username,
     password: password,
     re_password: re_password,
     email: email,
     first_name: firstName,
     last_name: lastName,
+    is_staff: "true",
   });
 
   axios({
     method: "post",
-    // fix dis URL below with correct endpoint
     url: `${process.env.REACT_APP_ROOT_URL}/api/sign_up/`,
     headers: {
-      "Content-Type": "application/x-www-form-urlencoded",
+      "Content-Type": "application/json",
     },
     data: body,
   })
@@ -142,8 +140,7 @@ export const signup = (
     })
     .then(res => {
       if (res.status === 201) {
-        // depreciated: dispatch({ type: "SIGNUP_SUCCESS", data: res.data });
-        console.log(res.data);
+        dispatch({ type: "SIGNUP_SUCCESS", data: res.data });
         return res.data;
       } else if (res.status === 403 || res.status === 401) {
         dispatch({ type: "ERROR", data: res.data });

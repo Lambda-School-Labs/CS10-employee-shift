@@ -17,7 +17,9 @@ class Signup extends Component {
   };
 
   submitHandler = e => {
+    // TODO: validate password
     e.preventDefault();
+    console.log(this.state);
     this.props.signup(
       this.state.username,
       this.state.password,
@@ -123,8 +125,10 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
   return {
-    signup: (username, password) => {
-      return dispatch(signup(username, password));
+    signup: (username, password, re_password, email, firstName, lastName) => {
+      return dispatch(
+        signup(username, password, re_password, email, firstName, lastName)
+      );
     },
   };
 };
