@@ -1,12 +1,8 @@
 import React, { Component } from "react";
-import { connect } from "react-redux";
 import { Route, Switch, BrowserRouter, Redirect } from "react-router-dom";
 
+import { connect } from "react-redux";
 import { getUser } from "../store/User/actions.js";
-
-import Template from "./Templates/main.js";
-
-import "../styles/App.css";
 
 import {
   Billing,
@@ -18,6 +14,11 @@ import {
   Signin,
   Signup,
 } from "./Pages";
+
+import Template from "./Templates/main.js";
+
+// NOTE: This component is for handling our App's routing.
+// It checks authentication (getUser) and reroutes accordingly.
 
 class App extends Component {
   componentDidMount() {

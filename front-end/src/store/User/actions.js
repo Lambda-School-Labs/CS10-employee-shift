@@ -13,7 +13,7 @@ export const getUser = () => (dispatch, getState) => {
 
     // TODO: Redo with correct endpoint to get user (not list of users)
     axios
-      .get(`${process.env.REACT_APP_ROOT_URL}/users/`, {
+      .get(`${process.env.REACT_APP_ROOT_URL}/api/users/`, {
         headers,
       })
       .then(res => {
@@ -23,6 +23,7 @@ export const getUser = () => (dispatch, getState) => {
         }
       })
       .catch(err => {
+        console.log(err);
         dispatch({ type: "AUTH_ERROR", data: err.data });
       });
   } else dispatch({ type: "AUTH_ERROR" });
