@@ -18,16 +18,25 @@ function Identify() {
 }
 
 class Model extends Component {
-    
+
     render() {
         return (
             <div className="model-container">
                 <button onClick={Open}>Popup</button>
                 <div className="model">
                     <div className="model-inner">
-                        <span>Inner content</span>
-                        <p>some ws stuff here bla bla bla</p>
-                        <button onClick={Close}>submit</button>
+                        <span>Hours of Operation</span>
+                        <form action="">
+                        Monday: <input type="text" name="Monday" placeholder="9am-5pm" /><br />
+                        Tuesday: <input type="text" name="Tuesday" placeholder="9am-5pm" /><br />
+                        Wensday: <input type="text" name="Wensday" placeholder="9am-5pm" /><br />
+                        Thursday: <input type="text" name="Thursday" placeholder="9am-5pm" /><br />
+                        Friday: <input type="text" name="Friday" placeholder="9am-5pm" /><br />
+                        Saturday: <input type="text" name="Saturday" placeholder="9am-5pm" /><br />
+                        Sunday: <input type="text" name="Sunday" placeholder="9am-5pm" /><br />
+                        <input type="submit" value="submit"></input>
+                        </form>
+                        <button onClick={Close}>Close</button>
                     </div>
                 </div>
             </div>
