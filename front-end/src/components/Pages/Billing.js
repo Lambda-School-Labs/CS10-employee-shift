@@ -1,6 +1,6 @@
 import React, { Component } from "react";
-import { connect } from "react-redux";
-import { Redirect } from "react-router-dom";
+// import { connect } from "react-redux";
+// import { Redirect } from "react-router-dom";
 import Sidebar from "../navbar/sidebar.js";
 
 import "../../styles/sidebar.css";
