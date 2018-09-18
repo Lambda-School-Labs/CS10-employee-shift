@@ -10,7 +10,7 @@ const SideNav = () => {
       <Link to="/employees">Employees</Link>
       <Link to="/schedules">Create Schedule</Link>
       <Link to="/billing">Billing</Link>
-      <Link to="/setting">Settings</Link>
+      <Link to="/settings">Settings</Link>
     </div>
   );
 };
