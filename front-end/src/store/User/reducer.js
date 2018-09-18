@@ -48,7 +48,7 @@ export default (state = initialState, action) => {
       };
 
     // TODO: employee check
-    case "REGISTRATION_SUCCESS":
+    case "SIGNUP_SUCCESS":
       localStorage.setItem("token", action.data.access_token);
       return {
         ...state,

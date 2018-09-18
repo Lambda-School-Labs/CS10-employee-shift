@@ -3,22 +3,74 @@ import { Link } from "react-router-dom";
 import "../../styles/LandingRef.css";
 
 const Landing = () => {
+  //TODO: Restyle all this
   return (
     <div className="container">
       <div className="background-holder">
         <div className="nav-bar">
           <Link to="/signup">
-            <button>Sign up</button>
+            <button
+              style={{
+                height: "50px",
+                width: "100px",
+                border: "none",
+                fontSize: "24px",
+              }}
+            >
+              Sign up
+            </button>
           </Link>
           <Link to="/signin">
-            <button>Sign in</button>
+            <button
+              style={{
+                height: "50px",
+                width: "100px",
+                border: "none",
+                fontSize: "24px",
+              }}
+            >
+              Sign in
+            </button>
           </Link>
         </div>
-        <span className="welcome-text">Welcome</span>
+        <div style={{ display: "flex", justifyContent: "center" }}>
+          <div
+            style={{
+              height: "30px",
+              width: "50px",
+              backgroundColor: "red",
+              position: "absolute",
+              top: "35px",
+            }}
+          />
+          <div
+            style={{
+              height: "200px",
+              width: "200px",
+              backgroundColor: "yellow",
+              display: "flex",
+              justifyContent: "center",
+              alignItems: "center",
+              textAlign: "center",
+              flexDirection: "column",
+            }}
+          >
+            <p>Note to self:</p> <p>Under Construction</p>
+          </div>
+        </div>
       </div>
       <div className="schedule-button">
         <Link to="/calendar">
-          <button className="button-button">Schedule Now</button>
+          <button
+            className="button-button"
+            style={{
+              height: "110px",
+              width: "340px",
+              textDecoration: "underline",
+            }}
+          >
+            Schedule Now
+          </button>
         </Link>
       </div>
       <div className="footer">
