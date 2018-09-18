@@ -14,6 +14,7 @@ import os
 from decouple import config
 import dj_database_url
 
+
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
@@ -108,6 +109,10 @@ DATABASES = {
  'default': dj_database_url.config('DATABASE_URL', default='sqlite:///db.sqlite3')
  }
 
+#Extending User Model Using a Custom Model Extending AbstractUser
+#https://simpleisbetterthancomplex.com/tutorial/2016/07/22/how-to-extend-django-user-model.html
+
+AUTH_USER_MODEL = 'shiftapp.User'
 
 # Password validation
 # https://docs.djangoproject.com/en/2.1/ref/settings/#auth-password-validators
