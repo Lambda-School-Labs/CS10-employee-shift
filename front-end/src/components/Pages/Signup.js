@@ -35,6 +35,7 @@ class Signup extends Component {
     this.setState({ [name]: value });
   };
 
+  // TODO: Modern & stylish
   render() {
     if (this.props.isAuthenticated) {
       // TODO: employee redirect
