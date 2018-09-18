@@ -1,6 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import "../../styles/LandingRef.css";
+import Model from "../Organisms/model";
 
 const Landing = () => {
   //TODO: Restyle all this
@@ -56,6 +57,7 @@ const Landing = () => {
             }}
           >
             <p>Note to self:</p> <p>Under Construction</p>
+            <Model />
           </div>
         </div>
       </div>
