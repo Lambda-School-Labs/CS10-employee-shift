@@ -1,22 +1,25 @@
 import React, { Component } from "react";
 import "../../styles/WelcomeRef.css";
-import Employees from "./Employees";
 import Sidebar from "../Parts/SideBar";
 
 
-function NewEmp() {
+function EmpWelcome() {
   return (
-    <div className="new-employee-card">
-      <form action="">
-        First Name: <input type="text" name="firstName" placeholder="first name" /><br />
-        Middle Name: <input type="text" name="middleName" placeholder="middle name" /><br />
-        Last Name: <input type="text" name="lastName" placeholder="last name" /><br />
-        Email: <input type="text" name="email" placeholder="email" /><br />
-        Phone: <input type="text" name="Phone" placeholder="phone" /><br />
-        Working Days: <input type="text" name="days" placeholder="working days" /><br />
-        Working Time: <input type="text" name="time" placeholder="working time" /><br />
-        <input type="submit" value="submit"></input>
-      </form>
+    <div className="emp-container">
+      <h1>Welcome Employee</h1>
+      <div classname="emp-inner-container">
+        <div>
+          <h1>assigned</h1>
+        </div>
+
+        <div>
+          <h1>Time off approved</h1>
+        </div>
+
+        <div>
+          <h1>time off requested</h1>
+        </div>
+      </div>
     </div>
   )
 }
@@ -35,9 +38,7 @@ class Welcome extends Component {
           <div className="left">
             <Sidebar />
           </div>
-
-          <Employees />
-          <NewEmp />
+          <EmpWelcome />
         </div>
       </div>
 
