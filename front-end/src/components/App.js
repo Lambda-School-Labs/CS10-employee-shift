@@ -4,6 +4,8 @@ import { Route, Switch, BrowserRouter, Redirect } from "react-router-dom";
 
 import { getUser } from "../store/User/actions.js";
 
+import Template from "./Templates/main.js";
+
 import "../styles/App.css";
 
 import {
@@ -28,12 +30,12 @@ class App extends Component {
         {...rest}
         render={props => {
           if (this.props.user.isLoading) {
-            // TODO: better loading screen, seperate component
-            return <em>Loading...</em>;
+            // TODO: better loading screen in a separate component
+            return <em>Loading something great...</em>;
           } else if (!this.props.user.isAuthenticated) {
             return <Redirect to="/signin" />;
           } else {
-            return <ChildComponent {...props} />;
+            return <Template component={ChildComponent} props={props} />;
           }
         }}
       />

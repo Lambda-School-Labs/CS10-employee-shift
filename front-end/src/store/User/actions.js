@@ -1,6 +1,6 @@
 import axios from "axios";
 
-// Action to get user the token is saved in local storage (WIP: and data?)
+// WIP: Action to get user's data if the token is saved in local storage
 export const getUser = () => (dispatch, getState) => {
   dispatch({ type: "FETCHING_USER" });
 
@@ -23,7 +23,7 @@ export const getUser = () => (dispatch, getState) => {
         }
       })
       .catch(err => {
-        dispatch({ type: "AUTH_ERROR" });
+        dispatch({ type: "AUTH_ERROR", data: err.data });
       });
   } else dispatch({ type: "AUTH_ERROR" });
 };
@@ -148,3 +148,11 @@ export const signup = (
       }
     });
 };
+
+// TODO: Update password
+// Patch to /api/users
+// Still needs user group persmission
+
+// TODO: Email
+// Patch to /api/users
+// Still needs user group persmission
