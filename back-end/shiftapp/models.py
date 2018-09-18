@@ -1,6 +1,7 @@
 from django.db import models
 from uuid import uuid4
 from django.contrib.auth.models import User
+from django.urls import reverse
 
 class Employer(models.Model):
     id = models.UUIDField(primary_key=True, default=uuid4, editable=False)
@@ -45,15 +46,13 @@ class RequestedTimeOff(models.Model):
     
 class Day(models.Model):
     id = models.UUIDField(primary_key=True, default=uuid4, editable=False)
-
     name = models.CharField(max_length=15)
     abbreviation_name = models.CharField(max_length=1)
 
     def __str__(self):
-      return self.name
+      return self.name 
       
 class Availability(models.Model):
-    
     class Meta:
         verbose_name_plural = "Availabilities"
     

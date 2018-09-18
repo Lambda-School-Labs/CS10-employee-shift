@@ -1,26 +1,38 @@
-import React, { Component } from "react";
+import React from "react";
+import CalendarTopNav from "../Organisms/CalendarTopNav.js";
+import Schedule from "../Organisms/Schedule.js";
+import SideNav from "../Organisms/SideNav.js";
+import TopNav from "../Organisms/TopNav.js";
 
-import Month from "./test_pages/Month.js"
-
-class Calendar extends Component {
-
-  render() {
-    return(
-      <div classname="container">
-      <header>
-        <div id="logo">
-          <span className="icon">date_range</span>
-          <span>
-            Shift<b>EZ</b>
-          </span>
+const Calendar = () => {
+  return (
+    <div
+      style={{
+        width: "100vw",
+        height: "100vh",
+        display: "flex",
+        flexDirection: "column",
+      }}
+    >
+      <TopNav />
+      <div
+        style={{
+          display: "flex",
+          height: "100%",
+        }}
+      >
+        <SideNav />
+        <div
+          style={{
+            width: "100%",
+          }}
+        >
+          <CalendarTopNav />
+          <Schedule />
         </div>
-        </header>
-        <main>
-          <Month/>
-        </main>
       </div>
-    )
-  }
-}
+    </div>
+  );
+};
 
 export default Calendar;
