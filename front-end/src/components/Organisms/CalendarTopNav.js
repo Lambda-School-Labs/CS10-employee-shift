@@ -29,7 +29,6 @@ const CalendarTopNav = () => {
       <p
         style={{
           display: "flex",
-          height: "100%",
         }}
       >
         {/* TODO: make modal HoO */}

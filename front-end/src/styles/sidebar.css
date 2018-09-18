@@ -1,19 +1,9 @@
-
-
-.sidebar-container{
-    display: flex;
-    border: solid red 1px;
-    flex-direction: column;
-    justify-content: flex-start;
-    position:fixed;
-    width: 20%;
-    top: 100px;
-   
-}
-
-.nav-sidebar {
-    flex-direction: column;
-    flex-grow: 1; 
-    flex-wrap: wrap;
-    margin: 10%
+.sidebar-container {
+  display: flex;
+  border: solid black 1px;
+  flex-direction: column;
+  justify-content: flex-start;
+  width: 20%;
+  height: 80%;
+  margin: 0 5%;
 }

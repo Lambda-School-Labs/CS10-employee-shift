@@ -69,37 +69,39 @@ export const signin = (username, password) => dispatch => {
 
 // TODO: needs more testing
 export const signout = token => dispatch => {
-  const body = JSON.stringify({
-    token: token,
-    client_id: `${process.env.REACT_APP_CLIENT_ID}`,
-    client_secret: `${process.env.REACT_APP_CLIENT_SECRET}`,
-  });
-
-  axios({
-    method: "post",
-    url: `${process.env.REACT_APP_ROOT_URL}/o/revoke_token/`,
-    headers: {
-      "Content-Type": "application/x-www-form-urlencoded",
-    },
-    data: body,
-  })
-    .then(res => {
-      if (res.status < 500) {
-        return { status: res.status, data: res.data };
-      } else {
-        console.log("Server Error!");
-        throw res;
-      }
-    })
-    .then(res => {
-      if (res.status === 200) {
-        dispatch({ type: "SIGNOUT_SUCCESS", data: res.data });
-        return res.data;
-      } else if (res.status === 403 || res.status === 401) {
-        dispatch({ type: "ERROR", data: res.data });
-        throw res.data;
-      }
+  if (token) {
+    const body = JSON.stringify({
+      token: token,
+      client_id: `${process.env.REACT_APP_CLIENT_ID}`,
+      client_secret: `${process.env.REACT_APP_CLIENT_SECRET}`,
     });
+
+    axios({
+      method: "post",
+      url: `${process.env.REACT_APP_ROOT_URL}/o/revoke_token/`,
+      headers: {
+        "Content-Type": "application/x-www-form-urlencoded",
+      },
+      data: body,
+    })
+      .then(res => {
+        if (res.status < 500) {
+          return { status: res.status, data: res.data };
+        } else {
+          console.log("Server Error!");
+          throw res;
+        }
+      })
+      .then(res => {
+        if (res.status === 200) {
+          dispatch({ type: "SIGNOUT_SUCCESS", data: res.data });
+          return res.data;
+        } else if (res.status === 403 || res.status === 401) {
+          dispatch({ type: "ERROR", data: res.data });
+          throw res.data;
+        }
+      });
+  } else dispatch({ type: "SIGNOUT_SUCCESS" });
 };
 
 // TODO: Encrypt password
