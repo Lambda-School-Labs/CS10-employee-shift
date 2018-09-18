@@ -3,8 +3,8 @@ import { connect } from "react-redux";
 import { Redirect } from "react-router-dom";
 import Sidebar from "../Organisms/SideNav.js";
 
-import "../../styles/sidebar.css";
-import "../../styles/billing.css";
+import { Container, FormItem, Form } from "../../styles/signin.js";
+
 
 class Billing extends Component {
   state = {
@@ -27,10 +27,12 @@ class Billing extends Component {
     return (
       <div>
         <Sidebar />
+        <Container>
         <div classname="main-container">
           <div>
-            <form onSubmit={this.submitHandler}>
+            <Form onSubmit={this.submitHandler}>
               <div className="card_body">
+              <FormItem>
                 <div>
                   <h3>Credit Card</h3>
                   <input
@@ -40,33 +42,39 @@ class Billing extends Component {
                     type="text"
                   />
                 </div>
+                </FormItem>
               </div>
               <div className="card_body">
-                <div>
-                  <h3>Expires on</h3>
-                  <input
-                    value={this.state.EXP}
-                    onChange={this.inputChangeHandler}
-                    name="EXP"
-                    type="text"
-                  />
-                </div>
+                <FormItem>
+                    <div>
+                      <h3>Expires on</h3>
+                      <input
+                        value={this.state.EXP}
+                        onChange={this.inputChangeHandler}
+                        name="EXP"
+                        type="text"
+                      />
+                    </div>
+                  </FormItem>
               </div>
               <div className="card_body">
-                <div>
-                  <h3>CCV</h3>
-                  <input
-                    value={this.state.CCV}
-                    onChange={this.inputChangeHandler}
-                    name="CCV"
-                    type="text"
-                  />
-                </div>
+                <FormItem>
+                    <div>
+                      <h3>CCV</h3>
+                      <input
+                        value={this.state.CCV}
+                        onChange={this.inputChangeHandler}
+                        name="CCV"
+                        type="text"
+                      />
+                    </div>
+                  </FormItem>
               </div>
               <button className="billing_btn">Buy Now</button>
-            </form>
+            </Form>
           </div>
         </div>
+        </Container>
       </div>
     );
   }
