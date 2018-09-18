@@ -3,6 +3,8 @@ import { Link } from "react-router-dom";
 
 import "../../styles/sidebar.css";
 
+// TODO: Render based on authorization level
+
 const SideNav = () => {
   return (
     <div className="sidebar-container">
