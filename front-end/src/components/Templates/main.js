@@ -34,7 +34,7 @@ const main = props => {
   const SpecificComponent = components[props.component.name];
   return (
     <MainContainer>
-      <TopNav />
+      <TopNav component={props.component.name} />
       <HorizontalContainer>
         <SideNav />
         <ComponentContainer>

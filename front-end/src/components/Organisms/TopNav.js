@@ -4,7 +4,7 @@ import { connect } from "react-redux";
 
 import { signout } from "../../store/User/actions.js";
 
-const TopNav = () => {
+const TopNav = props => {
   const clickSignout = () => {
     const token = localStorage.getItem("token");
     this.props.signout(token);
@@ -26,7 +26,7 @@ const TopNav = () => {
         }}
       >
         <Link to="/">Home</Link>
-        <p> > Component</p>
+        <p> > {props.component}</p>
       </div>
       <Link to="/" onClick={clickSignout}>
         Sign Out

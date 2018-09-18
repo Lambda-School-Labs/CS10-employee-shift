@@ -28,7 +28,7 @@ class Signin extends Component {
       return <Redirect to="/calendar" />;
     }
 
-    // TODO: Restyle all this
+    // TODO: Modern & stylish
     return (
       <Container>
         <Form onSubmit={this.submitHandler}>
