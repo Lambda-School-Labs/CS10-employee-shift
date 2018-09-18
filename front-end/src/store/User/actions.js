@@ -154,6 +154,44 @@ export const signup = (
 // Patch to /api/users
 // Still needs user group persmission
 
-// TODO: Email
-// Patch to /api/users
-// Still needs user group persmission
+export const updateUser = (email, password) => dispatch => {
+  const token = getState().user.token;
+  const id = getState().user.user;
+
+  if (token) {
+    const body = JSON.stringify({
+      token: token,
+      client_id: `${process.env.REACT_APP_CLIENT_ID}`,
+      client_secret: `${process.env.REACT_APP_CLIENT_SECRET}`,
+    });
+
+    if (email) body[email] = email;
+    if (password) body[password] = password;
+
+    axios({
+      method: "patch",
+      url: `${process.env.REACT_APP_ROOT_URL}/api/users/${id}`,
+      headers: {
+        "Content-Type": "application/json",
+      },
+      data: body,
+    })
+      .then(res => {
+        if (res.status < 500) {
+          return { status: res.status, data: res.data };
+        } else {
+          console.log("Server Error!");
+          throw res;
+        }
+      })
+      .then(res => {
+        if (res.status === 200) {
+          dispatch({ type: "UPDATE_SUCCESS", data: res.data });
+          return res.data;
+        } else if (res.status === 403 || res.status === 401) {
+          dispatch({ type: "ERROR", data: res.data });
+          throw res.data;
+        }
+      });
+  } else dispatch({ type: "ERROR" });
+};
