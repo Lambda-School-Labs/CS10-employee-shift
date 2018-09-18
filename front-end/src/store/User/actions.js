@@ -28,6 +28,7 @@ export const getUser = () => (dispatch, getState) => {
   } else dispatch({ type: "AUTH_ERROR" });
 };
 
+// TODO: Encrypt password
 export const signin = (username, password) => dispatch => {
   const body = JSON.stringify({
     grant_type: "password",
@@ -101,7 +102,7 @@ export const signout = token => dispatch => {
     });
 };
 
-// TODO: signup action
+// TODO: Encrypt password
 export const signup = (
   username,
   password,
@@ -110,8 +111,10 @@ export const signup = (
   lastName
 ) => dispatch => {
   const body = JSON.stringify({
+    // TODO: validate me
     username: username,
     password: password,
+    re_password: password,
     email: email,
     first_name: firstName,
     last_name: lastName,
@@ -139,8 +142,9 @@ export const signup = (
       }
     })
     .then(res => {
-      if (res.status === 200) {
+      if (res.status === 201) {
         dispatch({ type: "SIGNUP_SUCCESS", data: res.data });
+        // TODO: Log In
         return res.data;
       } else if (res.status === 403 || res.status === 401) {
         dispatch({ type: "ERROR", data: res.data });
