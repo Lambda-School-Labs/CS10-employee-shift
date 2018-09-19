@@ -13,7 +13,7 @@ export const getHoursOfOperation = () => (dispatch, getState) => {
     .get(`${process.env.REACT_APP_ROOT_URL}/hoos`, headers)
     .then(res => {
       if (res.status === 200) {
-        return dispatch({ type: "READ_HOOS", hoos: res.data });
+        return dispatch({ type: "READ_HOOS", data: res.data });
       }
     })
     .catch(err => {
@@ -48,7 +48,7 @@ export const postHoursOfOperation = data => (dispatch, getState) => {
   })
     .then(res => {
       if (res.status === 200) {
-        return dispatch({ type: "CREATE_HOOS", hoos: res.data });
+        return dispatch({ type: "CREATE_HOOS", data: res.data });
       }
     })
     .catch(err => {
@@ -83,7 +83,7 @@ export const updateHoursOfOperation = data => (dispatch, getState) => {
   })
     .then(res => {
       if (res.status === 200) {
-        return dispatch({ type: "UPDATE_HOOS", hoos: res.data });
+        return dispatch({ type: "UPDATE_HOOS", data: res.data });
       }
     })
     .catch(err => {
@@ -118,7 +118,7 @@ export const deleteHoursOfOperation = data => (dispatch, getState) => {
   })
     .then(res => {
       if (res.status === 200) {
-        return dispatch({ type: "DELETE_HOOS", hoos: res.data });
+        return dispatch({ type: "DELETE_HOOS", data: res.data });
       }
     })
     .catch(err => {

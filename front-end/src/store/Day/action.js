@@ -13,7 +13,7 @@ export const getDays = () => (dispatch, getState) => {
     .get(`${process.env.REACT_APP_ROOT_URL}/days`, headers)
     .then(res => {
       if (res.status === 200) {
-        return dispatch({ type: "READ_DAY", notes: res.data });
+        return dispatch({ type: "READ_DAY", data: res.data });
       }
     })
     .catch(err => {
@@ -50,7 +50,7 @@ export const postDay = (startTime, endTime) => (dispatch, getState) => {
   })
     .then(res => {
       if (res.status === 200) {
-        return dispatch({ type: "CREATE_DAY", notes: res.data });
+        return dispatch({ type: "CREATE_DAY", data: res.data });
       }
     })
     .catch(err => {
@@ -87,7 +87,7 @@ export const updateDay = (id, startTime, endTime) => (dispatch, getState) => {
   })
     .then(res => {
       if (res.status === 200) {
-        return dispatch({ type: "UPDATE_DAY", notes: res.data });
+        return dispatch({ type: "UPDATE_DAY", data: res.data });
       }
     })
     .catch(err => {
@@ -120,7 +120,7 @@ export const deleteDay = id => (dispatch, getState) => {
   })
     .then(res => {
       if (res.status === 200) {
-        return dispatch({ type: "DELETE_DAY", notes: res.data });
+        return dispatch({ type: "DELETE_DAY", data: res.data });
       }
     })
     .catch(err => {

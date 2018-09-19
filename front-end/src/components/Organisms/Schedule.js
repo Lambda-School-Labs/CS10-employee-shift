@@ -1,11 +1,16 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 
-import { updateShift } from "../../store/Shift/actions.js";
+import { getShifts, updateShift } from "../../store/Shift/actions.js";
 
 import ScheduleDay from "../Molecules/ScheduleDay.js";
 
 class Schedule extends Component {
+  // DEVELOPMENT TEST to get data REMOVE ME
+  componentDidMount() {
+    this.props.getShifts();
+  }
+
   render() {
     return (
       <div style={{ width: "100%", display: "flex" }}>
@@ -30,9 +35,12 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
   return {
-    updateShift: (username, password) => {
-      return dispatch(updateShift(username, password));
+    getShifts: () => {
+      return dispatch(getShifts());
     },
+    // updateShift: () => {
+    //   return dispatch(updateShift(id, startTime, endTime));
+    // },
   };
 };
 

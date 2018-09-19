@@ -13,7 +13,7 @@ export const getCalendar = () => (dispatch, getState) => {
     .get(`${process.env.REACT_APP_ROOT_URL}/calendar`, headers)
     .then(res => {
       if (res.status === 200) {
-        return dispatch({ type: "READ_CALENDAR", notes: res.data });
+        return dispatch({ type: "READ_CALENDAR", data: res.data });
       }
     })
     .catch(err => {
@@ -50,7 +50,7 @@ export const postCalendar = (startTime, endTime) => (dispatch, getState) => {
   })
     .then(res => {
       if (res.status === 200) {
-        return dispatch({ type: "CREATE_CALENDAR", notes: res.data });
+        return dispatch({ type: "CREATE_CALENDAR", data: res.data });
       }
     })
     .catch(err => {
@@ -90,7 +90,7 @@ export const updateCalendar = (id, startTime, endTime) => (
   })
     .then(res => {
       if (res.status === 200) {
-        return dispatch({ type: "UPDATE_CALENDAR", notes: res.data });
+        return dispatch({ type: "UPDATE_CALENDAR", data: res.data });
       }
     })
     .catch(err => {
@@ -123,7 +123,7 @@ export const deleteCalendar = id => (dispatch, getState) => {
   })
     .then(res => {
       if (res.status === 200) {
-        return dispatch({ type: "DELETE_CALENDAR", notes: res.data });
+        return dispatch({ type: "DELETE_CALENDAR", data: res.data });
       }
     })
     .catch(err => {

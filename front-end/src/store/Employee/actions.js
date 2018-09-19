@@ -13,7 +13,7 @@ export const getEmployees = () => (dispatch, getState) => {
     .get(`${process.env.REACT_APP_ROOT_URL}/employees`, headers)
     .then(res => {
       if (res.status === 200) {
-        return dispatch({ type: "READ_EMPLOYEE", notes: res.data });
+        return dispatch({ type: "READ_EMPLOYEE", data: res.data });
       }
     })
     .catch(err => {
@@ -48,7 +48,7 @@ export const postEmployee = data => (dispatch, getState) => {
   })
     .then(res => {
       if (res.status === 200) {
-        return dispatch({ type: "CREATE_EMPLOYEE", notes: res.data });
+        return dispatch({ type: "CREATE_EMPLOYEE", data: res.data });
       }
     })
     .catch(err => {
@@ -83,7 +83,7 @@ export const updateEmployee = data => (dispatch, getState) => {
   })
     .then(res => {
       if (res.status === 200) {
-        return dispatch({ type: "UPDATE_EMPLOYEE", notes: res.data });
+        return dispatch({ type: "UPDATE_EMPLOYEE", data: res.data });
       }
     })
     .catch(err => {
@@ -118,7 +118,7 @@ export const deleteEmployee = data => (dispatch, getState) => {
   })
     .then(res => {
       if (res.status === 200) {
-        return dispatch({ type: "DELETE_EMPLOYEE", notes: res.data });
+        return dispatch({ type: "DELETE_EMPLOYEE", data: res.data });
       }
     })
     .catch(err => {

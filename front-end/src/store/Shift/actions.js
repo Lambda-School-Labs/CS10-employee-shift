@@ -2,27 +2,26 @@ import axios from "axios";
 
 export const getShifts = () => (dispatch, getState) => {
   const headers = { "Content-Type": "application/x-www-form-urlencoded" };
-  const { token } = getState().user.token;
+  const token = getState().user.token;
 
   if (token) {
     headers["Authorization"] = `Bearer ${token}`;
   }
-
+  console.log(headers);
   axios
-    // Need user in body? Or is it read off of token?
-    .get(`${process.env.REACT_APP_ROOT_URL}/shifts`, headers)
+    .get(`${process.env.REACT_APP_ROOT_URL}/api/shifts`, headers)
     .then(res => {
       if (res.status === 200) {
-        return dispatch({ type: "READ_SHIFT", notes: res.data });
+        return dispatch({ type: "READ_SHIFT", data: res.data });
       }
     })
     .catch(err => {
       if (err.status === 401 || err.status === 403) {
         dispatch({ type: "AUTHENTICATION_ERROR", data: err.data });
-        throw err.data;
+        throw err;
       } else {
         dispatch({ type: "ERROR", data: err.data });
-        throw err.data;
+        throw err;
       }
     });
 };
@@ -44,13 +43,13 @@ export const postShift = (startTime, endTime) => (dispatch, getState) => {
   axios({
     method: "post",
     // TODO: fill correct end point
-    url: `${process.env.REACT_APP_ROOT_URL}/???`,
+    url: `${process.env.REACT_APP_ROOT_URL}/api/shifts`,
     headers: headers,
     data: body,
   })
     .then(res => {
       if (res.status === 200) {
-        return dispatch({ type: "CREATE_SHIFT", notes: res.data });
+        return dispatch({ type: "CREATE_SHIFT", data: res.data });
       }
     })
     .catch(err => {
@@ -81,13 +80,13 @@ export const updateShift = (id, startTime, endTime) => (dispatch, getState) => {
   axios({
     method: "update",
     // TODO: fill correct end point
-    url: `${process.env.REACT_APP_ROOT_URL}/???`,
+    url: `${process.env.REACT_APP_ROOT_URL}/api/shifts`,
     headers: headers,
     data: body,
   })
     .then(res => {
       if (res.status === 200) {
-        return dispatch({ type: "UPDATE_SHIFT", notes: res.data });
+        return dispatch({ type: "UPDATE_SHIFT", data: res.data });
       }
     })
     .catch(err => {
@@ -114,13 +113,13 @@ export const deleteShift = id => (dispatch, getState) => {
   axios({
     method: "delete",
     // TODO: fill correct end point
-    url: `${process.env.REACT_APP_ROOT_URL}/???`,
+    url: `${process.env.REACT_APP_ROOT_URL}/api/shifts`,
     headers: headers,
     data: body,
   })
     .then(res => {
       if (res.status === 200) {
-        return dispatch({ type: "DELETE_SHIFT", notes: res.data });
+        return dispatch({ type: "DELETE_SHIFT", data: res.data });
       }
     })
     .catch(err => {

@@ -36,7 +36,6 @@ class App extends Component {
           } else if (!this.props.user.isAuthenticated) {
             return <Redirect to="/signin" />;
           } else {
-            console.log(this.props);
             return <Template component={ChildComponent} props={props} />;
           }
         }}
