@@ -1,23 +1,21 @@
 import { combineReducers } from "redux";
 
-import user from "./User/reducer.js";
-import timeOff from "./TimeOff/reducer.js";
-import shift from "./Shift/reducer.js";
-import hourOfOperation from "./hourOfOperation/reducer.js";
-import employer from "./Employer/reducer.js";
+import calendar from "./Calendar/reducer.js";
+import day from "./Day/reducer.js";
 import employee from "./Employee/reducer.js";
-import contact from "./Contact/reducer.js";
-import calendarDay from "./CalendarDay/reducer.js";
-import availability from "./Availability/reducer.js";
+import employer from "./Employer/reducer.js";
+import hourOfOperation from "./hourOfOperation/reducer.js";
+import requestOff from "./requestOff/reducer.js";
+import shift from "./Shift/reducer.js";
+import user from "./User/reducer.js";
 
 export const rootReducer = combineReducers({
-  user,
-  timeOff,
-  shift,
-  hourOfOperation,
+  calendar,
+  day,
   employee,
   employer,
-  contact,
-  calendarDay,
-  availability,
+  hourOfOperation,
+  requestOff,
+  shift,
+  user,
 });

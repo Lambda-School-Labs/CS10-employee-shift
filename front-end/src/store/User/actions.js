@@ -13,7 +13,7 @@ export const getUser = () => (dispatch, getState) => {
 
     // TODO: Redo with correct endpoint to get user (not list of users)
     axios
-      .get(`${process.env.REACT_APP_ROOT_URL}/api/users/`, {
+      .get(`${process.env.REACT_APP_ROOT_URL}/api/user/`, {
         headers,
       })
       .then(res => {
@@ -156,7 +156,8 @@ export const signup = (
 
 export const updateUser = (email, password) => dispatch => {
   const token = getState().user.token;
-  const id = getState().user.user;
+  // Test with dummy ID
+  const id = `getState().user.user;`;
 
   if (token) {
     const body = JSON.stringify({

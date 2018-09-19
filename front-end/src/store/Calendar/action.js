@@ -1,19 +1,19 @@
 import axios from "axios";
 
-export const getTimeOff = () => (dispatch, getState) => {
+export const getCalendar = () => (dispatch, getState) => {
   const headers = { "Content-Type": "application/x-www-form-urlencoded" };
-  const { token } = getState().auth;
+  const { token } = getState().user.token;
 
   if (token) {
     headers["Authorization"] = `Bearer ${token}`;
   }
 
   axios
-    // TODO: fill correct end point
-    .get(`${process.env.REACT_APP_ROOT_URL}/???`, headers)
+    // Need user in body? Or is it read off of token?
+    .get(`${process.env.REACT_APP_ROOT_URL}/calendar`, headers)
     .then(res => {
       if (res.status === 200) {
-        return dispatch({ type: "READ_TIMEOFF", notes: res.data });
+        return dispatch({ type: "READ_CALENDAR", notes: res.data });
       }
     })
     .catch(err => {
@@ -21,34 +21,36 @@ export const getTimeOff = () => (dispatch, getState) => {
         dispatch({ type: "AUTHENTICATION_ERROR", data: err.data });
         throw err.data;
       } else {
-        dispatch({ type: "ERROR", data: res.data });
+        dispatch({ type: "ERROR", data: err.data });
         throw err.data;
       }
     });
 };
 
 // TODO: fill in correct data to send
-export const postTimeOff = data => (dispatch, getState) => {
-  const { token } = getState().auth;
+export const postCalendar = (startTime, endTime) => (dispatch, getState) => {
+  const { token } = getState().user.token;
   const headers = { "Content-Type": "application/x-www-form-urlencoded" };
 
   if (token) {
     headers["Authorization"] = `Bearer ${token}`;
   }
 
-  // fill me
-  const body = JSON.stringify({ data });
+  const body = JSON.stringify({
+    startTime: startTime,
+    endTime: endTime,
+  });
 
   axios({
     method: "post",
     // TODO: fill correct end point
-    url: `${process.env.REACT_APP_ROOT_URL}/???`,
+    url: `${process.env.REACT_APP_ROOT_URL}/calendar`,
     headers: headers,
     data: body,
   })
     .then(res => {
       if (res.status === 200) {
-        return dispatch({ type: "CREATE_TIMEOFF", notes: res.data });
+        return dispatch({ type: "CREATE_CALENDAR", notes: res.data });
       }
     })
     .catch(err => {
@@ -56,34 +58,39 @@ export const postTimeOff = data => (dispatch, getState) => {
         dispatch({ type: "AUTHENTICATION_ERROR", data: err.data });
         throw err.data;
       } else {
-        dispatch({ type: "ERROR", data: res.data });
+        dispatch({ type: "ERROR", data: err.data });
         throw err.data;
       }
     });
 };
 
-// TODO: fill in correct data to send
-export const updateTimeOff = data => (dispatch, getState) => {
-  const { token } = getState().auth;
+export const updateCalendar = (id, startTime, endTime) => (
+  dispatch,
+  getState
+) => {
+  const { token } = getState().user.token;
   const headers = { "Content-Type": "application/x-www-form-urlencoded" };
 
   if (token) {
     headers["Authorization"] = `Bearer ${token}`;
   }
 
-  // fill me
-  const body = JSON.stringify({ data });
+  const body = JSON.stringify({
+    id: id,
+    startTime: startTime,
+    endTime: endTime,
+  });
 
   axios({
     method: "update",
     // TODO: fill correct end point
-    url: `${process.env.REACT_APP_ROOT_URL}/???`,
+    url: `${process.env.REACT_APP_ROOT_URL}/calendar`,
     headers: headers,
     data: body,
   })
     .then(res => {
       if (res.status === 200) {
-        return dispatch({ type: "UPDATE_TIMEOFF", notes: res.data });
+        return dispatch({ type: "UPDATE_CALENDAR", notes: res.data });
       }
     })
     .catch(err => {
@@ -91,34 +98,32 @@ export const updateTimeOff = data => (dispatch, getState) => {
         dispatch({ type: "AUTHENTICATION_ERROR", data: err.data });
         throw err.data;
       } else {
-        dispatch({ type: "ERROR", data: res.data });
+        dispatch({ type: "ERROR", data: err.data });
         throw err.data;
       }
     });
 };
 
-// TODO: fill in correct data to send
-export const deleteTimeOff = data => (dispatch, getState) => {
-  const { token } = getState().auth;
+export const deleteCalendar = id => (dispatch, getState) => {
+  const { token } = getState().user.token;
   const headers = { "Content-Type": "application/x-www-form-urlencoded" };
 
   if (token) {
     headers["Authorization"] = `Bearer ${token}`;
   }
 
-  // fill me
-  const body = JSON.stringify({ data });
+  const body = JSON.stringify({ id: id });
 
   axios({
     method: "delete",
     // TODO: fill correct end point
-    url: `${process.env.REACT_APP_ROOT_URL}/???`,
+    url: `${process.env.REACT_APP_ROOT_URL}/calendar`,
     headers: headers,
     data: body,
   })
     .then(res => {
       if (res.status === 200) {
-        return dispatch({ type: "DELETE_TIMEOFF", notes: res.data });
+        return dispatch({ type: "DELETE_CALENDAR", notes: res.data });
       }
     })
     .catch(err => {
@@ -126,7 +131,7 @@ export const deleteTimeOff = data => (dispatch, getState) => {
         dispatch({ type: "AUTHENTICATION_ERROR", data: err.data });
         throw err.data;
       } else {
-        dispatch({ type: "ERROR", data: res.data });
+        dispatch({ type: "ERROR", data: err.data });
         throw err.data;
       }
     });

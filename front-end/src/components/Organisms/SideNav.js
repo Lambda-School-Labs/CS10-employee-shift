@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 
 import "../../styles/sidebar.css";
 
-// TODO: Render based on authorization level
+// TODO: Render based on permission level
 
 const SideNav = () => {
   return (
