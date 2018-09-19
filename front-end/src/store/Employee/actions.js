@@ -1,12 +1,8 @@
 import axios from "axios";
 
-/*
-TODO: REFACTOR OUT THE WORD SHIFT ---> Employee
-*/
-
-export const getShifts = () => (dispatch, getState) => {
+export const getEmployees = () => (dispatch, getState) => {
   const headers = { "Content-Type": "application/x-www-form-urlencoded" };
-  const { token } = getState().auth;
+  const { token } = getState().user.token;
 
   if (token) {
     headers["Authorization"] = `Bearer ${token}`;
@@ -14,10 +10,10 @@ export const getShifts = () => (dispatch, getState) => {
 
   axios
     // TODO: fill correct end point
-    .get(`${process.env.REACT_APP_ROOT_URL}/???`, headers)
+    .get(`${process.env.REACT_APP_ROOT_URL}/employees`, headers)
     .then(res => {
       if (res.status === 200) {
-        return dispatch({ type: "READ_SHIFT", notes: res.data });
+        return dispatch({ type: "READ_EMPLOYEE", data: res.data });
       }
     })
     .catch(err => {
@@ -32,8 +28,8 @@ export const getShifts = () => (dispatch, getState) => {
 };
 
 // TODO: fill in correct data to send
-export const postShift = data => (dispatch, getState) => {
-  const { token } = getState().auth;
+export const postEmployee = data => (dispatch, getState) => {
+  const { token } = getState().user.token;
   const headers = { "Content-Type": "application/x-www-form-urlencoded" };
 
   if (token) {
@@ -46,13 +42,13 @@ export const postShift = data => (dispatch, getState) => {
   axios({
     method: "post",
     // TODO: fill correct end point
-    url: `${process.env.REACT_APP_ROOT_URL}/???`,
+    url: `${process.env.REACT_APP_ROOT_URL}/employees`,
     headers: headers,
     data: body,
   })
     .then(res => {
       if (res.status === 200) {
-        return dispatch({ type: "CREATE_SHIFT", notes: res.data });
+        return dispatch({ type: "CREATE_EMPLOYEE", data: res.data });
       }
     })
     .catch(err => {
@@ -67,8 +63,8 @@ export const postShift = data => (dispatch, getState) => {
 };
 
 // TODO: fill in correct data to send
-export const updateShift = data => (dispatch, getState) => {
-  const { token } = getState().auth;
+export const updateEmployee = data => (dispatch, getState) => {
+  const { token } = getState().user.token;
   const headers = { "Content-Type": "application/x-www-form-urlencoded" };
 
   if (token) {
@@ -81,13 +77,13 @@ export const updateShift = data => (dispatch, getState) => {
   axios({
     method: "update",
     // TODO: fill correct end point
-    url: `${process.env.REACT_APP_ROOT_URL}/???`,
+    url: `${process.env.REACT_APP_ROOT_URL}/employees`,
     headers: headers,
     data: body,
   })
     .then(res => {
       if (res.status === 200) {
-        return dispatch({ type: "UPDATE_SHIFT", notes: res.data });
+        return dispatch({ type: "UPDATE_EMPLOYEE", data: res.data });
       }
     })
     .catch(err => {
@@ -102,8 +98,8 @@ export const updateShift = data => (dispatch, getState) => {
 };
 
 // TODO: fill in correct data to send
-export const deleteShift = data => (dispatch, getState) => {
-  const { token } = getState().auth;
+export const deleteEmployee = data => (dispatch, getState) => {
+  const { token } = getState().user.token;
   const headers = { "Content-Type": "application/x-www-form-urlencoded" };
 
   if (token) {
@@ -116,13 +112,13 @@ export const deleteShift = data => (dispatch, getState) => {
   axios({
     method: "delete",
     // TODO: fill correct end point
-    url: `${process.env.REACT_APP_ROOT_URL}/???`,
+    url: `${process.env.REACT_APP_ROOT_URL}/employees`,
     headers: headers,
     data: body,
   })
     .then(res => {
       if (res.status === 200) {
-        return dispatch({ type: "DELETE_SHIFT", notes: res.data });
+        return dispatch({ type: "DELETE_EMPLOYEE", data: res.data });
       }
     })
     .catch(err => {

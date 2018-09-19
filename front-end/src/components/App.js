@@ -1,10 +1,8 @@
 import React, { Component } from "react";
-import { connect } from "react-redux";
 import { Route, Switch, BrowserRouter, Redirect } from "react-router-dom";
 
+import { connect } from "react-redux";
 import { getUser } from "../store/User/actions.js";
-
-import "../styles/App.css";
 
 import {
   Billing,
@@ -17,6 +15,11 @@ import {
   Signup,
 } from "./Pages";
 
+import Template from "./Templates/main.js";
+
+// NOTE: This component is for handling our App's routing.
+// It checks authentication (getUser) and reroutes accordingly.
+
 class App extends Component {
   componentDidMount() {
     this.props.getUser();
@@ -28,12 +31,12 @@ class App extends Component {
         {...rest}
         render={props => {
           if (this.props.user.isLoading) {
-            // TODO: better loading screen, seperate component
-            return <em>Loading...</em>;
+            // TODO: better loading screen in a separate component
+            return <em>Loading something great...</em>;
           } else if (!this.props.user.isAuthenticated) {
             return <Redirect to="/signin" />;
           } else {
-            return <ChildComponent {...props} />;
+            return <Template component={ChildComponent} props={props} />;
           }
         }}
       />

@@ -4,10 +4,9 @@ import { connect } from "react-redux";
 
 import { signout } from "../../store/User/actions.js";
 
-const TopNav = () => {
-  const clickSignout = () => {
-    const token = localStorage.getItem("token");
-    this.props.signout(token);
+const TopNav = props => {
+  const clickSignout = e => {
+    props.signout();
   };
 
   return (
@@ -26,7 +25,7 @@ const TopNav = () => {
         }}
       >
         <Link to="/">Home</Link>
-        <p> > Component</p>
+        <p> > {props.component}</p>
       </div>
       <Link to="/" onClick={clickSignout}>
         Sign Out
@@ -37,10 +36,13 @@ const TopNav = () => {
 
 const mapDispatchToProps = dispatch => {
   return {
-    signout: token => {
-      return dispatch(signout(token));
+    signout: () => {
+      return dispatch(signout());
     },
   };
 };
 
-export default connect(mapDispatchToProps)(TopNav);
+export default connect(
+  null,
+  mapDispatchToProps
+)(TopNav);
