@@ -1,6 +1,6 @@
 import axios from "axios";
 
-// Action to get user the token is saved in local storage (WIP: and data?)
+// WIP: Action to get user's data if the token is saved in local storage
 export const getUser = () => (dispatch, getState) => {
   dispatch({ type: "FETCHING_USER" });
 
@@ -13,12 +13,12 @@ export const getUser = () => (dispatch, getState) => {
 
     // TODO: Redo with correct endpoint to get user (not list of users)
     axios
-      .get(`${process.env.REACT_APP_ROOT_URL}/users/`, {
+      .get(`${process.env.REACT_APP_ROOT_URL}/api/users/`, {
         headers,
       })
       .then(res => {
         if (res.status === 200) {
-          dispatch({ type: "FETCHED_USER", user: res.data });
+          dispatch({ type: "FETCHED_USER", data: res.data });
           return res.data;
         }
       })
@@ -48,26 +48,25 @@ export const signin = (username, password) => dispatch => {
     data: body,
   })
     .then(res => {
-      if (res.status < 500) {
-        return { status: res.status, data: res.data };
-      } else {
-        console.log("Server Error!");
-        throw res;
-      }
-    })
-    .then(res => {
       if (res.status === 200) {
         dispatch({ type: "SIGNIN_SUCCESS", data: res.data });
         return res.data;
-      } else if (res.status === 403 || res.status === 401) {
-        dispatch({ type: "ERROR", data: res.data });
-        throw res.data;
       }
-      // TODO: More error checking? Re-do with catch?
+    })
+    .catch(err => {
+      if (err.status < 500) {
+        console.log("Server Error!");
+        return { status: err.status, data: err.data };
+      } else if (err.status === 403 || err.status === 401) {
+        dispatch({ type: "ERROR", data: err.data });
+        throw err.data;
+      }
     });
 };
 
-export const signout = token => dispatch => {
+export const signout = () => dispatch => {
+  const token = localStorage.getItem("token");
+
   if (token) {
     const body = JSON.stringify({
       token: token,
@@ -84,20 +83,18 @@ export const signout = token => dispatch => {
       data: body,
     })
       .then(res => {
-        if (res.status < 500) {
-          return { status: res.status, data: res.data };
-        } else {
-          console.log("Server Error!");
-          throw res;
-        }
-      })
-      .then(res => {
         if (res.status === 200) {
           dispatch({ type: "SIGNOUT_SUCCESS", data: res.data });
           return res.data;
-        } else if (res.status === 403 || res.status === 401) {
-          dispatch({ type: "ERROR", data: res.data });
-          throw res.data;
+        }
+      })
+      .catch(err => {
+        if (err.status < 500) {
+          console.log("Server Error!");
+          return { status: err.status, data: err.data };
+        } else if (err.status === 403 || err.status === 401) {
+          dispatch({ type: "ERROR", data: err.data });
+          throw err.data;
         }
       });
   } else dispatch({ type: "SIGNOUT_SUCCESS" });
@@ -131,20 +128,62 @@ export const signup = (
     data: body,
   })
     .then(res => {
-      if (res.status < 500) {
-        return { status: res.status, data: res.data };
-      } else {
-        console.log("Server Error!");
-        throw res;
-      }
-    })
-    .then(res => {
       if (res.status === 201) {
         dispatch({ type: "SIGNUP_SUCCESS", data: res.data });
         return res.data;
-      } else if (res.status === 403 || res.status === 401) {
-        dispatch({ type: "ERROR", data: res.data });
-        throw res.data;
+      }
+    })
+    .catch(err => {
+      // TODO: Render error message
+      if (err.status < 500) {
+        console.log("Server Error!");
+        return { status: err.status, data: err.data };
+      } else if (err.status === 403 || err.status === 401) {
+        dispatch({ type: "ERROR", data: err.data });
+        throw err.data;
       }
     });
+};
+
+// Patch to /api/users
+// Still needs user group persmission
+
+export const updateUser = (email, password) => (dispatch, getState) => {
+  const token = getState().user.token;
+  const id = getState().user.currentUser.id;
+
+  if (token) {
+    const body = JSON.stringify({
+      token: token,
+      client_id: `${process.env.REACT_APP_CLIENT_ID}`,
+      client_secret: `${process.env.REACT_APP_CLIENT_SECRET}`,
+    });
+
+    if (email) body[email] = email;
+    if (password) body[password] = password;
+
+    axios({
+      method: "patch",
+      url: `${process.env.REACT_APP_ROOT_URL}/api/users/${id}`,
+      headers: {
+        "Content-Type": "application/json",
+      },
+      data: body,
+    })
+      .then(res => {
+        if (res.status === 200) {
+          dispatch({ type: "UPDATE_SUCCESS", data: res.data });
+          return res.data;
+        }
+      })
+      .catch(err => {
+        if (err.status < 500) {
+          console.log("Server Error!");
+          return { status: err.status, data: err.data };
+        } else if (err.status === 403 || err.status === 401) {
+          dispatch({ type: "ERROR", data: err.data });
+          throw err.data;
+        }
+      });
+  } else dispatch({ type: "ERROR", data: "no auth!" });
 };
