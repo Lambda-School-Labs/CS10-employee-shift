@@ -15,14 +15,14 @@ class SideNav extends Component{
 
     render(){
         return (
-            <div>
-                <button onClick={this.openModal}>Open Modal</button>
-                <Modal isOpen={this.state.isModalOpen} onClose={() => this.closeModal()}>
-                    <h1>Modal Title</h1>
-                    <button onClick={() => this.closeModal()}>Close</button>
-                </Modal>}
-            </div>
-            
+            <div></div>
+            // <div>
+            //     <button onClick={this.openModal}>Open Modal</button>
+            //     <Modal isOpen={this.state.isModalOpen} onClose={() => this.closeModal()}>
+            //         <h1>Modal Title</h1>
+            //         <button onClick={() => this.closeModal()}>Close</button>
+            //     </Modal>}
+            // </div>  
         )
     }
 }

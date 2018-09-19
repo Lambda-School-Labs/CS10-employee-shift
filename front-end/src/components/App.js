@@ -60,7 +60,7 @@ class App extends Component {
             <Route exact path="/signup" component={Signup} />
             {/*Dev routes */}
             <Route exact path="/dev_month" component={Calendar_test} />
-            <Route exact path="/dev_sidenav" component={SideNav} />
+            {/* <Route exact path="/dev_sidenav" component={SideNav} /> */}
           </Switch>
         </BrowserRouter>
       </div>
