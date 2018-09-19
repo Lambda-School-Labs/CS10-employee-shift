@@ -1,9 +1,19 @@
 import React, { Component } from "react";
 import Sidebar from "../Parts/SideBar";
+import { 
+  NewEmployeeCard, 
+  EmployeeCard, 
+  CardInner, 
+  NavBar, 
+  Top,
+  Bottom,
+  Left,
+  Right
+} from "../../styles/Employee";
 
 function NewEmp() {
   return (
-    <div className="new-employee-card">
+    <NewEmployeeCard>
       <form action="">
         First Name: <input type="text" name="firstName" placeholder="first name" /><br />
         Middle Name: <input type="text" name="middleName" placeholder="middle name" /><br />
@@ -14,7 +24,7 @@ function NewEmp() {
         Working Time: <input type="text" name="time" placeholder="working time" /><br />
         <input type="submit" value="submit"></input>
       </form>
-    </div>
+    </NewEmployeeCard>
   )
 }
 
@@ -23,22 +33,22 @@ function Employee(props) {
   return (
     props.data.map((employee, i) => {
       return (
-        <div key={i} className="employee-card">
+        <EmployeeCard key={i}>
           <h2>{employee.name}</h2>
           <h2>{employee.email}</h2>
           <h2>{employee.phone}</h2>
 
-          <div className="card-inner">
+          <CardInner>
             <h1 className="card-title">Avability</h1>
             <h2>{employee.workingDays}</h2>
             <h2>{employee.workingTime}</h2>
-          </div>
+          </CardInner>
 
-          <div className="card-inner">
+          <CardInner>
             <h1 className="card-title">Requested Time Off</h1>
             <span>something</span>
-          </div>
-        </div>
+          </CardInner>
+        </EmployeeCard>
       )
     })
   )
@@ -48,20 +58,20 @@ class Employees extends Component {
   render() {
     return (
       <div className="container">
-        <div className="top">
-          <div className="navbar">
+        <Top>
+          <NavBar>
             <span>Dashboard </span>
-          </div>
-        </div>
+          </NavBar>
+        </Top>
 
-        <div className="bottom">
-          <div className="left">
+        <Bottom>
+          <Left>
             <Sidebar />
-          </div>
+          </Left>
 
           <Employee />
           <NewEmp />
-        </div>
+        </Bottom>
       </div>
 
     )
