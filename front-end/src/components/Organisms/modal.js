@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import "../../styles/modal.css";
+import { Modals, ModalInner } from "../../styles/modal";
 
 function Open() {
     let model = Identify();
@@ -12,7 +12,7 @@ function Close() {
 }
 
 function Identify() {
-    let model = document.getElementsByClassName("modal");
+    let model = document.getElementsByClassName("cqaPHb");
     model = model[0];
     return model;
 }
@@ -23,8 +23,8 @@ class Modal extends Component {
         return (
             <div className="modal-container">
                 <button onClick={Open}>Popup</button>
-                <div className="modal">
-                    <div className="modal-inner">
+                <Modals>
+                    <ModalInner>
                         <span>Hours of Operation</span>
                         <form action="">
                         Monday: <input type="text" name="Monday" placeholder="9am-5pm" /><br />
@@ -37,8 +37,8 @@ class Modal extends Component {
                         <input type="submit" value="submit"></input>
                         </form>
                         <button onClick={Close}>Close</button>
-                    </div>
-                </div>
+                    </ModalInner>
+                </Modals>
             </div>
         )
     }
