@@ -13,7 +13,7 @@ export const getEmployer = () => (dispatch, getState) => {
     .get(`${process.env.REACT_APP_ROOT_URL}/employers`, headers)
     .then(res => {
       if (res.status === 200) {
-        return dispatch({ type: "READ_EMPLOYER", employers: res.data });
+        return dispatch({ type: "READ_EMPLOYER", data: res.data });
       }
     })
     .catch(err => {
@@ -48,7 +48,7 @@ export const postEmployer = data => (dispatch, getState) => {
   })
     .then(res => {
       if (res.status === 200) {
-        return dispatch({ type: "CREATE_EMPLOYER", employers: res.data });
+        return dispatch({ type: "CREATE_EMPLOYER", data: res.data });
       }
     })
     .catch(err => {
@@ -83,7 +83,7 @@ export const updateEmployer = data => (dispatch, getState) => {
   })
     .then(res => {
       if (res.status === 200) {
-        return dispatch({ type: "UPDATE_EMPLOYER", employers: res.data });
+        return dispatch({ type: "UPDATE_EMPLOYER", data: res.data });
       }
     })
     .catch(err => {
@@ -118,7 +118,7 @@ export const deleteEmployer = data => (dispatch, getState) => {
   })
     .then(res => {
       if (res.status === 200) {
-        return dispatch({ type: "DELETE_EMPLOYER", employers: res.data });
+        return dispatch({ type: "DELETE_EMPLOYER", data: res.data });
       }
     })
     .catch(err => {

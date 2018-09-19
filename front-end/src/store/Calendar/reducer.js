@@ -36,7 +36,7 @@ export default (state = initialState, action) => {
 
     // TODO: double check this
     case "ERROR":
-      return { ...state, error: action.errorMessage };
+      return { ...state, error: action.data };
 
     default:
       return state;

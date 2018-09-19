@@ -13,7 +13,7 @@ export const getRequestOffs = () => (dispatch, getState) => {
     .get(`${process.env.REACT_APP_ROOT_URL}/requestoffs`, headers)
     .then(res => {
       if (res.status === 200) {
-        return dispatch({ type: "READ_REQUESTOFF", requestOffs: res.data });
+        return dispatch({ type: "READ_REQUESTOFF", data: res.data });
       }
     })
     .catch(err => {
@@ -50,7 +50,7 @@ export const postRequestOff = (startTime, endTime) => (dispatch, getState) => {
   })
     .then(res => {
       if (res.status === 200) {
-        return dispatch({ type: "CREATE_REQUESTOFF", requestOffs: res.data });
+        return dispatch({ type: "CREATE_REQUESTOFF", data: res.data });
       }
     })
     .catch(err => {
@@ -90,7 +90,7 @@ export const updateRequestOff = (id, startTime, endTime) => (
   })
     .then(res => {
       if (res.status === 200) {
-        return dispatch({ type: "UPDATE_REQUESTOFF", requestOffs: res.data });
+        return dispatch({ type: "UPDATE_REQUESTOFF", data: res.data });
       }
     })
     .catch(err => {
@@ -123,7 +123,7 @@ export const deleteRequestOff = id => (dispatch, getState) => {
   })
     .then(res => {
       if (res.status === 200) {
-        return dispatch({ type: "DELETE_REQUESTOFF", requestOffs: res.data });
+        return dispatch({ type: "DELETE_REQUESTOFF", data: res.data });
       }
     })
     .catch(err => {
