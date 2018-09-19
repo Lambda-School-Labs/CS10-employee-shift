@@ -5,9 +5,8 @@ import { connect } from "react-redux";
 import { signout } from "../../store/User/actions.js";
 
 const TopNav = props => {
-  const clickSignout = () => {
-    const token = localStorage.getItem("token");
-    this.props.signout(token);
+  const clickSignout = e => {
+    props.signout();
   };
 
   return (
@@ -37,10 +36,13 @@ const TopNav = props => {
 
 const mapDispatchToProps = dispatch => {
   return {
-    signout: token => {
-      return dispatch(signout(token));
+    signout: () => {
+      return dispatch(signout());
     },
   };
 };
 
-export default connect(mapDispatchToProps)(TopNav);
+export default connect(
+  null,
+  mapDispatchToProps
+)(TopNav);

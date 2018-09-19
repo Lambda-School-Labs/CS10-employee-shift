@@ -3,7 +3,7 @@ const initialState = {
   isAuthenticated: false,
   isEmployee: null,
   isLoading: true,
-  user: null,
+  currentUser: null,
   errors: {},
 };
 
@@ -15,18 +15,17 @@ export default (state = initialState, action) => {
     case "FETCHED_USER":
       return {
         ...state,
+        currentUser: action.data,
         isAuthenticated: true,
         isLoading: false,
-        // TODO: user data WIP
-        // user: action.user,
       };
 
-    // TODO: Employee check
     case "SIGNIN_SUCCESS":
       localStorage.setItem("token", action.data.access_token);
+      // TODO: Authorization level check, use refresh token?
       return {
         ...state,
-        ...action.data,
+        token: action.data.access_token,
         isAuthenticated: true,
         isLoading: false,
         errors: null,
@@ -41,7 +40,7 @@ export default (state = initialState, action) => {
         ...state,
         errors: action.data,
         token: null,
-        user: null,
+        currentUser: null,
         isEmployee: null,
         isAuthenticated: false,
         isLoading: false,
@@ -50,6 +49,7 @@ export default (state = initialState, action) => {
     // TODO: employee check
     case "SIGNUP_SUCCESS":
       localStorage.setItem("token", action.data.access_token);
+      console.log(action.data);
       return {
         ...state,
         ...action.data,
@@ -67,7 +67,7 @@ export default (state = initialState, action) => {
 
     // TODO: double check this
     case "ERROR":
-      return { ...state, error: action.errorMessage };
+      return { ...state, errors: { ...action.data } };
 
     default:
       return state;
