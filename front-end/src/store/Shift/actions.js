@@ -1,33 +1,40 @@
 import axios from "axios";
 
+// DEPERECATED ??
 export const getShifts = () => (dispatch, getState) => {
-  const headers = { "Content-Type": "application/x-www-form-urlencoded" };
+  dispatch({ type: "LOADING_SHIFTS" });
   const token = getState().user.token;
 
   if (token) {
-    headers["Authorization"] = `Bearer ${token}`;
+    const headers = {
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${token}`,
+    };
+
+    axios
+      .get(`${process.env.REACT_APP_ROOT_URL}/api/shifts/`, { headers })
+      .then(res => {
+        if (res.status === 200) {
+          return dispatch({ type: "READ_SHIFT", data: res.data });
+        }
+      })
+      .catch(err => {
+        if (err.status === 401 || err.status === 403) {
+          dispatch({ type: "AUTHENTICATION_ERROR", data: err.data });
+          throw err;
+        } else {
+          dispatch({ type: "ERROR", data: err.data });
+          throw err;
+        }
+      });
+    // else do something, logout?
   }
-  console.log(headers);
-  axios
-    .get(`${process.env.REACT_APP_ROOT_URL}/api/shifts`, headers)
-    .then(res => {
-      if (res.status === 200) {
-        return dispatch({ type: "READ_SHIFT", data: res.data });
-      }
-    })
-    .catch(err => {
-      if (err.status === 401 || err.status === 403) {
-        dispatch({ type: "AUTHENTICATION_ERROR", data: err.data });
-        throw err;
-      } else {
-        dispatch({ type: "ERROR", data: err.data });
-        throw err;
-      }
-    });
 };
 
 // TODO: fill in correct data to send
 export const postShift = (startTime, endTime) => (dispatch, getState) => {
+  dispatch({ type: "LOADING_SHIFTS" });
+
   const { token } = getState().user.token;
   const headers = { "Content-Type": "application/x-www-form-urlencoded" };
 
@@ -42,8 +49,7 @@ export const postShift = (startTime, endTime) => (dispatch, getState) => {
 
   axios({
     method: "post",
-    // TODO: fill correct end point
-    url: `${process.env.REACT_APP_ROOT_URL}/api/shifts`,
+    url: `${process.env.REACT_APP_ROOT_URL}/api/shifts/`,
     headers: headers,
     data: body,
   })
@@ -64,6 +70,8 @@ export const postShift = (startTime, endTime) => (dispatch, getState) => {
 };
 
 export const updateShift = (id, startTime, endTime) => (dispatch, getState) => {
+  dispatch({ type: "LOADING_SHIFTS" });
+
   const { token } = getState().user.token;
   const headers = { "Content-Type": "application/x-www-form-urlencoded" };
 
@@ -77,9 +85,9 @@ export const updateShift = (id, startTime, endTime) => (dispatch, getState) => {
     endTime: endTime,
   });
 
+  // use id?
   axios({
     method: "update",
-    // TODO: fill correct end point
     url: `${process.env.REACT_APP_ROOT_URL}/api/shifts`,
     headers: headers,
     data: body,
@@ -101,6 +109,8 @@ export const updateShift = (id, startTime, endTime) => (dispatch, getState) => {
 };
 
 export const deleteShift = id => (dispatch, getState) => {
+  dispatch({ type: "LOADING_SHIFTS" });
+
   const { token } = getState().user.token;
   const headers = { "Content-Type": "application/x-www-form-urlencoded" };
 
@@ -112,7 +122,7 @@ export const deleteShift = id => (dispatch, getState) => {
 
   axios({
     method: "delete",
-    // TODO: fill correct end point
+    // TODO: use ID?
     url: `${process.env.REACT_APP_ROOT_URL}/api/shifts`,
     headers: headers,
     data: body,
