@@ -1,25 +1,27 @@
 import React, { Component } from "react";
 
+
 import { Container, FormItem, Form } from "../../styles/signin.js";
 
 class Settings extends Component {
-  constructor(props){
-    super(props)
+  constructor(props) {
+    super(props);
     this.state = {
       email: "",
       phone: "",
       old_password: "",
-      new_password: ""
-    }
+      new_password: "",
+    };
   }
 
   inputChangeHandler = event => {
-    console.log("state text", event.target)
-    const {name, value} = event.target;
-    this.setState({ [name] : value })
-  }
+    console.log("state text", event.target);
+    const { name, value } = event.target;
+    this.setState({ [name]: value });
+  };
 
   render() {
+
     return ( 
     <Container className = "card" >
         <Form onSubmit={this.submitForm}>

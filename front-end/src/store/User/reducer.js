@@ -1,8 +1,9 @@
 const initialState = {
   token: localStorage.getItem("token"),
-  isAuthenticated: null,
+  isAuthenticated: false,
+  isEmployee: null,
   isLoading: true,
-  user: null,
+  currentUser: null,
   errors: {},
 };
 
@@ -14,13 +15,41 @@ export default (state = initialState, action) => {
     case "FETCHED_USER":
       return {
         ...state,
+        currentUser: action.data,
         isAuthenticated: true,
         isLoading: false,
-        user: action.user,
       };
 
     case "SIGNIN_SUCCESS":
-      localStorage.setItem("token", action.data.token);
+      localStorage.setItem("token", action.data.access_token);
+      // TODO: Authorization level check, use refresh token?
+      return {
+        ...state,
+        token: action.data.access_token,
+        isAuthenticated: true,
+        isLoading: false,
+        errors: null,
+      };
+
+    case "AUTH_ERROR":
+    // fall through to signout
+
+    case "SIGNOUT_SUCCESS":
+      localStorage.removeItem("token");
+      return {
+        ...state,
+        errors: action.data,
+        token: null,
+        currentUser: null,
+        isEmployee: null,
+        isAuthenticated: false,
+        isLoading: false,
+      };
+
+    // TODO: employee check
+    case "SIGNUP_SUCCESS":
+      localStorage.setItem("token", action.data.access_token);
+      console.log(action.data);
       return {
         ...state,
         ...action.data,
@@ -29,19 +58,16 @@ export default (state = initialState, action) => {
         errors: null,
       };
 
-    case "SIGNOUT_SUCCESS":
-      localStorage.removeItem("token");
+    case "UPDATE_SUCCESS":
       return {
         ...state,
-        errors: action.data,
-        token: null,
-        user: null,
-        isAuthenticated: false,
-        isLoading: false,
+        ...action.data,
+        errors: null,
       };
 
+    // TODO: double check this
     case "ERROR":
-      return { ...state, error: action.errorMessage };
+      return { ...state, errors: { ...action.data } };
 
     default:
       return state;

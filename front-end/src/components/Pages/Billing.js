@@ -3,8 +3,8 @@ import { connect } from "react-redux";
 import { Redirect } from "react-router-dom";
 import Sidebar from "../Organisms/SideNav.js";
 
-import { Container, FormItem, Form } from "../../styles/signin.js";
 
+import { Container, FormItem, Form } from "../../styles/signin.js";
 
 class Billing extends Component {
   state = {
@@ -26,7 +26,6 @@ class Billing extends Component {
   render() {
     return (
       <div>
-        <Sidebar />
         <Container>
         <div classname="main-container">
           <div>
@@ -42,6 +41,7 @@ class Billing extends Component {
                     type="text"
                   />
                 </div>
+
                 </FormItem>
               </div>
               <div className="card_body">
