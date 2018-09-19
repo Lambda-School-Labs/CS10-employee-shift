@@ -2,15 +2,15 @@ import axios from "axios";
 
 export const getShifts = () => (dispatch, getState) => {
   const headers = { "Content-Type": "application/x-www-form-urlencoded" };
-  const { token } = getState().auth;
+  const { token } = getState().user.token;
 
   if (token) {
     headers["Authorization"] = `Bearer ${token}`;
   }
 
   axios
-    // TODO: fill correct end point
-    .get(`${process.env.REACT_APP_ROOT_URL}/???`, headers)
+    // Need user in body? Or is it read off of token?
+    .get(`${process.env.REACT_APP_ROOT_URL}/shifts`, headers)
     .then(res => {
       if (res.status === 200) {
         return dispatch({ type: "READ_SHIFT", notes: res.data });
@@ -29,7 +29,7 @@ export const getShifts = () => (dispatch, getState) => {
 
 // TODO: fill in correct data to send
 export const postShift = (startTime, endTime) => (dispatch, getState) => {
-  const { token } = getState().auth;
+  const { token } = getState().user.token;
   const headers = { "Content-Type": "application/x-www-form-urlencoded" };
 
   if (token) {
@@ -65,7 +65,7 @@ export const postShift = (startTime, endTime) => (dispatch, getState) => {
 };
 
 export const updateShift = (id, startTime, endTime) => (dispatch, getState) => {
-  const { token } = getState().auth;
+  const { token } = getState().user.token;
   const headers = { "Content-Type": "application/x-www-form-urlencoded" };
 
   if (token) {
@@ -102,7 +102,7 @@ export const updateShift = (id, startTime, endTime) => (dispatch, getState) => {
 };
 
 export const deleteShift = id => (dispatch, getState) => {
-  const { token } = getState().auth;
+  const { token } = getState().user.token;
   const headers = { "Content-Type": "application/x-www-form-urlencoded" };
 
   if (token) {
