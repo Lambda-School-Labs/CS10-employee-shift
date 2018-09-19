@@ -1,29 +1,29 @@
-import React, { Component } from "react";
+// import React, { Component } from "react";
 
-class Modal extends Component {
-    state = { isModalOpen: false };
+// class Modal extends Component {
+//     state = { isModalOpen: false };
 
-    openModal = () => {
-    this.setState({ isModalOpen: true})
-}
+//     openModal = () => {
+//     this.setState({ isModalOpen: true})
+// }
 
-closeModal = () => {
-    this.setState({ isModalOpen: false})
-}
+// closeModal = () => {
+//     this.setState({ isModalOpen: false})
+// }
 
-    render() {
-        return (
-            <div>
-                <button onClick={this.openModal}>Open Modal</button>
-                <Modal isOpen={this.state.isModalOpen} onClose={() => this.closeModal()}>
-                    <h1>Modal Title</h1>
-                    <button onClick={() => this.closeModal()}>Close</button>
-                    </Modal>}
-            </div>
-        )
-    };
-}
+//     render() {
+//         return (
+//             <div>
+//                 <button onClick={this.openModal}>Open Modal</button>
+//                 <Modal isOpen={this.state.isModalOpen} onClose={() => this.closeModal()}>
+//                     <h1>Modal Title</h1>
+//                     <button onClick={() => this.closeModal()}>Close</button>
+//                     </Modal>}
+//             </div>
+//         )
+//     };
+// }
 
 
 
- export default Modal; 
+//  export default Modal; 

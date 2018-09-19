@@ -1,8 +1,8 @@
-import React from "react";
+import React, { Component } from "react";
 
-import Month from "./test_pages/Month.js"
+import Month from "./Month.js"
 
-class Calendar extends Component {
+class Calendar_test extends Component {
 
   render() {
     return(
@@ -23,4 +23,4 @@ class Calendar extends Component {
   }
 }
 
-export default Calendar;
+export default Calendar_test;

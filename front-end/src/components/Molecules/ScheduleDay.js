@@ -1,6 +1,6 @@
 import React from "react";
 import Date from "../Atoms/Date.js";
-import Shift from "../Atoms/Shift.js";
+//import Shift from "../Atoms/Shift.js";
 import Totals from "../Atoms/Totals.js";
 
 const Day = ({ name, date }) => {
