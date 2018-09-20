@@ -4,9 +4,7 @@ const initialState = {
   allShifts: [],
 };
 
-/*
-TODO: REFACTOR OUT THE WORD SHIFT ---> Employee
-*/
+// TODO: UPDATE ME AND FIX ME
 
 export default (state = initialState, action) => {
   // return shallow copy of shifts

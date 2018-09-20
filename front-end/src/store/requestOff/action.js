@@ -10,7 +10,7 @@ export const getRequestOffs = () => (dispatch, getState) => {
 
   axios
     // Need user in body? Or is it read off of token?
-    .get(`${process.env.REACT_APP_ROOT_URL}/requestoffs`, headers)
+    .get(`${process.env.REACT_APP_ROOT_URL}/api/requestoff/`, headers)
     .then(res => {
       if (res.status === 200) {
         return dispatch({ type: "READ_REQUESTOFF", data: res.data });
@@ -47,7 +47,7 @@ export const postRequestOff = (date, reason) => (dispatch, getState) => {
   axios({
     method: "post",
     // TODO: fill correct end point
-    url: `${process.env.REACT_APP_ROOT_URL}/requestoffs`,
+    url: `${process.env.REACT_APP_ROOT_URL}/api/requestoff/`,
     headers: headers,
     data: body,
   })
@@ -87,7 +87,7 @@ export const updateRequestOff = (id, startTime, endTime) => (
   axios({
     method: "update",
     // TODO: fill correct end point
-    url: `${process.env.REACT_APP_ROOT_URL}/requestoffs`,
+    url: `${process.env.REACT_APP_ROOT_URL}/api/requestoff/`,
     headers: headers,
     data: body,
   })
@@ -120,7 +120,7 @@ export const deleteRequestOff = id => (dispatch, getState) => {
   axios({
     method: "delete",
     // TODO: fill correct end point
-    url: `${process.env.REACT_APP_ROOT_URL}/requestoffs`,
+    url: `${process.env.REACT_APP_ROOT_URL}/api/requestoff/`,
     headers: headers,
     data: body,
   })

@@ -4,6 +4,8 @@ const initialState = {
   allDays: [],
 };
 
+// TODO: UPDATE ME AND FIX ME
+
 export default (state = initialState, action) => {
   // return shallow copy of days
   const days = state.allDays.slice();

@@ -1,6 +1,6 @@
 import axios from "axios";
 
-export const getDays = () => (dispatch, getState) => {
+export const getAvailabilities = () => (dispatch, getState) => {
   const headers = { "Content-Type": "application/x-www-form-urlencoded" };
   const { token } = getState().user.token;
 
@@ -10,10 +10,10 @@ export const getDays = () => (dispatch, getState) => {
 
   axios
     // Need user in body? Or is it read off of token?
-    .get(`${process.env.REACT_APP_ROOT_URL}/days`, headers)
+    .get(`${process.env.REACT_APP_ROOT_URL}/api/availabilities/`, headers)
     .then(res => {
       if (res.status === 200) {
-        return dispatch({ type: "READ_DAY", data: res.data });
+        return dispatch({ type: "READ_AVAILABILITIES", data: res.data });
       }
     })
     .catch(err => {
@@ -28,7 +28,10 @@ export const getDays = () => (dispatch, getState) => {
 };
 
 // TODO: fill in correct data to send
-export const postDay = (startTime, endTime) => (dispatch, getState) => {
+export const postAvailabilities = (startTime, endTime) => (
+  dispatch,
+  getState
+) => {
   const { token } = getState().user.token;
   const headers = { "Content-Type": "application/x-www-form-urlencoded" };
 
@@ -44,13 +47,13 @@ export const postDay = (startTime, endTime) => (dispatch, getState) => {
   axios({
     method: "post",
     // TODO: fill correct end point
-    url: `${process.env.REACT_APP_ROOT_URL}/days`,
+    url: `${process.env.REACT_APP_ROOT_URL}/api/availabilities/`,
     headers: headers,
     data: body,
   })
     .then(res => {
       if (res.status === 200) {
-        return dispatch({ type: "CREATE_DAY", data: res.data });
+        return dispatch({ type: "CREATE_AVAILABILITIES", data: res.data });
       }
     })
     .catch(err => {
@@ -64,7 +67,10 @@ export const postDay = (startTime, endTime) => (dispatch, getState) => {
     });
 };
 
-export const updateDay = (id, startTime, endTime) => (dispatch, getState) => {
+export const updateAvailabilities = (id, startTime, endTime) => (
+  dispatch,
+  getState
+) => {
   const { token } = getState().user.token;
   const headers = { "Content-Type": "application/x-www-form-urlencoded" };
 
@@ -81,13 +87,13 @@ export const updateDay = (id, startTime, endTime) => (dispatch, getState) => {
   axios({
     method: "update",
     // TODO: fill correct end point
-    url: `${process.env.REACT_APP_ROOT_URL}/days`,
+    url: `${process.env.REACT_APP_ROOT_URL}/api/availabilities/`,
     headers: headers,
     data: body,
   })
     .then(res => {
       if (res.status === 200) {
-        return dispatch({ type: "UPDATE_DAY", data: res.data });
+        return dispatch({ type: "UPDATE_AVAILABILITIES", data: res.data });
       }
     })
     .catch(err => {
@@ -101,7 +107,7 @@ export const updateDay = (id, startTime, endTime) => (dispatch, getState) => {
     });
 };
 
-export const deleteDay = id => (dispatch, getState) => {
+export const deleteAvailabilities = id => (dispatch, getState) => {
   const { token } = getState().user.token;
   const headers = { "Content-Type": "application/x-www-form-urlencoded" };
 
@@ -114,13 +120,13 @@ export const deleteDay = id => (dispatch, getState) => {
   axios({
     method: "delete",
     // TODO: fill correct end point
-    url: `${process.env.REACT_APP_ROOT_URL}/days`,
+    url: `${process.env.REACT_APP_ROOT_URL}/api/availabilities/`,
     headers: headers,
     data: body,
   })
     .then(res => {
       if (res.status === 200) {
-        return dispatch({ type: "DELETE_DAY", data: res.data });
+        return dispatch({ type: "DELETE_AVAILABILITIES", data: res.data });
       }
     })
     .catch(err => {

@@ -59,6 +59,8 @@ export default (state = initialState, action) => {
       };
 
     case "UPDATE_SUCCESS":
+      // DEV CONSOLE LOG, REMOVE ME!
+      console.log("UPDATED USER");
       return {
         ...state,
         ...action.data,

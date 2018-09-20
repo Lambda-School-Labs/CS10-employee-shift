@@ -1,6 +1,6 @@
 import axios from "axios";
 
-export const getEmployees = () => (dispatch, getState) => {
+export const getAccount = () => (dispatch, getState) => {
   const headers = { "Content-Type": "application/x-www-form-urlencoded" };
   const { token } = getState().user.token;
 
@@ -10,10 +10,10 @@ export const getEmployees = () => (dispatch, getState) => {
 
   axios
     // TODO: fill correct end point
-    .get(`${process.env.REACT_APP_ROOT_URL}/employees`, headers)
+    .get(`${process.env.REACT_APP_ROOT_URL}/api/accounts/`, headers)
     .then(res => {
       if (res.status === 200) {
-        return dispatch({ type: "READ_EMPLOYEE", data: res.data });
+        return dispatch({ type: "READ_ACCOUNT", data: res.data });
       }
     })
     .catch(err => {
@@ -28,7 +28,7 @@ export const getEmployees = () => (dispatch, getState) => {
 };
 
 // TODO: fill in correct data to send
-export const postEmployee = data => (dispatch, getState) => {
+export const postAccount = data => (dispatch, getState) => {
   const { token } = getState().user.token;
   const headers = { "Content-Type": "application/x-www-form-urlencoded" };
 
@@ -42,13 +42,13 @@ export const postEmployee = data => (dispatch, getState) => {
   axios({
     method: "post",
     // TODO: fill correct end point
-    url: `${process.env.REACT_APP_ROOT_URL}/employees`,
+    url: `${process.env.REACT_APP_ROOT_URL}/api/accounts/`,
     headers: headers,
     data: body,
   })
     .then(res => {
       if (res.status === 200) {
-        return dispatch({ type: "CREATE_EMPLOYEE", data: res.data });
+        return dispatch({ type: "CREATE_ACCOUNT", data: res.data });
       }
     })
     .catch(err => {
@@ -63,7 +63,7 @@ export const postEmployee = data => (dispatch, getState) => {
 };
 
 // TODO: fill in correct data to send
-export const updateEmployee = data => (dispatch, getState) => {
+export const updateAccount = data => (dispatch, getState) => {
   const { token } = getState().user.token;
   const headers = { "Content-Type": "application/x-www-form-urlencoded" };
 
@@ -77,13 +77,13 @@ export const updateEmployee = data => (dispatch, getState) => {
   axios({
     method: "update",
     // TODO: fill correct end point
-    url: `${process.env.REACT_APP_ROOT_URL}/employees`,
+    url: `${process.env.REACT_APP_ROOT_URL}/api/accounts/`,
     headers: headers,
     data: body,
   })
     .then(res => {
       if (res.status === 200) {
-        return dispatch({ type: "UPDATE_EMPLOYEE", data: res.data });
+        return dispatch({ type: "UPDATE_ACCOUNT", data: res.data });
       }
     })
     .catch(err => {
@@ -98,7 +98,7 @@ export const updateEmployee = data => (dispatch, getState) => {
 };
 
 // TODO: fill in correct data to send
-export const deleteEmployee = data => (dispatch, getState) => {
+export const deleteAccount = data => (dispatch, getState) => {
   const { token } = getState().user.token;
   const headers = { "Content-Type": "application/x-www-form-urlencoded" };
 
@@ -112,13 +112,13 @@ export const deleteEmployee = data => (dispatch, getState) => {
   axios({
     method: "delete",
     // TODO: fill correct end point
-    url: `${process.env.REACT_APP_ROOT_URL}/employees`,
+    url: `${process.env.REACT_APP_ROOT_URL}/api/accounts/`,
     headers: headers,
     data: body,
   })
     .then(res => {
       if (res.status === 200) {
-        return dispatch({ type: "DELETE_EMPLOYEE", data: res.data });
+        return dispatch({ type: "DELETE_ACCOUNT", data: res.data });
       }
     })
     .catch(err => {

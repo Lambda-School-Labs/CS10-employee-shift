@@ -13,6 +13,8 @@ export default (state = initialState, action) => {
       return { ...state, requestOffsLoading: true };
 
     case "READ_REQUESTOFF":
+      // DEV CONSOLE LOG, REMOVE ME!
+      console.log("READ REQUESTOFF");
       return {
         ...state,
         allRequestOffs: [...action.requestOffs],
@@ -20,6 +22,8 @@ export default (state = initialState, action) => {
       };
 
     case "CREATE_REQUESTOFF":
+      // DEV CONSOLE LOG, REMOVE ME!
+      console.log("CREATED REQUESTOFF");
       requestOffs.push(action.shift);
       return {
         ...state,

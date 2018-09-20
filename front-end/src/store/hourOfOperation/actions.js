@@ -10,10 +10,10 @@ export const getHoursOfOperation = () => (dispatch, getState) => {
 
   axios
     // TODO: fill correct end point
-    .get(`${process.env.REACT_APP_ROOT_URL}/hoos`, headers)
+    .get(`${process.env.REACT_APP_ROOT_URL}/api/hoo/`, headers)
     .then(res => {
       if (res.status === 200) {
-        return dispatch({ type: "READ_HOOS", data: res.data });
+        return dispatch({ type: "READ_HOO", data: res.data });
       }
     })
     .catch(err => {
@@ -42,13 +42,13 @@ export const postHoursOfOperation = data => (dispatch, getState) => {
   axios({
     method: "post",
     // TODO: fill correct end point
-    url: `${process.env.REACT_APP_ROOT_URL}/hoos`,
+    url: `${process.env.REACT_APP_ROOT_URL}/api/hoo/`,
     headers: headers,
     data: body,
   })
     .then(res => {
       if (res.status === 200) {
-        return dispatch({ type: "CREATE_HOOS", data: res.data });
+        return dispatch({ type: "CREATE_HOO", data: res.data });
       }
     })
     .catch(err => {
@@ -77,13 +77,13 @@ export const updateHoursOfOperation = data => (dispatch, getState) => {
   axios({
     method: "update",
     // TODO: fill correct end point
-    url: `${process.env.REACT_APP_ROOT_URL}/hoos`,
+    url: `${process.env.REACT_APP_ROOT_URL}/api/hoo/`,
     headers: headers,
     data: body,
   })
     .then(res => {
       if (res.status === 200) {
-        return dispatch({ type: "UPDATE_HOOS", data: res.data });
+        return dispatch({ type: "UPDATE_HOO", data: res.data });
       }
     })
     .catch(err => {
@@ -112,13 +112,13 @@ export const deleteHoursOfOperation = data => (dispatch, getState) => {
   axios({
     method: "delete",
     // TODO: fill correct end point
-    url: `${process.env.REACT_APP_ROOT_URL}/hoos`,
+    url: `${process.env.REACT_APP_ROOT_URL}/api/hoo/`,
     headers: headers,
     data: body,
   })
     .then(res => {
       if (res.status === 200) {
-        return dispatch({ type: "DELETE_HOOS", data: res.data });
+        return dispatch({ type: "DELETE_HOO", data: res.data });
       }
     })
     .catch(err => {

@@ -4,6 +4,8 @@ const initialState = {
   employer: [],
 };
 
+// TODO: UPDATE ME AND FIX ME
+
 export default (state = initialState, action) => {
   // return shallow copy of employers
   const employers = state.employer.slice();

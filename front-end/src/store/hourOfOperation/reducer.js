@@ -4,6 +4,8 @@ const initialState = {
   allHoOs: [],
 };
 
+// TODO: UPDATE ME AND FIX ME
+
 export default (state = initialState, action) => {
   // return shallow copy of hoos
   const hoos = state.allHoOs.slice();
@@ -13,7 +15,7 @@ export default (state = initialState, action) => {
       return { ...state, hoosLoading: true };
 
     case "READ_HOOS":
-      return { ...state, allHoOs: [...action.hoos], hoosLoading: false };
+      return { ...state, allHoOs: [...action.data], hoosLoading: false };
 
     case "CREATE_HOOS":
       hoos.push(action.shift);
