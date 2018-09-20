@@ -3,6 +3,8 @@ import React, { Component } from "react";
 class Dashboard extends Component {
   render() {
     return (
+      /* TODO: Pull out into Molecular components */
+      /* TODO: Styled components */
       <div className="emp-container">
         <h1>Welcome Employee</h1>
         <div classname="emp-inner-container">

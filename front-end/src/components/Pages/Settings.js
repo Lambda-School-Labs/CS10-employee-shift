@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 
-import { Container, FormItem, Form } from "../../styles/signin.js";
+import { SettingsContainer, FormItem, Form } from "../../styles/Signin.js";
 
 class Settings extends Component {
   constructor(props) {
@@ -21,7 +21,7 @@ class Settings extends Component {
 
   render() {
     return (
-      <Container>
+      <SettingsContainer>
         <Form onSubmit={this.submitForm}>
           <FormItem>
             <label>Email</label>
@@ -69,7 +69,7 @@ class Settings extends Component {
           </FormItem>
           <button type="submit">Save</button>
         </Form>
-      </Container>
+      </SettingsContainer>
     );
   }
 }

@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import { Link, Redirect } from "react-router-dom";
 
-import { Container, FormItem, Form } from "../../styles/signin.js";
+import { Container, FormItem, Form } from "../../styles/Signin.js";
 
 import { signin } from "../../store/User/actions.js";
 
@@ -28,7 +28,7 @@ class Signin extends Component {
       return <Redirect to="/calendar" />;
     }
 
-    // TODO: Modern & stylish
+    // TODO: Restyle all this
     return (
       <Container>
         <Form onSubmit={this.submitHandler}>

@@ -19,3 +19,19 @@ export const Form = styled.form`
 export const FormItem = styled.div`
   margin: 5%;
 `;
+
+export const SettingsContainer = styled.div`
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+`;
+
+export const BillingContainer = styled.div`
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+`;
