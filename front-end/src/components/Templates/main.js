@@ -31,10 +31,16 @@ const components = {
 };
 
 const main = props => {
-  const SpecificComponent = components[props.component.name];
+  // If wrapped with redux grab correct name of component
+  const name =
+    props.component.name === "Connect"
+      ? props.component.WrappedComponent.name
+      : props.component.name;
+  const SpecificComponent = components[name];
+
   return (
     <MainContainer>
-      <TopNav component={props.component.name} />
+      <TopNav component={name} />
       <HorizontalContainer>
         <SideNav />
         <ComponentContainer>
