@@ -10,7 +10,6 @@ import { LandingNavBar,
 
 const Landing = () => {
   // TODO: Restyle all this
-  // TODO: STYLED COMPONENTS
   return (
     <div className="container">
       <BackgroundHolder>
@@ -24,7 +23,6 @@ const Landing = () => {
         </LandingNavBar>
         <WelcomeText>
             <p>Note to self:</p> <p>Under Construction</p>
-            <Modal />
             </WelcomeText>
       </BackgroundHolder>
       <ScheduleButton>
