@@ -1,38 +1,38 @@
 const initialState = {
-  shiftsLoading: true,
+  employerLoading: true,
   errors: {},
-  allShifts: [],
+  employer: [],
 };
 
-/*
-TODO: REFACTOR OUT THE WORD SHIFT ---> Employer
-*/
-
 export default (state = initialState, action) => {
-  // return shallow copy of shifts
-  const shifts = state.allShifts.slice();
+  // return shallow copy of employers
+  const employers = state.employer.slice();
 
   switch (action.type) {
     case "LOADING":
-      return { ...state, shiftsLoading: true };
+      return { ...state, employerLoading: true };
 
-    case "READ_SHIFT":
-      return { ...state, allShifts: [...action.shifts], shiftsLoading: false };
+    case "READ_EMPLOYER":
+      return {
+        ...state,
+        employer: [...action.employers],
+        employerLoading: false,
+      };
 
-    case "CREATE_SHIFT":
-      shifts.push(action.shift);
-      return { ...state, allShifts: shifts, shiftsLoading: false };
+    case "CREATE_EMPLOYER":
+      employers.push(action.shift);
+      return { ...state, employer: employers, employerLoading: false };
 
-    case "UPDATE_SHIFT":
+    case "UPDATE_EMPLOYER":
       // grab shift using its index, maybe handle this differently
-      const shiftToUpdate = shifts[action.index];
+      const shiftToUpdate = employers[action.index];
       // do some updates
-      shifts.splice(action.index, 1, shiftToUpdate);
-      return { ...state, allShifts: shifts, shiftsLoading: false };
+      employers.splice(action.index, 1, shiftToUpdate);
+      return { ...state, employer: employers, employerLoading: false };
 
-    case "DELETE_SHIFT":
-      shifts.splice(action.index, 1);
-      return { ...state, allShifts: shifts, shiftsLoading: false };
+    case "DELETE_EMPLOYER":
+      employers.splice(action.index, 1);
+      return { ...state, employer: employers, employerLoading: false };
 
     // TODO: double check this
     case "ERROR":
