@@ -42,7 +42,7 @@ class Profile(models.Model):
     account = models.ForeignKey(Account, on_delete=models.CASCADE)
 
     phone_number = models.CharField(max_length=14)
-    notes = models.TextField(max_length=400)
+    notes = models.TextField(max_length=400, blank=True, null=True)
 
 
 class RequestedTimeOff(models.Model):
@@ -71,7 +71,7 @@ class Shift(models.Model):
 
     start_datetime =  models.DateTimeField(auto_now=False, auto_now_add=False)
     end_datetime =  models.DateTimeField(auto_now=False, auto_now_add=False)
-    notes = models.TextField(max_length=400)
+    notes = models.TextField(max_length=400, blank=True, null=True)
     is_open = models.BooleanField(default=True)
 
 
