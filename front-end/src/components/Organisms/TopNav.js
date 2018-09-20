@@ -2,15 +2,17 @@ import React from "react";
 import { Link } from "react-router-dom";
 import { connect } from "react-redux";
 
-import { TopNav_Container, Breadcrumb } from "../../styles/Template--main.js";
+import { signout } from "../../store/User/actions.js";
+
+import { TopNavContainer, Breadcrumb } from "../../styles/Template--main.js";
 
 const TopNav = props => {
-  const clickSignout = e => {
+  const clickSignout = () => {
     props.signout();
   };
 
   return (
-    <TopNav_Container>
+    <TopNavContainer>
       <Breadcrumb>
         <Link to="/">Home</Link>
         <p> > {props.component}</p>
@@ -18,7 +20,7 @@ const TopNav = props => {
       <Link to="/" onClick={clickSignout}>
         Sign Out
       </Link>
-    </TopNav_Container>
+    </TopNavContainer>
   );
 };
 

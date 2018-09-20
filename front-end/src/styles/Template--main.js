@@ -27,14 +27,14 @@ export const SideNavigationContainer = styled.div`
   margin: 0 5%;
 `;
 
-export const TopNav_Container = styled.div`
-width: "90%",
-display: "flex",
-justifyContent: "space-between",
-margin: "0 5%",
+export const TopNavContainer = styled.div`
+  width: 90%;
+  display: flex;
+  justify-content: space-between;
+  margin: 0 5%;
 `;
 
 export const Breadcrumb = styled.div`
-display: "flex",
-alignItems: "center",
+  display: flex;
+  align-items: center;
 `;

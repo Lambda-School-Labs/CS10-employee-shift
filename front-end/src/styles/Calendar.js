@@ -10,21 +10,21 @@ export const CalendarContainer = styled.div`
   flex-direction: column;
 `;
 
-export const TopNav_Container = styled.div`
-  width: "100%",
-  display: "flex",
-  justifyContent: "space-between",
-  alignItems: "center",
+export const TopNavContainer = styled.div`
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  alignitems: center;
 `;
 
-export const TopNav_Header = styled.h1`
+export const TopNavHeader = styled.h1`
   fontsize: 30px;
   fontweight: 300;
 `;
 
-export const Button_Container = styled.div`
-width: "14%",
-display: "flex",
-alignItems: "center",
-justifyContent: "space-between",
+export const ButtonContainer = styled.div`
+  width: 14%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
 `;
