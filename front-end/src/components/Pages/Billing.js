@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 // TODO: MAKE OWN STYLES
-import { BillingContainer, FormItem, Form } from "../../styles/Signin.js";
+import { BillingContainer, FormItem, Form } from "../../styles/signin.js";
 
 class Billing extends Component {
   state = {
