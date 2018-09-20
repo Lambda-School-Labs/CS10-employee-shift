@@ -1,6 +1,10 @@
 import React, { Component } from "react";
-// TODO: MAKE OWN STYLES
-import { BillingContainer, FormItem, Form } from "../../styles/signin.js";
+import {
+  BillingContainer,
+  FormItem,
+  Form,
+  BillingHeader,
+} from "../../styles/Billing.js";
 
 class Billing extends Component {
   state = {
@@ -22,7 +26,8 @@ class Billing extends Component {
   render() {
     return (
       <BillingContainer>
-        {/* Pull out into Molecular components */}
+        {/* Pull out into Molecular components? */}
+        <BillingHeader>BILLING</BillingHeader>
         <Form onSubmit={this.submitHandler}>
           <FormItem>
             <h3>Credit Card</h3>

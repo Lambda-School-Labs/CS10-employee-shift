@@ -28,7 +28,7 @@ export const getRequestOffs = () => (dispatch, getState) => {
 };
 
 // TODO: fill in correct data to send
-export const postRequestOff = (startTime, endTime) => (dispatch, getState) => {
+export const postRequestOff = (date, reason) => (dispatch, getState) => {
   const { token } = getState().user.token;
   const headers = { "Content-Type": "application/x-www-form-urlencoded" };
 
@@ -37,9 +37,12 @@ export const postRequestOff = (startTime, endTime) => (dispatch, getState) => {
   }
 
   const body = JSON.stringify({
-    startTime: startTime,
-    endTime: endTime,
+    date: date,
+    reason: reason,
   });
+
+  // DEV CONSOLE LOG, REMOVE ME
+  console.log(body);
 
   axios({
     method: "post",

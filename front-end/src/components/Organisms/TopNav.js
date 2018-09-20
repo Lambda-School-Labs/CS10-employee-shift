@@ -2,7 +2,7 @@ import React from "react";
 import { Link } from "react-router-dom";
 import { connect } from "react-redux";
 
-import { signout } from "../../store/User/actions.js";
+import { TopNav_Container, Breadcrumb } from "../../styles/Template--main.js";
 
 const TopNav = props => {
   const clickSignout = e => {
@@ -10,27 +10,15 @@ const TopNav = props => {
   };
 
   return (
-    <div
-      style={{
-        width: "90%",
-        display: "flex",
-        justifyContent: "space-between",
-        margin: "0 5%",
-      }}
-    >
-      <div
-        style={{
-          display: "flex",
-          alignItems: "center",
-        }}
-      >
+    <TopNav_Container>
+      <Breadcrumb>
         <Link to="/">Home</Link>
         <p> > {props.component}</p>
-      </div>
+      </Breadcrumb>
       <Link to="/" onClick={clickSignout}>
         Sign Out
       </Link>
-    </div>
+    </TopNav_Container>
   );
 };
 

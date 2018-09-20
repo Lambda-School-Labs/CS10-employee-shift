@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { Link, Redirect } from "react-router-dom";
 import { connect } from "react-redux";
 
-import { Container, FormItem, Form } from "../../styles/signin.js";
+import { Container, FormItem, Form } from "../../styles/Signin.js";
 
 import { signup } from "../../store/User/actions.js";
 

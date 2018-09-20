@@ -1,9 +1,9 @@
 import styled from "styled-components";
 
-// STYLES FOR SIGNIN & SIGNUP PAGE
+// STYLES FOR SETTINGS PAGE
 
-export const Container = styled.div`
-  height: 100vh;
+export const SettingsContainer = styled.div`
+  height: 100%;
   display: flex;
   justify-content: center;
   align-items: center;

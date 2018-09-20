@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 
-import { SettingsContainer, FormItem, Form } from "../../styles/signin.js";
+import { SettingsContainer, FormItem, Form } from "../../styles/Settings.js";
 
 class Settings extends Component {
   constructor(props) {
