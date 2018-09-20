@@ -1,5 +1,6 @@
 import axios from "axios";
 
+// POPULATE CALENDAR VIEW WITH THIS DATA
 export const getCalendar = () => (dispatch, getState) => {
   const headers = { "Content-Type": "application/x-www-form-urlencoded" };
   const { token } = getState().user.token;
@@ -10,7 +11,7 @@ export const getCalendar = () => (dispatch, getState) => {
 
   axios
     // Need user in body? Or is it read off of token?
-    .get(`${process.env.REACT_APP_ROOT_URL}/calendar`, headers)
+    .get(`${process.env.REACT_APP_ROOT_URL}/api/calendar`, headers)
     .then(res => {
       if (res.status === 200) {
         return dispatch({ type: "READ_CALENDAR", data: res.data });

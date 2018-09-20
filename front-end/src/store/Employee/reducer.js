@@ -17,7 +17,7 @@ export default (state = initialState, action) => {
       return { ...state, shiftsLoading: true };
 
     case "READ_SHIFT":
-      return { ...state, allShifts: [...action.shifts], shiftsLoading: false };
+      return { ...state, allShifts: shifts, shiftsLoading: false };
 
     case "CREATE_SHIFT":
       shifts.push(action.shift);

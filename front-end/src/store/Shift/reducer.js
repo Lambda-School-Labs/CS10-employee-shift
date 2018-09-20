@@ -9,14 +9,14 @@ export default (state = initialState, action) => {
   const shifts = state.allShifts.slice();
 
   switch (action.type) {
-    case "LOADING":
+    case "LOADING_SHIFTS":
       return { ...state, shiftsLoading: true };
 
     case "READ_SHIFT":
-      return { ...state, allShifts: [...action.shifts], shiftsLoading: false };
+      return { ...state, allShifts: action.data, shiftsLoading: false };
 
     case "CREATE_SHIFT":
-      shifts.push(action.shift);
+      shifts.push(action.data);
       return { ...state, allShifts: shifts, shiftsLoading: false };
 
     case "UPDATE_SHIFT":
