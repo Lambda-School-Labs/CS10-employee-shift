@@ -1,84 +1,42 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import "../../styles/LandingRef.css";
+import Modal from "../Organisms/modal";
+import { LandingNavBar,
+  ScheduleButtonButton, 
+  ScheduleButton, 
+  FooterStyles, 
+  BackgroundHolder, 
+  WelcomeText, } from "../../styles/Landing.js";
 
 const Landing = () => {
   // TODO: Restyle all this
   // TODO: STYLED COMPONENTS
   return (
     <div className="container">
-      <div className="background-holder">
-        <div className="nav-bar">
+      <BackgroundHolder>
+        <LandingNavBar>
           <Link to="/signup">
-            <button
-              style={{
-                height: "50px",
-                width: "100px",
-                border: "none",
-                fontSize: "24px",
-              }}
-            >
-              Sign up
-            </button>
+            <button>Sign up</button>
           </Link>
           <Link to="/signin">
-            <button
-              style={{
-                height: "50px",
-                width: "100px",
-                border: "none",
-                fontSize: "24px",
-              }}
-            >
-              Sign in
-            </button>
+            <button>Sign in</button>
           </Link>
-        </div>
-        <div style={{ display: "flex", justifyContent: "center" }}>
-          <div
-            style={{
-              height: "30px",
-              width: "50px",
-              backgroundColor: "red",
-              position: "absolute",
-              top: "35px",
-            }}
-          />
-          <div
-            style={{
-              height: "200px",
-              width: "200px",
-              backgroundColor: "yellow",
-              display: "flex",
-              justifyContent: "center",
-              alignItems: "center",
-              textAlign: "center",
-              flexDirection: "column",
-            }}
-          >
+        </LandingNavBar>
+        <WelcomeText>
             <p>Note to self:</p> <p>Under Construction</p>
-          </div>
-        </div>
-      </div>
-      <div className="schedule-button">
+            <Modal />
+            </WelcomeText>
+      </BackgroundHolder>
+      <ScheduleButton>
         <Link to="/calendar">
-          <button
-            className="button-button"
-            style={{
-              height: "110px",
-              width: "340px",
-              textDecoration: "underline",
-            }}
-          >
-            Schedule Now
-          </button>
+          <ScheduleButtonButton>Schedule Now</ScheduleButtonButton>
         </Link>
-      </div>
-      <div className="footer">
+      </ScheduleButton>
+      <FooterStyles>
         <footer>
           <span>Copyright 2018</span>
         </footer>
-      </div>
+      </FooterStyles>
     </div>
   );
 };
