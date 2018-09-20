@@ -1,6 +1,5 @@
 import React, { Component } from "react";
 
-
 import { Container, FormItem, Form } from "../../styles/signin.js";
 
 class Settings extends Component {
@@ -21,41 +20,58 @@ class Settings extends Component {
   };
 
   render() {
-
-    return ( 
-    <Container className = "card" >
+    return (
+      <Container>
         <Form onSubmit={this.submitForm}>
           <FormItem>
-            <div>
-              <label>Email</label>
-              <input value={this.state.email} onChange={this.inputChangeHandler} name="email" type="text" />
-            </div>
-            <div>
-              <label> Phone</label>
-              <input value={this.state.phone} onChange={this.inputChangeHandler} name="email" type="text" />
-            </div>
-
-            <label>email</label>
-            <input type="checkbox" name="msg" value="Email" />
-            <label>text</label>
-            <input type="checkbox" name="msg" value="text" />
-
-            <div>
-              <label>Old Password</label>
-              <input value={this.state.old_password} onChange={this.inputChangeHandler} name="old_password" type="password" />
-            </div>
-            <div>
-              <label>New Password</label>
-              <input value={this.state.new_password} onChange={this.inputChangeHandler} name="new_password" type="password" />
-            </div>
-            <div>
-              <button type="submit">Save</button>
-            </div>
+            <label>Email</label>
+            <input
+              value={this.state.email}
+              onChange={this.inputChangeHandler}
+              name="email"
+              type="text"
+            />
           </FormItem>
+          <FormItem>
+            <label>Phone</label>
+            <input
+              value={this.state.phone}
+              onChange={this.inputChangeHandler}
+              name="email"
+              type="text"
+            />
+          </FormItem>
+          <FormItem>
+            <label>Emails?</label>
+            <input type="checkbox" name="msg" value="Email" />
+            <FormItem>
+              <label>Texts?</label>
+              <input type="checkbox" name="msg" value="text" />
+            </FormItem>
+          </FormItem>
+          <FormItem>
+            <label>Old Password</label>
+            <input
+              value={this.state.old_password}
+              onChange={this.inputChangeHandler}
+              name="old_password"
+              type="password"
+            />
+          </FormItem>
+          <FormItem>
+            <label>New Password</label>
+            <input
+              value={this.state.new_password}
+              onChange={this.inputChangeHandler}
+              name="new_password"
+              type="password"
+            />
+          </FormItem>
+          <button type="submit">Save</button>
         </Form>
       </Container>
     );
-  }  
+  }
 }
 
 export default Settings;
