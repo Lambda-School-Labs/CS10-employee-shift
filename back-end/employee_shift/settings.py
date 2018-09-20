@@ -112,7 +112,7 @@ DATABASES = {
 #Extending User Model Using a Custom Model Extending AbstractUser
 #https://simpleisbetterthancomplex.com/tutorial/2016/07/22/how-to-extend-django-user-model.html
 
-AUTH_USER_MODEL = 'shiftapp.User'
+# AUTH_USER_MODEL = 'shiftapp.User'
 
 # Password validation
 # https://docs.djangoproject.com/en/2.1/ref/settings/#auth-password-validators
