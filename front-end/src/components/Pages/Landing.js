@@ -1,12 +1,16 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import Modal from "../Organisms/modal";
-import { LandingNavBar,
-  ScheduleButtonButton, 
-  ScheduleButton, 
-  FooterStyles, 
-  BackgroundHolder, 
-  WelcomeText, } from "../../styles/Landing.js";
+import {
+  LandingNavBar,
+  ScheduleButtonButton,
+  ScheduleButton,
+  FooterStyles,
+  BackgroundHolder,
+  WelcomeSide,
+  WelcomeH1,
+  WelcomeLogo,
+  WelcomeHolder,
+} from "../../styles/Landing.js";
 
 const Landing = () => {
   // TODO: Restyle all this
@@ -21,9 +25,13 @@ const Landing = () => {
             <button>Sign in</button>
           </Link>
         </LandingNavBar>
-        <WelcomeText>
-            <p>Note to self:</p> <p>Under Construction</p>
-            </WelcomeText>
+        <WelcomeHolder>
+        <WelcomeSide>
+          <WelcomeH1>Welcome</WelcomeH1>
+          <p>Click bla bla bla to learn more</p>
+        </WelcomeSide>
+        <WelcomeLogo></WelcomeLogo>
+        </WelcomeHolder>
       </BackgroundHolder>
       <ScheduleButton>
         <Link to="/calendar">

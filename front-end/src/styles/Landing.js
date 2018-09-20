@@ -12,11 +12,34 @@ export const LandingNavBar = styled.div`
     justify-content: flex-end;
   `;
 
+export const WelcomeHolder = styled.div`
+    display: flex;
+`;
+
+export const WelcomeH1 = styled.div`
+    font-size: 4em;
+`;
+
+export const WelcomeSide = styled.div`
+    display: flex;
+    flex-flow: column;
+    margin-top: 20%;
+    margin-left: 10%;
+`;
+
+export const WelcomeLogo = styled.div`
+    width: 50%;
+    background: black;
+    margin-left: 10%;
+    margin-top: 5%;
+`;
+
+{/* possibly depreciated */}
 export const WelcomeText = styled.div`
     display: flex;
     justify-content: center;
     padding-top: 17%;
-    font-size: 5em;
+    font-size: 2em;
   `;
 
 export const ScheduleButton = styled.div`
