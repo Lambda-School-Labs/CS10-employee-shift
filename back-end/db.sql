@@ -1,6 +1,10 @@
 .mode column
 .header on
 
+.tables
+
+.schema
+
 SELECT * FROM shiftapp_employer;
 
 SELECT * FROM shiftapp_employee;

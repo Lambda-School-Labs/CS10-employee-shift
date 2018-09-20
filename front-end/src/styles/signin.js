@@ -35,3 +35,11 @@ export const BillingContainer = styled.div`
   align-items: center;
   flex-direction: column;
 `;
+
+export const DashboardContainer = styled.div `
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+`;

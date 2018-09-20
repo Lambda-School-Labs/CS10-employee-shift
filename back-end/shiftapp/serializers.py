@@ -1,5 +1,5 @@
-from django.contrib.auth.models import Group
-from shiftapp.models import User, Employee, Employer, Day, CalendarDay, RequestedTimeOff, Shift, HourOfOperation
+from django.contrib.auth.models import User, Group
+from shiftapp.models import Profile, Account, Availability, RequestedTimeOff, Shift, HourOfOperation
 from rest_framework import serializers, viewsets
 from django.core.exceptions import ValidationError
 from django.contrib.auth.password_validation import validate_password, get_password_validators
@@ -8,15 +8,11 @@ from django.contrib.auth.password_validation import validate_password, get_passw
 from difflib import SequenceMatcher
 
 
-class UserSerializer(serializers.HyperlinkedModelSerializer):
-    #class Meta:
-       # model = User
-       # fields = ('url','id', 'username', 'email', 'telephone' ,'groups')
-    
+class UserSerializer(serializers.HyperlinkedModelSerializer): 
     class Meta:
         model = User
         # fields = '__all__'
-        fields = ('id', 'username','first_name', 'last_name', 'email', 'password', "is_staff")
+        fields = ('url', 'id', 'username','first_name', 'last_name', 'email', 'password', "is_staff", 'groups')
         extra_kwargs = {
             'password': {'write_only': True},
             'is_superuser': {'read_only': True},
@@ -62,86 +58,39 @@ class GroupSerializer(serializers.HyperlinkedModelSerializer):
         model = Group
         fields = ('url', 'name')
 
-class SignUpSerializer(serializers.ModelSerializer):
+
+class AccountSerializer(serializers.ModelSerializer):
     class Meta:
-        model = User
-        # fields = '__all__'
-        fields = ('username', 'first_name', 'last_name', 'email', 'password', "is_staff")
-        extra_kwargs = {
-            'password': {'write_only': True},
-            'is_superuser': {'read_only': True},
-        }
+        model = Account
+        fields = ('id', 'logo', 'company', 'enabled', 'plan_expires')
 
 
-    def validate_password(self, value):
-      data = self.get_initial()
-      request = self.context.get("request")
-      username = data.get("username")
-      email = data.get("email")
-
-      password = data.get("password")
-      #retype password
-      re_password = request.data["re_password"]
-
-      first_name = data.get("first_name") 
-      max_similarity = 0.5
-      if re_password != password:
-        raise serializers.ValidationError("The password doesn't match.")
-      if SequenceMatcher(a=password.lower(), b=username.lower()).quick_ratio() > max_similarity:
-        raise serializers.ValidationError("The password is too similar to the username.")
-      if SequenceMatcher(a=password.lower(), b=email.lower()).quick_ratio() > max_similarity:
-        raise serializers.ValidationError("The password is too similar to the email.")
-      if SequenceMatcher(a=password.lower(), b=first_name.lower()).quick_ratio() > max_similarity:
-        raise serializers.ValidationError("The password is too similar to the first name.")
-      try:
-        validate_password(value)
-      except ValidationError as exc:
-        raise serializers.ValidationError(str(exc))
-      return value
-
-    def create(self, validated_data):
-      user = super(SignUpSerializer, self).create(validated_data)
-      if 'password' in validated_data:
-        user.set_password(validated_data['password'])
-        user.save()
-      return user
-      
-
-class EmployerSerializer(serializers.ModelSerializer):
+class ProfileSerializer(serializers.ModelSerializer):
     class Meta:
-        model = Employer
-        fields = ('id', 'user', 'company_name')
-        
-
-class DaySerializer(serializers.ModelSerializer):
-    class Meta:
-        model = Day
-        fields = ('id', 'day_name', 'abbreviation_name')
-
-
-class EmployeeSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = Employee
-        fields = ('id', 'user', 'employer')
+        model = Profile
+        fields = ('id', 'user', 'account', 'phone_number', 'notes')
   
-
-class CalendarDaySerializer(serializers.ModelSerializer):
-    class Meta:
-        model = CalendarDay
-        fields = ('id', 'employer', 'hour_of_operation', 'date', 'is_active', 'is_holiday', 'is_weekend')
 
 class RequestedTimeOffSerializer(serializers.ModelSerializer):
     class Meta:
         model = RequestedTimeOff
-        fields = ('id', 'employee', 'date', 'reason', 'is_approved')
+        fields = ('id', 'profile', 'start_datetime', 'end_datetime', 'reason', 'status')
+
 
 class ShiftSerializer(serializers.ModelSerializer):
     class Meta:
         model = Shift
-        fields = ('id', 'calendar_day', 'employee', 'start_time', 'end_time' 'status', 'is_available')
-        
+        fields = ('id', 'account', 'profile', 'start_datetime', 'end_datetime', 'notes', 'is_open')
+
+
 class HourOfOperationSerializer(serializers.ModelSerializer):
     class Meta:
         model = HourOfOperation
-        fields = ('id', 'start_time', 'end_time')
-    
+        fields = ('id', 'account', 'day', 'open_time', 'close_time')
+
+
+class AvailabilitySerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Availability
+        fields = ('id', 'profile', 'day', 'start_time', 'end_time')
+

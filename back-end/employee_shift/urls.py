@@ -15,19 +15,18 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
-from shiftapp.api import UserList, UserDetails, GroupList, SignUp, EmployeeList, EmployerList, DayList, CalendarDayList, RequestedTimeOffList, ShiftList, HourOfOperationList
+from shiftapp.api import UserList, UserDetails, GroupList, SignUp, AccountList, ProfileList, AvailabilityList, RequestedTimeOffList, ShiftList, HourOfOperationList
 from django.contrib.auth.models import User, Group
 admin.autodiscover()
 from rest_framework import generics, permissions, serializers, routers
 from oauth2_provider.contrib.rest_framework import TokenHasReadWriteScope, TokenHasScope 
 
 router = routers.DefaultRouter()
-router.register(r'employees', EmployeeList)
-router.register(r'days', DayList)
-router.register(r'employers', EmployerList)
-router.register(r'calendar', CalendarDayList)
+router.register(r'accounts', AccountList)
+router.register(r'profiles', ProfileList)
 router.register(r'requestoff', RequestedTimeOffList)
 router.register(r'shifts', ShiftList)
+router.register(r'availabilities', AvailabilityList)
 router.register(r'hoo', HourOfOperationList)
 router.register(r'users', UserList)
 

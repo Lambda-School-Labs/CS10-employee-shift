@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import User, Employer, Employee, HourOfOperation, Shift, CalendarDay, Day, RequestedTimeOff
+from .models import Account, Profile, HourOfOperation, Shift, Availability, RequestedTimeOff
 
 # Register your models here.
-admin.site.register((User, Employer, Employee, HourOfOperation, Shift, CalendarDay, Day, RequestedTimeOff),)
+admin.site.register((Account, Profile, HourOfOperation, Shift, Availability, RequestedTimeOff),)
