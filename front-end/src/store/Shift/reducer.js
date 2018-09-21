@@ -14,7 +14,7 @@ export default (state = initialState, action) => {
 
     case "READ_SHIFT":
       // DEV CONSOLE LOG, REMOVE ME!
-      console.log("FETCHED SHIFTS");
+      console.log("FETCHED SHIFTS", action.data);
       return { ...state, allShifts: action.data, shiftsLoading: false };
 
     case "CREATE_SHIFT":

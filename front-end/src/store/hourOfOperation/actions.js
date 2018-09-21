@@ -37,7 +37,7 @@ export const postHoursOfOperation = (open_time, close_time) => (
   dispatch({ type: "LOADING_HOO" });
 
   const { token } = getState().user.token;
-  const headers = { "Content-Type": "application/x-www-form-urlencoded" };
+  const headers = { "Content-Type": "application/json" };
 
   if (token) {
     headers["Authorization"] = `Bearer ${token}`;
@@ -61,11 +61,13 @@ export const postHoursOfOperation = (open_time, close_time) => (
       }
     })
     .catch(err => {
-      if (err.status === 401 || err.status === 403) {
-        dispatch({ type: "AUTHENTICATION_ERROR", data: err.data });
+      console.log(err.response, "this", err.request);
+      if (err.response.status === 401 || err.response.status === 403) {
+        console.log("HITTT");
+        dispatch({ type: "AUTHE_ERROR", data: err });
         throw err.data;
       } else {
-        dispatch({ type: "ERROR", data: err.data });
+        dispatch({ type: "ERROR", data: err });
         throw err.data;
       }
     });

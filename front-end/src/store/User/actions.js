@@ -1,6 +1,6 @@
 import axios from "axios";
 
-// WIP: Action to get user's data if the token is saved in local storage
+// Returns the user of the token that is sent in as an authorization check
 export const getUser = () => (dispatch, getState) => {
   dispatch({ type: "FETCHING_USER" });
 
@@ -10,7 +10,7 @@ export const getUser = () => (dispatch, getState) => {
       "Content-Type": "application/json",
       Authorization: `Bearer ${token}`,
     };
-
+    // TODO: GET ACCOUNT ID
     // TODO: Redo with correct endpoint to get user (not list of users)
     axios
       .get(`${process.env.REACT_APP_ROOT_URL}/api/users/`, {
@@ -28,7 +28,7 @@ export const getUser = () => (dispatch, getState) => {
   } else dispatch({ type: "AUTH_ERROR" });
 };
 
-// TODO: Encrypt password
+// TODO: Encrypt everything
 export const signin = (username, password) => dispatch => {
   const body = JSON.stringify({
     grant_type: "password",
@@ -100,7 +100,8 @@ export const signout = () => dispatch => {
   } else dispatch({ type: "SIGNOUT_SUCCESS" });
 };
 
-// TODO: Encrypt password
+// TODO: Encrypt everything
+// Sign up for a business account
 export const signup = (
   username,
   password,
@@ -145,9 +146,8 @@ export const signup = (
     });
 };
 
-// Patch to /api/users
-// Still needs user group persmission
-
+// CURRENTLY TESTING
+// Can only change their own information
 export const updateUser = (email, password) => (dispatch, getState) => {
   const token = getState().user.token;
   const id = getState().user.currentUser.id;

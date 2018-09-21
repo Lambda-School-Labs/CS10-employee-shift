@@ -1,11 +1,17 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 
-import { getHoursOfOperation } from "../../store/hourOfOperation/actions.js";
+import {
+  getHoursOfOperation,
+  postHoursOfOperation,
+  updateHoursOfOperation,
+} from "../../store/hourOfOperation/actions.js";
 
+// Parent of HoO which will hold time picker modals for each day
 class HoO extends Component {
   componentDidMount() {
     this.props.getHoursOfOperation();
+    //this.props.postHoursOfOperation();
   }
   render() {
     return (
@@ -35,10 +41,12 @@ const mapDispatchToProps = dispatch => {
       return dispatch(getHoursOfOperation());
     },
     postHoursOfOperation: () => {
-      return dispatch(getHoursOfOperation());
+      // fill with data
+      return dispatch(postHoursOfOperation());
     },
     updateHoursOfOperation: () => {
-      return dispatch(getHoursOfOperation());
+      // fill with data
+      return dispatch(updateHoursOfOperation());
     },
   };
 };

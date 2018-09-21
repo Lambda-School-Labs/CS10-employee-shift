@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 
-import { getShifts, updateShift } from "../../store/Shift/actions.js";
+import { getShifts } from "../../store/Shift/actions.js";
 
 import ScheduleDay from "../Molecules/ScheduleDay.js";
 
@@ -26,7 +26,7 @@ class Schedule extends Component {
   }
 }
 
-// How many shifts to hold? 1 week? all?
+// Holds 3 weeks of shifts
 const mapStateToProps = state => {
   return {
     allShifts: state.shift.allShifts,
@@ -38,9 +38,6 @@ const mapDispatchToProps = dispatch => {
     getShifts: () => {
       return dispatch(getShifts());
     },
-    // updateShift: () => {
-    //   return dispatch(updateShift(id, startTime, endTime));
-    // },
   };
 };
 
