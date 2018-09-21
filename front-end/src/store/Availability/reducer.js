@@ -1,44 +1,62 @@
 const initialState = {
-  calendarLoading: true,
+  availabilityLoading: true,
   errors: {},
-  allDays: [],
+  allAvailabilities: [],
 };
 
-// TODO: UPDATE ME AND FIX ME
-
 export default (state = initialState, action) => {
-  // return shallow copy of days
-  const days = state.allDays.slice();
+  // return shallow copy of allAvailabilities
+  const newAvailabilities = state.allAvailabilities.slice();
 
   switch (action.type) {
-    case "LOADING":
-      return { ...state, calendarLoading: true };
+    case "LOADING_AVAILABILITIES":
+      return { ...state, availabilityLoading: true };
 
-    case "READ_DAY":
+    case "READ_AVAILABILITIES":
+      // DEV CONSOLE LOG, REMOVE ME!
+      console.log("FETCHED Availabilities");
       return {
         ...state,
-        allDays: [...action.days],
-        calendarLoading: false,
+        allAvailabilities: action.data,
+        availabilityLoading: false,
       };
 
-    case "CREATE_DAY":
-      days.push(action.days);
-      return { ...state, allDays: days, calendarLoading: false };
+    case "CREATE_AVAILABILITIES":
+      // DEV CONSOLE LOG, REMOVE ME!
+      console.log("CREATED AVAILABILITIES");
+      newAvailabilities.push(action.data);
+      return {
+        ...state,
+        allAvailabilities: newAvailabilities,
+        availabilityLoading: false,
+      };
 
-    case "UPDATE_DAY":
-      // grab days using its index, maybe handle this differently
-      const calendarToUpdate = days[action.index];
+    case "UPDATE_AVAILABILITIES":
+      // DEV CONSOLE LOG, REMOVE ME!
+      console.log("UPDATED AVAILABILITIES");
+      // grab shift using its index, maybe handle this differently
+      const availabilityUpdate = newAvailabilities[action.data.index];
       // do some updates
-      days.splice(action.index, 1, calendarToUpdate);
-      return { ...state, allDays: days, calendarLoading: false };
+      newAvailabilities.splice(action.index, 1, availabilityUpdate);
+      return {
+        ...state,
+        allAvailabilities: newAvailabilities,
+        availabilityLoading: false,
+      };
 
-    case "DELETE_DAY":
-      days.splice(action.index, 1);
-      return { ...state, allDays: days, calendarLoading: false };
+    case "DELETE_AVAILABILITIES":
+      // DEV CONSOLE LOG, REMOVE ME!
+      console.log("DELETED AVAILABILITIES");
+      newAvailabilities.splice(action.index, 1);
+      return {
+        ...state,
+        allAvailabilities: newAvailabilities,
+        availabilityLoading: false,
+      };
 
     // TODO: double check this
     case "ERROR":
-      return { ...state, error: action.errorMessage };
+      return { ...state, error: action.data };
 
     default:
       return state;

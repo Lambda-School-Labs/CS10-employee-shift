@@ -1,6 +1,7 @@
 import axios from "axios";
 
 export const getRequestOffs = () => (dispatch, getState) => {
+  dispatch({ type: "LOADING_REQUESTOFF" });
   const headers = { "Content-Type": "application/x-www-form-urlencoded" };
   const { token } = getState().user.token;
 
@@ -29,6 +30,7 @@ export const getRequestOffs = () => (dispatch, getState) => {
 
 // TODO: fill in correct data to send
 export const postRequestOff = (date, reason) => (dispatch, getState) => {
+  dispatch({ type: "LOADING_REQUESTOFF" });
   const { token } = getState().user.token;
   const headers = { "Content-Type": "application/x-www-form-urlencoded" };
 
@@ -42,7 +44,7 @@ export const postRequestOff = (date, reason) => (dispatch, getState) => {
   });
 
   // DEV CONSOLE LOG, REMOVE ME
-  console.log(body);
+  console.log("posting with:", body);
 
   axios({
     method: "post",
@@ -71,6 +73,7 @@ export const updateRequestOff = (id, startTime, endTime) => (
   dispatch,
   getState
 ) => {
+  dispatch({ type: "LOADING_REQUESTOFF" });
   const { token } = getState().user.token;
   const headers = { "Content-Type": "application/x-www-form-urlencoded" };
 
@@ -86,7 +89,7 @@ export const updateRequestOff = (id, startTime, endTime) => (
 
   axios({
     method: "update",
-    // TODO: fill correct end point
+    // TODO: fill correct end point using ID
     url: `${process.env.REACT_APP_ROOT_URL}/api/requestoff/`,
     headers: headers,
     data: body,
@@ -108,6 +111,7 @@ export const updateRequestOff = (id, startTime, endTime) => (
 };
 
 export const deleteRequestOff = id => (dispatch, getState) => {
+  dispatch({ type: "LOADING_REQUESTOFF" });
   const { token } = getState().user.token;
   const headers = { "Content-Type": "application/x-www-form-urlencoded" };
 

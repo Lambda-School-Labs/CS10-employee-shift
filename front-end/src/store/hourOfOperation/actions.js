@@ -1,34 +1,41 @@
 import axios from "axios";
 
 export const getHoursOfOperation = () => (dispatch, getState) => {
-  const headers = { "Content-Type": "application/x-www-form-urlencoded" };
-  const { token } = getState().user.token;
+  dispatch({ type: "LOADING_HOO" });
+  const token = getState().user.token;
 
   if (token) {
-    headers["Authorization"] = `Bearer ${token}`;
-  }
+    const headers = {
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${token}`,
+    };
 
-  axios
-    // TODO: fill correct end point
-    .get(`${process.env.REACT_APP_ROOT_URL}/api/hoo/`, headers)
-    .then(res => {
-      if (res.status === 200) {
-        return dispatch({ type: "READ_HOO", data: res.data });
-      }
-    })
-    .catch(err => {
-      if (err.status === 401 || err.status === 403) {
-        dispatch({ type: "AUTHENTICATION_ERROR", data: err.data });
-        throw err.data;
-      } else {
-        dispatch({ type: "ERROR", data: res.data });
-        throw err.data;
-      }
-    });
+    axios
+      .get(`${process.env.REACT_APP_ROOT_URL}/api/hoo/`, { headers })
+      .then(res => {
+        if (res.status === 200) {
+          return dispatch({ type: "READ_HOO", data: res.data });
+        }
+      })
+      .catch(err => {
+        if (err.status === 401 || err.status === 403) {
+          dispatch({ type: "AUTHENTICATION_ERROR", data: err.data });
+          throw err.data;
+        } else {
+          dispatch({ type: "ERROR", data: err.data });
+          throw err.data;
+        }
+      });
+  }
 };
 
 // TODO: fill in correct data to send
-export const postHoursOfOperation = data => (dispatch, getState) => {
+export const postHoursOfOperation = (open_time, close_time) => (
+  dispatch,
+  getState
+) => {
+  dispatch({ type: "LOADING_HOO" });
+
   const { token } = getState().user.token;
   const headers = { "Content-Type": "application/x-www-form-urlencoded" };
 
@@ -36,8 +43,10 @@ export const postHoursOfOperation = data => (dispatch, getState) => {
     headers["Authorization"] = `Bearer ${token}`;
   }
 
-  // fill me
-  const body = JSON.stringify({ data });
+  const body = JSON.stringify({
+    open_time: open_time,
+    close_time: close_time,
+  });
 
   axios({
     method: "post",
@@ -56,14 +65,18 @@ export const postHoursOfOperation = data => (dispatch, getState) => {
         dispatch({ type: "AUTHENTICATION_ERROR", data: err.data });
         throw err.data;
       } else {
-        dispatch({ type: "ERROR", data: res.data });
+        dispatch({ type: "ERROR", data: err.data });
         throw err.data;
       }
     });
 };
 
-// TODO: fill in correct data to send
-export const updateHoursOfOperation = data => (dispatch, getState) => {
+// TODO: fill in correct data to send. ID?
+export const updateHoursOfOperation = (id, open_time, close_time) => (
+  dispatch,
+  getState
+) => {
+  dispatch({ type: "LOADING_HOO" });
   const { token } = getState().user.token;
   const headers = { "Content-Type": "application/x-www-form-urlencoded" };
 
@@ -71,8 +84,10 @@ export const updateHoursOfOperation = data => (dispatch, getState) => {
     headers["Authorization"] = `Bearer ${token}`;
   }
 
-  // fill me
-  const body = JSON.stringify({ data });
+  const body = JSON.stringify({
+    open_time: open_time,
+    close_time: close_time,
+  });
 
   axios({
     method: "update",
@@ -91,14 +106,20 @@ export const updateHoursOfOperation = data => (dispatch, getState) => {
         dispatch({ type: "AUTHENTICATION_ERROR", data: err.data });
         throw err.data;
       } else {
-        dispatch({ type: "ERROR", data: res.data });
+        dispatch({ type: "ERROR", data: err.data });
         throw err.data;
       }
     });
 };
 
-// TODO: fill in correct data to send
-export const deleteHoursOfOperation = data => (dispatch, getState) => {
+/* 
+TODO: Is this needed?
+*/
+export const deleteHoursOfOperation = (id, open_time, close_time) => (
+  dispatch,
+  getState
+) => {
+  dispatch({ type: "LOADING_HOO" });
   const { token } = getState().user.token;
   const headers = { "Content-Type": "application/x-www-form-urlencoded" };
 
@@ -106,8 +127,10 @@ export const deleteHoursOfOperation = data => (dispatch, getState) => {
     headers["Authorization"] = `Bearer ${token}`;
   }
 
-  // fill me
-  const body = JSON.stringify({ data });
+  const body = JSON.stringify({
+    open_time: open_time,
+    close_time: close_time,
+  });
 
   axios({
     method: "delete",
@@ -126,7 +149,7 @@ export const deleteHoursOfOperation = data => (dispatch, getState) => {
         dispatch({ type: "AUTHENTICATION_ERROR", data: err.data });
         throw err.data;
       } else {
-        dispatch({ type: "ERROR", data: res.data });
+        dispatch({ type: "ERROR", data: err.data });
         throw err.data;
       }
     });

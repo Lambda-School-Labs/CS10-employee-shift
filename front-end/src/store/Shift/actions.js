@@ -1,6 +1,5 @@
 import axios from "axios";
 
-// DEPERECATED ??
 export const getShifts = () => (dispatch, getState) => {
   dispatch({ type: "LOADING_SHIFTS" });
   const token = getState().user.token;
@@ -85,7 +84,7 @@ export const updateShift = (id, startTime, endTime) => (dispatch, getState) => {
     endTime: endTime,
   });
 
-  // use id?
+  // TODO: use ID?
   axios({
     method: "update",
     url: `${process.env.REACT_APP_ROOT_URL}/api/shifts`,

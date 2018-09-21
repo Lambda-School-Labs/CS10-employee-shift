@@ -1,36 +1,46 @@
 const initialState = {
-  shiftsLoading: true,
+  profileLoading: true,
   errors: {},
-  allShifts: [],
+  currentProfile: null,
+  // implement me
+  allProfiles: [],
 };
 
-// TODO: UPDATE ME AND FIX ME
-
 export default (state = initialState, action) => {
-  // return shallow copy of shifts
-  const shifts = state.allShifts.slice();
+  // return shallow copy of allProfiles
+  const newProfiles = state.allProfiles.slice();
 
   switch (action.type) {
-    case "LOADING":
-      return { ...state, shiftsLoading: true };
+    case "LOADING_PROFILE":
+      return { ...state, profileLoading: true };
 
-    case "READ_SHIFT":
-      return { ...state, allShifts: shifts, shiftsLoading: false };
+    case "READ_PROFILE":
+      // DEV CONSOLE LOG, REMOVE ME!
+      console.log("FETCHED SHIFTS");
+      return { ...state, currentProfile: action.data, profileLoading: false };
 
-    case "CREATE_SHIFT":
-      shifts.push(action.shift);
-      return { ...state, allShifts: shifts, shiftsLoading: false };
+    /* For managers only?? REFACTOR FOLLOWING
+    */
+    case "CREATE_PROFILE":
+      // DEV CONSOLE LOG, REMOVE ME!
+      console.log("CREATED SHIFT");
+      shifts.push(action.data);
+      return { ...state, currentProfile: shifts, profileLoading: false };
 
-    case "UPDATE_SHIFT":
+    case "UPDATE_PROFILE":
+      // DEV CONSOLE LOG, REMOVE ME!
+      console.log("UPDATED SHIFT");
       // grab shift using its index, maybe handle this differently
       const shiftToUpdate = shifts[action.index];
       // do some updates
       shifts.splice(action.index, 1, shiftToUpdate);
-      return { ...state, allShifts: shifts, shiftsLoading: false };
+      return { ...state, currentProfile: shifts, profileLoading: false };
 
-    case "DELETE_SHIFT":
+    case "DELETE_PROFILE":
+      // DEV CONSOLE LOG, REMOVE ME!
+      console.log("DELETED SHIFT");
       shifts.splice(action.index, 1);
-      return { ...state, allShifts: shifts, shiftsLoading: false };
+      return { ...state, currentProfile: shifts, profileLoading: false };
 
     // TODO: double check this
     case "ERROR":

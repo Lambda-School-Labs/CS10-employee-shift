@@ -1,40 +1,34 @@
 const initialState = {
-  employerLoading: true,
+  accountLoading: true,
   errors: {},
-  employer: [],
+  currentAccount: null,
 };
 
-// TODO: UPDATE ME AND FIX ME
-
 export default (state = initialState, action) => {
-  // return shallow copy of employers
-  const employers = state.employer.slice();
-
   switch (action.type) {
-    case "LOADING":
-      return { ...state, employerLoading: true };
+    case "LOADING_ACCOUNT":
+      return { ...state, accountLoading: true };
 
-    case "READ_EMPLOYER":
-      return {
-        ...state,
-        employer: [...action.employers],
-        employerLoading: false,
-      };
+    case "READ_ACCOUNT":
+      // DEV CONSOLE LOG, REMOVE ME!
+      console.log("FETCHED ACCOUNT");
+      return { ...state, currentAccount: action.data, accountLoading: false };
 
-    case "CREATE_EMPLOYER":
-      employers.push(action.shift);
-      return { ...state, employer: employers, employerLoading: false };
+    case "CREATE_ACCOUNT":
+      // DEV CONSOLE LOG, REMOVE ME!
+      console.log("CREATED ACCOUNT");
+      return { ...state, currentAccount: action.data, accountLoading: false };
 
-    case "UPDATE_EMPLOYER":
-      // grab shift using its index, maybe handle this differently
-      const shiftToUpdate = employers[action.index];
-      // do some updates
-      employers.splice(action.index, 1, shiftToUpdate);
-      return { ...state, employer: employers, employerLoading: false };
+    case "UPDATE_ACCOUNT":
+      // DEV CONSOLE LOG, REMOVE ME!
+      console.log("UPDATED ACCOUNT");
 
-    case "DELETE_EMPLOYER":
-      employers.splice(action.index, 1);
-      return { ...state, employer: employers, employerLoading: false };
+      return { ...state, currentAccount: action.data, accountLoading: false };
+
+    case "DELETE_ACCOUNT":
+      // DEV CONSOLE LOG, REMOVE ME!
+      console.log("DELETED ACCOUNT");
+      return { ...state, currentAccount: null, accountLoading: false };
 
     // TODO: double check this
     case "ERROR":

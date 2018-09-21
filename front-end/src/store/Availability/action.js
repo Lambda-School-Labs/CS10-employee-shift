@@ -1,6 +1,7 @@
 import axios from "axios";
 
 export const getAvailabilities = () => (dispatch, getState) => {
+  dispatch({ type: "LOADING_AVAILABILITIES" });
   const headers = { "Content-Type": "application/x-www-form-urlencoded" };
   const { token } = getState().user.token;
 
@@ -32,6 +33,7 @@ export const postAvailabilities = (startTime, endTime) => (
   dispatch,
   getState
 ) => {
+  dispatch({ type: "LOADING_AVAILABILITIES" });
   const { token } = getState().user.token;
   const headers = { "Content-Type": "application/x-www-form-urlencoded" };
 
@@ -71,6 +73,7 @@ export const updateAvailabilities = (id, startTime, endTime) => (
   dispatch,
   getState
 ) => {
+  dispatch({ type: "LOADING_AVAILABILITIES" });
   const { token } = getState().user.token;
   const headers = { "Content-Type": "application/x-www-form-urlencoded" };
 
@@ -108,6 +111,7 @@ export const updateAvailabilities = (id, startTime, endTime) => (
 };
 
 export const deleteAvailabilities = id => (dispatch, getState) => {
+  dispatch({ type: "LOADING_AVAILABILITIES" });
   const { token } = getState().user.token;
   const headers = { "Content-Type": "application/x-www-form-urlencoded" };
 

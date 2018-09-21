@@ -1,6 +1,7 @@
 import axios from "axios";
 
 export const getAccount = () => (dispatch, getState) => {
+  dispatch({ type: "LOADING_ACCOUNT" });
   const headers = { "Content-Type": "application/x-www-form-urlencoded" };
   const { token } = getState().user.token;
 
@@ -29,6 +30,7 @@ export const getAccount = () => (dispatch, getState) => {
 
 // TODO: fill in correct data to send
 export const postAccount = data => (dispatch, getState) => {
+  dispatch({ type: "LOADING_ACCOUNT" });
   const { token } = getState().user.token;
   const headers = { "Content-Type": "application/x-www-form-urlencoded" };
 
@@ -64,6 +66,7 @@ export const postAccount = data => (dispatch, getState) => {
 
 // TODO: fill in correct data to send
 export const updateAccount = data => (dispatch, getState) => {
+  dispatch({ type: "LOADING_ACCOUNT" });
   const { token } = getState().user.token;
   const headers = { "Content-Type": "application/x-www-form-urlencoded" };
 
@@ -99,6 +102,7 @@ export const updateAccount = data => (dispatch, getState) => {
 
 // TODO: fill in correct data to send
 export const deleteAccount = data => (dispatch, getState) => {
+  dispatch({ type: "LOADING_ACCOUNT" });
   const { token } = getState().user.token;
   const headers = { "Content-Type": "application/x-www-form-urlencoded" };
 
