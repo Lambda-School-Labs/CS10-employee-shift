@@ -76,7 +76,7 @@ class UpdateShift extends Component {
           <FormItem>
             <h3>Available for pickup</h3>
             <input
-              value={this.state.is_open}
+              checked={this.state.is_open}
               onChange={this.inputChangeHandler}
               name="is_open"
               type="checkbox"

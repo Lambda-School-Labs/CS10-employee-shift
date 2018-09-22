@@ -18,6 +18,7 @@ export const getUser = () => (dispatch, getState) => {
       })
       .then(res => {
         if (res.status === 200) {
+          console.log(res.data);
           dispatch({ type: "FETCHED_USER", data: res.data });
           return res.data;
         }
@@ -32,8 +33,8 @@ export const getUser = () => (dispatch, getState) => {
 export const signin = (username, password) => dispatch => {
   const body = JSON.stringify({
     grant_type: "password",
-    username: `${username}`,
-    password: `${password}`,
+    username,
+    password,
     client_id: `${process.env.REACT_APP_CLIENT_ID}`,
     client_secret: `${process.env.REACT_APP_CLIENT_SECRET}`,
   });
@@ -69,7 +70,7 @@ export const signout = () => dispatch => {
 
   if (token) {
     const body = JSON.stringify({
-      token: token,
+      token,
       client_id: `${process.env.REACT_APP_CLIENT_ID}`,
       client_secret: `${process.env.REACT_APP_CLIENT_SECRET}`,
     });
@@ -107,16 +108,16 @@ export const signup = (
   password,
   re_password,
   email,
-  firstName,
-  lastName
+  first_name,
+  last_name
 ) => dispatch => {
   const body = JSON.stringify({
-    username: username,
-    password: password,
-    re_password: re_password,
-    email: email,
-    first_name: firstName,
-    last_name: lastName,
+    username,
+    password,
+    re_password,
+    email,
+    first_name,
+    last_name,
     is_staff: "true",
   });
 
@@ -147,27 +148,39 @@ export const signup = (
 };
 
 // CURRENTLY TESTING
+// BACK END TO HANDLE OLD VS NEW PASSWORD
 // Can only change their own information
-export const updateUser = (email, password) => (dispatch, getState) => {
+export const updateUser = (
+  email,
+  phone,
+  text_enabled,
+  email_enabled,
+  old_password,
+  new_password
+) => (dispatch, getState) => {
   const token = getState().user.token;
-  const id = getState().user.currentUser.id;
+  // Implemented once getOwnUser works
+  // const id = getState().user.currentUser.id;
+  const id = 1;
 
   if (token) {
-    const body = JSON.stringify({
-      token: token,
-      client_id: `${process.env.REACT_APP_CLIENT_ID}`,
-      client_secret: `${process.env.REACT_APP_CLIENT_SECRET}`,
-    });
+    const headers = {
+      Authorization: `Bearer ${token}`,
+    };
 
-    if (email) body[email] = email;
-    if (password) body[password] = password;
-
+    const body = {
+      // username: "admin", 500 error when you send "username" and "password"
+      email,
+      phone,
+      text_enabled,
+      email_enabled,
+      old_password,
+      new_password,
+    };
     axios({
-      method: "patch",
-      url: `${process.env.REACT_APP_ROOT_URL}/api/users/${id}`,
-      headers: {
-        "Content-Type": "application/json",
-      },
+      method: "put",
+      url: `${process.env.REACT_APP_ROOT_URL}/api/users/${id}/`,
+      headers,
       data: body,
     })
       .then(res => {

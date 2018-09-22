@@ -7,14 +7,20 @@ import { OrganismContainer } from "../../styles/Dashboard.js";
 import { FormItem, Form } from "../../styles/Signin.js";
 class TimeOffRequest extends Component {
   state = {
-    date: "",
+    start_datetime: "",
+    end_datetime: "",
+    reason: "",
     reason: "",
   };
 
   submitHandler = e => {
+    // dummy dates, remove me
+    let date = new Date();
+    date = date.toISOString();
+
     e.preventDefault();
     // TODO: Fill with correct data to send
-    this.props.postRequestOff(this.state.date, this.state.reason);
+    this.props.postRequestOff(date, date, this.state.reason);
   };
 
   inputChangeHandler = event => {
@@ -29,13 +35,24 @@ class TimeOffRequest extends Component {
         <Form onSubmit={this.submitHandler}>
           <FormItem>
             {/* Better date picker */}
-            Date:{" "}
+            Date Start:{" "}
             <input
-              value={this.state.date}
+              value={this.state.start_datetime}
               onChange={this.inputChangeHandler}
               type="text"
-              name="date"
-              placeholder="date"
+              name="start_datetime"
+              placeholder="start date"
+            />
+          </FormItem>
+          <FormItem>
+            {/* Better date picker */}
+            Date End:{" "}
+            <input
+              value={this.state.end_datetime}
+              onChange={this.inputChangeHandler}
+              type="text"
+              name="end_datetime"
+              placeholder="end date"
             />
           </FormItem>
           <FormItem>
@@ -59,8 +76,8 @@ class TimeOffRequest extends Component {
 
 const mapDispatchToProps = dispatch => {
   return {
-    postRequestOff: (date, reason) => {
-      return dispatch(postRequestOff(date, reason));
+    postRequestOff: (start_datetime, end_datetime, reason) => {
+      return dispatch(postRequestOff(start_datetime, end_datetime, reason));
     },
   };
 };

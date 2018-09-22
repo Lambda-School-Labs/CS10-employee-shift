@@ -8,6 +8,8 @@ import {
 } from "../../store/hourOfOperation/actions.js";
 
 // Parent of HoO which will hold time picker modals for each day
+// WARNING: NEEDS FURTHER TESTING
+// TODO: Seperate into further modal components
 class HoO extends Component {
   componentDidMount() {
     this.props.getHoursOfOperation();

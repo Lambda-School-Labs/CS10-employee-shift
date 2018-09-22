@@ -27,7 +27,7 @@ export const getProfile = () => (dispatch, getState) => {
     });
 };
 
-/* Implement me */
+/* Implement me on back-end */
 export const getAllProfiles = () => (dispatch, getState) => {
   dispatch({ type: "LOADING_PROFILE" });
   const headers = { "Content-Type": "application/x-www-form-urlencoded" };

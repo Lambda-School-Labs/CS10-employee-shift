@@ -8,7 +8,7 @@ const initialState = {
 
 export default (state = initialState, action) => {
   // return shallow copy of allProfiles
-  const newProfiles = state.allProfiles.slice();
+  // const newProfiles = state.allProfiles.slice();
 
   switch (action.type) {
     case "LOADING_PROFILE":

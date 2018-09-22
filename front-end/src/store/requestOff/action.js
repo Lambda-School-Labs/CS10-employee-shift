@@ -29,9 +29,14 @@ export const getRequestOffs = () => (dispatch, getState) => {
 };
 
 // TODO: fill in correct data to send
-export const postRequestOff = (date, reason) => (dispatch, getState) => {
+export const postRequestOff = (start_datetime, end_datetime, reason) => (
+  dispatch,
+  getState
+) => {
   dispatch({ type: "LOADING_REQUESTOFF" });
   const token = getState().user.token;
+  const profile = 1;
+  //const user = getState().user.currentUser.id; Implement once getUser works correctly
   const headers = { "Content-Type": "application/x-www-form-urlencoded" };
 
   if (token) {
@@ -39,8 +44,10 @@ export const postRequestOff = (date, reason) => (dispatch, getState) => {
   }
 
   const body = JSON.stringify({
-    date: date,
-    reason: reason,
+    end_datetime,
+    profile,
+    reason,
+    start_datetime,
   });
 
   // DEV CONSOLE LOG, REMOVE ME
