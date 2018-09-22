@@ -22,7 +22,7 @@ export const getShifts = () => (dispatch, getState) => {
         if (err.status < 500) {
           console.log("Server Error!");
           return { status: err.status, data: err.data };
-        } else if (err.status === 403 || err.status === 401) {
+        } else {
           dispatch({ type: "ERROR", data: err.data });
           throw err.data;
         }

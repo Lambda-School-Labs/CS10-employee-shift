@@ -29,28 +29,32 @@ export const getHoursOfOperation = () => (dispatch, getState) => {
   }
 };
 
-// TODO: fill in correct data to send
-export const postHoursOfOperation = (open_time, close_time) => (
+export const postHoursOfOperation = (day, open_time, close_time) => (
   dispatch,
   getState
 ) => {
   dispatch({ type: "LOADING_HOO" });
 
-  const { token } = getState().user.token;
+  const token = getState().user.token;
   const headers = { "Content-Type": "application/json" };
-
   if (token) {
     headers["Authorization"] = `Bearer ${token}`;
   }
 
+  // Get account
+  const account = 1;
+
   const body = JSON.stringify({
+    account: account,
+    day: day,
     open_time: open_time,
     close_time: close_time,
   });
 
+  console.log(body, headers);
+
   axios({
     method: "post",
-    // TODO: fill correct end point
     url: `${process.env.REACT_APP_ROOT_URL}/api/hoo/`,
     headers: headers,
     data: body,
@@ -61,40 +65,41 @@ export const postHoursOfOperation = (open_time, close_time) => (
       }
     })
     .catch(err => {
-      console.log(err.response, "this", err.request);
-      if (err.response.status === 401 || err.response.status === 403) {
-        console.log("HITTT");
-        dispatch({ type: "AUTHE_ERROR", data: err });
-        throw err.data;
-      } else {
-        dispatch({ type: "ERROR", data: err });
+      if (err.status < 500) {
+        console.log("Server Error!");
+        return { status: err.status, data: err.data };
+      } else if (err.status === 403 || err.status === 401) {
+        dispatch({ type: "ERROR", data: err.data });
         throw err.data;
       }
     });
 };
 
 // TODO: fill in correct data to send. ID?
-export const updateHoursOfOperation = (id, open_time, close_time) => (
+export const updateHoursOfOperation = (id, day, open_time, close_time) => (
   dispatch,
   getState
 ) => {
   dispatch({ type: "LOADING_HOO" });
-  const { token } = getState().user.token;
+  const token = getState().user.token;
   const headers = { "Content-Type": "application/x-www-form-urlencoded" };
-
   if (token) {
     headers["Authorization"] = `Bearer ${token}`;
   }
 
+  // Get account
+  const account = 1;
+
   const body = JSON.stringify({
+    account: account,
     open_time: open_time,
     close_time: close_time,
   });
 
   axios({
     method: "update",
-    // TODO: fill correct end point
-    url: `${process.env.REACT_APP_ROOT_URL}/api/hoo/`,
+    // TODO: use ID for the end point dynamically
+    url: `${process.env.REACT_APP_ROOT_URL}/api/hoo/1`,
     headers: headers,
     data: body,
   })
@@ -117,29 +122,19 @@ export const updateHoursOfOperation = (id, open_time, close_time) => (
 /* 
 TODO: Is this needed?
 */
-export const deleteHoursOfOperation = (id, open_time, close_time) => (
-  dispatch,
-  getState
-) => {
+export const deleteHoursOfOperation = id => (dispatch, getState) => {
   dispatch({ type: "LOADING_HOO" });
-  const { token } = getState().user.token;
+  const token = getState().user.token;
   const headers = { "Content-Type": "application/x-www-form-urlencoded" };
-
   if (token) {
     headers["Authorization"] = `Bearer ${token}`;
   }
 
-  const body = JSON.stringify({
-    open_time: open_time,
-    close_time: close_time,
-  });
-
   axios({
     method: "delete",
-    // TODO: fill correct end point
-    url: `${process.env.REACT_APP_ROOT_URL}/api/hoo/`,
+    // TODO: use ID for the end point dynamically
+    url: `${process.env.REACT_APP_ROOT_URL}/api/hoo/1`,
     headers: headers,
-    data: body,
   })
     .then(res => {
       if (res.status === 200) {

@@ -14,7 +14,7 @@ export default (state = initialState, action) => {
 
     case "READ_REQUESTOFF":
       // DEV CONSOLE LOG, REMOVE ME!
-      console.log("FETCHED REQUESTOFF");
+      console.log("FETCHED REQUESTOFF", action.data);
       return {
         ...state,
         allRequestOffs: action.data,
@@ -23,7 +23,7 @@ export default (state = initialState, action) => {
 
     case "CREATE_REQUESTOFF":
       // DEV CONSOLE LOG, REMOVE ME!
-      console.log("CREATED requestOff");
+      console.log("CREATED requestOff", action.data);
       newRequestOffs.push(action.data);
       return {
         ...state,
@@ -33,7 +33,7 @@ export default (state = initialState, action) => {
 
     case "UPDATE_REQUESTOFF":
       // DEV CONSOLE LOG, REMOVE ME!
-      console.log("UPDATED requestOff");
+      console.log("UPDATED requestOff", action.data);
       // grab requestOff using its index, maybe handle this differently
       const requestOffToUpdate = newRequestOffs[action.index];
       // do some updates
@@ -46,7 +46,7 @@ export default (state = initialState, action) => {
 
     case "DELETE_REQUESTOFF":
       // DEV CONSOLE LOG, REMOVE ME!
-      console.log("DELETED requestOff");
+      console.log("DELETED requestOff", action.data);
       newRequestOffs.splice(action.index, 1);
       return {
         ...state,

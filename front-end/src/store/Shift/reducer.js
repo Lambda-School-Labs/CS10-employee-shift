@@ -19,13 +19,13 @@ export default (state = initialState, action) => {
 
     case "CREATE_SHIFT":
       // DEV CONSOLE LOG, REMOVE ME!
-      console.log("CREATED SHIFT");
+      console.log("CREATED SHIFT", action.data);
       shifts.push(action.data);
       return { ...state, allShifts: shifts, shiftsLoading: false };
 
     case "UPDATE_SHIFT":
       // DEV CONSOLE LOG, REMOVE ME!
-      console.log("UPDATED SHIFT");
+      console.log("UPDATED SHIFT", action.data);
       // grab shift using its index, maybe handle this differently
       const shiftToUpdate = shifts[action.index];
       // do some updates
@@ -34,7 +34,7 @@ export default (state = initialState, action) => {
 
     case "DELETE_SHIFT":
       // DEV CONSOLE LOG, REMOVE ME!
-      console.log("DELETED SHIFT");
+      console.log("DELETED SHIFT", action.data);
       shifts.splice(action.index, 1);
       return { ...state, allShifts: shifts, shiftsLoading: false };
 

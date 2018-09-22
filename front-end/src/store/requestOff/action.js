@@ -3,7 +3,7 @@ import axios from "axios";
 export const getRequestOffs = () => (dispatch, getState) => {
   dispatch({ type: "LOADING_REQUESTOFF" });
   const headers = { "Content-Type": "application/x-www-form-urlencoded" };
-  const { token } = getState().user.token;
+  const token = getState().user.token;
 
   if (token) {
     headers["Authorization"] = `Bearer ${token}`;
@@ -31,7 +31,7 @@ export const getRequestOffs = () => (dispatch, getState) => {
 // TODO: fill in correct data to send
 export const postRequestOff = (date, reason) => (dispatch, getState) => {
   dispatch({ type: "LOADING_REQUESTOFF" });
-  const { token } = getState().user.token;
+  const token = getState().user.token;
   const headers = { "Content-Type": "application/x-www-form-urlencoded" };
 
   if (token) {
@@ -74,7 +74,7 @@ export const updateRequestOff = (id, startTime, endTime) => (
   getState
 ) => {
   dispatch({ type: "LOADING_REQUESTOFF" });
-  const { token } = getState().user.token;
+  const token = getState().user.token;
   const headers = { "Content-Type": "application/x-www-form-urlencoded" };
 
   if (token) {
@@ -112,7 +112,7 @@ export const updateRequestOff = (id, startTime, endTime) => (
 
 export const deleteRequestOff = id => (dispatch, getState) => {
   dispatch({ type: "LOADING_REQUESTOFF" });
-  const { token } = getState().user.token;
+  const token = getState().user.token;
   const headers = { "Content-Type": "application/x-www-form-urlencoded" };
 
   if (token) {

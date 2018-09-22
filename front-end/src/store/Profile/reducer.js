@@ -16,7 +16,7 @@ export default (state = initialState, action) => {
 
     case "READ_PROFILE":
       // DEV CONSOLE LOG, REMOVE ME!
-      console.log("FETCHED SHIFTS");
+      console.log("FETCHED SHIFTS", action.data);
       return { ...state, currentProfile: action.data, profileLoading: false };
 
     /* For managers only?? REFACTOR FOLLOWING

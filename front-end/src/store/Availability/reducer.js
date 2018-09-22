@@ -14,7 +14,7 @@ export default (state = initialState, action) => {
 
     case "READ_AVAILABILITIES":
       // DEV CONSOLE LOG, REMOVE ME!
-      console.log("FETCHED Availabilities");
+      console.log("FETCHED Availabilities", action.data);
       return {
         ...state,
         allAvailabilities: action.data,
@@ -23,7 +23,7 @@ export default (state = initialState, action) => {
 
     case "CREATE_AVAILABILITIES":
       // DEV CONSOLE LOG, REMOVE ME!
-      console.log("CREATED AVAILABILITIES");
+      console.log("CREATED AVAILABILITIES", action.data);
       newAvailabilities.push(action.data);
       return {
         ...state,
@@ -33,7 +33,7 @@ export default (state = initialState, action) => {
 
     case "UPDATE_AVAILABILITIES":
       // DEV CONSOLE LOG, REMOVE ME!
-      console.log("UPDATED AVAILABILITIES");
+      console.log("UPDATED AVAILABILITIES", action.data);
       // grab shift using its index, maybe handle this differently
       const availabilityUpdate = newAvailabilities[action.data.index];
       // do some updates
@@ -46,7 +46,7 @@ export default (state = initialState, action) => {
 
     case "DELETE_AVAILABILITIES":
       // DEV CONSOLE LOG, REMOVE ME!
-      console.log("DELETED AVAILABILITIES");
+      console.log("DELETED AVAILABILITIES", action.data);
       newAvailabilities.splice(action.index, 1);
       return {
         ...state,

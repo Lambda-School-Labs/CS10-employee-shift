@@ -11,27 +11,39 @@ import {
 class HoO extends Component {
   componentDidMount() {
     this.props.getHoursOfOperation();
-    //this.props.postHoursOfOperation();
   }
+
+  testFirePost = () => {
+    let date = new Date();
+    date = date.toISOString();
+    this.props.postHoursOfOperation("M", date, date);
+  };
+
+  testFireUpdate = () => {
+    let date = new Date();
+    date = date.toISOString();
+    this.props.postHoursOfOperation(1, "M", date, date);
+  };
+
   render() {
     return (
       <div>
         <p>One day I'll grow up to be a Modal!</p>
+        <button onClick={this.testFirePost}>Test Post</button>
+        <button onClick={this.testFireUpdate}>Test Update</button>
+        <button onClick={this.testFireAction}>W</button>
+        <button onClick={this.testFireAction}> Th</button>
+        <button onClick={this.testFireAction}>F</button>
+        <button onClick={this.testFireAction}>S</button>
+        <button onClick={this.testFireAction}>Su</button>
       </div>
     );
   }
 }
 
 const mapStateToProps = state => {
-  let errors = [];
-  if (state.user.errors) {
-    errors = Object.keys(state.user.errors).map(field => {
-      return { field, message: state.user.errors[field] };
-    });
-  }
   return {
-    errors,
-    isAuthenticated: state.user.isAuthenticated,
+    allHoOs: state.hourOfOperation.allHoOs,
   };
 };
 
@@ -40,14 +52,13 @@ const mapDispatchToProps = dispatch => {
     getHoursOfOperation: () => {
       return dispatch(getHoursOfOperation());
     },
-    postHoursOfOperation: () => {
-      // fill with data
-      return dispatch(postHoursOfOperation());
+    postHoursOfOperation: (day, open_time, close_time) => {
+      return dispatch(postHoursOfOperation(day, open_time, close_time));
     },
-    updateHoursOfOperation: () => {
-      // fill with data
-      return dispatch(updateHoursOfOperation());
+    updateHoursOfOperation: (id, day, open_time, close_time) => {
+      return dispatch(updateHoursOfOperation(id, day, open_time, close_time));
     },
+    // delete?
   };
 };
 

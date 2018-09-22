@@ -10,7 +10,6 @@ const Calendar = () => {
     <CalendarContainer>
       <CalendarTopNav />
       <Schedule />
-      <HoO />
     </CalendarContainer>
   );
 };

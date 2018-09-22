@@ -14,18 +14,18 @@ export default (state = initialState, action) => {
 
     case "READ_HOO":
       // DEV CONSOLE LOG, REMOVE ME!
-      console.log("READ HOO");
+      console.log("READ HOO", action.data);
       return { ...state, allHoOs: action.data, HoOLoading: false };
 
     case "CREATE_HOO":
       // DEV CONSOLE LOG, REMOVE ME!
-      console.log("CREATED HOO");
+      console.log("CREATED HOO", action.data);
       newHoO.push(action.data);
       return { ...state, allHoOs: newHoO, HoOLoading: false };
 
     case "UPDATE_HOO":
       // DEV CONSOLE LOG, REMOVE ME!
-      console.log("UPDATE HOO");
+      console.log("UPDATE HOO", action.data);
       // grab shift using its index, maybe handle this differently
       const hooToUpdate = newHoO[action.index];
       // do some updates
@@ -34,7 +34,7 @@ export default (state = initialState, action) => {
 
     case "DELETE_HOO":
       // DEV CONSOLE LOG, REMOVE ME!
-      console.log("DELETE HOO");
+      console.log("DELETE HOO", action.data);
       newHoO.splice(action.index, 1);
       return { ...state, allHoOs: newHoO, HoOLoading: false };
 

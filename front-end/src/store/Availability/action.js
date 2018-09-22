@@ -3,7 +3,7 @@ import axios from "axios";
 export const getAvailabilities = () => (dispatch, getState) => {
   dispatch({ type: "LOADING_AVAILABILITIES" });
   const headers = { "Content-Type": "application/x-www-form-urlencoded" };
-  const { token } = getState().user.token;
+  const token = getState().user.token;
 
   if (token) {
     headers["Authorization"] = `Bearer ${token}`;
@@ -34,7 +34,7 @@ export const postAvailabilities = (startTime, endTime) => (
   getState
 ) => {
   dispatch({ type: "LOADING_AVAILABILITIES" });
-  const { token } = getState().user.token;
+  const token = getState().user.token;
   const headers = { "Content-Type": "application/x-www-form-urlencoded" };
 
   if (token) {
@@ -74,7 +74,7 @@ export const updateAvailabilities = (id, startTime, endTime) => (
   getState
 ) => {
   dispatch({ type: "LOADING_AVAILABILITIES" });
-  const { token } = getState().user.token;
+  const token = getState().user.token;
   const headers = { "Content-Type": "application/x-www-form-urlencoded" };
 
   if (token) {
@@ -112,7 +112,7 @@ export const updateAvailabilities = (id, startTime, endTime) => (
 
 export const deleteAvailabilities = id => (dispatch, getState) => {
   dispatch({ type: "LOADING_AVAILABILITIES" });
-  const { token } = getState().user.token;
+  const token = getState().user.token;
   const headers = { "Content-Type": "application/x-www-form-urlencoded" };
 
   if (token) {
