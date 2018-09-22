@@ -16,9 +16,9 @@ class HoO extends Component {
   }
 
   testFirePost = () => {
-    let date = new Date();
-    date = date.toISOString();
-    this.props.postHoursOfOperation("M", date, date);
+    const date = "12:00:00";
+    const date2 = "18:00:00";
+    this.props.postHoursOfOperation("M", date, date2);
   };
 
   testFireUpdate = () => {
