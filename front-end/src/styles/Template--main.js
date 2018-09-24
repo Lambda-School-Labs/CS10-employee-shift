@@ -4,7 +4,7 @@ import styled from "styled-components";
 
 export const MainContainer = styled.div`
 width: 100vw,
-height: 100vh,
+height: 95vh,
 display: flex,
 flexDirection: column,
 `;
@@ -14,7 +14,8 @@ export const HorizontalContainer = styled.div`
 `;
 
 export const ComponentContainer = styled.div`
-  width: 80%;
+  height: 95vh
+  width: 100vw;
 `;
 
 export const SideNavigationContainer = styled.div`
