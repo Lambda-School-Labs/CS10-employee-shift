@@ -2,19 +2,13 @@ import React, { Component } from "react";
 import { Modals, ModalInner } from "../../styles/modal";
 
 function Open() {
-  let model = Identify();
+  let model = document.getElementById("pop-up");
   model.style.display = "block";
 }
 
 function Close() {
-  let model = Identify();
+  let model = document.getElementById("pop-up");
   model.style.display = "none";
-}
-
-function Identify() {
-  let model = document.getElementsByClassName("cqaPHb");
-  model = model[0];
-  return model;
 }
 
 class Modal extends Component {
@@ -22,7 +16,7 @@ class Modal extends Component {
     return (
       <div className="modal-container">
         <button onClick={Open}>Popup</button>
-        <Modals>
+        <Modals id="pop-up">
           <ModalInner>
             <span>Hours of Operation</span>
             <form action="">

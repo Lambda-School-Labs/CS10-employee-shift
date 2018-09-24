@@ -1,12 +1,13 @@
 import React from "react";
+import { connect } from "react-redux";
 
-import { NewEmployeeCard } from "../../styles/Employee";
+import { NewEmployeeCard } from "../../styles/Employees";
 
 const NewEmployee = () => {
-  // TODO: Connect to redux, add form submit handler, fire action
+  // TODO: What info to grab?
   return (
     <NewEmployeeCard>
-      {/* TODO: Use form.js styled components */}
+      {/* TODO: Use styled components */}
       <form action="">
         First Name:{" "}
         <input type="text" name="firstName" placeholder="first name" />
@@ -32,4 +33,13 @@ const NewEmployee = () => {
   );
 };
 
-export default NewEmployee;
+const mapDispatchToProps = dispatch => {
+  return {
+    // what action to fire?
+  };
+};
+
+export default connect(
+  null,
+  mapDispatchToProps
+)(NewEmployee);

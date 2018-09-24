@@ -37,6 +37,8 @@ const main = props => {
       ? props.component.WrappedComponent.name
       : props.component.name;
   const SpecificComponent = components[name];
+  // DEV ERROR TESTING REMOVE ME
+  console.log("Is this working?", props);
 
   return (
     <MainContainer>

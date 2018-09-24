@@ -1,5 +1,7 @@
 import styled from "styled-components";
 
+// STYLES FOR MAIN TEMPLATE
+
 export const MainContainer = styled.div`
 width: 100vw,
 height: 100vh,
@@ -23,4 +25,16 @@ export const SideNavigationContainer = styled.div`
   width: 20%;
   height: 80vh;
   margin: 0 5%;
+`;
+
+export const TopNavContainer = styled.div`
+  width: 90%;
+  display: flex;
+  justify-content: space-between;
+  margin: 0 5%;
+`;
+
+export const Breadcrumb = styled.div`
+  display: flex;
+  align-items: center;
 `;
