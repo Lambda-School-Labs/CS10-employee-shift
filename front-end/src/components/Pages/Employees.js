@@ -1,4 +1,7 @@
 import React, { Component } from "react";
+import { connect } from "react-redux";
+
+import { signin } from "../../store/User/actions.js";
 
 import EmployeeCard from "../Organisms/EmployeeCard.js";
 import NewEmployee from "../Organisms/NewEmployee.js";
@@ -16,4 +19,23 @@ class Employees extends Component {
   }
 }
 
-export default Employees;
+// TODO: Use correct actions and state
+
+const mapStateToProps = state => {
+  return {
+    isAuthenticated: state.user.isAuthenticated,
+  };
+};
+
+const mapDispatchToProps = dispatch => {
+  return {
+    signin: (username, password) => {
+      return dispatch(signin(username, password));
+    },
+  };
+};
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(Employees);

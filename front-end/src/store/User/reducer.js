@@ -46,9 +46,9 @@ export default (state = initialState, action) => {
         isLoading: false,
       };
 
-    // TODO: employee check
     case "SIGNUP_SUCCESS":
       localStorage.setItem("token", action.data.access_token);
+      // DEV CONSOLE LOG, REMOVE ME!
       console.log(action.data);
       return {
         ...state,

@@ -13,6 +13,7 @@ import {
 class HoO extends Component {
   componentDidMount() {
     this.props.getHoursOfOperation();
+    console.log(this.props.allHoOs);
   }
 
   testFirePost = () => {
@@ -22,9 +23,9 @@ class HoO extends Component {
   };
 
   testFireUpdate = () => {
-    let date = new Date();
-    date = date.toISOString();
-    this.props.postHoursOfOperation(1, "M", date, date);
+    const date = "12:00:00";
+    const date2 = "18:00:00";
+    this.props.updateHoursOfOperation(1, "W", date, date);
   };
 
   render() {
