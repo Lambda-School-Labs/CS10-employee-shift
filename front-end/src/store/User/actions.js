@@ -163,22 +163,20 @@ export const updateUser = (
   // const id = getState().user.currentUser.id;
   const id = 1;
 
+  // username, email, password, re_password, firstname, lastname
   if (token) {
     const headers = {
       Authorization: `Bearer ${token}`,
     };
 
+    // More form items for validation
+
     const body = {
       // username: "admin", 500 error when you send "username" and "password"
       email,
-      phone,
-      text_enabled,
-      email_enabled,
-      old_password,
-      new_password,
     };
     axios({
-      method: "put",
+      method: "patch",
       url: `${process.env.REACT_APP_ROOT_URL}/api/users/${id}/`,
       headers,
       data: body,
