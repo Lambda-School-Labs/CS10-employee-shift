@@ -1,7 +1,7 @@
 import styled from "styled-components";
 
 export const BackgroundHolder = styled.div`
-    background-color: #A0DDFF;
+    background-color: #4B9CD3;
     width: 100%;
     height: 500px;
     max-height: 80%;
@@ -30,7 +30,7 @@ export const WelcomeSide = styled.div`
 export const WelcomeLogo = styled.div`
     height: 500px;
     width: 75%;
-    background-color: grey;
+    background-color: #13294B;
     margin-left: 30%;
     
 `;
