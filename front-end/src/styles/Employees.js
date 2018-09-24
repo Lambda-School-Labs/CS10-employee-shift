@@ -1,28 +1,16 @@
 import styled from "styled-components";
 // Maybe combine with all other "cards" styling
 
-export const Top = styled.div``;
-export const NavBar = styled.div`
+export const EmployeesContainer = styled.div`
+  height: 100%;
   display: flex;
-  padding: 1em;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
 `;
 
-export const Bottom = styled.div`
-  display: flex;
-`;
-
-export const Left = styled.div`
-  padding-left: 0.5em;
-  padding-right: 0.5em;
-`;
-
-export const Right = styled.div`
-  display: flex;
-  padding-left: 1em;
-`;
 export const EmployeeCardContainer = styled.div`
   border: 1px solid black;
-  font-size: 0.5em;
 `;
 
 export const CardInner = styled.div`

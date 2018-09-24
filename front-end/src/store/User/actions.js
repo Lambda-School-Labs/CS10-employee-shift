@@ -1,6 +1,6 @@
 import axios from "axios";
 
-// WIP: Action to get user's data if the token is saved in local storage
+// Returns the user of the token that is sent in as an authorization check
 export const getUser = () => (dispatch, getState) => {
   dispatch({ type: "FETCHING_USER" });
 
@@ -10,7 +10,7 @@ export const getUser = () => (dispatch, getState) => {
       "Content-Type": "application/json",
       Authorization: `Bearer ${token}`,
     };
-
+    // TODO: GET ACCOUNT ID
     // TODO: Redo with correct endpoint to get user (not list of users)
     axios
       .get(`${process.env.REACT_APP_ROOT_URL}/api/users/`, {
@@ -18,6 +18,7 @@ export const getUser = () => (dispatch, getState) => {
       })
       .then(res => {
         if (res.status === 200) {
+          console.log(res.data);
           dispatch({ type: "FETCHED_USER", data: res.data });
           return res.data;
         }
@@ -28,12 +29,12 @@ export const getUser = () => (dispatch, getState) => {
   } else dispatch({ type: "AUTH_ERROR" });
 };
 
-// TODO: Encrypt password
+// TODO: Encrypt everything
 export const signin = (username, password) => dispatch => {
   const body = JSON.stringify({
     grant_type: "password",
-    username: `${username}`,
-    password: `${password}`,
+    username,
+    password,
     client_id: `${process.env.REACT_APP_CLIENT_ID}`,
     client_secret: `${process.env.REACT_APP_CLIENT_SECRET}`,
   });
@@ -69,7 +70,7 @@ export const signout = () => dispatch => {
 
   if (token) {
     const body = JSON.stringify({
-      token: token,
+      token,
       client_id: `${process.env.REACT_APP_CLIENT_ID}`,
       client_secret: `${process.env.REACT_APP_CLIENT_SECRET}`,
     });
@@ -100,22 +101,23 @@ export const signout = () => dispatch => {
   } else dispatch({ type: "SIGNOUT_SUCCESS" });
 };
 
-// TODO: Encrypt password
+// TODO: Encrypt everything
+// Sign up for a business account
 export const signup = (
   username,
   password,
   re_password,
   email,
-  firstName,
-  lastName
+  first_name,
+  last_name
 ) => dispatch => {
   const body = JSON.stringify({
-    username: username,
-    password: password,
-    re_password: re_password,
-    email: email,
-    first_name: firstName,
-    last_name: lastName,
+    username,
+    password,
+    re_password,
+    email,
+    first_name,
+    last_name,
     is_staff: "true",
   });
 
@@ -145,29 +147,38 @@ export const signup = (
     });
 };
 
-// Patch to /api/users
-// Still needs user group persmission
-
-export const updateUser = (email, password) => (dispatch, getState) => {
+// CURRENTLY TESTING
+// BACK END TO HANDLE OLD VS NEW PASSWORD
+// Can only change their own information
+export const updateUser = (
+  email,
+  phone,
+  text_enabled,
+  email_enabled,
+  old_password,
+  new_password
+) => (dispatch, getState) => {
   const token = getState().user.token;
-  const id = getState().user.currentUser.id;
+  // Implemented once getOwnUser works
+  // const id = getState().user.currentUser.id;
+  const id = 1;
 
+  // username, email, password, re_password, firstname, lastname
   if (token) {
-    const body = JSON.stringify({
-      token: token,
-      client_id: `${process.env.REACT_APP_CLIENT_ID}`,
-      client_secret: `${process.env.REACT_APP_CLIENT_SECRET}`,
-    });
+    const headers = {
+      Authorization: `Bearer ${token}`,
+    };
 
-    if (email) body[email] = email;
-    if (password) body[password] = password;
+    // More form items for validation
 
+    const body = {
+      // username: "admin", 500 error when you send "username" and "password"
+      email,
+    };
     axios({
       method: "patch",
-      url: `${process.env.REACT_APP_ROOT_URL}/api/users/${id}`,
-      headers: {
-        "Content-Type": "application/json",
-      },
+      url: `${process.env.REACT_APP_ROOT_URL}/api/users/${id}/`,
+      headers,
       data: body,
     })
       .then(res => {

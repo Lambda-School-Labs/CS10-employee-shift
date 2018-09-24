@@ -4,33 +4,23 @@ import { connect } from "react-redux";
 
 import { signout } from "../../store/User/actions.js";
 
+import { TopNavContainer, Breadcrumb } from "../../styles/Template--main.js";
+
 const TopNav = props => {
-  const clickSignout = e => {
+  const clickSignout = () => {
     props.signout();
   };
 
   return (
-    <div
-      style={{
-        width: "90%",
-        display: "flex",
-        justifyContent: "space-between",
-        margin: "0 5%",
-      }}
-    >
-      <div
-        style={{
-          display: "flex",
-          alignItems: "center",
-        }}
-      >
+    <TopNavContainer>
+      <Breadcrumb>
         <Link to="/">Home</Link>
         <p> > {props.component}</p>
-      </div>
+      </Breadcrumb>
       <Link to="/" onClick={clickSignout}>
         Sign Out
       </Link>
-    </div>
+    </TopNavContainer>
   );
 };
 

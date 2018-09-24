@@ -1,13 +1,18 @@
 import styled from "styled-components";
 
-// STYLES FOR SIGNIN & SIGNUP PAGE
+// STYLES FOR DASHBOARD PAGE
 
-export const Container = styled.div`
-  height: 100vh;
+export const BillingContainer = styled.div`
+  height: 100%;
   display: flex;
   justify-content: center;
   align-items: center;
   flex-direction: column;
+`;
+
+export const BillingHeader = styled.h1`
+  fontsize: 30px;
+  fontweight: 300;
 `;
 
 export const Form = styled.form`

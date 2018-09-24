@@ -1,7 +1,7 @@
 import axios from "axios";
 
-// POPULATE CALENDAR VIEW WITH THIS DATA
-export const getCalendar = () => (dispatch, getState) => {
+export const getProfile = () => (dispatch, getState) => {
+  dispatch({ type: "LOADING_PROFILE" });
   const headers = { "Content-Type": "application/x-www-form-urlencoded" };
   const { token } = getState().user.token;
 
@@ -10,11 +10,10 @@ export const getCalendar = () => (dispatch, getState) => {
   }
 
   axios
-    // Need user in body? Or is it read off of token?
-    .get(`${process.env.REACT_APP_ROOT_URL}/api/calendar`, headers)
+    .get(`${process.env.REACT_APP_ROOT_URL}/api/profiles/`, headers)
     .then(res => {
       if (res.status === 200) {
-        return dispatch({ type: "READ_CALENDAR", data: res.data });
+        return dispatch({ type: "READ_PROFILE", data: res.data });
       }
     })
     .catch(err => {
@@ -22,14 +21,43 @@ export const getCalendar = () => (dispatch, getState) => {
         dispatch({ type: "AUTHENTICATION_ERROR", data: err.data });
         throw err.data;
       } else {
-        dispatch({ type: "ERROR", data: err.data });
+        dispatch({ type: "ERROR", data: res.data });
+        throw err.data;
+      }
+    });
+};
+
+/* Implement me on back-end */
+export const getAllProfiles = () => (dispatch, getState) => {
+  dispatch({ type: "LOADING_PROFILE" });
+  const headers = { "Content-Type": "application/x-www-form-urlencoded" };
+  const { token } = getState().user.token;
+
+  if (token) {
+    headers["Authorization"] = `Bearer ${token}`;
+  }
+
+  axios
+    .get(`${process.env.REACT_APP_ROOT_URL}/api/profiles/`, headers)
+    .then(res => {
+      if (res.status === 200) {
+        return dispatch({ type: "READ_PROFILE", data: res.data });
+      }
+    })
+    .catch(err => {
+      if (err.status === 401 || err.status === 403) {
+        dispatch({ type: "AUTHENTICATION_ERROR", data: err.data });
+        throw err.data;
+      } else {
+        dispatch({ type: "ERROR", data: res.data });
         throw err.data;
       }
     });
 };
 
 // TODO: fill in correct data to send
-export const postCalendar = (startTime, endTime) => (dispatch, getState) => {
+export const postProfile = data => (dispatch, getState) => {
+  dispatch({ type: "LOADING_PROFILE" });
   const { token } = getState().user.token;
   const headers = { "Content-Type": "application/x-www-form-urlencoded" };
 
@@ -37,21 +65,19 @@ export const postCalendar = (startTime, endTime) => (dispatch, getState) => {
     headers["Authorization"] = `Bearer ${token}`;
   }
 
-  const body = JSON.stringify({
-    startTime: startTime,
-    endTime: endTime,
-  });
+  // fill me
+  const body = JSON.stringify({ data });
 
   axios({
     method: "post",
     // TODO: fill correct end point
-    url: `${process.env.REACT_APP_ROOT_URL}/calendar`,
+    url: `${process.env.REACT_APP_ROOT_URL}/api/profiles/`,
     headers: headers,
     data: body,
   })
     .then(res => {
       if (res.status === 200) {
-        return dispatch({ type: "CREATE_CALENDAR", data: res.data });
+        return dispatch({ type: "CREATE_PROFILE", data: res.data });
       }
     })
     .catch(err => {
@@ -59,16 +85,15 @@ export const postCalendar = (startTime, endTime) => (dispatch, getState) => {
         dispatch({ type: "AUTHENTICATION_ERROR", data: err.data });
         throw err.data;
       } else {
-        dispatch({ type: "ERROR", data: err.data });
+        dispatch({ type: "ERROR", data: res.data });
         throw err.data;
       }
     });
 };
 
-export const updateCalendar = (id, startTime, endTime) => (
-  dispatch,
-  getState
-) => {
+// TODO: fill in correct data to send
+export const updateProfile = data => (dispatch, getState) => {
+  dispatch({ type: "LOADING_PROFILE" });
   const { token } = getState().user.token;
   const headers = { "Content-Type": "application/x-www-form-urlencoded" };
 
@@ -76,22 +101,19 @@ export const updateCalendar = (id, startTime, endTime) => (
     headers["Authorization"] = `Bearer ${token}`;
   }
 
-  const body = JSON.stringify({
-    id: id,
-    startTime: startTime,
-    endTime: endTime,
-  });
+  // fill me
+  const body = JSON.stringify({ data });
 
   axios({
     method: "update",
     // TODO: fill correct end point
-    url: `${process.env.REACT_APP_ROOT_URL}/calendar`,
+    url: `${process.env.REACT_APP_ROOT_URL}/api/profiles/`,
     headers: headers,
     data: body,
   })
     .then(res => {
       if (res.status === 200) {
-        return dispatch({ type: "UPDATE_CALENDAR", data: res.data });
+        return dispatch({ type: "UPDATE_PROFILE", data: res.data });
       }
     })
     .catch(err => {
@@ -99,13 +121,15 @@ export const updateCalendar = (id, startTime, endTime) => (
         dispatch({ type: "AUTHENTICATION_ERROR", data: err.data });
         throw err.data;
       } else {
-        dispatch({ type: "ERROR", data: err.data });
+        dispatch({ type: "ERROR", data: res.data });
         throw err.data;
       }
     });
 };
 
-export const deleteCalendar = id => (dispatch, getState) => {
+// TODO: fill in correct data to send
+export const deleteProfile = data => (dispatch, getState) => {
+  dispatch({ type: "LOADING_PROFILE" });
   const { token } = getState().user.token;
   const headers = { "Content-Type": "application/x-www-form-urlencoded" };
 
@@ -113,18 +137,19 @@ export const deleteCalendar = id => (dispatch, getState) => {
     headers["Authorization"] = `Bearer ${token}`;
   }
 
-  const body = JSON.stringify({ id: id });
+  // fill me
+  const body = JSON.stringify({ data });
 
   axios({
     method: "delete",
     // TODO: fill correct end point
-    url: `${process.env.REACT_APP_ROOT_URL}/calendar`,
+    url: `${process.env.REACT_APP_ROOT_URL}/api/profiles/`,
     headers: headers,
     data: body,
   })
     .then(res => {
       if (res.status === 200) {
-        return dispatch({ type: "DELETE_CALENDAR", data: res.data });
+        return dispatch({ type: "DELETE_PROFILE", data: res.data });
       }
     })
     .catch(err => {
@@ -132,7 +157,7 @@ export const deleteCalendar = id => (dispatch, getState) => {
         dispatch({ type: "AUTHENTICATION_ERROR", data: err.data });
         throw err.data;
       } else {
-        dispatch({ type: "ERROR", data: err.data });
+        dispatch({ type: "ERROR", data: res.data });
         throw err.data;
       }
     });
