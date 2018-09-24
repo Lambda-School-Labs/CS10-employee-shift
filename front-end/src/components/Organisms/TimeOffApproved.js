@@ -1,9 +1,9 @@
-import React from 'react';
+import React from "react";
+
+import { OrganismContainer } from "../../styles/Dashboard.js";
 
 const TimeOffApproved = () => {
-    return (
-        <div> TimeOffApproved</div>
-    )
-}
+  return <OrganismContainer>TimeOffApproved</OrganismContainer>;
+};
 
 export default TimeOffApproved;

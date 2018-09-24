@@ -1,5 +1,7 @@
 import styled from "styled-components";
 
+// STYLES FOR SIGNIN & SIGNUP PAGE
+
 export const Container = styled.div`
   height: 100vh;
   display: flex;

@@ -13,6 +13,8 @@ whitenoise = "*"
 django-oauth-toolkit = "*"
 djangorestframework = "*"
 django-cors-middleware = "*"
+dj-stripe = "*"
+stripe = "*"
 
 [dev-packages]
 
