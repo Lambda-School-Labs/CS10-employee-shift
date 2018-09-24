@@ -14,7 +14,6 @@ import os
 from decouple import config
 import dj_database_url
 
-
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
@@ -24,6 +23,16 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = config('SECRET_KEY')
+STRIPE_SECRET_KEY = config("STRIPE_SECRET_KEY")
+
+STRIPE_SECRET_KEY = os.environ.get("STRIPE_SECRET_KEY")
+STRIPE_TEST_SECRET_KEY = os.environ.get("STRIPE_TEST_SECRET_KEY")
+STRIPE_PUBLISHABLE_KEY = os.environ.get("STRIPE_PUBLISHABLE_KEY")
+STRIPE_PUBLIC_KEY = STRIPE_PUBLISHABLE_KEY
+STRIPE_LIVE_SECRET_KEY = STRIPE_TEST_SECRET_KEY = STRIPE_SECRET_KEY
+STRIPE_LIVE_MODE = os.environ.get("STRIPE_LIVE_MODE")
+
+
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = config('DEBUG', cast=bool)
@@ -37,6 +46,8 @@ INSTALLED_APPS = [
     'corsheaders',
     'oauth2_provider',
     'rest_framework',
+    'djstripe',
+    'stripe_payment',
     'shiftapp',
     'django.contrib.admin',
     'django.contrib.auth',
@@ -162,3 +173,4 @@ STATIC_URL = '/static/'
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+

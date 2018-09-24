@@ -20,6 +20,7 @@ from django.contrib.auth.models import User, Group
 admin.autodiscover()
 from rest_framework import generics, permissions, serializers, routers
 from oauth2_provider.contrib.rest_framework import TokenHasReadWriteScope, TokenHasScope 
+from stripe_payment.api import checkout
 
 router = routers.DefaultRouter()
 router.register(r'accounts', AccountList)
@@ -28,7 +29,8 @@ router.register(r'requestoff', RequestedTimeOffList)
 router.register(r'shifts', ShiftList)
 router.register(r'availabilities', AvailabilityList)
 router.register(r'hoo', HourOfOperationList)
-router.register(r'users', UserList)
+router.register(r'users', UserList),
+
 
 
 urlpatterns = [
@@ -37,5 +39,7 @@ urlpatterns = [
    path('users/<pk>/', UserDetails.as_view()),
    path('groups/', GroupList.as_view()),
    path('api/', include(router.urls)),
-   path('api/sign_up/', SignUp.as_view())
+   path('api/sign_up/', SignUp.as_view()),
+   path(r'payments/', include('djstripe.urls', namespace="djstripe")),
+   path(r'create-charge/', checkout, name="cout"),
 ]
