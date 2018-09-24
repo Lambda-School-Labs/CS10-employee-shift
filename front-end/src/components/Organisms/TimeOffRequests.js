@@ -4,7 +4,7 @@ import { connect } from "react-redux";
 import { postRequestOff } from "../../store/requestOff/action.js";
 
 import { OrganismContainer } from "../../styles/Dashboard.js";
-import { FormItem, Form } from "../../styles/Signin.js";
+import { FormItem, Form } from "../../styles/signin.js";
 class TimeOffRequest extends Component {
   state = {
     start_datetime: "",
