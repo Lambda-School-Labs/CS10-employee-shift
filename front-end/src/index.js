@@ -7,11 +7,16 @@ import "./styles/index.css";
 
 import { Provider } from "react-redux";
 import configureStore from "./store/store.js";
+import {Elements, StripeProvider} from 'react-stripe-elements';
 const store = configureStore();
 
 ReactDOM.render(
   <Provider store={store}>
-    <App />
+    <StripeProvider apiKey="REACT_APP_publishable">
+      <Elements>
+        <App />
+      </Elements>
+    </StripeProvider>
   </Provider>,
   document.getElementById("root")
 );
