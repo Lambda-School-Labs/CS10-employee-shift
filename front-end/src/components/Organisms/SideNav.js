@@ -1,17 +1,7 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
 
-import {
-  Button,
-  Header,
-  Icon,
-  Image,
-  Menu,
-  Segment,
-  Sidebar,
-} from "semantic-ui-react";
-
-import { SideNavigationContainer } from "../../styles/Template--main";
+import { Icon, Menu, Sidebar } from "semantic-ui-react";
 
 // TODO: Render based on permission level
 
@@ -52,9 +42,3 @@ const SideNav = props => {
 };
 
 export default SideNav;
-
-/* // <Link to="/calendar">Calendar</Link>
-        // <Link to="/employees">Employees</Link>
-        // <Link to="#">Create Schedule</Link>
-        // <Link to="/billing">Billing</Link>
-        // <Link to="/settings">Settings</Link> */
