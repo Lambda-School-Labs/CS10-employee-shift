@@ -1,7 +1,7 @@
 import styled from "styled-components";
 
 export const BackgroundHolder = styled.div`
-    background-color: #e6faf8;
+    background-color: #A0DDFF;
     width: 100%;
     height: 500px;
     max-height: 80%;
