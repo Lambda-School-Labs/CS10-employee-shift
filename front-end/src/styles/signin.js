@@ -8,6 +8,7 @@ export const Container = styled.div`
   justify-content: center;
   align-items: center;
   flex-direction: column;
+  background-color: hsl(178, 53%, 83%);
 `;
 
 export const Form = styled.form`
@@ -16,8 +17,35 @@ export const Form = styled.form`
   align-items: center;
   flex-direction: column;
   margin: 10%;
+  background-color: lightgray;
+  padding: 13px;
+  border: 1px solid black;
 `;
 
 export const FormItem = styled.div`
   margin: 5%;
+`;
+
+export const SettingsContainer = styled.div`
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+`;
+
+export const BillingContainer = styled.div`
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+`;
+
+export const DashboardContainer = styled.div `
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
 `;

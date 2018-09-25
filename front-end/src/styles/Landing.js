@@ -1,7 +1,7 @@
 import styled from "styled-components";
 
 export const BackgroundHolder = styled.div`
-    background-color: grey;
+    background-color: #A0DDFF;
     width: 100%;
     height: 500px;
     max-height: 80%;
@@ -28,10 +28,11 @@ export const WelcomeSide = styled.div`
 `;
 
 export const WelcomeLogo = styled.div`
-    width: 50%;
-    background: black;
-    margin-left: 10%;
-    margin-top: 5%;
+    height: 500px;
+    width: 75%;
+    background-color: grey;
+    margin-left: 30%;
+    
 `;
 
 {/* possibly depreciated */}
@@ -46,14 +47,20 @@ export const ScheduleButton = styled.div`
     display: flex;
     justify-content: center;
     padding: 70px;
+    margin-top: -120px;
   `;
 
 export const ScheduleButtonButton = styled.button`
-    box-shadow: 5px 10px 20px black;
+    box-shadow: 5px 10px 20px hsl(178, 53%, 43%);
     font-size: 2em;
+    align-self: flex-end;
+    margin-left: 345%;
+    z-index: 2;
+    position: relative;
   `;
 
 export const FooterStyles = styled.div`
     display: flex;
     justify-content: center;
+    margin-top: -15px;
   `;
