@@ -44,10 +44,8 @@ class Landing_Card extends Component {
                 </ScheduleButton>
                 </WelcomeSide>
                 
-                <Circle_div className = "circle_img1 fade">
-                    {/* <Transition visible={visible} animation='scale' duration={500}>
-                        <img className="visible" src={talkingLogo}/>
-                    </Transition> */}
+                <Circle_div className="fade">
+                    {/* <Image size = "small" src={talkingLogo}/> */}
                     <circle_img>
                         <img src={talkingLogo}/>
                     </circle_img>

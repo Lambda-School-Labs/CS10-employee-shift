@@ -97,7 +97,7 @@ export const circle_img = styled.div `
     border: solid pink 1px;
     justify-content: center;
     border: red 1px solid;
-    z-index:2;
+    z-index: -1;
     `;
 
 export const FooterStyles = styled.div`
