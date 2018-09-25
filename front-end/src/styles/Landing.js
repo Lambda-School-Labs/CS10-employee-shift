@@ -85,20 +85,17 @@ export const ScheduleButtonButton = styled.button`
 
 export const Circle_div = styled.div `
     position: absolute;
-    left: -10%;
-    top: -25%;
-    width: 105%;
-    height: 100%
-    z - index: -1;
+    margin-left: -10%;
+    top: -200px;
+    z - index: 1;
     transistion: 2s;
   `;
 
   
 export const circle_img = styled.div `
     display: flex;
+    border: solid pink 1px;
     justify-content: center;
-    margin-left: 200%;
-    margin-top: 15px;
     border: red 1px solid;
     z-index:2;
     `;

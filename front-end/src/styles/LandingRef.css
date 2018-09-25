@@ -30,7 +30,7 @@
 
      /* Elements to Animate */
 
-     .circle_img1{
+     /* .circle_img1{
        position: absolute;
        animation-name: float;
        animation-duration: 20s;
@@ -39,5 +39,35 @@
      @keyframes float{
        from{ transform: translateY(500)}
        to{ transform: translateY(-500px)}
-     }
+     } */
 
+     /* .hidden {
+       visibility: hidden;
+       opacity: 0;
+       transition: visibility 0s 5s, opacity 2s linear;
+     } 
+
+     .visible {
+       visibility: visible;
+       opacity: 1;
+       transition: opacity 2s linear;
+     } */
+
+      .fade {
+        opacity: 0;
+        transition: opacity .25s ease-in-out;
+        animation-name: float;
+        animation-duration: 12s;
+        animation-iteration-count: inifinte;
+       }
+
+      .fade:hover {
+            opacity: 1;
+        }
+
+      @keyframes float{
+        from{ transform: translateY(400px)}
+        to{ transform: translateY(-700px)}
+      }
+
+    
