@@ -51,6 +51,7 @@ export const signin = (username, password) => dispatch => {
     .then(res => {
       if (res.status === 200) {
         dispatch({ type: "SIGNIN_SUCCESS", data: res.data });
+        // getUser()
         return res.data;
       }
     })

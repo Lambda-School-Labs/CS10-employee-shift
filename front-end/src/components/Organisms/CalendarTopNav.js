@@ -11,14 +11,11 @@ import {
 const CalendarTopNav = () => {
   return (
     <TopNavContainer>
-      <ButtonContainer>
-        {/* TODO: how will these handle state? */}
-        <button>&lt; Previous week</button>
-        <button>Next week &gt;</button>
-      </ButtonContainer>
       <TopNavHeader>
         {/* TODO: figure out dynamic date */}
+        <button>&lt;</button>
         September 17 - 23, 2018
+        <button>&gt;</button>
       </TopNavHeader>
       <HoO />
     </TopNavContainer>

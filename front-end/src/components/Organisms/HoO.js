@@ -9,7 +9,7 @@ import {
   updateHoursOfOperation,
 } from "../../store/hourOfOperation/actions.js";
 
-import { HoOButton } from "../../styles/Calendar.js";
+import { ButtonContainer, HoOButton } from "../../styles/Calendar.js";
 import { Header, Segment, Portal } from "semantic-ui-react";
 
 class HoO extends Component {
@@ -41,9 +41,12 @@ class HoO extends Component {
   };
 
   render() {
+    console.log(window.innerWidth);
     return (
-      <div>
-        <HoOButton onClick={this.handleOpen}>Edit Hours of Operation</HoOButton>
+      <ButtonContainer>
+        <HoOButton onClick={this.handleOpen}>
+          {window.innerWidth > 500 ? "Edit Hours of Operation" : "HoO"}
+        </HoOButton>
         <Portal
           closeOnDocumentClick={false}
           open={this.state.open}
@@ -98,7 +101,7 @@ class HoO extends Component {
             />
           </Segment>
         </Portal>
-      </div>
+      </ButtonContainer>
     );
   }
 }
