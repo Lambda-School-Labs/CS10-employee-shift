@@ -1,6 +1,6 @@
 import React from "react";
 
-import { EmployeeCardContainer, CardInner } from "../../styles/Employee";
+import { EmployeeCardContainer, CardInner } from "../../styles/Employees";
 
 const EmployeeCard = () => {
   const dummydata = [

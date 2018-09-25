@@ -1,8 +1,9 @@
 import axios from "axios";
 
 export const getRequestOffs = () => (dispatch, getState) => {
+  dispatch({ type: "LOADING_REQUESTOFF" });
   const headers = { "Content-Type": "application/x-www-form-urlencoded" };
-  const { token } = getState().user.token;
+  const token = getState().user.token;
 
   if (token) {
     headers["Authorization"] = `Bearer ${token}`;
@@ -10,7 +11,7 @@ export const getRequestOffs = () => (dispatch, getState) => {
 
   axios
     // Need user in body? Or is it read off of token?
-    .get(`${process.env.REACT_APP_ROOT_URL}/requestoffs`, headers)
+    .get(`${process.env.REACT_APP_ROOT_URL}/api/requestoff/`, headers)
     .then(res => {
       if (res.status === 200) {
         return dispatch({ type: "READ_REQUESTOFF", data: res.data });
@@ -28,8 +29,14 @@ export const getRequestOffs = () => (dispatch, getState) => {
 };
 
 // TODO: fill in correct data to send
-export const postRequestOff = (startTime, endTime) => (dispatch, getState) => {
-  const { token } = getState().user.token;
+export const postRequestOff = (start_datetime, end_datetime, reason) => (
+  dispatch,
+  getState
+) => {
+  dispatch({ type: "LOADING_REQUESTOFF" });
+  const token = getState().user.token;
+  const profile = 1;
+  //const user = getState().user.currentUser.id; Implement once getUser works correctly
   const headers = { "Content-Type": "application/x-www-form-urlencoded" };
 
   if (token) {
@@ -37,14 +44,19 @@ export const postRequestOff = (startTime, endTime) => (dispatch, getState) => {
   }
 
   const body = JSON.stringify({
-    startTime: startTime,
-    endTime: endTime,
+    end_datetime,
+    profile,
+    reason,
+    start_datetime,
   });
+
+  // DEV CONSOLE LOG, REMOVE ME
+  console.log("posting with:", body);
 
   axios({
     method: "post",
     // TODO: fill correct end point
-    url: `${process.env.REACT_APP_ROOT_URL}/requestoffs`,
+    url: `${process.env.REACT_APP_ROOT_URL}/api/requestoff/`,
     headers: headers,
     data: body,
   })
@@ -68,7 +80,8 @@ export const updateRequestOff = (id, startTime, endTime) => (
   dispatch,
   getState
 ) => {
-  const { token } = getState().user.token;
+  dispatch({ type: "LOADING_REQUESTOFF" });
+  const token = getState().user.token;
   const headers = { "Content-Type": "application/x-www-form-urlencoded" };
 
   if (token) {
@@ -83,8 +96,8 @@ export const updateRequestOff = (id, startTime, endTime) => (
 
   axios({
     method: "update",
-    // TODO: fill correct end point
-    url: `${process.env.REACT_APP_ROOT_URL}/requestoffs`,
+    // TODO: fill correct end point using ID
+    url: `${process.env.REACT_APP_ROOT_URL}/api/requestoff/`,
     headers: headers,
     data: body,
   })
@@ -105,7 +118,8 @@ export const updateRequestOff = (id, startTime, endTime) => (
 };
 
 export const deleteRequestOff = id => (dispatch, getState) => {
-  const { token } = getState().user.token;
+  dispatch({ type: "LOADING_REQUESTOFF" });
+  const token = getState().user.token;
   const headers = { "Content-Type": "application/x-www-form-urlencoded" };
 
   if (token) {
@@ -117,7 +131,7 @@ export const deleteRequestOff = id => (dispatch, getState) => {
   axios({
     method: "delete",
     // TODO: fill correct end point
-    url: `${process.env.REACT_APP_ROOT_URL}/requestoffs`,
+    url: `${process.env.REACT_APP_ROOT_URL}/api/requestoff/`,
     headers: headers,
     data: body,
   })

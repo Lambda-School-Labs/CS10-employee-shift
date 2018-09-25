@@ -29,14 +29,14 @@ class App extends Component {
     return (
       <Route
         {...rest}
-        render={props => {
+        render={() => {
           if (this.props.user.isLoading) {
             // TODO: better loading screen in a separate component
             return <em>Loading something great...</em>;
           } else if (!this.props.user.isAuthenticated) {
             return <Redirect to="/signin" />;
           } else {
-            return <Template component={ChildComponent} props={props} />;
+            return <Template component={ChildComponent} />;
           }
         }}
       />
@@ -46,21 +46,18 @@ class App extends Component {
   render() {
     const { PrivateRoute } = this;
     return (
-      <div className="App">
-        <BrowserRouter>
-          <Switch>
-            <PrivateRoute exact path="/calendar" component={Calendar} />
-            <PrivateRoute exact path="/billing" component={Billing} />
-            <PrivateRoute exact path="/dashboard" component={Dashboard} />
-            <PrivateRoute exact path="/employees" component={Employees} />
-            <PrivateRoute exact path="/settings" component={Settings} />
-            <Route exact path="/" component={Landing} />
-            <Route exact path="/signin" component={Signin} />
-            <Route exact path="/signup" component={Signup} />
-            
-          </Switch>
-        </BrowserRouter>
-      </div>
+      <BrowserRouter>
+        <Switch>
+          <PrivateRoute exact path="/calendar" component={Calendar} />
+          <PrivateRoute exact path="/billing" component={Billing} />
+          <PrivateRoute exact path="/dashboard" component={Dashboard} />
+          <PrivateRoute exact path="/employees" component={Employees} />
+          <PrivateRoute exact path="/settings" component={Settings} />
+          <Route exact path="/" component={Landing} />
+          <Route exact path="/signin" component={Signin} />
+          <Route exact path="/signup" component={Signup} />
+        </Switch>
+      </BrowserRouter>
     );
   }
 }

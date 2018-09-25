@@ -1,11 +1,14 @@
 import styled from "styled-components";
 
+// STYLES FOR SIGNIN & SIGNUP PAGE
+
 export const Container = styled.div`
   height: 100vh;
   display: flex;
   justify-content: center;
   align-items: center;
   flex-direction: column;
+  background-color: hsl(178, 53%, 83%);
 `;
 
 export const Form = styled.form`
@@ -14,6 +17,9 @@ export const Form = styled.form`
   align-items: center;
   flex-direction: column;
   margin: 10%;
+  background-color: lightgray;
+  padding: 13px;
+  border: 1px solid black;
 `;
 
 export const FormItem = styled.div`
