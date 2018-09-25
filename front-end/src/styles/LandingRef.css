@@ -28,42 +28,28 @@
     transform: rotate(360deg)
     }
 
-     /* Elements to Animate */
-
-
-     /* .hidden {
-       visibility: hidden;
-       opacity: 0;
-       transition: visibility 0s 5s, opacity 2s linear;
-     } 
-
-     .visible {
-       visibility: visible;
-       opacity: 1;
-       transition: opacity 2s linear;
-     } */
-
-      .fade {
+      .fade_1 {
         opacity: 1;
         transition: opacity .25s ease-in-out;
-        animation: float ;
-        animation-duration: 35s;
+        animation: float_1;
+        animation-duration: 50s;
         animation-fill-mode: both;
         animation-iteration-count: infinite;
        }
 
-      .fade:hover {
+      .fade_1:hover {
             opacity: 1;
         }
 
-      @keyframes float {
+
+      @keyframes float_1 {
         0% {
           transform: translate(0, 400px);
           opacity: 0.0;
         }
         25% {
           transform: translate(0, -540px);
-          opacity: 0.8;
+          opacity: 1;
         }
         26% {
           transform: translate(0, -550px);
@@ -72,10 +58,174 @@
         100% {
           transform: translate(0,-550px);
           opacity: 0;
-          
-          
         }
       }
+      
+      .fade_2 {
+        opacity: 1;
+        transition: opacity .25s ease-in-out;
+        animation: float_2;
+        animation-delay: 8s;
+        animation-duration: 50s;
+        animation-fill-mode: both;
+        animation-iteration-count: infinite;
+       }
+
+      .fade_2:hover {
+            opacity: 1;
+        }
+
+        @keyframes float_2 {
+        0% {
+          transform: translate(150px, 400px);
+          opacity: 0.0;
+        }
+        25% {
+          transform: translate(150, -540px);
+          opacity: 1;
+        }
+        26% {
+          transform: translate(200px, -550px);
+          opacity: 1;
+        }
+        100% {
+          transform: translate(100px,-550px);
+          opacity: 0;
+        }
+      }
+
+      .fade_3 {
+        opacity: 1;
+        transition: opacity .25s ease-in-out;
+        animation: float_3;
+        animation-delay: 15s;
+        animation-duration: 50s;
+        animation-fill-mode: both;
+        animation-iteration-count: infinite;
+       }
+
+      .fade_3:hover {
+            opacity: 1;
+        }
+
+        @keyframes float_3 {
+        0% {
+          transform: translate(120px, 300px);
+          opacity: 0.0;
+        }
+        25% {
+          transform: translate(150px, -540px);
+          opacity: 1;
+        }
+        26% {
+          transform: translate(50px, -550px);
+          opacity: 1;
+        }
+        100% {
+          transform: translate(100px, -550px);
+          opacity: 0;
+        }
+      }
+
+      .fade_4 {
+        opacity: 1;
+        transition: opacity .25s ease-in-out;
+        animation: float_3;
+        animation-delay: 24s;
+        animation-duration: 50s;
+        animation-fill-mode: both;
+        animation-iteration-count: infinite;
+       }
+
+      .fade_4:hover {
+            opacity: 1;
+        }
+
+        @keyframes float_4 {
+        0% {
+          transform: translate(-200px,420px);
+          opacity: 0.0;
+        }
+        25% {
+          transform: translate(-50, -540px);
+          opacity: 1;
+        }
+        26% {
+          transform: translate(-20px, -550px);
+          opacity: 1;
+        }
+        100% {
+          transform: translate(100px, -550px);
+          opacity: 0;
+        }
+      }
+
+      .fade_5 {
+        opacity: 1;
+        transition: opacity .25s ease-in-out;
+        animation: float_3;
+        animation-delay: 32s;
+        animation-duration: 50s;
+        animation-fill-mode: both;
+        animation-iteration-count: infinite;
+       }
+
+      .fade_5:hover {
+            opacity: 1;
+        }
+
+        @keyframes float_5 {
+        0% {
+          transform: translate(150px, 200px);
+          opacity: 0.0;
+        }
+        25% {
+          transform: translate(-10, -540px);
+          opacity: 1;
+        }
+        26% {
+          transform: translate(-50px, -550px);
+          opacity: 1;
+        }
+        100% {
+          transform: translate(100px, -550px);
+          opacity: 0;
+        }
+      }
+
+      .fade_6 {
+        opacity: 1;
+        transition: opacity .25s ease-in-out;
+        animation: float_3;
+        animation-delay: 40s;
+        animation-duration: 50s;
+        animation-fill-mode: both;
+        animation-iteration-count: infinite;
+       }
+
+      .fade_6:hover {
+            opacity: 1;
+        }
+
+        @keyframes float_6 {
+        0% {
+          transform: translate(250px, 400px);
+          opacity: 0.0;
+        }
+        25% {
+          transform: translate(-50, -540px);
+          opacity: 1;
+        }
+        26% {
+          transform: translate(-50px, -550px);
+          opacity: 1;
+        }
+        100% {
+          transform: translate(100px, -550px);
+          opacity: 0;
+        }
+      }
+
 
       /* @keyframes float{
         from{ transform: translateY(400px); opacity: 1}
