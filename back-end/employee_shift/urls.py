@@ -21,7 +21,7 @@ admin.autodiscover()
 from rest_framework import generics, permissions, serializers, routers
 
 from oauth2_provider.contrib.rest_framework import TokenHasReadWriteScope, TokenHasScope 
-from stripe_payment.api import checkout
+from stripe_payment.api import checkout, my_webhook_view
 
 from shiftapp.api import (
     UserViewSet, 
@@ -56,6 +56,6 @@ urlpatterns = [
 #    path('groups/', GroupViewSet.as_view()),
    path('api/', include(router.urls)),
    path('api/sign_up/', SignUp.as_view()),
-   path(r'payments/', include('djstripe.urls', namespace="djstripe")),
    path(r'create-charge/', checkout, name="cout"),
+   path(r'payments/', my_webhook_view, name="pay")
 ]
