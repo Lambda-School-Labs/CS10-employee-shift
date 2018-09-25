@@ -29,3 +29,9 @@ export const ButtonContainer = styled.div`
   align-items: center;
   justify-content: space-between;
 `;
+
+export const HoOButton = styled.button`
+  border: none;
+  cursor: pointer;
+  outline: none;
+`;

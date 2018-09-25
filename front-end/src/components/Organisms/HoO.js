@@ -1,44 +1,103 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 
+import HoODay from "../Molecules/HoODay.js";
+
 import {
   getHoursOfOperation,
   postHoursOfOperation,
   updateHoursOfOperation,
 } from "../../store/hourOfOperation/actions.js";
 
-// Parent of HoO which will hold time picker modals for each day
-// WARNING: NEEDS FURTHER TESTING
-// TODO: Seperate into further modal components
-class HoO extends Component {
-  componentDidMount() {
-    this.props.getHoursOfOperation();
-    console.log(this.props.allHoOs);
-  }
+import { HoOButton } from "../../styles/Calendar.js";
+import { Header, Segment, Portal } from "semantic-ui-react";
 
-  testFirePost = () => {
-    const date = "12:00:00";
-    const date2 = "18:00:00";
-    this.props.postHoursOfOperation("M", date, date2);
+class HoO extends Component {
+  state = {
+    open: false,
   };
 
-  testFireUpdate = () => {
-    const date = "12:00:00";
-    const date2 = "18:00:00";
-    this.props.updateHoursOfOperation(1, "W", date, date);
+  handleOpen = () => {
+    if (this.props.allHoOs.length === 0) this.props.getHoursOfOperation();
+    this.setState({ open: true });
+  };
+
+  handleClose = () => {
+    this.setState({ open: false });
+  };
+
+  postHoO = (day, time) => {
+    console.log(day, time);
+    // const date = "12:00:00";
+    // const date2 = "18:00:00";
+    // this.props.postHoursOfOperation("M", date, date2);
+  };
+
+  updateHoO = (day, time) => {
+    console.log(day, time);
+    // const date = "12:00:00";
+    // const date2 = "18:00:00";
+    // this.props.updateHoursOfOperation(1, "W", date, date);
   };
 
   render() {
     return (
       <div>
-        <p>One day I'll grow up to be a Modal!</p>
-        <button onClick={this.testFirePost}>Test Post</button>
-        <button onClick={this.testFireUpdate}>Test Update</button>
-        <button onClick={this.testFireAction}>W</button>
-        <button onClick={this.testFireAction}> Th</button>
-        <button onClick={this.testFireAction}>F</button>
-        <button onClick={this.testFireAction}>S</button>
-        <button onClick={this.testFireAction}>Su</button>
+        <HoOButton onClick={this.handleOpen}>Edit Hours of Operation</HoOButton>
+        <Portal
+          closeOnDocumentClick={false}
+          open={this.state.open}
+          onClose={this.handleClose}
+        >
+          <Segment
+            style={{
+              left: "80%",
+              position: "fixed",
+              top: "5%",
+              zIndex: 1000,
+              width: "20%",
+              minWidth: "100px",
+            }}
+          >
+            <button onClick={this.handleClose}>X</button>
+            <Header>Hours of Operation</Header>
+            <HoODay
+              day="Monday"
+              postHoO={this.postHoO}
+              updateHoO={this.updateHoO}
+            />
+            <HoODay
+              day="Tuesday"
+              postHoO={this.postHoO}
+              updateHoO={this.updateHoO}
+            />
+            <HoODay
+              day="Wednesday"
+              postHoO={this.postHoO}
+              updateHoO={this.updateHoO}
+            />
+            <HoODay
+              day="Thursday"
+              postHoO={this.postHoO}
+              updateHoO={this.updateHoO}
+            />
+            <HoODay
+              day="Friday"
+              postHoO={this.postHoO}
+              updateHoO={this.updateHoO}
+            />
+            <HoODay
+              day="Saturday"
+              postHoO={this.postHoO}
+              updateHoO={this.updateHoO}
+            />
+            <HoODay
+              day="Sunday"
+              postHoO={this.postHoO}
+              updateHoO={this.updateHoO}
+            />
+          </Segment>
+        </Portal>
       </div>
     );
   }

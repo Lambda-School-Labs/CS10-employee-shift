@@ -1,5 +1,7 @@
 import React from "react";
 
+import HoO from "./HoO.js";
+
 import {
   TopNavContainer,
   TopNavHeader,
@@ -18,14 +20,7 @@ const CalendarTopNav = () => {
         {/* TODO: figure out dynamic date */}
         September 17 - 23, 2018
       </TopNavHeader>
-      <p
-        style={{
-          display: "flex",
-        }}
-      >
-        {/* TODO: make modal HoO */}
-        Edit Hours of Operation
-      </p>
+      <HoO />
     </TopNavContainer>
   );
 };
