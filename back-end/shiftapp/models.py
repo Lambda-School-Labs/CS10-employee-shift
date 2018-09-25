@@ -43,6 +43,8 @@ class Profile(models.Model):
 
     phone_number = models.CharField(max_length=14)
     notes = models.TextField(max_length=400, blank=True, null=True)
+    text_enabled = models.BooleanField(default=False)
+    email_enabled = models.BooleanField(default=False)
 
 
 class RequestedTimeOff(models.Model):
