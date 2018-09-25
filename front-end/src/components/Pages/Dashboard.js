@@ -1,21 +1,28 @@
 import React, { Component } from "react";
-import { connect } from "react-redux"; 
-import AssignedShift from "../Organisms/AssignedShift.js"; 
+import { connect } from "react-redux";
+import AssignedShift from "../Organisms/AssignedShift.js";
 import TimeOffApproved from "../Organisms/TimeOffApproved.js";
 import TimeOffRequest from "../Organisms/TimeOffRequests.js";
 
-import { DashboardContainer } from "../../styles/signin.js";
-import { HorizontalContainer } from "../../styles/Template--main.js";
+import {
+  DashboardContainer,
+  HorizontalContainer,
+  DashboardHeader,
+} from "../../styles/Dashboard.js";
 
 class Dashboard extends Component {
   render() {
     return (
       <DashboardContainer>
-        <h1>Welcome Employee</h1>
+        <DashboardHeader>
+          Welcome,
+          {this.props.first_name}
+          {this.props.last_name}
+        </DashboardHeader>
         <HorizontalContainer>
-            <AssignedShift/>
-            <TimeOffApproved/>
-            <TimeOffRequest/>
+          <AssignedShift />
+          <TimeOffApproved />
+          <TimeOffRequest />
         </HorizontalContainer>
       </DashboardContainer>
     );
@@ -24,9 +31,12 @@ class Dashboard extends Component {
 
 const mapStateToProps = state => {
   return {
-    firstname: state.user.currentUser.firstname,
-    lastname: state.user.currentUser.lastname
-  }
-}
+    firstname: state.user.currentUser.first_name,
+    lastname: state.user.currentUser.last_name,
+  };
+};
 
-export default connect(mapStateToProps, null)(Dashboard);
+export default connect(
+  mapStateToProps,
+  null
+)(Dashboard);

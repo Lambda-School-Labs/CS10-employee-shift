@@ -21,6 +21,7 @@ admin.autodiscover()
 from rest_framework import generics, permissions, serializers, routers
 
 from oauth2_provider.contrib.rest_framework import TokenHasReadWriteScope, TokenHasScope 
+from stripe_payment.api import checkout
 
 from shiftapp.api import (
     UserViewSet, 
@@ -37,6 +38,7 @@ from shiftapp.api import (
 
 
 router = routers.DefaultRouter()
+
 router.register(r'users', UserViewSet)
 router.register(r'profiles', ProfileViewSet)
 router.register(r'userprofile', UserProfileViewSet)
@@ -47,10 +49,13 @@ router.register(r'availabilities', AvailabilityViewSet)
 router.register(r'hoo', HourOfOperationViewSet)
 
 
+
 urlpatterns = [
    path('admin/', admin.site.urls),
    path('o/', include('oauth2_provider.urls', namespace='oauth2_provider')),
 #    path('groups/', GroupViewSet.as_view()),
    path('api/', include(router.urls)),
-   path('api/sign_up/', SignUp.as_view())
+   path('api/sign_up/', SignUp.as_view()),
+   path(r'payments/', include('djstripe.urls', namespace="djstripe")),
+   path(r'create-charge/', checkout, name="cout"),
 ]
