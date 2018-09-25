@@ -1,4 +1,4 @@
-import React from "react";
+import React, { Component } from "react";
 import SideNav from "../Organisms/SideNav.js";
 import TopNav from "../Organisms/TopNav.js";
 
@@ -8,49 +8,41 @@ import {
   ComponentContainer,
 } from "../../styles/Template--main.js";
 
-import {
-  Billing,
-  Calendar,
-  Dashboard,
-  Employees,
-  Landing,
-  Settings,
-  Signin,
-  Signup,
-} from "../Pages";
+import { Button, Segment, Sidebar } from "semantic-ui-react";
 
-const components = {
-  Billing: Billing,
-  Calendar: Calendar,
-  Dashboard: Dashboard,
-  Employees: Employees,
-  Landing: Landing,
-  Settings: Settings,
-  Signin: Signin,
-  Signup: Signup,
-};
+class main extends Component {
+  state = { visible: false };
 
-const main = props => {
-  // If wrapped with redux grab correct name of component
-  const name =
-    props.component.name === "Connect"
-      ? props.component.WrappedComponent.name
-      : props.component.name;
-  const SpecificComponent = components[name];
-  // DEV ERROR TESTING REMOVE ME
-  console.log("Is this working?", props);
+  handleButtonClick = () => this.setState({ visible: !this.state.visible });
 
-  return (
-    <MainContainer>
-      <TopNav component={name} />
-      <HorizontalContainer>
-        <SideNav />
-        <ComponentContainer>
-          <SpecificComponent />
-        </ComponentContainer>
-      </HorizontalContainer>
-    </MainContainer>
-  );
-};
+  handleSidebarHide = () => this.setState({ visible: false });
+
+  render() {
+    return (
+      <MainContainer>
+        <TopNav component={"hi"} />
+        <HorizontalContainer>
+          <Button
+            style={{ position: "fixed", top: "0" }}
+            onClick={this.handleButtonClick}
+          >
+            Nav
+          </Button>
+          <Sidebar.Pushable as={Segment}>
+            <SideNav
+              visible={this.state.visible}
+              handleSidebarHide={this.handleSidebarHide}
+            />
+            <Sidebar.Pusher>
+              <ComponentContainer>
+                <this.props.component />
+              </ComponentContainer>
+            </Sidebar.Pusher>
+          </Sidebar.Pushable>
+        </HorizontalContainer>
+      </MainContainer>
+    );
+  }
+}
 
 export default main;

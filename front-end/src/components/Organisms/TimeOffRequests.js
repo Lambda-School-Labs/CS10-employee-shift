@@ -10,7 +10,6 @@ class TimeOffRequest extends Component {
     start_datetime: "",
     end_datetime: "",
     reason: "",
-    reason: "",
   };
 
   submitHandler = e => {

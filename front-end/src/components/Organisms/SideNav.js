@@ -1,22 +1,44 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
 
-import { SideNavigationContainer } from "../../styles/Template--main";
+import { Icon, Menu, Sidebar } from "semantic-ui-react";
 
 // TODO: Render based on permission level
 
-class SideNav extends Component {
-  render() {
-    return (
-      <SideNavigationContainer>
-        <Link to="/calendar">Calendar</Link>
-        <Link to="/employees">Employees</Link>
-        <Link to="#">Create Schedule</Link>
-        <Link to="/billing">Billing</Link>
-        <Link to="/settings">Settings</Link>
-      </SideNavigationContainer>
-    );
-  }
-}
+const SideNav = props => {
+  return (
+    <Sidebar
+      as={Menu}
+      animation="overlay"
+      icon="labeled"
+      inverted
+      onHide={props.handleSidebarHide}
+      vertical
+      visible={props.visible}
+      width="thin"
+    >
+      <Menu.Item as={Link} to="/">
+        <Icon name="home" />
+        Home
+      </Menu.Item>
+      <Menu.Item as={Link} to="/calendar">
+        <Icon name="calendar alternate outline" />
+        Calendar
+      </Menu.Item>
+      <Menu.Item as={Link} to="/employees">
+        <Icon name="users" />
+        Employees
+      </Menu.Item>
+      <Menu.Item as={Link} to="/billing">
+        <Icon name="money" />
+        Billing
+      </Menu.Item>
+      <Menu.Item as={Link} to="/settings">
+        <Icon name="settings" />
+        Settings
+      </Menu.Item>
+    </Sidebar>
+  );
+};
 
 export default SideNav;
