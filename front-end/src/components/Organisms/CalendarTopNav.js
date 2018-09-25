@@ -2,11 +2,7 @@ import React from "react";
 
 import HoO from "./HoO.js";
 
-import {
-  TopNavContainer,
-  TopNavHeader,
-  ButtonContainer,
-} from "../../styles/Calendar.js";
+import { TopNavContainer, TopNavHeader } from "../../styles/Calendar.js";
 
 const CalendarTopNav = () => {
   return (

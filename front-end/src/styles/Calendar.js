@@ -1,5 +1,7 @@
 import styled from "styled-components";
 
+import { device } from "./globals.js";
+
 // STYLES FOR CALENDAR PAGE
 
 export const CalendarContainer = styled.div`
@@ -23,6 +25,13 @@ export const TopNavHeader = styled.h1`
   min-width: 380px;
   align-self: baseline;
   margin-left: calc(50% - 200px);
+  color: black;
+
+  @media ${device.tablet} {
+    font-size: 20px;
+    min-width: 270px;
+    margin-left: 0;
+  }
 `;
 
 export const ButtonContainer = styled.div`

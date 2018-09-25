@@ -41,12 +41,9 @@ class HoO extends Component {
   };
 
   render() {
-    console.log(window.innerWidth);
     return (
       <ButtonContainer>
-        <HoOButton onClick={this.handleOpen}>
-          {window.innerWidth > 500 ? "Edit Hours of Operation" : "HoO"}
-        </HoOButton>
+        <HoOButton onClick={this.handleOpen}>Edit Hours of Operation</HoOButton>
         <Portal
           closeOnDocumentClick={false}
           open={this.state.open}
