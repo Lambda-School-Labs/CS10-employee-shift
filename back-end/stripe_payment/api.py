@@ -104,3 +104,25 @@ def checkout(request):
         return HttpResponse(json.dumps({
             'message': 'Unable to process payment, try again.'
         }))
+
+# Add endpoint_secretkey here in localhost
+
+def my_webhook_view(request):
+  payload = request.body
+  sig_header = request.META['HTTP_STRIPE_SIGNATURE']
+  event = None
+
+  try:
+    event = stripe.Webhook.construct_event(
+      payload, sig_header, endpoint_secret
+    )
+  except ValueError as e:
+    # Invalid payload
+    return HttpResponse(status=400)
+  except stripe.error.SignatureVerificationError as e:
+    # Invalid signature
+    return HttpResponse(status=400)
+
+  # Do something with event
+
+  return HttpResponse(status=200)

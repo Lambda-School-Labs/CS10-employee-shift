@@ -51,7 +51,6 @@ INSTALLED_APPS = [
     'corsheaders',
     'oauth2_provider',
     'rest_framework',
-    'djstripe',
     'stripe_payment',
     'shiftapp',
     'django.contrib.admin',
