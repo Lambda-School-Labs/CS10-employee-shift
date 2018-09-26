@@ -1,5 +1,7 @@
 import React from "react";
 
+// DEPRECATED DELETE ME
+
 const Date = ({ name, date }) => {
   return (
     <div

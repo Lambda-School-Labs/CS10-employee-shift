@@ -3,6 +3,8 @@ import Date from "../Atoms/Date.js";
 import Shift from "../Atoms/Shift.js";
 import Totals from "../Atoms/Totals.js";
 
+// DEPRECATED DELETE ME
+
 const Day = ({ name, date }) => {
   return (
     <div

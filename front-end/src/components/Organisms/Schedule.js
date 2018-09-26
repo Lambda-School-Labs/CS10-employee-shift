@@ -3,10 +3,12 @@ import { connect } from "react-redux";
 
 import { getShifts } from "../../store/Shift/actions.js";
 
-import ScheduleDay from "../Molecules/ScheduleDay.js";
+import ScheduleShift from "../Molecules/ScheduleShift.js";
 
 import {
   GridItemHeader,
+  GridItemHeaderDay,
+  GridItemHeaderDate,
   GridItemEmployee,
   GridItemShift,
   GridContainer,
@@ -18,31 +20,63 @@ class Schedule extends Component {
     this.props.getShifts();
   }
 
-  fillGrid(employees) {
+  handleClick = (row, column) => {
+    console.log("Click from ", row, column);
+  };
+
+  fillGrid = employees => {
     const output = [];
     for (let column = 2; column <= 7 + 1; column++) {
       for (let row = 2; row <= employees + 1; row++) {
-        output.push(<GridItemShift row={row} column={column} />);
+        output.push(
+          <ScheduleShift
+            key={`${row}-${column}`}
+            onClick={this.handleClick}
+            row={row}
+            column={column}
+          />
+        );
       }
     }
     return output;
-  }
+  };
 
   render() {
     const employees = 8;
-
     return (
       <div style={{ width: "100%", display: "flex" }}>
         <GridContainer rows={employees + 1}>
-          {/* Refactor into molecules */}
+          {/* Refactor into molecules - Column Header */}
           <GridItemHeader column="1" />
-          <GridItemHeader column="2">Monday 17</GridItemHeader>
-          <GridItemHeader column="3">Tuesday 18</GridItemHeader>
-          <GridItemHeader column="4">Wednesday 19</GridItemHeader>
-          <GridItemHeader column="5">Thursday 20</GridItemHeader>
-          <GridItemHeader column="6">Friday 21</GridItemHeader>
-          <GridItemHeader column="7">Saturday 22</GridItemHeader>
-          <GridItemHeader column="8">Sunday 23</GridItemHeader>
+          <GridItemHeader column="2">
+            <GridItemHeaderDay>Monday</GridItemHeaderDay>
+            <GridItemHeaderDate>17</GridItemHeaderDate>
+          </GridItemHeader>
+          <GridItemHeader column="3">
+            <GridItemHeaderDay>Tuesday</GridItemHeaderDay>
+            <GridItemHeaderDate>18</GridItemHeaderDate>
+          </GridItemHeader>
+          <GridItemHeader column="4">
+            <GridItemHeaderDay>Wednesday</GridItemHeaderDay>
+            <GridItemHeaderDate>19</GridItemHeaderDate>
+          </GridItemHeader>
+          <GridItemHeader column="5">
+            <GridItemHeaderDay>Thursday</GridItemHeaderDay>
+            <GridItemHeaderDate>20</GridItemHeaderDate>
+          </GridItemHeader>
+          <GridItemHeader column="6">
+            <GridItemHeaderDay>Friday</GridItemHeaderDay>
+            <GridItemHeaderDate>21</GridItemHeaderDate>
+          </GridItemHeader>
+          <GridItemHeader column="7">
+            <GridItemHeaderDay>Saturday</GridItemHeaderDay>
+            <GridItemHeaderDate>22</GridItemHeaderDate>
+          </GridItemHeader>
+          <GridItemHeader column="8">
+            <GridItemHeaderDay>Sunday</GridItemHeaderDay>
+            <GridItemHeaderDate>23</GridItemHeaderDate>
+          </GridItemHeader>
+          {/* Refactor into molecules - Row Header */}
           <GridItemEmployee row="1" />
           <GridItemEmployee row="2">Vlad</GridItemEmployee>
           <GridItemEmployee row="3">Brandon</GridItemEmployee>
@@ -52,6 +86,7 @@ class Schedule extends Component {
           <GridItemEmployee row="7">Terrie</GridItemEmployee>
           <GridItemEmployee row="8">Brian Doyle</GridItemEmployee>
           <GridItemEmployee row="9">Boomer</GridItemEmployee>
+          {/* Refactor into molecules - Body */}
           {this.fillGrid(employees)}
         </GridContainer>
       </div>

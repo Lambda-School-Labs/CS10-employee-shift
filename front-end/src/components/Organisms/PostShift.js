@@ -4,7 +4,7 @@ import { connect } from "react-redux";
 import { postShift } from "../../store/Shift/actions.js";
 
 //REFACTOR TO OWN STYLES
-import { BillingContainer, FormItem, Form } from "../../styles/Billing.js";
+import { PostShiftContainer, FormItem, Form } from "../../styles/Calendar.js";
 
 class PostShift extends Component {
   state = {
@@ -35,12 +35,12 @@ class PostShift extends Component {
 
   render() {
     return (
-      <BillingContainer>
+      <PostShiftContainer>
         {/* Pull out into Molecular components? */}
         <Form onSubmit={this.submitHandler}>
-          <p> I'm want to be a modal when I grow up!</p>
           <FormItem>
-            <h3>Start Time (Make me a calendar)</h3>
+            {/* (Make me a calendar) */}
+            <h3>Start Time</h3>
             <input
               value={this.state.start_datetime}
               onChange={this.inputChangeHandler}
@@ -49,21 +49,12 @@ class PostShift extends Component {
             />
           </FormItem>
           <FormItem>
-            <h3>End Time (Make me a calendar)</h3>
+            {/* (Make me a calendar) */}
+            <h3>End Time</h3>
             <input
               value={this.state.end_datetime}
               onChange={this.inputChangeHandler}
               name="end_datetime"
-              type="text"
-            />
-          </FormItem>
-
-          <FormItem>
-            <h3>Assigned Employee (Make me an employee dropdown)</h3>
-            <input
-              value={this.state.profile}
-              onChange={this.inputChangeHandler}
-              name="profile"
               type="text"
             />
           </FormItem>
@@ -87,7 +78,7 @@ class PostShift extends Component {
           </FormItem>
           <button>Schedule!</button>
         </Form>
-      </BillingContainer>
+      </PostShiftContainer>
     );
   }
 }
