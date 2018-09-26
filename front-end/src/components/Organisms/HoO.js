@@ -1,16 +1,19 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 
-import HoODay from "../Molecules/HoODay.js";
-
 import {
   getHoursOfOperation,
   postHoursOfOperation,
   updateHoursOfOperation,
 } from "../../store/hourOfOperation/actions.js";
 
+import HoODay from "../Molecules/HoODay.js";
+
 import { ButtonContainer, HoOButton } from "../../styles/Calendar.js";
-import { Header, Segment, Portal } from "semantic-ui-react";
+import { Header, Segment, Portal, Icon } from "semantic-ui-react";
+
+// TODO: Make me more stylish
+// TODO: Refactor to be a form that holds dates from child components and fires postHoO and updateHoO on submit
 
 class HoO extends Component {
   state = {
@@ -28,15 +31,11 @@ class HoO extends Component {
 
   postHoO = (day, time) => {
     console.log(day, time);
-    // const date = "12:00:00";
-    // const date2 = "18:00:00";
     // this.props.postHoursOfOperation("M", date, date2);
   };
 
   updateHoO = (day, time) => {
     console.log(day, time);
-    // const date = "12:00:00";
-    // const date2 = "18:00:00";
     // this.props.updateHoursOfOperation(1, "W", date, date);
   };
 
@@ -49,18 +48,19 @@ class HoO extends Component {
           open={this.state.open}
           onClose={this.handleClose}
         >
+          {/* TODO: position this better segment */}
           <Segment
             style={{
-              left: "80%",
-              position: "fixed",
+              left: "70%",
+              position: "absolute",
               top: "5%",
               zIndex: 1000,
-              width: "20%",
+              width: "15%",
               minWidth: "100px",
             }}
           >
-            <button onClick={this.handleClose}>X</button>
-            <Header>Hours of Operation</Header>
+            <Icon link onClick={this.handleClose} name="close" />
+            <Header textAlign={"center"}>Hours of Operation</Header>
             <HoODay
               day="Monday"
               postHoO={this.postHoO}

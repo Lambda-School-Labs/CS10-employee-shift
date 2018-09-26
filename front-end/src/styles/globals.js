@@ -1,28 +1,23 @@
-// import css from "styled-components";
+export const colors = [
+  "red",
+  "orange",
+  "yellow",
+  "olive",
+  "green",
+  "teal",
+  "blue",
+  "violet",
+  "purple",
+  "pink",
+  "brown",
+  "grey",
+  "black",
+];
 
-// export const media = {
-//   phone: (...args) => css`
-//     @media screen and (max-width: 600px) {
-//       ${css(...args)};
-//     }
-//   `,
-
-//   tablet: (...args) => css`
-//     @media screen and (min-width: 601px) and (max-width: 1200px) {
-//       ${css(...args)};
-//     }
-//   `,
-
-//   desktop: (...args) => css`
-//     @media screen and (min-width: 1201px) {
-//       ${css(...args)};
-//     }
-//   `,
-// };
 const size = {
   mobileS: "320px",
   mobileM: "375px",
-  mobileL: "425px",
+  mobileL: "510px",
   tablet: "768px",
   laptop: "1024px",
   laptopL: "1440px",

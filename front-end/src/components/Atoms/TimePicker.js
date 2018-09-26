@@ -1,10 +1,10 @@
 import React from "react";
 import TimeKeeper from "react-timekeeper";
 
-class HoOPicker extends React.Component {
+class TimePicker extends React.Component {
   state = {
     time: "2:50 pm",
-    // get time from props
+    // TODO: get time from props
   };
   handleTimeChange(newTime) {
     this.setState({ time: newTime.formatted });
@@ -18,7 +18,7 @@ class HoOPicker extends React.Component {
         onChange={this.handleTimeChange}
         config={{
           TIMEPICKER_BACKGROUND: "white",
-          // Add global colors
+          // TODO: Add global colors
           DONE_BUTTON_COLOR: "#64c9f1",
           DONE_BUTTON_BORDER_COLOR: "#ededed",
         }}
@@ -31,4 +31,4 @@ class HoOPicker extends React.Component {
   }
 }
 
-export default HoOPicker;
+export default TimePicker;

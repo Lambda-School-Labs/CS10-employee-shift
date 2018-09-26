@@ -33,21 +33,25 @@ export const TopNavHeader = styled.h1`
   color: black;
 
   @media ${device.tablet} {
-    font-size: 20px;
+    font-size: 23px;
     min-width: 260px;
+    margin-left: calc(50% - 158px);
   }
 
   @media ${device.mobileL} {
-    font-size: 20px;
-    min-width: 260px;
-    margin-left: 0;
-    font-size: 10px;
+    margin-left: 16px;
+    font-size: 21px;
+    min-width: 200px;
   }
 `;
 
 export const ButtonContainer = styled.div`
   margin-left: auto;
   align-self: baseline;
+
+  @media ${device.tablet} {
+    max-width: 92px;
+  }
 `;
 
 export const HoOButton = styled.button`
@@ -92,6 +96,44 @@ export const GridItemHeaderDay = styled.div`
   }
 `;
 
+export const GridItemOpenShift = styled.div`
+  grid-row-start: ${props => props.row};
+  grid-row-end: ${props => props.row};
+  grid-column-start: 1;
+  grid-column-end: 1;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  // THE FOLLOW ARE STYLINGS FOR THE OPEN SHIFT
+  // background: #e0f6d8;
+  // color: #0c881d;
+  // border: #bfecaf solid 1px;
+  // border-right: #76db56 solid 2px;
+  // padding: 4px 6px;
+  // font-size: 12px;
+  // z-index: 1;
+
+  &::after {
+    background: #ddd;
+    content: "";
+    height: 5px;
+    width: 5px;
+    position: absolute;
+    right: -2.5px;
+    bottom: -5px;
+    transform: translateY(-50%);
+    border-radius: 50%;
+  }
+`;
+
+export const GridItemOpenShiftHeader = styled.h3`
+  @media ${device.mobileL} {
+    // TODO: do some stuff here?
+  }
+`;
+
 export const GridItemEmployee = styled.div`
   grid-row-start: ${props => props.row};
   grid-row-end: ${props => props.row};
@@ -122,8 +164,14 @@ export const GridItemShift = styled.div`
   grid-column-end: ${props => props.column};
   border-bottom: 1px solid #ddd;
   border-right: 1px solid #ddd;
+
+  &:hover {
+    background: #f6f6f6;
+    cursor: pointer;
+  }
 `;
 
+// TODO: REFACTOR BELOW
 export const PostShiftContainer = styled.div`
   height: 50%;
   display: flex;
@@ -137,21 +185,9 @@ export const Form = styled.form`
   justify-content: space-evenly;
   align-items: center;
   flex-direction: column;
+  padding: 5%;
 `;
 
 export const FormItem = styled.div`
   margin: 5%;
 `;
-
-// background: $appointment-background-color;
-// color: $appointment-color;
-// border: darken($appointment-background-color, 10%) solid 1px;
-// border-left: $appointment-border-color solid 2px;
-// padding: 4px 6px;
-// font-size: 12px;
-// position: absolute;
-// top: -1px;
-// right: -1px;
-// left: 0;
-// z-index: 1;
-// min-height: 100%;

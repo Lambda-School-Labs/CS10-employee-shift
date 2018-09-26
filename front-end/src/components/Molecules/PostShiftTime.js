@@ -3,12 +3,11 @@ import React from "react";
 import TimePicker from "../Atoms/TimePicker.js";
 
 import { HoOButton } from "../../styles/Calendar.js";
-
 import { Segment, Portal } from "semantic-ui-react";
 
-// TODO: Chain portals so that after first time is picked second time must be picked
+// TODO: add bounds to where the portal can open
 
-class HoODay extends React.Component {
+class PostShiftTime extends React.Component {
   state = {
     open: false,
     clickX: 0,
@@ -16,7 +15,13 @@ class HoODay extends React.Component {
   };
 
   submitTimeChange(newTime) {
-    this.props.postHoO(this.props.day, newTime);
+    const event = {
+      target: {
+        name: this.props.data,
+        value: newTime,
+      },
+    };
+    this.props.inputChangeHandler(event);
   }
 
   handleOpen = e => {
@@ -36,9 +41,9 @@ class HoODay extends React.Component {
         <Portal open={this.state.open} onClose={this.handleClose}>
           <Segment
             style={{
-              position: "fixed",
-              top: `${this.state.clickY - 200}px`,
-              left: `${this.state.clickX - 358}px`,
+              position: "absolute",
+              top: `${this.state.clickY - 230}px`,
+              left: `${this.state.clickX - 354}px`,
               zIndex: 1000,
               minWidth: "120px",
             }}
@@ -54,4 +59,4 @@ class HoODay extends React.Component {
   }
 }
 
-export default HoODay;
+export default PostShiftTime;
