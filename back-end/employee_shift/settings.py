@@ -25,6 +25,13 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = config('SECRET_KEY')
 STRIPE_SECRET_KEY = config("STRIPE_SECRET_KEY")
 
+# STRIPE_SECRET_KEY = os.environ.get("STRIPE_SECRET_KEY")
+# STRIPE_TEST_SECRET_KEY = os.environ.get("STRIPE_TEST_SECRET_KEY")
+# STRIPE_PUBLISHABLE_KEY = os.environ.get("STRIPE_PUBLISHABLE_KEY")
+# STRIPE_PUBLIC_KEY = STRIPE_PUBLISHABLE_KEY
+# STRIPE_LIVE_SECRET_KEY = STRIPE_TEST_SECRET_KEY = STRIPE_SECRET_KEY
+# STRIPE_LIVE_MODE = os.environ.get("STRIPE_LIVE_MODE")
+
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = config('DEBUG', cast=bool)
 

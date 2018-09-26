@@ -17,9 +17,9 @@ const SideNav = props => {
       visible={props.visible}
       width="thin"
     >
-      <Menu.Item as={Link} to="/">
-        <Icon name="home" />
-        Home
+      <Menu.Item as={Link} to="/dashboard">
+        <Icon name="dashboard" />
+        Dashboard
       </Menu.Item>
       <Menu.Item as={Link} to="/calendar">
         <Icon name="calendar alternate outline" />

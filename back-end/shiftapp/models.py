@@ -41,7 +41,7 @@ class Profile(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     account = models.ForeignKey(Account, on_delete=models.CASCADE)
 
-    phone_number = models.CharField(max_length=14)
+    phone_number = models.CharField(max_length=14, blank=True, null=True)
     notes = models.TextField(max_length=400, blank=True, null=True)
     text_enabled = models.BooleanField(default=False)
     email_enabled = models.BooleanField(default=False)

@@ -1,5 +1,5 @@
 from django.contrib.auth.models import User, Group, Permission
-from rest_framework.serializers import ModelSerializer
+from rest_framework.serializers import ModelSerializer, ChoiceField
 from django.core.exceptions import ValidationError
 from django.contrib.auth.password_validation import validate_password, get_password_validators
 
@@ -86,7 +86,8 @@ class UserProfileSerializer(ModelSerializer):
     account = AccountSerializer()
     class Meta:
         model = Profile
-        fields = ('url', 'id', 'user', 'account', 'phone_number', 'notes')
+        fields = ('url', 'id', 'user', 'account', 'phone_number', 'notes', 'email_enabled', 'text_enabled')
+        
 
     def update(self, instance, validated_data):
         if 'user' in validated_data:
@@ -97,20 +98,33 @@ class UserProfileSerializer(ModelSerializer):
             # would need to be handled.
             user = instance.user
             for key, value in user_data.items():
+              if value != "":
                 setattr(user, key, value)
             user.save()
 
         for key, value in validated_data.items():
-            setattr(instance, key, value)
+            if value != "":
+              setattr(instance, key, value)
             
         instance.save()
 
         return instance
 
 class RequestedTimeOffSerializer(ModelSerializer):
+    # status = serializers.ChoiceField(choices=STATUS_CHOICES, default='Pending')
+
     class Meta:
         model = RequestedTimeOff
+        # model.STATUS_CHOICES
         fields = ('id', 'profile', 'start_datetime', 'end_datetime', 'reason', 'status')
+
+
+    def create(self, validated_data):
+      # TODO: check valid profile wuth user
+      roo = super(RequestedTimeOffSerializer, self).create(validated_data)
+      roo.save()
+      return roo
+
 
 
 class ShiftSerializer(ModelSerializer):
