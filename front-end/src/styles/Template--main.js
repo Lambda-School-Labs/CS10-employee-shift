@@ -4,7 +4,7 @@ import styled from "styled-components";
 
 export const MainContainer = styled.div`
 width: 100vw,
-height: 95vh,
+height: 100vh,
 display: flex,
 flexDirection: column,
 `;
@@ -29,7 +29,6 @@ export const SideNavigationContainer = styled.div`
 `;
 
 export const TopNavContainer = styled.div`
-  width: 90%;
   display: flex;
   justify-content: space-between;
   margin: 0 5%;
