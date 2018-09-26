@@ -32,13 +32,6 @@ STRIPE_SECRET_KEY = config("STRIPE_SECRET_KEY")
 # STRIPE_LIVE_SECRET_KEY = STRIPE_TEST_SECRET_KEY = STRIPE_SECRET_KEY
 # STRIPE_LIVE_MODE = os.environ.get("STRIPE_LIVE_MODE")
 
-STRIPE_LIVE_PUBLIC_KEY = os.environ.get("STRIPE_LIVE_PUBLIC_KEY", "pk_test_I1P4xxdF9rizqkxLnt0P3WV7")
-STRIPE_LIVE_SECRET_KEY = os.environ.get("STRIPE_LIVE_SECRET_KEY", "sk_test_hO7NJ48k831zuSDu9NxAvh7Z")
-STRIPE_TEST_PUBLIC_KEY = os.environ.get("STRIPE_TEST_PUBLIC_KEY", "sk_test_hO7NJ48k831zuSDu9NxAvh7Z")
-STRIPE_TEST_SECRET_KEY = os.environ.get("STRIPE_TEST_SECRET_KEY", "sk_test_hO7NJ48k831zuSDu9NxAvh7Z")
-STRIPE_LIVE_MODE = False
-
-
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = config('DEBUG', cast=bool)
 
