@@ -3,137 +3,146 @@ import { connect } from "react-redux";
 
 import { getShifts } from "../../store/Shift/actions.js";
 
-import ScheduleDay from "../Molecules/ScheduleDay.js";
+import ScheduleShift from "../Molecules/ScheduleShift.js";
+
+import {
+  GridItemHeader,
+  GridItemHeaderDay,
+  GridItemHeaderDate,
+  GridItemEmployee,
+  GridItemOpenShift,
+  GridContainer,
+  GridItemOpenShiftHeader,
+} from "../../styles/Calendar.js";
+
+import { colors } from "../../styles/globals.js";
+
+import { Label } from "semantic-ui-react";
+
+// TODO: Make me more stylish
 
 class Schedule extends Component {
-  // DEVELOPMENT TEST to get data REMOVE ME
+  // TODO: Should GET to shifts be fired here?
   componentDidMount() {
     this.props.getShifts();
   }
 
-  render() {
-    return (
-      <div style={{ width: "100%", display: "flex" }}>
-        {/*   
-//       //   <table className="scheduler" style={{ width: "100%" }}>
-//       //     <thead>
-//       //       <tr>
-//       //         <td colSpan="2">IMMA HEADER</td>
-//       //       </tr>
-//       //     </thead>
-//       //     <tbody>
-//       //       <tr>
-//       //         <td style={{ width: "100px", verticalAlign: "top" }}>
-//       //           <div className="resource-view">
-//       //             <div
-      //               style={{
-      //                 overflow: "hidden",
-      //                 borderBottom: "1px solid #e9e9e9",
-      //                 height: "100px",
-      //               }}
-      //             >
-      //               <div
-      //                 style={{
-      //                   overflowX: "scroll",
-      //                   overflowY: "hidden",
-      //                   margin: `0px 0px -10px`,
-      //                 }}
-      //               >
-      //                 <table className="resource-table">
-      //                   <thead>
-      //                     <tr style={{ height: "10px" }}>
-      //                       <th className="header3-text">RESOURCE</th>
-      //                     </tr>
-      //                   </thead>
-      //                 </table>
-      //               </div>
-      //             </div>
-      //             <div
-      //             // style={resourceContentStyle}
-      //             // ref={this.schedulerResourceRef}
-      //             // onMouseOver={this.onSchedulerResourceMouseOver}
-      //             // onMouseOut={this.onSchedulerResourceMouseOut}
-      //             // onScroll={this.onSchedulerResourceScroll}
-      //             >
-      //               {/* ResourceView */}
-        {/* //             </div>
-      //           </div>
-      //         </td>
-      //         <td>
-      //           <div
-      //             className="scheduler-view"
-      //             style={{
-      //               width: "10px",
-      //               verticalAlign: "top",
-      //             }}
-      //           >
-      //             <div
-      //               style={{
-      //                 overflow: "hidden",
-      //                 borderBottom: "1px solid #e9e9e9",
-      //                 height: "10px",
-      //               }}
-      //             >
-      //               <div
-      //                 style={{
-      //                   overflowX: "scroll",
-      //                   overflowY: "hidden",
-      //                   margin: `0px 0px -10px`,
-      //                 }}
-      //                 // ref={this.schedulerHeadRef}
-      //                 // onMouseOver={this.onSchedulerHeadMouseOver}
-      //                 // onMouseOut={this.onSchedulerHeadMouseOut}
-      //                 // onScroll={this.onSchedulerHeadScroll}
-      //               >
-      //                 <div
-      //                   style={{
-      //                     paddingRight: `10px`,
-      //                     width: "10px",
-      //                   }}
-      //                 >
-      //                   <table className="scheduler-bg-table">
-      //                     {/* <HeaderView {...this.props} /> */}
-        {/* //                   </table> */}
-        {/* //                 </div>
-      //               </div>
-      //             </div>
-      //             <div
-      //             // style={schedulerContentStyle}
-      //             // ref={this.schedulerContentRef}
-      //             // onMouseOver={this.onSchedulerContentMouseOver}
-      //             // onMouseOut={this.onSchedulerContentMouseOut}
-      //             // onScroll={this.onSchedulerContentScroll}
-      //             >
-      //               <div style={{ width: "10px", height: "10px" }}>
-      //                 <div className="scheduler-content">
-      //                   <table className="scheduler-content-table">
-      //                     <tbody>Events</tbody>
-      //                   </table>
-      //                 </div>
-      //                 <div className="scheduler-bg">
-      //                   <table
-      //                     className="scheduler-bg-table"
-      //                     style={{ width: "10px" }}
-      //                   >
-      //                     {/* <BodyView {...this.props} /> */}
-        {/* //                   </table> */}
-        {/* //                 </div>
-      //               </div>
-      //             </div>
-      //           </div>
-      //         </td>
-      //       </tr>
-      //     </tbody>
-      //   </table> */}
+  handleClick = () => {
+    console.log("Use me for something");
+  };
 
-        <ScheduleDay name={"Monday"} date={"X/X/X"} />
-        <ScheduleDay name={"Tuesday"} date={"X/X/X"} />
-        <ScheduleDay name={"Wednesday"} date={"X/X/X"} />
-        <ScheduleDay name={"Thursday"} date={"X/X/X"} />
-        <ScheduleDay name={"Friday"} date={"X/X/X"} />
-        <ScheduleDay name={"Saturday"} date={"X/X/X"} />
-        <ScheduleDay name={"Sunday"} date={"X/X/X"} />
-      </div>
+  fillGrid = employees => {
+    // This function takes the number of employees and fills the body of the table
+    // There are 7 columns (First column is the row headers)
+    // Rows = employees + 2 (one for column headers, one for open shifts)
+    const output = [];
+    for (let column = 2; column <= 7 + 1; column++) {
+      for (let row = 2; row <= employees + 2; row++) {
+        output.push(
+          <ScheduleShift
+            key={`${row}-${column}`}
+            handleClick={this.handleClick}
+            row={row}
+            column={column}
+          />
+        );
+      }
+    }
+    return output;
+  };
+
+  render() {
+    // TODO: get employees from store to make this dynamic
+    const employees = 8;
+    return (
+      <GridContainer rows={employees + 1}>
+        {/* Refactor into molecules - Column Header */}
+        <GridItemHeader column="1" />
+        <GridItemHeader column="2">
+          <GridItemHeaderDay>Monday</GridItemHeaderDay>
+          <GridItemHeaderDate>17</GridItemHeaderDate>
+        </GridItemHeader>
+        <GridItemHeader column="3">
+          <GridItemHeaderDay>Tuesday</GridItemHeaderDay>
+          <GridItemHeaderDate>18</GridItemHeaderDate>
+        </GridItemHeader>
+        <GridItemHeader column="4">
+          <GridItemHeaderDay>Wednesday</GridItemHeaderDay>
+          <GridItemHeaderDate>19</GridItemHeaderDate>
+        </GridItemHeader>
+        <GridItemHeader column="5">
+          <GridItemHeaderDay>Thursday</GridItemHeaderDay>
+          <GridItemHeaderDate>20</GridItemHeaderDate>
+        </GridItemHeader>
+        <GridItemHeader column="6">
+          <GridItemHeaderDay>Friday</GridItemHeaderDay>
+          <GridItemHeaderDate>21</GridItemHeaderDate>
+        </GridItemHeader>
+        <GridItemHeader column="7">
+          <GridItemHeaderDay>Saturday</GridItemHeaderDay>
+          <GridItemHeaderDate>22</GridItemHeaderDate>
+        </GridItemHeader>
+        <GridItemHeader column="8">
+          <GridItemHeaderDay>Sunday</GridItemHeaderDay>
+          <GridItemHeaderDate>23</GridItemHeaderDate>
+        </GridItemHeader>
+        {/* Refactor into molecules - Row Header 
+        TODO: Make this dynamically from the number of employees */}
+        <GridItemEmployee row="1" />
+        <GridItemOpenShift row="2">
+          <GridItemOpenShiftHeader>Open Shifts</GridItemOpenShiftHeader>
+        </GridItemOpenShift>
+        <GridItemEmployee row="3">
+          <Label horizontal circular color={colors[0]} key={colors[0]}>
+            0
+          </Label>
+          Vlad
+        </GridItemEmployee>
+        <GridItemEmployee row="4">
+          <Label horizontal circular color={colors[1]} key={colors[1]}>
+            0
+          </Label>
+          Brandon
+        </GridItemEmployee>
+        <GridItemEmployee row="5">
+          <Label horizontal circular color={colors[2]} key={colors[2]}>
+            0
+          </Label>
+          Kyle
+        </GridItemEmployee>
+        <GridItemEmployee row="6">
+          <Label horizontal circular color={colors[3]} key={colors[3]}>
+            0
+          </Label>
+          Justin
+        </GridItemEmployee>
+        <GridItemEmployee row="7">
+          <Label horizontal circular color={colors[4]} key={colors[4]}>
+            0
+          </Label>
+          Obo
+        </GridItemEmployee>
+        <GridItemEmployee row="8">
+          <Label horizontal circular color={colors[5]} key={colors[5]}>
+            0
+          </Label>
+          Terrie
+        </GridItemEmployee>
+        <GridItemEmployee row="9">
+          <Label horizontal circular color={colors[6]} key={colors[6]}>
+            0
+          </Label>
+          Brian Doyle
+        </GridItemEmployee>
+        <GridItemEmployee row="10">
+          <Label horizontal circular color={colors[7]} key={colors[7]}>
+            0
+          </Label>
+          Boomer
+        </GridItemEmployee>
+        {/* Refactor into molecules - Body */}
+        {this.fillGrid(employees)}
+      </GridContainer>
     );
   }
 }

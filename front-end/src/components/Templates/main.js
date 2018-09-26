@@ -8,7 +8,7 @@ import {
   ComponentContainer,
 } from "../../styles/Template--main.js";
 
-import { Button, Segment, Sidebar } from "semantic-ui-react";
+import { Button, Segment, Sidebar, Icon } from "semantic-ui-react";
 
 class main extends Component {
   state = { visible: false };
@@ -26,7 +26,7 @@ class main extends Component {
             style={{ position: "fixed", top: "0" }}
             onClick={this.handleButtonClick}
           >
-            Nav
+            <Icon name="sidebar" />
           </Button>
           <Sidebar.Pushable as={Segment}>
             <SideNav
