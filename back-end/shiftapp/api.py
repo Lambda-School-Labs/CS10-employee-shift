@@ -99,12 +99,30 @@ class RequestedTimeOffViewSet(viewsets.ModelViewSet):
     serializer_class = RequestedTimeOffSerializer
     queryset = RequestedTimeOff.objects.all()
 
+    def get_queryset(self, *args, **kwargs):
+        user = self.request.user
+        print(user)
+
+        if user.is_anonymous:
+            return RequestedTimeOff.objects.none()
+        else:
+            return RequestedTimeOff.objects.filter(profile__user=user)
+
 class ShiftViewSet(viewsets.ModelViewSet):
     """
     API endpoint that allows groups to be viewed or edited.
     """
     serializer_class = ShiftSerializer
     queryset = Shift.objects.all()
+
+    def get_queryset(self, *args, **kwargs):
+        user = self.request.user
+        print(user)
+
+        if user.is_anonymous:
+            return Shift.objects.none()
+        else:
+            return Shift.objects.filter(profile__user=user)
 
 class HourOfOperationViewSet(viewsets.ModelViewSet):
     """
