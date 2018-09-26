@@ -100,8 +100,19 @@ export const circle_img = styled.div `
     z-index: -1;
     `;
 
+export const textBox = styled.div `
+    display: flex;
+    width: 25%;
+    height: 700px;
+    justify-content: flex-start;
+    flex-direction: row;
+    border: red 1px solid;
+    background-color: white;
+    `;
+
 export const FooterStyles = styled.div`
     display: flex;
+    background-color: #4B9CD3;
     justify-content: center;
     margin-top: -15px;
   `;

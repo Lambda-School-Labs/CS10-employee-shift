@@ -93,12 +93,6 @@ class Landing_Card extends Component {
                 </WelcomeLogo>
                 </WelcomeHolder>
             </BackgroundHolder>
-            
-            <FooterStyles>
-                <footer>
-                <span>Copyright 2018</span>
-                </footer>
-            </FooterStyles>
             </div>
         );
 }
