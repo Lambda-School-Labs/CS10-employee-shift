@@ -13,14 +13,13 @@ export const getUser = () => (dispatch, getState) => {
     // TODO: GET ACCOUNT ID
     // TODO: Redo with correct endpoint to get user (not list of users)
     axios
-      .get(`${process.env.REACT_APP_ROOT_URL}/api/users/`, {
+      .get(`${process.env.REACT_APP_ROOT_URL}/api/userprofile/`, {
         headers,
       })
       .then(res => {
         if (res.status === 200) {
-          console.log(res.data);
-          dispatch({ type: "FETCHED_USER", data: res.data });
-          return res.data;
+          dispatch({ type: "FETCHED_USER", data: res.data[0] });
+          return res.data[0];
         }
       })
       .catch(err => {
@@ -51,12 +50,12 @@ export const signin = (username, password) => dispatch => {
     .then(res => {
       if (res.status === 200) {
         dispatch({ type: "SIGNIN_SUCCESS", data: res.data });
+        dispatch(getUser());
         return res.data;
       }
     })
     .catch(err => {
       if (err.status < 500) {
-        console.log("Server Error!");
         return { status: err.status, data: err.data };
       } else if (err.status === 403 || err.status === 401) {
         dispatch({ type: "ERROR", data: err.data });
@@ -152,16 +151,15 @@ export const signup = (
 // Can only change their own information
 export const updateUser = (
   email,
-  phone,
-  text_enabled,
+  phone_number,
   email_enabled,
+  text_enabled,
   old_password,
   new_password
 ) => (dispatch, getState) => {
   const token = getState().user.token;
   // Implemented once getOwnUser works
-  // const id = getState().user.currentUser.id;
-  const id = 1;
+  const profile_id = getState().user.currentUser.id;
 
   // username, email, password, re_password, firstname, lastname
   if (token) {
@@ -173,11 +171,16 @@ export const updateUser = (
 
     const body = {
       // username: "admin", 500 error when you send "username" and "password"
-      email,
+      user: {
+        email
+      },
+      phone_number,
+      text_enabled,
+      email_enabled
     };
     axios({
       method: "patch",
-      url: `${process.env.REACT_APP_ROOT_URL}/api/users/${id}/`,
+      url: `${process.env.REACT_APP_ROOT_URL}/api/userprofile/${profile_id}/`,
       headers,
       data: body,
     })

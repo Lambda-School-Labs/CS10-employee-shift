@@ -5,6 +5,8 @@ import { postRequestOff } from "../../store/requestOff/action.js";
 
 import { OrganismContainer } from "../../styles/Dashboard.js";
 import { FormItem, Form } from "../../styles/signin.js";
+
+
 class TimeOffRequest extends Component {
   state = {
     start_datetime: "",
@@ -19,7 +21,11 @@ class TimeOffRequest extends Component {
 
     e.preventDefault();
     // TODO: Fill with correct data to send
-    this.props.postRequestOff(date, date, this.state.reason);
+    this.props.postRequestOff(
+      this.state.start_datetime, 
+      this.state.end_datetime, 
+      this.state.reason
+    );
   };
 
   inputChangeHandler = event => {

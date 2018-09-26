@@ -30,13 +30,14 @@ class Dashboard extends Component {
 }
 
 const mapStateToProps = state => {
+  const userProfile = state.user.currentUser;
+  //TODO: check for empty profile - error
   return {
-    firstname: state.user.currentUser.first_name,
-    lastname: state.user.currentUser.last_name,
+    first_name: userProfile.user.first_name,
+    last_name: userProfile.user.last_name,
   };
 };
 
 export default connect(
-  mapStateToProps,
-  null
+  mapStateToProps
 )(Dashboard);
