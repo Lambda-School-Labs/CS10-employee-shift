@@ -1,19 +1,17 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
-import { Button, Divider, Image, Transition } from 'semantic-ui-react';
 import {
   LandingNavBar,
   ScheduleButtonButton,
   ScheduleButton,
-  FooterStyles,
   BackgroundHolder,
   WelcomeSide,
   WelcomeH1,
   WelcomeLogo,
   WelcomeHolder,
+  WelcomeText,
   circle_img,
   Circle_div,
-  Test
 } from "../../styles/Landing.js";
 
 import "../../styles/LandingRef.css";
@@ -43,7 +41,9 @@ class Landing_Card extends Component {
                 <WelcomeHolder>
                 <WelcomeSide>
                 <WelcomeH1>Welcome</WelcomeH1>
-                <p>Click bla bla bla to learn more</p>
+                < WelcomeText>
+                    <p>Build your Work Schedule in Minutes.</p>
+                </WelcomeText>
                 <ScheduleButton>
                     <Link to="/calendar">
                     <ScheduleButtonButton className="btn">Welcome</ScheduleButtonButton>

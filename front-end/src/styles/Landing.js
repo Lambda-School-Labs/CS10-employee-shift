@@ -10,6 +10,8 @@ export const BackgroundHolder = styled.div`
 export const LandingNavBar = styled.div`
     display: flex;
     justify-content: flex-end;
+    position: absolute;
+    z-index: 5;
   `;
 
 export const WelcomeHolder = styled.div`
@@ -38,9 +40,10 @@ export const WelcomeLogo = styled.div`
 {/* possibly depreciated */}
 export const WelcomeText = styled.div`
     display: flex;
+    width: 200px;
     justify-content: center;
     padding-top: 17%;
-    font-size: 2em;
+    font-size: 1.5em;
   `;
 
 export const ScheduleButton = styled.div`
@@ -48,7 +51,7 @@ export const ScheduleButton = styled.div`
     display: flex;
     position: relative;
     justify-content: center;
-    margin-top: -30%;
+    margin-top: 6%;
     margin-left: 215%;
     outline: none;
     border: none;
@@ -94,7 +97,6 @@ export const Circle_div = styled.div `
   
 export const circle_img = styled.div `
     display: flex;
-    border: solid pink 1px;
     justify-content: center;
     border: red 1px solid;
     z-index: -1;
