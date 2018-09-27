@@ -10,7 +10,8 @@ export const BackgroundHolder = styled.div`
 export const LandingNavBar = styled.div`
     display: flex;
     justify-content: flex-end;
-    z-index: 2;
+    position: relative;
+
   `;
 
 export const WelcomeHolder = styled.div`
@@ -49,7 +50,7 @@ export const ScheduleButton = styled.div`
     display: flex;
     position: relative;
     justify-content: center;
-    margin-top: 6%;
+    margin-top: 50%;
     margin-left: 215%;
     outline: none;
     border: none;
@@ -81,6 +82,46 @@ export const ScheduleButtonButton = styled.button`
     align-self: flex-end;
     margin-left: 345%;
     z-index: 2;
+    position: relative;
+  `;
+
+export const NavButton = styled.div `
+    .btn{
+    display: flex;
+    position: relative;
+    justify-content: center;
+    margin-top: 6%;
+    margin-left: 215%;
+    
+    border: none;
+    cursor: pointer;
+    font-size: 16px;
+    font-weight: 300px;
+    color: black;
+    letter-spacing: 2px;
+    padding: 25px 50px;
+    border-radius: 10px;
+    box-shadow: 10px 6px #13294B
+    }
+
+    .btn: hover {
+        background-color: #007FAE;
+        box-shadow: 6px 2px #13294B;
+        top: 2px;
+    }
+
+    .btn: action {
+        box-shadow: none;
+        top: 6px;
+    }
+  `;
+
+export const NavButtonButton = styled.button `
+    box-shadow: 5px 10px 20px hsl(178, 53%, 43%);
+    font-size: 2em;
+    align-self: flex-end;
+    margin-left: 345%;
+    z-index: 3;
     position: relative;
   `;
 

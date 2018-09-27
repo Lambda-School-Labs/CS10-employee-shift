@@ -4,6 +4,8 @@ import {
   LandingNavBar,
   ScheduleButtonButton,
   ScheduleButton,
+  NavButtonButton,
+  NavButton,
   BackgroundHolder,
   WelcomeSide,
   WelcomeH1,
@@ -81,13 +83,22 @@ class Landing_Card extends Component {
                 </Circle_div>
                 <WelcomeLogo>
                     <LandingNavBar>
-                        <Link to="/signup">
-                            <button>Sign up</button>
-                        </Link>
-                        <Link to="/signin">
-                            <button>Sign in</button>
-                        </Link>
-                        <button>Click test</button>
+                          {/* <NavButton>
+                            <Link to="/signup">
+                                <NavButtonButton>Sign up</NavButtonButton>
+                            </Link>
+                         </NavButton>
+                        <NavButton>
+                            <Link to="/signin">
+                                <NavButtonButton>Sign in</NavButtonButton>
+                            </Link>
+                        </NavButton> */}
+                        <button><Link to="/signup">
+                                Sign up
+                            </Link></button>
+                        <button><Link to="/signin">
+                                Sign in
+                            </Link></button>
                     </LandingNavBar>
                 </WelcomeLogo>
                 </WelcomeHolder>
