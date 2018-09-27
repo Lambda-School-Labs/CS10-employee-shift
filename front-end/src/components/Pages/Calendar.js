@@ -7,6 +7,7 @@ import { getShifts } from "../../store/Shift/actions.js";
 
 import CalendarTopNav from "../Organisms/CalendarTopNav.js";
 import ScheduleShift from "../Molecules/ScheduleShift.js";
+import ScheduleShiftUpdate from "../Molecules/ScheduleShiftUpdate";
 
 import {
   GridItemHeader,
@@ -203,9 +204,11 @@ class Calendar extends Component {
           {this.fillGrid(employees)}
           {this.props.allShifts.map(shift => {
             return (
-              <GridItemActiveShift
+              <ScheduleShiftUpdate
+                hue={shift.profile > 0 ? shift.profile * 20 : 104}
+                text1={moment(shift.start_datetime).format("h A")}
+                text2={moment(shift.end_datetime).format("h A")}
                 key={shift.id}
-                handleClick={this.handleClick}
                 row={shift.profile + 2}
                 column={4}
                 color={shift.profile ? colors[shift.profile] : colors[0]}
@@ -216,15 +219,7 @@ class Calendar extends Component {
                       ? "flex-end"
                       : "center"
                 }
-              >
-                <GridItemActiveShiftInner
-                  hue={shift.profile > 0 ? shift.profile * 20 : 104}
-                >
-                  {`${moment(shift.start_datetime).format("h A")} - ${moment(
-                    shift.end_datetime
-                  ).format("h A")}`}
-                </GridItemActiveShiftInner>
-              </GridItemActiveShift>
+              />
             );
           })}
         </GridContainer>

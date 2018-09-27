@@ -6,7 +6,6 @@ import { device } from "./globals.js";
 
 export const CalendarContainer = styled.div`
   width: 100%;
-  height: 100%;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -69,6 +68,7 @@ export const HoOButton = styled.button`
 export const GridContainer = styled.div`
   display: grid;
   width: 100%;
+  height: 100%;
   grid-template-column: repeat(8, 1fr);
   grid-template-rows: repeat(${props => props.rows}, 70px);
   padding: 1% 0;
@@ -188,8 +188,8 @@ export const GridItemActiveShift = styled.div`
 `;
 
 export const GridItemActiveShiftInner = styled.div`
-  width: 50%;
-  height: 50%;
+  width: 60%;
+  height: 60%;
   background: hsl(${props => props.hue}, 62.5%, 90.6%);
   color: hsl(${props => props.hue + 24.2}, 83.8%, 29%)
   border: hsl(${props => props.hue - 14.5}, 61.6%, 80.6%) solid 1px;
