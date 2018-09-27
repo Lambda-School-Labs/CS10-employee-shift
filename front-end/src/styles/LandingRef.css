@@ -30,6 +30,12 @@
   margin-bottom: auto;
 }
 
+.icon {
+  width: 100px;
+  align-self: center;
+  margin-top: -120px;
+}
+
 .title-text {
   font-family: 'PT Sans', sans-serif;
   color: #4B9CD3;
