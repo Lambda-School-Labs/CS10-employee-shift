@@ -92,9 +92,6 @@ class UserProfileSerializer(ModelSerializer):
     def update(self, instance, validated_data):
         if 'user' in validated_data:
             user_data = validated_data.pop('user')
-            # Unless the application properly enforces that this field is
-            # always set, the follow could raise a `DoesNotExist`, which
-            # would need to be handled.
             user = instance.user
             for key, value in user_data.items():
               if key == 'password':

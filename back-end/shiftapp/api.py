@@ -33,6 +33,9 @@ def is_employee(user):
 def is_manager(user):
     return user.groups.filter(name='manager').exists()
 
+def is_owner(user):
+    return user.groups.filter(name='owner').exists()
+
 class UserViewSet(viewsets.ModelViewSet):
     permission_classes = [permissions.IsAuthenticated, TokenHasReadWriteScope]
     queryset = User.objects.all()
