@@ -1,9 +1,9 @@
 import styled from "styled-components";
 
 export const BackgroundHolder = styled.div`
-    background-color: #A0DDFF;
+    background-color: #4B9CD3;
     width: 100%;
-    height: 500px;
+    height: 700px;
     max-height: 80%;
   `;
 
@@ -28,9 +28,9 @@ export const WelcomeSide = styled.div`
 `;
 
 export const WelcomeLogo = styled.div`
-    height: 500px;
+    height: 700px;
     width: 75%;
-    background-color: grey;
+    background-color: #13294B;
     margin-left: 30%;
     
 `;
@@ -44,10 +44,34 @@ export const WelcomeText = styled.div`
   `;
 
 export const ScheduleButton = styled.div`
+    .btn{
     display: flex;
+    position: relative;
     justify-content: center;
-    padding: 70px;
-    margin-top: -120px;
+    margin-top: -30%;
+    margin-left: 215%;
+    outline: none;
+    border: none;
+    cursor: pointer;
+    font-size: 16px;
+    font-weight: 300px;
+    color: black;
+    letter-spacing: 2px;
+    padding: 25px 50px;
+    border-radius: 10px;
+    box-shadow: 10px 6px #13294B
+    }
+
+    .btn: hover {
+        background-color: #007FAE;
+        box-shadow: 6px 2px #13294B;
+        top: 2px;
+    }
+
+    .btn: action {
+        box-shadow: none;
+        top: 6px;
+    }
   `;
 
 export const ScheduleButtonButton = styled.button`
@@ -59,8 +83,37 @@ export const ScheduleButtonButton = styled.button`
     position: relative;
   `;
 
+export const Circle_div = styled.div `
+    position: absolute;
+    margin-left: -10%;
+    top: -200px;
+    z - index: 1;
+    transistion: 2s;
+  `;
+
+  
+export const circle_img = styled.div `
+    display: flex;
+    border: solid pink 1px;
+    justify-content: center;
+    border: red 1px solid;
+    z-index: -1;
+    `;
+
+export const textBox = styled.div `
+    display: flex;
+    width: 25%;
+    height: 700px;
+    justify-content: flex-start;
+    flex-direction: row;
+    border: red 1px solid;
+    background-color: white;
+    `;
+
 export const FooterStyles = styled.div`
     display: flex;
+    background-color: #4B9CD3;
     justify-content: center;
     margin-top: -15px;
   `;
+
