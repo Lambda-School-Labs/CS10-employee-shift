@@ -10,7 +10,8 @@ export const BackgroundHolder = styled.div`
 export const LandingNavBar = styled.div`
     display: flex;
     justify-content: flex-end;
-    z-index: 2;
+    position: absolute;
+    z-index: 5;
   `;
 
 export const WelcomeHolder = styled.div`
