@@ -84,8 +84,6 @@ class UserProfileViewSet(viewsets.ModelViewSet):
 
     def get_queryset(self, *args, **kwargs):
         user = self.request.user
-        print(user)
-
         if user.is_anonymous:
             return Profile.objects.none()
         else:
