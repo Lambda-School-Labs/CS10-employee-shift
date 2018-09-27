@@ -107,7 +107,9 @@ def checkout(request):
 
 # Add endpoint_secretkey here in localhost
 
-endpoint_secret =  settings.endpoint_secret
+print(settings.STRIPE_SECRET_KEY)
+
+endpoint_secret =  settings.ENDPOINT_SECRET
 
 def my_webhook_view(request):
   payload = request.body
