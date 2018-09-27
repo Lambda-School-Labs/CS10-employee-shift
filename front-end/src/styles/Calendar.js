@@ -116,8 +116,6 @@ export const GridItemOpenShift = styled.div`
   justify-content: center;
   background: hsl(104, 62.5%, 95%);
 
-  // Something is up with the following ////
-
   &::after {
     background: #ddd;
     content: "";
@@ -191,16 +189,21 @@ export const GridItemActiveShift = styled.div`
 `;
 
 export const GridItemActiveShiftInner = styled.div`
-  width: 60%;
+  width: 70%;
   height: 60%;
-  background: hsl(${props => props.hue}, 62.5%, 90.6%);
-  color: hsl(${props => props.hue + 24.2}, 83.8%, 29%)
-  border: hsl(${props => props.hue - 14.5}, 61.6%, 80.6%) solid 1px;
-  border-left: hsl(${props => props.hue + 1.6}, 64.9%, 59.8%) solid 4px;
+  background: hsl(${props => props.hue}, 62%, 90%);
+  color: hsl(${props => props.hue}, 84%, 29%);
+  border: hsl(${props => props.hue}, 62%, 81%) solid 1px;
+  border-left: hsl(${props => props.hue}, 65%, 60%) solid 4px;
   display: flex;
   justify-content: center;
   align-items: center;
-  font-size: 18px;
+  font-size: 14px;
+
+  @media ${device.tablet} {
+    width: 100%;
+    height: 100%;
+  }
 
   &:hover {
     cursor: pointer;
@@ -230,7 +233,10 @@ export const FormItem = styled.div`
 `;
 
 export const ProfileIcon = styled.div`
-  background: hsl(${props => props.hue + 1.6}, 64.9%, 59.8%);
+  color: white;
+  text-align: center;
+  margin-right: 10px;
+  background: hsl(${props => props.hue}, 65%, 60%);
   height: 20px;
   width: 20px;
   border-radius: 50%;

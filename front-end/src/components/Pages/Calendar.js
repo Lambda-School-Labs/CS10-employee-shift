@@ -27,6 +27,9 @@ import { Label } from "semantic-ui-react";
 
 // TODO: Make me more stylish
 // TODO: Make own "label" so colors show up correctly
+// TODO: Check HoO against shifts to make sure that the time is filled, if not render cell red
+// TODO: Turn cell red if conflict with employee's time off
+// TODO: Span shifts to multiple days
 
 class Calendar extends Component {
   state = {
@@ -155,75 +158,64 @@ class Calendar extends Component {
             <GridItemOpenShiftHeader>Open Shifts</GridItemOpenShiftHeader>
           </GridItemOpenShift>
           <GridItemEmployee row="3">
-            <ProfileIcon hue={1 * 20}>
+            <ProfileIcon hue={1 * 40}>
               {/* TODO: dynamically use user.id from user state in store */}0
               {/* TODO: make dynamic number of shifts */}
             </ProfileIcon>
             Vlad
           </GridItemEmployee>
           <GridItemEmployee row="4">
-            <Label horizontal circular color={colors[2]} key={colors[1]}>
-              0
-            </Label>
+            <ProfileIcon hue={2 * 40}>0</ProfileIcon>
             Brandon
           </GridItemEmployee>
           <GridItemEmployee row="5">
-            <Label horizontal circular color={colors[3]} key={colors[2]}>
-              0
-            </Label>
+            <ProfileIcon hue={3 * 40}>0</ProfileIcon>
             Kyle
           </GridItemEmployee>
           <GridItemEmployee row="6">
-            <Label horizontal circular color={colors[4]} key={colors[3]}>
-              0
-            </Label>
+            <ProfileIcon hue={4 * 40}>0</ProfileIcon>
             Justin
           </GridItemEmployee>
           <GridItemEmployee row="7">
-            <Label horizontal circular color={colors[5]} key={colors[4]}>
-              0
-            </Label>
+            <ProfileIcon hue={5 * 40}>0</ProfileIcon>
             Obo
           </GridItemEmployee>
           <GridItemEmployee row="8">
-            <Label horizontal circular color={colors[6]} key={colors[5]}>
-              0
-            </Label>
+            <ProfileIcon hue={6 * 40}>0</ProfileIcon>
             Terrie
           </GridItemEmployee>
           <GridItemEmployee row="9">
-            <Label horizontal circular color={colors[7]} key={colors[6]}>
-              0
-            </Label>
+            <ProfileIcon hue={7 * 40}>0</ProfileIcon>
             Brian Doyle
           </GridItemEmployee>
           <GridItemEmployee row="10">
-            <Label horizontal circular color={colors[8]} key={colors[7]}>
-              0
-            </Label>
+            <ProfileIcon hue={8 * 40}>0</ProfileIcon>
             Boomer
           </GridItemEmployee>
           {/* Refactor into molecules - Body */}
           {this.fillGrid(employees)}
           {this.props.allShifts.map(shift => {
             const currentDate = moment(this.state.date);
-            console.log(
-              moment(shift.start_datetime).isBetween(
-                currentDate.clone().day(1),
-                currentDate.clone().day(1)
-              )
+            const shiftInCurrentWeek = moment(shift.start_datetime).isBetween(
+              currentDate
+                .clone()
+                .day(1)
+                .set({ hour: 0, minute: 0, "second:": 0, millisecond: 0 }),
+              currentDate
+                .clone()
+                .day(7)
+                .set({ hour: 23, minute: 59, "second:": 59, millisecond: 999 })
             );
-            if (true) {
+            if (shiftInCurrentWeek) {
               return (
                 <ScheduleShiftUpdate
-                  hue={shift.profile > 0 ? shift.profile * 20 : 104}
-                  text1={moment(shift.start_datetime).format("h A")}
-                  text2={moment(shift.end_datetime).format("h A")}
+                  hue={shift.profile ? shift.profile * 40 : 102}
+                  text1={moment(shift.start_datetime).format("h:mm A")}
+                  text2={moment(shift.end_datetime).format("h:mm A")}
                   key={shift.id}
                   row={shift.profile + 2}
                   // add span to second day if applicable
-                  column={moment(shift.start_datetime).isoWeekday + 1}
-                  color={shift.profile ? colors[shift.profile] : colors[0]}
+                  column={moment(shift.start_datetime).isoWeekday() + 1}
                   justify={
                     moment(shift.start_datetime).format("k") <= 9
                       ? "flex-start"
