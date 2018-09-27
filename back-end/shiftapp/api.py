@@ -27,6 +27,11 @@ from rest_framework.response import Response
 from shiftapp.models import Profile, Account, RequestedTimeOff, Shift, HourOfOperation, Availability
 # Create the API views
 
+def is_employee(user):
+    return user.groups.filter(name='employee').exists()
+
+def is_manager(user):
+    return user.groups.filter(name='manager').exists()
 
 class UserViewSet(viewsets.ModelViewSet):
     permission_classes = [permissions.IsAuthenticated, TokenHasReadWriteScope]
@@ -84,8 +89,10 @@ class UserProfileViewSet(viewsets.ModelViewSet):
 
     def get_queryset(self, *args, **kwargs):
         user = self.request.user
-        if user.is_anonymous:
-            return Profile.objects.none()
+        if user.is_staff:
+            profile = Profile.objects.filter(user=user)
+            account_id = profile[0].account
+            return Profile.objects.filter(account=account_id)
         else:
             return Profile.objects.filter(user=user)
 
@@ -115,12 +122,14 @@ class ShiftViewSet(viewsets.ModelViewSet):
 
     def get_queryset(self, *args, **kwargs):
         user = self.request.user
-        print(user)
+        profile = Profile.objects.filter(user=user)
+        account_id = profile[0].account
 
-        if user.is_anonymous:
-            return Shift.objects.none()
+        if is_manager(user):
+            return Shift.objects.filter(account=account_id)
         else:
-            return Shift.objects.filter(profile__user=user)
+            if is_employee(user):
+              return Shift.objects.filter(account=account_id, profile__user=user)
 
 class HourOfOperationViewSet(viewsets.ModelViewSet):
     """

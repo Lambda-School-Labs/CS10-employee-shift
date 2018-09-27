@@ -3,7 +3,7 @@ from rest_framework.serializers import ModelSerializer, ChoiceField
 from rest_framework import serializers
 from django.core.exceptions import ValidationError
 from django.contrib.auth.password_validation import validate_password, get_password_validators
-from django.contrib.auth.hashers import make_password
+from django.contrib.auth.hashers import make_password, check_password
 
 from difflib import SequenceMatcher
 
@@ -40,15 +40,20 @@ class UserSerializer(ModelSerializer):
     def validate_password(self, value):
       data = self.get_initial()
       request = self.context.get("request")
+      user = request.user
 
       password = data.get("password")
       re_password = request.data["re_password"]
+
       if 'old_password' in request.data:
+        old_user = User.objects.get(username=user)
         old_password = request.data["old_password"]
-        print(old_password)
+        if not check_password(old_password, old_user.password):
+          raise serializers.ValidationError("Old password is incorrect")
 
       if re_password != value:
         raise serializers.ValidationError("The password doesn't match.")
+      
       try:
         validate_password(value)
       except ValidationError as exc:
@@ -70,6 +75,7 @@ class AccountSerializer(ModelSerializer):
 
 
 class ProfileSerializer(ModelSerializer):
+    user = UserSerializer()
     class Meta:
         model = Profile
         fields = ('url', 'id', 'user', 'account', 'phone_number', 'notes')
@@ -84,7 +90,6 @@ class UserProfileSerializer(ModelSerializer):
         
 
     def update(self, instance, validated_data):
-        print(validated_data)
         if 'user' in validated_data:
             user_data = validated_data.pop('user')
             # Unless the application properly enforces that this field is
