@@ -203,24 +203,36 @@ class Calendar extends Component {
           {/* Refactor into molecules - Body */}
           {this.fillGrid(employees)}
           {this.props.allShifts.map(shift => {
-            return (
-              <ScheduleShiftUpdate
-                hue={shift.profile > 0 ? shift.profile * 20 : 104}
-                text1={moment(shift.start_datetime).format("h A")}
-                text2={moment(shift.end_datetime).format("h A")}
-                key={shift.id}
-                row={shift.profile + 2}
-                column={4}
-                color={shift.profile ? colors[shift.profile] : colors[0]}
-                justify={
-                  moment(shift.start_datetime).format("k") <= 9
-                    ? "flex-start"
-                    : moment(shift.start_datetime).format("k") >= 5
-                      ? "flex-end"
-                      : "center"
-                }
-              />
+            const currentDate = moment(this.state.date);
+            console.log(
+              moment(shift.start_datetime).isBetween(
+                currentDate.clone().day(1),
+                currentDate.clone().day(1)
+              )
             );
+            if (true) {
+              return (
+                <ScheduleShiftUpdate
+                  hue={shift.profile > 0 ? shift.profile * 20 : 104}
+                  text1={moment(shift.start_datetime).format("h A")}
+                  text2={moment(shift.end_datetime).format("h A")}
+                  key={shift.id}
+                  row={shift.profile + 2}
+                  // add span to second day if applicable
+                  column={moment(shift.start_datetime).isoWeekday + 1}
+                  color={shift.profile ? colors[shift.profile] : colors[0]}
+                  justify={
+                    moment(shift.start_datetime).format("k") <= 9
+                      ? "flex-start"
+                      : moment(shift.start_datetime).format("k") >= 5
+                        ? "flex-end"
+                        : "center"
+                  }
+                  start={moment(shift.start_datetime).format("H:mm A")}
+                  end={moment(shift.end_datetime).format("H:mm A")}
+                />
+              );
+            }
           })}
         </GridContainer>
       </CalendarContainer>
@@ -232,6 +244,7 @@ class Calendar extends Component {
 const mapStateToProps = state => {
   return {
     allShifts: state.shift.allShifts,
+    // all users
   };
 };
 

@@ -93,11 +93,13 @@ class ScheduleShiftUpdate extends React.Component {
             <Header textAlign={"center"}>Update Shift</Header>
             <PostShiftTime
               day={"Start Time"}
+              time={this.props.start}
               data={"start_datetime"}
               inputChangeHandler={this.inputChangeHandler}
             />
             <PostShiftTime
               day={"End Time"}
+              time={this.props.end}
               data={"end_datetime"}
               inputChangeHandler={this.inputChangeHandler}
             />
