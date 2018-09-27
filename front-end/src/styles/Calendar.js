@@ -228,3 +228,10 @@ export const Form = styled.form`
 export const FormItem = styled.div`
   margin: 5%;
 `;
+
+export const ProfileIcon = styled.div`
+  background: hsl(${props => props.hue + 1.6}, 64.9%, 59.8%);
+  height: 20px;
+  width: 20px;
+  border-radius: 50%;
+`;

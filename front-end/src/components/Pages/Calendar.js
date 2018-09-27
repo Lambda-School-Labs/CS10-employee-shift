@@ -19,6 +19,7 @@ import {
   GridContainer,
   GridItemOpenShiftHeader,
   GridItemActiveShiftInner,
+  ProfileIcon,
 } from "../../styles/Calendar.js";
 import { CalendarContainer } from "../../styles/Calendar.js";
 import { colors } from "../../styles/globals.js";
@@ -66,6 +67,7 @@ class Calendar extends Component {
 
   render() {
     // TODO: get employees from store to make this dynamic
+    // this.props.profile.allProfiles.length
     const employees = 8;
     return (
       <CalendarContainer>
@@ -153,9 +155,10 @@ class Calendar extends Component {
             <GridItemOpenShiftHeader>Open Shifts</GridItemOpenShiftHeader>
           </GridItemOpenShift>
           <GridItemEmployee row="3">
-            <Label horizontal circular color={colors[1]} key={colors[0]}>
-              0
-            </Label>
+            <ProfileIcon hue={1 * 20}>
+              {/* TODO: dynamically use user.id from user state in store */}0
+              {/* TODO: make dynamic number of shifts */}
+            </ProfileIcon>
             Vlad
           </GridItemEmployee>
           <GridItemEmployee row="4">
@@ -240,7 +243,6 @@ class Calendar extends Component {
   }
 }
 
-// Holds 3 weeks of shifts
 const mapStateToProps = state => {
   return {
     allShifts: state.shift.allShifts,
