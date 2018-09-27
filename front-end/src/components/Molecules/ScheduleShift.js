@@ -62,6 +62,7 @@ class ScheduleShift extends React.Component {
         key={`${this.props.row}-${this.props.column}`}
         row={this.props.row}
         column={this.props.column}
+        background={this.props.row > 2 ? "none" : "hsl(104, 62.5%, 95%)"}
       >
         <div
           style={{ width: "100%", height: "100%" }}
