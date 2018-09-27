@@ -107,6 +107,8 @@ def checkout(request):
 
 # Add endpoint_secretkey here in localhost
 
+endpoint_secret =  settings.endpoint_secret
+
 def my_webhook_view(request):
   payload = request.body
   sig_header = request.META['HTTP_STRIPE_SIGNATURE']

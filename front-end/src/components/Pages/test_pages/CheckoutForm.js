@@ -29,7 +29,7 @@ class CheckoutForm extends React.Component {
     Element to tokenize, since there's only one in this group.
     */
     return this.props.stripe
-      .createToken({ type: "card", name: "Borislav Hadzhiev" })
+      .createToken({ type: "card", name: " " })
       .then(result => {
         if (result.error) {
           console.log("THERE IS AN ERROR IN YOUR FORM", result.error);
@@ -44,7 +44,7 @@ class CheckoutForm extends React.Component {
           formData.append("currency", "usd");
           formData.append("amount", 237);
           formData.append("source", result.token.id);
-          return fetch(`http://127.0.0.1:8000/create-charge/`, {
+          return fetch(`https://employeeshift.herokuapp.com/create-charge/`, {
             method: "POST",
             headers: {
               accept: "application/json"
