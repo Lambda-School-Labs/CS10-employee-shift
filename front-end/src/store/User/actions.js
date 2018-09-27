@@ -155,7 +155,8 @@ export const updateUser = (
   email_enabled,
   text_enabled,
   old_password,
-  new_password
+  password,
+  re_password
 ) => (dispatch, getState) => {
   const token = getState().user.token;
   // Implemented once getOwnUser works
@@ -168,16 +169,23 @@ export const updateUser = (
     };
 
     // More form items for validation
-
+    
     const body = {
       // username: "admin", 500 error when you send "username" and "password"
       user: {
-        email
+        email,
       },
       phone_number,
       text_enabled,
       email_enabled
     };
+    if (password) {
+      body.user.password = password;
+      body.old_password = old_password;
+      body.re_password = re_password;
+    };
+
+
     axios({
       method: "patch",
       url: `${process.env.REACT_APP_ROOT_URL}/api/userprofile/${profile_id}/`,

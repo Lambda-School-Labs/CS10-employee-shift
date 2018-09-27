@@ -75,11 +75,15 @@ class ProfileViewSet(viewsets.ModelViewSet):
     search_fields = ['user__username', 'user__first_name']
 
     def get_queryset(self, *args, **kwargs):
-        queryset = Profile.objects.all()
-        username = self.request.query_params.get('username', None)
-        if username is not None:
-            queryset = queryset.filter(user__username=username)
-        return queryset
+        user = self.request.user
+        profile = Profile.objects.filter(user=user)
+        account_id = profile[0].account
+
+        if is_manager(user):
+            return Profile.objects.filter(account=account_id).exclude(user=user)
+        else:
+            if is_employee(user):
+              return Profile.objects.filter(user=user)
 
 class UserProfileViewSet(viewsets.ModelViewSet):
     """
@@ -92,12 +96,8 @@ class UserProfileViewSet(viewsets.ModelViewSet):
 
     def get_queryset(self, *args, **kwargs):
         user = self.request.user
-        if user.is_staff:
-            profile = Profile.objects.filter(user=user)
-            account_id = profile[0].account
-            return Profile.objects.filter(account=account_id)
-        else:
-            return Profile.objects.filter(user=user)
+
+        return Profile.objects.filter(user=user)
 
 
 class RequestedTimeOffViewSet(viewsets.ModelViewSet):
