@@ -15,6 +15,7 @@ djangorestframework = "*"
 django-cors-middleware = "*"
 dj-stripe = "*"
 stripe = "*"
+django-dotenv = "*"
 
 [dev-packages]
 

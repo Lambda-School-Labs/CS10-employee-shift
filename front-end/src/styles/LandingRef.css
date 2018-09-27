@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css?family=Josefin+Slab');
+@import url('https://fonts.googleapis.com/css?family=Oswald');
 
 
 /* .circle_img1{
@@ -27,16 +29,57 @@
   margin-bottom: auto;
 }
 
+.text-block1 {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  margin-top: -95px;
+  padding:0 25px;
+}
+
+.text-block2 {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  margin-top: -30px;
+}
+
+.vertical {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: auto;
+}
+
+.title-text {
+  display: flex;
+  justify-content: center;
+  
+  padding: 25px;
+}
+
+.inner-text {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 50px;
+  padding-right: auto;
+  padding-left: auto;
+  padding-bottom: -35px;
+}
+
 .font-title {
-  
-  
+  font-family: 'Oswald', sans-serif;
+  font-size: 4em;
+}
+
+.font-title2 {
+  font-family: 'Josefin Slab', serif;
 }
 
 .mid-container {
   display: flex;
   flex-direction: row;
   justify-content: center;
-  border: solid black 2px;
 }
 
 .textBox {
@@ -44,8 +87,7 @@
   width: 50%;
   height: 350px;
   justify-content: space-evenly;
-  flex-direction: row;
-  border: red 1px solid;
+  flex-direction: column;
   background-color: #E1E1E1;
   padding: 10px;
   margin-top: 5%;
@@ -88,7 +130,7 @@
 
       @keyframes float_1 {
         0% {
-          transform: translate(0, 400px);
+          transform: translate(0, 300px);
           opacity: 0.0;
         }
         25% {
@@ -121,12 +163,12 @@
 
         @keyframes float_2 {
         0% {
-          transform: translate(150px, 400px);
+          transform: translate(150px, 300px);
           opacity: 0.0;
         }
         25% {
           transform: translate(150, -540px);
-          opacity: 1;
+          opacity: 0.7;
         }
         26% {
           transform: translate(200px, -550px);
@@ -192,7 +234,7 @@
         }
         25% {
           transform: translate(-50, -540px);
-          opacity: 1;
+          opacity: 0.7;
         }
         26% {
           transform: translate(-20px, -550px);
