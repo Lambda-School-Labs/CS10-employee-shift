@@ -10,7 +10,6 @@ import {
   WelcomeLogo,
   WelcomeHolder,
   WelcomeText,
-  circle_img,
   Circle_div,
 } from "../../styles/Landing.js";
 
@@ -34,7 +33,6 @@ class Landing_Card extends Component {
 
 
     render(){
-        const { visible } = this.state
         return (
             <div className="container">
             <BackgroundHolder>
@@ -82,14 +80,15 @@ class Landing_Card extends Component {
                     </circle_img>
                 </Circle_div>
                 <WelcomeLogo>
-                <LandingNavBar>
-                <Link to="/signup">
-                    <button>Sign up</button>
-                </Link>
-                <Link to="/signin">
-                    <button>Sign in</button>
-                </Link>
-                </LandingNavBar>
+                    <LandingNavBar>
+                        <Link to="/signup">
+                            <button>Sign up</button>
+                        </Link>
+                        <Link to="/signin">
+                            <button>Sign in</button>
+                        </Link>
+                        <button>Click test</button>
+                    </LandingNavBar>
                 </WelcomeLogo>
                 </WelcomeHolder>
             </BackgroundHolder>

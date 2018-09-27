@@ -33,7 +33,6 @@ export const WelcomeLogo = styled.div`
     width: 75%;
     background-color: #13294B;
     margin-left: 30%;
-    
 `;
 
 {/* possibly depreciated */}
@@ -93,13 +92,6 @@ export const Circle_div = styled.div `
     transistion: 2s;
   `;
 
-  
-export const circle_img = styled.div `
-    display: flex;
-    justify-content: center;
-    border: red 1px solid;
-    z-index: -1;
-    `;
 
 export const textBox = styled.div `
     display: flex;
