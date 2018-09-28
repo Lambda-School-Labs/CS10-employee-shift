@@ -28,7 +28,7 @@ class ScheduleShift extends React.Component {
     end_time: "",
     start_time24: "",
     end_time24: "",
-    profile: this.props.row - 2,
+    profile: this.props.profile,
   };
 
   handleOpen = e => {
@@ -142,8 +142,16 @@ class ScheduleShift extends React.Component {
           <Segment
             style={{
               position: "fixed",
-              left: `${this.state.clickX - 140}px`,
-              top: `${this.state.clickY}px`,
+              left: `${
+                this.state.clickX > window.innerWidth - 142
+                  ? this.state.clickX - 262
+                  : this.state.clickX + 20
+              }px`,
+              top: `${
+                this.state.clickY > window.innerHeight - 242
+                  ? this.state.clickY - 362
+                  : this.state.clickY - 100
+              }px`,
               zIndex: 1005,
             }}
           >

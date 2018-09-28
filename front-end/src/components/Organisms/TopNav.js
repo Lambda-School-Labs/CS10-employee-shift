@@ -13,10 +13,6 @@ const TopNav = props => {
 
   return (
     <TopNavContainer>
-      <Breadcrumb>
-        <Link to="/">Home</Link>
-        <p> > {props.component}</p>
-      </Breadcrumb>
       <Link to="/" onClick={clickSignout}>
         Sign Out
       </Link>

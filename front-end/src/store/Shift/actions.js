@@ -48,16 +48,15 @@ export const postShift = (
   const body = JSON.stringify({
     start_datetime,
     end_datetime,
-    profile,
     is_open,
     notes,
+    account: getState().user.currentUser.account.id,
+    profile,
   });
 
   axios({
     method: "post",
-    url: `${process.env.REACT_APP_ROOT_URL}/api/shifts/${
-      getState().user.currentUser.account.id
-    }`,
+    url: `${process.env.REACT_APP_ROOT_URL}/api/shifts/`,
     headers: headers,
     data: body,
   })
@@ -124,8 +123,6 @@ export const updateShift = (
 };
 
 export const deleteShift = id => (dispatch, getState) => {
-  dispatch({ type: "LOADING_SHIFTS" });
-
   const token = getState().user.token;
   const headers = {};
   if (token) {
@@ -134,13 +131,12 @@ export const deleteShift = id => (dispatch, getState) => {
 
   axios({
     method: "delete",
-    // TODO: use ID of the SHIFT dynamically
-    url: `${process.env.REACT_APP_ROOT_URL}/api/shifts/1`,
+    url: `${process.env.REACT_APP_ROOT_URL}/api/shifts/${id}/`,
     headers: headers,
   })
     .then(res => {
-      if (res.status === 200) {
-        return dispatch({ type: "DELETE_SHIFT", data: res.data });
+      if (res.status === 204) {
+        return dispatch({ type: "DELETE_SHIFT", data: id });
       }
     })
     .catch(err => {

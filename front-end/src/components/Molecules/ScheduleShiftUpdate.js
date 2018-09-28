@@ -150,7 +150,7 @@ class ScheduleShiftUpdate extends React.Component {
           <Segment
             style={{
               position: "fixed",
-              left: `${this.state.clickX - 140}px`,
+              left: `${window.innerWidth - this.state.clickX}px`,
               top: `${this.state.clickY}px`,
               zIndex: 1005,
               minWidth: "120px",

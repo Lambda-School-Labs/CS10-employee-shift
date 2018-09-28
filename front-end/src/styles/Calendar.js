@@ -239,4 +239,5 @@ export const ProfileIcon = styled.div`
   height: 20px;
   width: 20px;
   border-radius: 50%;
+  font-size: 20px;
 `;

@@ -9,32 +9,15 @@ display: flex,
 flexDirection: column,
 `;
 
-export const HorizontalContainer = styled.div`
-  display: flex;
-`;
-
 export const ComponentContainer = styled.div`
-  height: 95%;
-  width: 100vw;
-`;
-
-export const SideNavigationContainer = styled.div`
-  display: flex;
-  border: solid black 1px;
-  flex-direction: column;
-  justify-content: flex-start;
-  width: 20%;
-  height: 80vh;
-  margin: 0 5%;
+  height: 100%;
+  width: 100%;
+  padding-top: 2%;
 `;
 
 export const TopNavContainer = styled.div`
-  display: flex;
-  justify-content: space-between;
-  margin: 0 5%;
-`;
-
-export const Breadcrumb = styled.div`
-  display: flex;
-  align-items: center;
+  position: fixed;
+  margin-left: auto;
+  top: 2%;
+  right: 2%;
 `;
