@@ -32,7 +32,7 @@ export default (state = initialState, action) => {
       return { ...state, allShifts: shifts, shiftsLoading: false };
 
     case "DELETE_SHIFT":
-      const new_shifts = shifts.filter(shift => shift.id != action.data);
+      const new_shifts = shifts.filter(shift => shift.id !== action.data);
       return { ...state, allShifts: new_shifts, shiftsLoading: false };
 
     // TODO: double check this

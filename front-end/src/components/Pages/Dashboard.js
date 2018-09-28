@@ -15,9 +15,9 @@ class Dashboard extends Component {
     return (
       <DashboardContainer>
         <DashboardHeader>
-          <h1>Welcome,</h1>
-          <span>{this.props.first_name} </span>
-          <span>{this.props.last_name}</span>
+          Welcome,
+          {this.props.first_name}
+          {this.props.last_name}
         </DashboardHeader>
         <HorizontalContainer>
           <AssignedShift />
