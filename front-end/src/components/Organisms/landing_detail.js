@@ -19,7 +19,7 @@ const Landing_Details = () => {
       <BackgroundHolder style={divStyle}>
         <div className="top-container">
           <h1 className="font-title">
-            Employee Scheduling Software for Your Industry
+          The Benefits of Exact
           </h1>
         </div>
 
@@ -60,11 +60,11 @@ const Landing_Details = () => {
           </div>
         </div>
       </BackgroundHolder>
-      <FooterStyles>
+      {/* <FooterStyles>
         <footer>
           <span>Copyright 2018</span>
         </footer>
-      </FooterStyles>
+      </FooterStyles> */}
     </div>
   );
 };

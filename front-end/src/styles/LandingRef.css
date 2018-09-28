@@ -57,7 +57,8 @@
 .font-title2 {
   font-family: "Josefin Slab", serif;
 }
-*/ .mid-container {
+
+.mid-container {
   display: flex;
   flex-direction: row;
   justify-content: center;
@@ -78,6 +79,70 @@
   line-height: 1.5em;
   color: #767676;
 }
+
+.frame1TextContainer {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  font-family: "PT Sans", sans-serif;
+  font-size: 1.5em;
+  padding: 50px;
+  text-align: center;
+}
+
+.frameHeading {
+  font-family: "PT Sans", sans-serif;
+  color: #767676;
+  font-size: 1.8em;
+  font-weight: 100;
+}
+
+.frameText {
+  margin-top: 10px;
+  color: #767676;
+  width: 900px;
+  align-self: center;
+  font-size: 0.9em;
+  line-height: 1.5em;
+}
+
+.frameContainer {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  text-align: center;
+}
+
+.frame1 {
+  width: 100%;
+}
+
+.frame2Heading {
+  font-family: "PT Sans", sans-serif;
+  font-size: 2.8em;
+  font-weight: 100;
+  color: #fff;
+}
+
+.frame2 {
+  font-family: "PT Sans", sans-serif;
+  font-weight: 100;
+  margin-top: -500px;
+  color: #e6e6e6;
+  display: flex;
+  flex-direction: column;
+}
+
+.cta-button {
+  margin-top: 35px;
+  border: solid #fff;
+  border-width: 2px;
+  align-self: center;
+  width: 300px;
+  font-size: 2.0em;
+  padding: 5px 20px;
+}
+
 
 .Test {
   width: 100px;
