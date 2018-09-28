@@ -11,7 +11,7 @@ const Landing = () => {
       <Landing_Card/>
       <Landing_Detail/>
       <LandingLearning/>
-      {/* <LandingFooter/> */}
+      {/*<LandingFooter/>*/}
     </div>
   )
 };
