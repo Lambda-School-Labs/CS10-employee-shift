@@ -1,4 +1,7 @@
 export const colors = [
+  // open shift color [0]
+  "#e0f6d8",
+  // user profile colors
   "red",
   "orange",
   "yellow",

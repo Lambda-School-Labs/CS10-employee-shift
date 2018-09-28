@@ -37,7 +37,10 @@ class PostShiftTime extends React.Component {
 
     return (
       <div>
-        <HoOButton onClick={this.handleOpen}>{this.props.day}</HoOButton>
+        <HoOButton onClick={this.handleOpen}>
+          <h4>{this.props.day}</h4> <h5>{this.props.start}</h5>
+          <h5>{this.props.end}</h5>
+        </HoOButton>
         <Portal open={this.state.open} onClose={this.handleClose}>
           <Segment
             style={{

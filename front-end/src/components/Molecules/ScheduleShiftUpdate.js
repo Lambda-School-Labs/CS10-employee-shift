@@ -1,14 +1,17 @@
 import React from "react";
 import { connect } from "react-redux";
 
-import { postShift } from "../../store/Shift/actions.js";
+import { updateShift, deleteShift } from "../../store/Shift/actions.js";
 
 import PostShiftTime from "./PostShiftTime.js";
 
+import {
+  GridItemActiveShiftInner,
+  GridItemActiveShift,
+} from "../../styles/Calendar.js";
 import { Segment, Portal, Icon, Header } from "semantic-ui-react";
-import { GridItemShift } from "../../styles/Calendar.js";
 
-class ScheduleShift extends React.Component {
+class ScheduleShiftUpdate extends React.Component {
   state = {
     open: false,
     clickX: 0,
@@ -58,16 +61,18 @@ class ScheduleShift extends React.Component {
 
   render() {
     return (
-      <GridItemShift
-        key={`${this.props.row}-${this.props.column}`}
+      <GridItemActiveShift
         row={this.props.row}
         column={this.props.column}
-        background={this.props.row > 2 ? "none" : "hsl(104, 62.5%, 95%)"}
+        color={this.props.color}
+        justify={this.props.justify}
       >
-        <div
-          style={{ width: "100%", height: "100%" }}
+        <GridItemActiveShiftInner
           onClick={this.handleOpen}
-        />
+          hue={this.props.hue}
+        >
+          {this.props.text1} - {this.props.text2}
+        </GridItemActiveShiftInner>
         <Portal
           open={this.state.open}
           onClose={this.handleClose}
@@ -85,14 +90,16 @@ class ScheduleShift extends React.Component {
             }}
           >
             <Icon link onClick={this.handleClose} name="close" />
-            <Header textAlign={"center"}>New Shift</Header>
+            <Header textAlign={"center"}>Update Shift</Header>
             <PostShiftTime
               day={"Start Time"}
+              time={this.props.start}
               data={"start_datetime"}
               inputChangeHandler={this.inputChangeHandler}
             />
             <PostShiftTime
               day={"End Time"}
+              time={this.props.end}
               data={"end_datetime"}
               inputChangeHandler={this.inputChangeHandler}
             />
@@ -106,17 +113,27 @@ class ScheduleShift extends React.Component {
             <button onClick={this.submitHandler}>Submit</button>
           </Segment>
         </Portal>
-      </GridItemShift>
+      </GridItemActiveShift>
     );
   }
 }
 
 const mapDispatchToProps = dispatch => {
   return {
-    postShift: (start_datetime, end_datetime, profile, is_open, notes) => {
+    updateShift: (
+      id,
+      start_datetime,
+      end_datetime,
+      profile,
+      is_open,
+      notes
+    ) => {
       return dispatch(
-        postShift(start_datetime, end_datetime, profile, is_open, notes)
+        updateShift(id, start_datetime, end_datetime, profile, is_open, notes)
       );
+    },
+    deleteShift: id => {
+      return dispatch(deleteShift(id));
     },
   };
 };
@@ -124,4 +141,4 @@ const mapDispatchToProps = dispatch => {
 export default connect(
   null,
   mapDispatchToProps
-)(ScheduleShift);
+)(ScheduleShiftUpdate);

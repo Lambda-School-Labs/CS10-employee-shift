@@ -14,7 +14,7 @@ export const HorizontalContainer = styled.div`
 `;
 
 export const ComponentContainer = styled.div`
-  height: 95vh
+  height: 95%;
   width: 100vw;
 `;
 

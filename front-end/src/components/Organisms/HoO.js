@@ -55,7 +55,6 @@ class HoO extends Component {
               position: "absolute",
               top: "5%",
               zIndex: 1000,
-              width: "15%",
               minWidth: "100px",
             }}
           >
@@ -65,36 +64,78 @@ class HoO extends Component {
               day="Monday"
               postHoO={this.postHoO}
               updateHoO={this.updateHoO}
+              start={
+                this.props.allHoOs[0] ? this.props.allHoOs[0].open_time : null
+              }
+              end={
+                this.props.allHoOs[0] ? this.props.allHoOs[0].close_time : null
+              }
             />
             <HoODay
               day="Tuesday"
               postHoO={this.postHoO}
               updateHoO={this.updateHoO}
+              start={
+                this.props.allHoOs[1] ? this.props.allHoOs[1].open_time : null
+              }
+              end={
+                this.props.allHoOs[1] ? this.props.allHoOs[1].close_time : null
+              }
             />
             <HoODay
               day="Wednesday"
               postHoO={this.postHoO}
               updateHoO={this.updateHoO}
+              start={
+                this.props.allHoOs[2] ? this.props.allHoOs[2].open_time : null
+              }
+              end={
+                this.props.allHoOs[2] ? this.props.allHoOs[2].close_time : null
+              }
             />
             <HoODay
               day="Thursday"
               postHoO={this.postHoO}
               updateHoO={this.updateHoO}
+              start={
+                this.props.allHoOs[3] ? this.props.allHoOs[3].open_time : null
+              }
+              end={
+                this.props.allHoOs[3] ? this.props.allHoOs[3].close_time : null
+              }
             />
             <HoODay
               day="Friday"
               postHoO={this.postHoO}
               updateHoO={this.updateHoO}
+              start={
+                this.props.allHoOs[4] ? this.props.allHoOs[4].open_time : null
+              }
+              end={
+                this.props.allHoOs[4] ? this.props.allHoOs[4].close_time : null
+              }
             />
             <HoODay
               day="Saturday"
               postHoO={this.postHoO}
               updateHoO={this.updateHoO}
+              start={
+                this.props.allHoOs[5] ? this.props.allHoOs[5].open_time : null
+              }
+              end={
+                this.props.allHoOs[5] ? this.props.allHoOs[5].close_time : null
+              }
             />
             <HoODay
               day="Sunday"
               postHoO={this.postHoO}
               updateHoO={this.updateHoO}
+              start={
+                this.props.allHoOs[6] ? this.props.allHoOs[6].open_time : null
+              }
+              end={
+                this.props.allHoOs[6] ? this.props.allHoOs[6].close_time : null
+              }
             />
           </Segment>
         </Portal>
