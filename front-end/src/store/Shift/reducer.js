@@ -5,7 +5,6 @@ const initialState = {
 };
 
 export default (state = initialState, action) => {
-  // return shallow copy of shifts
   const shifts = state.allShifts.slice();
 
   switch (action.type) {
@@ -20,15 +19,11 @@ export default (state = initialState, action) => {
       return { ...state, allShifts: shifts, shiftsLoading: false };
 
     case "UPDATE_SHIFT":
-      const updatedShift = action.updatedShift;
+      const updatedShift = action.data;
       const indexToUpdate = shifts.indexOf(
         shifts.filter(shift => shift.id === updatedShift.id)
       );
-      shifts.splice(
-        indexToUpdate === 0 ? indexToUpdate : indexToUpdate - 1,
-        1,
-        updatedShift
-      );
+      shifts.splice(indexToUpdate, 1, updatedShift);
       return { ...state, allShifts: shifts, shiftsLoading: false };
 
     case "DELETE_SHIFT":
