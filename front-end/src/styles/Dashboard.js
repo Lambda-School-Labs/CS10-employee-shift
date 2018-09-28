@@ -20,8 +20,8 @@ export const DashboardHeader = styled.h1`
 `;
 
 export const OrganismContainer = styled.div`
-  width: 30vh;
-  height: 50vh;
+  width: 100%;
+  height: 89vh;
   display: flex;
   align-items: center;
   flex-direction: column;

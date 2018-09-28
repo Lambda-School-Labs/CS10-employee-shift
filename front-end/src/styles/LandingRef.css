@@ -1,5 +1,5 @@
-@import url('https://fonts.googleapis.com/css?family=Josefin+Slab');
-@import url('https://fonts.googleapis.com/css?family=Oswald');
+@import url("https://fonts.googleapis.com/css?family=Josefin+Slab");
+@import url("https://fonts.googleapis.com/css?family=Oswald");
 
 
 .top-container {
@@ -8,6 +8,7 @@
   justify-content: center;
   width: 100%;
   height: 200px;
+  padding-top: 100px;
 }
 
 .title {
@@ -19,51 +20,33 @@
   margin-bottom: auto;
 }
 
-.text-block1 {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  margin-top: -95px;
-  padding:0 25px;
-}
-
-.text-block2 {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  margin-top: -30px;
-}
-
-.vertical {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  padding: auto;
+.ouricon {
+  width: 100px;
+  align-self: center;
+  margin-top: -120px;
 }
 
 .title-text {
-  display: flex;
-  justify-content: center;
-  
-  padding: 25px;
+  font-family: "PT Sans", sans-serif;
+  color: #4b9cd3;
+  padding: 0 15px;
 }
 
 .inner-text {
-  display: flex;
-  justify-content: center;
-  margin-bottom: 50px;
-  padding-right: auto;
-  padding-left: auto;
-  padding-bottom: -35px;
+  align-self: center;
+  margin-bottom: 25px;
 }
 
 .font-title {
-  font-family: 'Oswald', sans-serif;
-  font-size: 4em;
+  /* font-family: 'Oswald', sans-serif; */
+  font-family: "PT Sans", sans-serif;
+  font-size: 2.7em;
+  font-weight: 100;
+  color: #767676;
 }
 
 .font-title2 {
-  font-family: 'Josefin Slab', serif;
+  font-family: "Josefin Slab", serif;
 }
 
 .frame1 {
@@ -82,16 +65,18 @@
 
 .textBox {
   display: flex;
-  width: 50%;
+  width: 300px;
   height: 350px;
-  justify-content: space-evenly;
   flex-direction: column;
-  background-color: #E1E1E1;
-  padding: 10px;
-  margin-top: 5%;
-  margin-bottom: 5%;
-  margin-right: 10px;
-  margin-left: 10px;
+  background-color: #fff;
+  padding: 20px;
+  padding-top: 70px;
+  margin: 5% 15px;
+  font-family: "PT Sans", sans-serif;
+  text-align: center;
+  font-size: 1.2em;
+  line-height: 1.5em;
+  color: #767676;
 }
 
 

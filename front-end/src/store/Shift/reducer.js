@@ -13,13 +13,9 @@ export default (state = initialState, action) => {
       return { ...state, shiftsLoading: true };
 
     case "READ_SHIFT":
-      // DEV CONSOLE LOG, REMOVE ME!
-      console.log("FETCHED SHIFTS", action.data);
       return { ...state, allShifts: action.data, shiftsLoading: false };
 
     case "CREATE_SHIFT":
-      // DEV CONSOLE LOG, REMOVE ME!
-      console.log("CREATED SHIFT", action.data);
       shifts.push(action.data);
       return { ...state, allShifts: shifts, shiftsLoading: false };
 
@@ -33,9 +29,10 @@ export default (state = initialState, action) => {
       return { ...state, allShifts: shifts, shiftsLoading: false };
 
     case "DELETE_SHIFT":
-      // DEV CONSOLE LOG, REMOVE ME!
-      console.log("DELETED SHIFT", action.data);
-      shifts.splice(action.index, 1);
+      const index = shifts.indexOf(
+        shifts.filter(shift => shift.id === action.id)
+      );
+      shifts.splice(index - 1, 1);
       return { ...state, allShifts: shifts, shiftsLoading: false };
 
     // TODO: double check this

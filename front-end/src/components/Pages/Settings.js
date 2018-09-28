@@ -8,22 +8,32 @@ import { SettingsContainer, FormItem, Form } from "../../styles/Settings.js";
 class Settings extends Component {
   state = {
     email: "",
-    phone: "",
-    text_enabled: true,
-    email_enabled: true,
+    phone_number: "",
+    text_enabled: false,
+    email_enabled: false,
     old_password: "",
-    new_password: "",
+    password: "",
+    re_password: ""
   };
+  componentDidMount() {
+    this.setState({
+      email: this.props.email,
+      phone_number: this.props.phone_number,
+      email_enabled: this.props.email_enabled,
+      text_enabled: this.props.text_enabled
+    })
+  }
 
   submitForm = event => {
     event.preventDefault();
     this.props.updateUser(
       this.state.email,
-      this.state.phone,
+      this.state.phone_number,
       this.state.text_enabled,
       this.state.email_enabled,
       this.state.old_password,
-      this.state.new_password
+      this.state.password,
+      this.state.re_password
     );
   };
 
@@ -50,7 +60,7 @@ class Settings extends Component {
           <FormItem>
             <label>Phone</label>
             <input
-              value={this.state.phone}
+              value={this.state.phone_number}
               onChange={this.inputChangeHandler}
               name="phone"
               type="text"
@@ -86,9 +96,18 @@ class Settings extends Component {
           <FormItem>
             <label>New Password</label>
             <input
-              value={this.state.new_password}
+              value={this.state.password}
               onChange={this.inputChangeHandler}
-              name="new_password"
+              name="password"
+              type="password"
+            />
+          </FormItem>
+          <FormItem>
+            <label>Retype Password</label>
+            <input
+              value={this.state.re_password}
+              onChange={this.inputChangeHandler}
+              name="re_password"
               type="password"
             />
           </FormItem>
@@ -106,8 +125,16 @@ const mapStateToProps = state => {
       return { field, message: state.user.errors[field] };
     });
   }
+
+  const userProfile = state.user.currentUser;
+  //TODO: check for empty profile - error
   return {
     errors,
+    
+    email: userProfile.user.email,
+    phone_number: userProfile.phone_number,
+    email_enabled: userProfile.email_enabled,
+    text_enabled: userProfile.text_enabled
   };
 };
 
@@ -119,7 +146,8 @@ const mapDispatchToProps = dispatch => {
       text_enabled,
       email_enabled,
       old_password,
-      new_password
+      password,
+      re_password
     ) => {
       return dispatch(
         updateUser(
@@ -128,7 +156,8 @@ const mapDispatchToProps = dispatch => {
           text_enabled,
           email_enabled,
           old_password,
-          new_password
+          password,
+          re_password
         )
       );
     },

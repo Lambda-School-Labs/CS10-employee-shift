@@ -1,9 +1,10 @@
+// DEPRECATED
+
 import React, { Component } from "react";
 import { connect } from "react-redux";
 
 import { updateShift, deleteShift } from "../../store/Shift/actions.js";
 
-//REFACTOR TO OWN STYLES
 import { BillingContainer, FormItem, Form } from "../../styles/Billing.js";
 
 class UpdateShift extends Component {

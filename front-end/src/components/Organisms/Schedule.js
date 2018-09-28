@@ -1,5 +1,8 @@
+// DEPRECATED
 import React, { Component } from "react";
 import { connect } from "react-redux";
+
+import moment from "moment";
 
 import { getShifts } from "../../store/Shift/actions.js";
 
@@ -11,6 +14,7 @@ import {
   GridItemHeaderDate,
   GridItemEmployee,
   GridItemOpenShift,
+  GridItemActiveShift,
   GridContainer,
   GridItemOpenShiftHeader,
 } from "../../styles/Calendar.js";
@@ -23,12 +27,20 @@ import { Label } from "semantic-ui-react";
 
 class Schedule extends Component {
   // TODO: Should GET to shifts be fired here?
-  componentDidMount() {
+  state = {
+    date: moment().format(),
+  };
+
+  componentWillMount() {
     this.props.getShifts();
+    const currentDate = moment().format();
+  }
+  componentDidMount() {
+    this.fillShifts();
   }
 
-  handleClick = () => {
-    console.log("Use me for something");
+  handleChangeDate = () => {
+    console.log(this.state.currentDate);
   };
 
   fillGrid = employees => {
@@ -51,6 +63,20 @@ class Schedule extends Component {
     return output;
   };
 
+  fillShifts = () => {
+    return [
+      <GridItemActiveShift
+        key={`${1}-${1}`}
+        handleClick={this.handleClick}
+        row={4}
+        column={4}
+      >
+        {" "}
+        hi
+      </GridItemActiveShift>,
+    ];
+  };
+
   render() {
     // TODO: get employees from store to make this dynamic
     const employees = 8;
@@ -60,31 +86,73 @@ class Schedule extends Component {
         <GridItemHeader column="1" />
         <GridItemHeader column="2">
           <GridItemHeaderDay>Monday</GridItemHeaderDay>
-          <GridItemHeaderDate>17</GridItemHeaderDate>
+          <GridItemHeaderDate>
+            {
+              moment(this.state.date)
+                .day(1)
+                .toObject().date
+            }
+          </GridItemHeaderDate>
         </GridItemHeader>
         <GridItemHeader column="3">
           <GridItemHeaderDay>Tuesday</GridItemHeaderDay>
-          <GridItemHeaderDate>18</GridItemHeaderDate>
+          <GridItemHeaderDate>
+            {
+              moment(this.state.date)
+                .day(2)
+                .toObject().date
+            }
+          </GridItemHeaderDate>
         </GridItemHeader>
         <GridItemHeader column="4">
           <GridItemHeaderDay>Wednesday</GridItemHeaderDay>
-          <GridItemHeaderDate>19</GridItemHeaderDate>
+          <GridItemHeaderDate>
+            {
+              moment(this.state.date)
+                .day(3)
+                .toObject().date
+            }
+          </GridItemHeaderDate>
         </GridItemHeader>
         <GridItemHeader column="5">
           <GridItemHeaderDay>Thursday</GridItemHeaderDay>
-          <GridItemHeaderDate>20</GridItemHeaderDate>
+          <GridItemHeaderDate>
+            {
+              moment(this.state.date)
+                .day(4)
+                .toObject().date
+            }
+          </GridItemHeaderDate>
         </GridItemHeader>
         <GridItemHeader column="6">
           <GridItemHeaderDay>Friday</GridItemHeaderDay>
-          <GridItemHeaderDate>21</GridItemHeaderDate>
+          <GridItemHeaderDate>
+            {
+              moment(this.state.date)
+                .day(5)
+                .toObject().date
+            }
+          </GridItemHeaderDate>
         </GridItemHeader>
         <GridItemHeader column="7">
           <GridItemHeaderDay>Saturday</GridItemHeaderDay>
-          <GridItemHeaderDate>22</GridItemHeaderDate>
+          <GridItemHeaderDate>
+            {
+              moment(this.state.date)
+                .day(6)
+                .toObject().date
+            }
+          </GridItemHeaderDate>
         </GridItemHeader>
         <GridItemHeader column="8">
           <GridItemHeaderDay>Sunday</GridItemHeaderDay>
-          <GridItemHeaderDate>23</GridItemHeaderDate>
+          <GridItemHeaderDate>
+            {
+              moment(this.state.date)
+                .day(7)
+                .toObject().date
+            }
+          </GridItemHeaderDate>
         </GridItemHeader>
         {/* Refactor into molecules - Row Header 
         TODO: Make this dynamically from the number of employees */}
@@ -93,55 +161,68 @@ class Schedule extends Component {
           <GridItemOpenShiftHeader>Open Shifts</GridItemOpenShiftHeader>
         </GridItemOpenShift>
         <GridItemEmployee row="3">
-          <Label horizontal circular color={colors[0]} key={colors[0]}>
+          <Label horizontal circular color={colors[1]} key={colors[0]}>
             0
           </Label>
           Vlad
         </GridItemEmployee>
         <GridItemEmployee row="4">
-          <Label horizontal circular color={colors[1]} key={colors[1]}>
+          <Label horizontal circular color={colors[2]} key={colors[1]}>
             0
           </Label>
           Brandon
         </GridItemEmployee>
         <GridItemEmployee row="5">
-          <Label horizontal circular color={colors[2]} key={colors[2]}>
+          <Label horizontal circular color={colors[3]} key={colors[2]}>
             0
           </Label>
           Kyle
         </GridItemEmployee>
         <GridItemEmployee row="6">
-          <Label horizontal circular color={colors[3]} key={colors[3]}>
+          <Label horizontal circular color={colors[4]} key={colors[3]}>
             0
           </Label>
           Justin
         </GridItemEmployee>
         <GridItemEmployee row="7">
-          <Label horizontal circular color={colors[4]} key={colors[4]}>
+          <Label horizontal circular color={colors[5]} key={colors[4]}>
             0
           </Label>
           Obo
         </GridItemEmployee>
         <GridItemEmployee row="8">
-          <Label horizontal circular color={colors[5]} key={colors[5]}>
+          <Label horizontal circular color={colors[6]} key={colors[5]}>
             0
           </Label>
           Terrie
         </GridItemEmployee>
         <GridItemEmployee row="9">
-          <Label horizontal circular color={colors[6]} key={colors[6]}>
+          <Label horizontal circular color={colors[7]} key={colors[6]}>
             0
           </Label>
           Brian Doyle
         </GridItemEmployee>
         <GridItemEmployee row="10">
-          <Label horizontal circular color={colors[7]} key={colors[7]}>
+          <Label horizontal circular color={colors[8]} key={colors[7]}>
             0
           </Label>
           Boomer
         </GridItemEmployee>
         {/* Refactor into molecules - Body */}
         {this.fillGrid(employees)}
+        {this.props.allShifts.map(shift => {
+          return (
+            <GridItemActiveShift
+              key={shift.id}
+              handleClick={this.handleClick}
+              row={shift.profile + 2}
+              column={4}
+              color={shift.profile ? colors[shift.profile] : colors[0]}
+            >
+              {new Date(shift.start_datetime).getHours()}
+            </GridItemActiveShift>
+          );
+        })}
       </GridContainer>
     );
   }

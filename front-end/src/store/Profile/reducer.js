@@ -2,7 +2,6 @@ const initialState = {
   profileLoading: true,
   errors: {},
   currentProfile: null,
-  // implement me
   allProfiles: [],
 };
 
@@ -15,9 +14,10 @@ export default (state = initialState, action) => {
       return { ...state, profileLoading: true };
 
     case "READ_PROFILE":
-      // DEV CONSOLE LOG, REMOVE ME!
-      console.log("FETCHED SHIFTS", action.data);
       return { ...state, currentProfile: action.data, profileLoading: false };
+
+    case "READ_PROFILES":
+      return { ...state, allProfiles: action.data, profileLoading: false };
 
     /* For managers only?? REFACTOR FOLLOWING
     */
