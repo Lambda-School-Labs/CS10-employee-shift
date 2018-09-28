@@ -4,11 +4,7 @@ import "react-dates/initialize";
 
 import { postRequestOff } from "../../store/requestOff/action.js";
 
-import {
-  DateRangePicker,
-  SingleDatePicker,
-  DayPickerRangeController,
-} from "react-dates";
+import { DateRangePicker } from "react-dates";
 
 import { OrganismContainer } from "../../styles/Dashboard.js";
 import { FormItem, Form } from "../../styles/signin.js";
@@ -21,17 +17,14 @@ class TimeOffRequest extends Component {
   };
 
   submitHandler = e => {
-    // dummy dates, remove me
-    let date = new Date();
-    date = date.toISOString();
-
     e.preventDefault();
     // TODO: Fill with correct data to send
-    this.props.postRequestOff(
-      this.state.start_datetime,
-      this.state.end_datetime,
-      this.state.reason
-    );
+    console.log("postRequestOff FIRE");
+    // this.props.postRequestOff(
+    //   this.state.start_datetime,
+    //   this.state.end_datetime,
+    //   this.state.reason
+    // );
   };
 
   inputChangeHandler = event => {

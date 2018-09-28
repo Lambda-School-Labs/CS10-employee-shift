@@ -10,7 +10,7 @@ import {
   DashboardHeader,
 } from "../../styles/Dashboard.js";
 
-class Dashboard extends Component {
+class Admin extends Component {
   render() {
     return (
       <DashboardContainer>
@@ -38,4 +38,4 @@ const mapStateToProps = state => {
   };
 };
 
-export default connect(mapStateToProps)(Dashboard);
+export default connect(mapStateToProps)(Admin);

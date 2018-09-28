@@ -28,9 +28,10 @@ class ScheduleShiftUpdate extends React.Component {
     notes: this.props.notes,
     start_time: this.props.start,
     end_time: this.props.end,
-    start_time24: "",
-    end_time24: "",
-    profile: this.props.row - 2,
+    start_time24: this.props.start24,
+    end_time24: this.props.end24,
+    profile: this.props.profile,
+    id: this.props.id,
   };
 
   handleOpen = e => {
@@ -58,29 +59,31 @@ class ScheduleShiftUpdate extends React.Component {
 
     if (this.state.start_time24 && this.state.end_time24) {
       let start_hour;
-      if (this.state.start_time24.length === 4)
+      let start_minutes;
+      if (this.state.start_time24.length === 4) {
         start_hour = "0" + this.state.start_time24[0];
-      else start_hour = this.state.start_time24.slice(0, 1);
-      const start_minutes = this.state.start_time24.slice(
-        this.state.start_time24.length - 3,
-        this.state.start_time24.length - 1
-      );
+        start_minutes = this.state.start_time24.slice(2, 4);
+      } else {
+        start_hour = this.state.start_time24.slice(0, 2);
+        start_minutes = this.state.start_time24.slice(3, 5);
+      }
       const start_datetime = moment(this.props.date)
         .hour(start_hour)
         .minute(start_minutes)
+        .second(0)
         .utc()
         .format();
 
       let end_hour;
       let end_minutes;
       let end_datetime;
-      if (this.state.end_time24.length === 4)
+      if (this.state.end_time24.length === 4) {
         end_hour = "0" + this.state.end_time24[0];
-      else end_hour = this.state.end_time24.slice(0, 1);
-      end_minutes = this.state.end_time24.slice(
-        this.state.end_time24.length - 3,
-        this.state.end_time24.length - 1
-      );
+        end_minutes = this.state.end_time24.slice(2, 4);
+      } else {
+        end_hour = this.state.end_time24.slice(0, 2);
+        end_minutes = this.state.end_time24.slice(3, 5);
+      }
       if (end_hour < start_hour) {
         end_datetime = moment(start_datetime)
           .clone()
@@ -109,14 +112,16 @@ class ScheduleShiftUpdate extends React.Component {
       const notes = this.state.notes ? this.state.notes : "";
 
       this.props.updateShift(
-        this.props.id,
+        this.state.id,
+        profile,
         start_datetime,
         end_datetime,
-        profile,
         is_open,
         notes
       );
     }
+
+    this.handleClose();
   };
 
   inputChangeHandler = event => {
@@ -140,7 +145,7 @@ class ScheduleShiftUpdate extends React.Component {
           onClick={this.handleOpen}
           hue={this.props.hue}
         >
-          {this.props.text1} - {this.props.text2}
+          {this.props.start} - {this.props.end}
         </GridItemActiveShiftInner>
         <Portal
           open={this.state.open}
@@ -150,11 +155,18 @@ class ScheduleShiftUpdate extends React.Component {
           <Segment
             style={{
               position: "fixed",
-              left: `${window.innerWidth - this.state.clickX}px`,
-              top: `${this.state.clickY}px`,
+              left: `${
+                this.state.clickX > window.innerWidth - 142
+                  ? this.state.clickX - 262
+                  : this.state.clickX + 20
+              }px`,
+              top: `${
+                this.state.clickY > window.innerHeight - 242
+                  ? this.state.clickY - 362
+                  : this.state.clickY - 100
+              }px`,
               zIndex: 1005,
-              minWidth: "120px",
-              margin: "0",
+              minWidth: "300px",
             }}
           >
             <Label
@@ -178,14 +190,14 @@ class ScheduleShiftUpdate extends React.Component {
             <Divider />
             <PostShiftTime
               day={"Start Time"}
-              start={this.props.start}
-              data={"start_datetime"}
+              start={this.state.start_time}
+              data={"start"}
               inputChangeHandler={this.inputChangeHandler}
             />
             <PostShiftTime
               day={"End Time"}
-              end={this.props.end}
-              data={"end_datetime"}
+              end={this.state.end_time}
+              data={"end"}
               inputChangeHandler={this.inputChangeHandler}
             />
             <Input
@@ -215,14 +227,14 @@ const mapDispatchToProps = dispatch => {
   return {
     updateShift: (
       id,
+      profile,
       start_datetime,
       end_datetime,
-      profile,
       is_open,
       notes
     ) => {
       return dispatch(
-        updateShift(id, start_datetime, end_datetime, profile, is_open, notes)
+        updateShift(id, profile, start_datetime, end_datetime, is_open, notes)
       );
     },
     deleteShift: id => {

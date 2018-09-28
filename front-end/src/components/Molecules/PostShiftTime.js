@@ -5,8 +5,6 @@ import TimePicker from "../Atoms/TimePicker.js";
 import { HoOButton } from "../../styles/Calendar.js";
 import { Segment, Portal } from "semantic-ui-react";
 
-// TODO: add bounds to where the portal can open
-
 class PostShiftTime extends React.Component {
   state = {
     open: false,
@@ -35,6 +33,7 @@ class PostShiftTime extends React.Component {
 
   render() {
     this.submitTimeChange = this.submitTimeChange.bind(this);
+
     return (
       <div>
         <HoOButton onClick={this.handleOpen}>
@@ -53,6 +52,7 @@ class PostShiftTime extends React.Component {
             }}
           >
             <TimePicker
+              currentTime={this.props.start ? this.props.start : this.props.end}
               handleClose={this.handleClose}
               submitTimeChange={this.submitTimeChange}
             />

@@ -16,15 +16,11 @@ import {
   GridItemHeaderDate,
   GridItemEmployee,
   GridItemOpenShift,
-  GridItemActiveShift,
   GridContainer,
   GridItemOpenShiftHeader,
-  GridItemActiveShiftInner,
   ProfileIcon,
 } from "../../styles/Calendar.js";
 import { CalendarContainer } from "../../styles/Calendar.js";
-import { colors } from "../../styles/globals.js";
-import { Label } from "semantic-ui-react";
 
 // TODO: Make me more stylish
 // TODO: Check HoO against shifts to make sure that the time is filled, if not render cell red
@@ -38,10 +34,9 @@ class Calendar extends Component {
     date: moment().format(),
   };
 
-  componentWillMount() {
+  componentDidMount() {
     this.props.getAllProfiles();
     this.props.getShifts();
-    const currentDate = moment().format();
   }
 
   handleChangeDate = direction => {
@@ -66,6 +61,7 @@ class Calendar extends Component {
             date={moment(this.state.date)
               .day(column - 1)
               .format()}
+            profile={row > 2 ? this.props.allProfiles[row - 3].id : null}
           />
         );
       }
@@ -74,9 +70,6 @@ class Calendar extends Component {
   };
 
   render() {
-    // TODO: get employees from store to make this dynamic
-    // this.props.profile.allProfiles.length
-    const employees = 8;
     return (
       <CalendarContainer>
         <CalendarTopNav
@@ -86,6 +79,7 @@ class Calendar extends Component {
         <GridContainer rows={this.props.allProfiles.length + 2}>
           {/* Refactor into molecules - Column Header */}
           <GridItemHeader column="1" />
+          {/* Refactor - Dynamic */}
           <GridItemHeader column="2">
             <GridItemHeaderDay>Monday</GridItemHeaderDay>
             <GridItemHeaderDate>
@@ -176,6 +170,7 @@ class Calendar extends Component {
           })}
           {/* Refactor into molecules - Body */}
           {this.fillGrid(this.props.allProfiles.length)}
+
           {this.props.allShifts.map((shift, index) => {
             const currentDate = moment(this.state.date);
             const shiftInCurrentWeek = moment(shift.start_datetime).isBetween(
@@ -189,19 +184,17 @@ class Calendar extends Component {
                 .set({ hour: 23, minute: 59, "second:": 59, millisecond: 999 })
             );
             if (shiftInCurrentWeek) {
+              const profileRow =
+                this.props.allProfiles.indexOf(
+                  this.props.allProfiles.filter(
+                    profile => profile.id === shift.profile
+                  )[0]
+                ) + 3;
               return (
                 <ScheduleShiftUpdate
-                  hue={shift.profile ? shift.profile * 40 : 102}
-                  text1={moment(shift.start_datetime).format("h:mm A")}
-                  text2={moment(shift.end_datetime).format("h:mm A")}
+                  hue={profileRow ? profileRow * 40 : 102}
                   key={shift.id}
-                  row={
-                    this.props.allProfiles.indexOf(
-                      this.props.allProfiles.filter(
-                        profile => profile.id === shift.profile
-                      )[0]
-                    ) + 3
-                  }
+                  row={profileRow}
                   // add span to second day if applicable
                   column={moment(shift.start_datetime).isoWeekday() + 1}
                   justify={
@@ -211,14 +204,16 @@ class Calendar extends Component {
                         ? "flex-end"
                         : "center"
                   }
-                  start={moment(shift.start_datetime).format("H:mm A")}
-                  end={moment(shift.end_datetime).format("H:mm A")}
+                  start={moment(shift.start_datetime).format("h:mm A")}
+                  end={moment(shift.end_datetime).format("h:mm A")}
+                  start24={moment(shift.start_datetime).format("H:mm")}
+                  end24={moment(shift.end_datetime).format("H:mm")}
                   notes={shift.notes}
-                  id={shift.id}
                   profile={shift.profile}
+                  id={shift.id}
                 />
               );
-            }
+            } else return null;
           })}
         </GridContainer>
       </CalendarContainer>
