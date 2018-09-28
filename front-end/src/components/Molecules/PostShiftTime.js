@@ -14,11 +14,12 @@ class PostShiftTime extends React.Component {
     clickY: 0,
   };
 
-  submitTimeChange(newTime) {
+  submitTimeChange(time24, time) {
     const event = {
       target: {
         name: this.props.data,
-        value: newTime,
+        value: time,
+        value24: time24,
       },
     };
     this.props.inputChangeHandler(event);
@@ -34,12 +35,12 @@ class PostShiftTime extends React.Component {
 
   render() {
     this.submitTimeChange = this.submitTimeChange.bind(this);
-
     return (
       <div>
         <HoOButton onClick={this.handleOpen}>
-          <h4>{this.props.day}</h4> <h5>{this.props.start}</h5>
-          <h5>{this.props.end}</h5>
+          <h4>{this.props.day}</h4>
+          {this.props.start ? <h5>{this.props.start}</h5> : null}
+          {this.props.end ? <h5>{this.props.end}</h5> : null}
         </HoOButton>
         <Portal open={this.state.open} onClose={this.handleClose}>
           <Segment

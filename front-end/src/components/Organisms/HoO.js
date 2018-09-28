@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
+import moment from "moment";
 
 import {
   getHoursOfOperation,
@@ -10,7 +11,7 @@ import {
 import HoODay from "../Molecules/HoODay.js";
 
 import { ButtonContainer, HoOButton } from "../../styles/Calendar.js";
-import { Header, Segment, Portal, Icon } from "semantic-ui-react";
+import { Header, Segment, Portal, Label, Divider } from "semantic-ui-react";
 
 // TODO: Make me more stylish
 // TODO: Refactor to be a form that holds dates from child components and fires postHoO and updateHoO on submit
@@ -51,24 +52,41 @@ class HoO extends Component {
           {/* TODO: position this better segment */}
           <Segment
             style={{
-              left: "70%",
+              left: `${window.innerWidth - 310}px`,
               position: "absolute",
-              top: "5%",
+              top: `${window.innerHeight - 760}px`,
               zIndex: 1000,
-              minWidth: "100px",
+              width: "300px",
             }}
           >
-            <Icon link onClick={this.handleClose} name="close" />
-            <Header textAlign={"center"}>Hours of Operation</Header>
+            <Label
+              as="a"
+              corner={"left"}
+              color="red"
+              onClick={this.handleClose}
+              icon="close"
+            />
+            <Header as="h2" textAlign={"center"}>
+              Hours of Operation
+            </Header>
+            <Divider />
             <HoODay
               day="Monday"
               postHoO={this.postHoO}
               updateHoO={this.updateHoO}
               start={
-                this.props.allHoOs[0] ? this.props.allHoOs[0].open_time : null
+                this.props.allHoOs[0]
+                  ? moment(this.props.allHoOs[0].open_time, "H-m-s").format(
+                      "h:mm A"
+                    )
+                  : null
               }
               end={
-                this.props.allHoOs[0] ? this.props.allHoOs[0].close_time : null
+                this.props.allHoOs[0]
+                  ? moment(this.props.allHoOs[0].close_time, "H-m-s").format(
+                      "h:mm A"
+                    )
+                  : null
               }
             />
             <HoODay
@@ -76,10 +94,18 @@ class HoO extends Component {
               postHoO={this.postHoO}
               updateHoO={this.updateHoO}
               start={
-                this.props.allHoOs[1] ? this.props.allHoOs[1].open_time : null
+                this.props.allHoOs[1]
+                  ? moment(this.props.allHoOs[1].open_time, "H-m-s").format(
+                      "h:mm A"
+                    )
+                  : null
               }
               end={
-                this.props.allHoOs[1] ? this.props.allHoOs[1].close_time : null
+                this.props.allHoOs[1]
+                  ? moment(this.props.allHoOs[1].close_time, "H-m-s").format(
+                      "h:mm A"
+                    )
+                  : null
               }
             />
             <HoODay
@@ -87,10 +113,18 @@ class HoO extends Component {
               postHoO={this.postHoO}
               updateHoO={this.updateHoO}
               start={
-                this.props.allHoOs[2] ? this.props.allHoOs[2].open_time : null
+                this.props.allHoOs[2]
+                  ? moment(this.props.allHoOs[2].open_time, "H-m-s").format(
+                      "h:mm A"
+                    )
+                  : null
               }
               end={
-                this.props.allHoOs[2] ? this.props.allHoOs[2].close_time : null
+                this.props.allHoOs[2]
+                  ? moment(this.props.allHoOs[2].close_time, "H-m-s").format(
+                      "h:mm A"
+                    )
+                  : null
               }
             />
             <HoODay
@@ -98,10 +132,18 @@ class HoO extends Component {
               postHoO={this.postHoO}
               updateHoO={this.updateHoO}
               start={
-                this.props.allHoOs[3] ? this.props.allHoOs[3].open_time : null
+                this.props.allHoOs[3]
+                  ? moment(this.props.allHoOs[3].open_time, "H-m-s").format(
+                      "h:mm A"
+                    )
+                  : null
               }
               end={
-                this.props.allHoOs[3] ? this.props.allHoOs[3].close_time : null
+                this.props.allHoOs[3]
+                  ? moment(this.props.allHoOs[3].close_time, "H-m-s").format(
+                      "h:mm A"
+                    )
+                  : null
               }
             />
             <HoODay
@@ -109,10 +151,18 @@ class HoO extends Component {
               postHoO={this.postHoO}
               updateHoO={this.updateHoO}
               start={
-                this.props.allHoOs[4] ? this.props.allHoOs[4].open_time : null
+                this.props.allHoOs[4]
+                  ? moment(this.props.allHoOs[4].open_time, "H-m-s").format(
+                      "h:mm A"
+                    )
+                  : null
               }
               end={
-                this.props.allHoOs[4] ? this.props.allHoOs[4].close_time : null
+                this.props.allHoOs[4]
+                  ? moment(this.props.allHoOs[4].close_time, "H-m-s").format(
+                      "h:mm A"
+                    )
+                  : null
               }
             />
             <HoODay
@@ -120,10 +170,18 @@ class HoO extends Component {
               postHoO={this.postHoO}
               updateHoO={this.updateHoO}
               start={
-                this.props.allHoOs[5] ? this.props.allHoOs[5].open_time : null
+                this.props.allHoOs[5]
+                  ? moment(this.props.allHoOs[5].open_time, "H-m-s").format(
+                      "h:mm A"
+                    )
+                  : null
               }
               end={
-                this.props.allHoOs[5] ? this.props.allHoOs[5].close_time : null
+                this.props.allHoOs[5]
+                  ? moment(this.props.allHoOs[5].close_time, "H-m-s").format(
+                      "h:mm A"
+                    )
+                  : null
               }
             />
             <HoODay
@@ -131,10 +189,18 @@ class HoO extends Component {
               postHoO={this.postHoO}
               updateHoO={this.updateHoO}
               start={
-                this.props.allHoOs[6] ? this.props.allHoOs[6].open_time : null
+                this.props.allHoOs[6]
+                  ? moment(this.props.allHoOs[6].open_time, "H-m-s").format(
+                      "h:mm A"
+                    )
+                  : null
               }
               end={
-                this.props.allHoOs[6] ? this.props.allHoOs[6].close_time : null
+                this.props.allHoOs[6]
+                  ? moment(this.props.allHoOs[6].close_time, "H-m-s").format(
+                      "h:mm A"
+                    )
+                  : null
               }
             />
           </Segment>

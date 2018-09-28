@@ -1,11 +1,21 @@
 import React from "react";
 import { connect } from "react-redux";
+import moment from "moment";
 
 import { postShift } from "../../store/Shift/actions.js";
 
 import PostShiftTime from "./PostShiftTime.js";
 
-import { Segment, Portal, Icon, Header } from "semantic-ui-react";
+import {
+  Segment,
+  Portal,
+  Label,
+  Header,
+  Form,
+  Input,
+  Button,
+  Divider,
+} from "semantic-ui-react";
 import { GridItemShift } from "../../styles/Calendar.js";
 
 class ScheduleShift extends React.Component {
@@ -14,9 +24,11 @@ class ScheduleShift extends React.Component {
     clickX: 0,
     clickY: 0,
     notes: "",
-    start_datetime: "",
-    end_datetime: "",
-    profile: this.props.row - 1,
+    start_time: "",
+    end_time: "",
+    start_time24: "",
+    end_time24: "",
+    profile: this.props.row - 2,
   };
 
   handleOpen = e => {
@@ -37,23 +49,77 @@ class ScheduleShift extends React.Component {
 
   submitHandler = event => {
     event.preventDefault();
-    console.log("The current state is:", this.state);
-    this.handleClose();
-    // If start time and end time:
-    // If profile === 1 post to open shifts
+    if (this.state.start_time24 && this.state.end_time24) {
+      let start_hour;
+      if (this.state.start_time24.length === 4)
+        start_hour = "0" + this.state.start_time24[0];
+      else start_hour = this.state.start_time24.slice(0, 1);
+      const start_minutes = this.state.start_time24.slice(
+        this.state.start_time24.length - 3,
+        this.state.start_time24.length - 1
+      );
+      const start_datetime = moment(this.props.date)
+        .hour(start_hour)
+        .minute(start_minutes)
+        .utc()
+        .format();
 
-    // this.props.postShift(
-    //   this.state.start_datetime,
-    //   this.state.end_datetime,
-    //   this.state.profile,
-    //   this.state.is_open,
-    //   this.state.notes
-    // );
+      let end_hour;
+      let end_minutes;
+      let end_datetime;
+      if (this.state.end_time24.length === 4)
+        end_hour = "0" + this.state.end_time24[0];
+      else end_hour = this.state.end_time24.slice(0, 1);
+      end_minutes = this.state.end_time24.slice(
+        this.state.end_time24.length - 3,
+        this.state.end_time24.length - 1
+      );
+      if (end_hour < start_hour) {
+        end_datetime = moment(start_datetime)
+          .clone()
+          .add(24 - start_hour + end_hour, "h")
+          .add(end_minutes, "m")
+          .utc()
+          .format();
+      } else {
+        end_datetime = moment(this.props.date)
+          .hour(end_hour)
+          .minute(end_minutes)
+          .utc()
+          .format();
+      }
+
+      let profile;
+      let is_open;
+      if (this.state.profile === 0) {
+        profile = null;
+        is_open = true;
+      } else {
+        profile = this.state.profile;
+        is_open = false;
+      }
+
+      const notes = this.state.notes ? this.state.notes : "";
+
+      this.props.postShift(
+        start_datetime,
+        end_datetime,
+        profile,
+        is_open,
+        notes
+      );
+    }
+
+    this.handleClose();
   };
 
   inputChangeHandler = event => {
-    const { name, value } = event.target;
-    this.setState({ [name]: value });
+    const { name, value, value24 } = event.target;
+    if (value24) {
+      const name24 = name + "_time24";
+      const name12 = name + "_time";
+      this.setState({ [name24]: value24, [name12]: value });
+    } else this.setState({ [name]: value });
   };
 
   render() {
@@ -79,31 +145,49 @@ class ScheduleShift extends React.Component {
               left: `${this.state.clickX - 140}px`,
               top: `${this.state.clickY}px`,
               zIndex: 1005,
-              minWidth: "120px",
-              margin: "0",
-              padding: "0",
             }}
           >
-            <Icon link onClick={this.handleClose} name="close" />
-            <Header textAlign={"center"}>New Shift</Header>
-            <PostShiftTime
-              day={"Start Time"}
-              data={"start_datetime"}
-              inputChangeHandler={this.inputChangeHandler}
+            <Label
+              as="a"
+              corner={"left"}
+              color="red"
+              onClick={this.handleClose}
+              icon="close"
             />
-            <PostShiftTime
-              day={"End Time"}
-              data={"end_datetime"}
-              inputChangeHandler={this.inputChangeHandler}
-            />
-            <label>Notes</label>
-            <input
-              value={this.state.notes}
-              onChange={this.inputChangeHandler}
-              name="notes"
-              type="text"
-            />
-            <button onClick={this.submitHandler}>Submit</button>
+            <Form>
+              <Header as="h2" textAlign={"center"}>
+                New Shift
+              </Header>
+              <Divider />
+              <PostShiftTime
+                day={"Start Time"}
+                data={"start"}
+                start={this.state.start_time}
+                inputChangeHandler={this.inputChangeHandler}
+              />
+              <PostShiftTime
+                day={"End Time"}
+                data={"end"}
+                end={this.state.end_time}
+                inputChangeHandler={this.inputChangeHandler}
+              />
+              <Input
+                label={{ tag: true, content: "Note" }}
+                labelPosition="left"
+                style={{ width: "70%", padding: "8% 8%" }}
+                value={this.state.notes}
+                onChange={this.inputChangeHandler}
+                name={"notes"}
+              />
+              <Button
+                fluid
+                size="large"
+                color="teal"
+                onClick={this.submitHandler}
+              >
+                Submit
+              </Button>
+            </Form>
           </Segment>
         </Portal>
       </GridItemShift>

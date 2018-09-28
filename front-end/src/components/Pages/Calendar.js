@@ -26,10 +26,11 @@ import { colors } from "../../styles/globals.js";
 import { Label } from "semantic-ui-react";
 
 // TODO: Make me more stylish
-// TODO: Make own "label" so colors show up correctly
 // TODO: Check HoO against shifts to make sure that the time is filled, if not render cell red
 // TODO: Turn cell red if conflict with employee's time off
 // TODO: Span shifts to multiple days
+// TODO: Dynamic employees
+// TODO: test CRUD
 
 class Calendar extends Component {
   state = {
@@ -60,7 +61,9 @@ class Calendar extends Component {
             key={`${row}-${column}`}
             handleClick={this.handleClick}
             row={row}
-            column={column}
+            date={moment(this.state.date)
+              .day(column - 1)
+              .format()}
           />
         );
       }
@@ -219,12 +222,14 @@ class Calendar extends Component {
                   justify={
                     moment(shift.start_datetime).format("k") <= 9
                       ? "flex-start"
-                      : moment(shift.start_datetime).format("k") >= 5
+                      : moment(shift.start_datetime).format("k") >= 17
                         ? "flex-end"
                         : "center"
                   }
                   start={moment(shift.start_datetime).format("H:mm A")}
                   end={moment(shift.end_datetime).format("H:mm A")}
+                  notes={shift.notes}
+                  id={shift.id}
                 />
               );
             }

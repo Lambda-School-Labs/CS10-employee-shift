@@ -31,8 +31,6 @@ export const getShifts = () => (dispatch, getState) => {
   }
 };
 
-// TESTING
-// TODO: fill in correct data to send
 export const postShift = (
   start_datetime,
   end_datetime,
@@ -47,25 +45,19 @@ export const postShift = (
   if (token) {
     headers["Authorization"] = `Bearer ${token}`;
   }
-
-  // DUMMY ACCOUNT -- REMOVE ME AND GRAB CORRECT ONE FROM STORE
-  const account = 1;
-  // DUMMY DATES -- REMOVE ME AND FILL IN CORRECT ONES
-  let date = new Date();
-  date = date.toISOString();
-
   const body = JSON.stringify({
-    account: account,
-    profile: profile,
-    start_datetime: date,
-    end_datetime: date,
-    is_open: is_open,
-    notes: notes,
+    start_datetime,
+    end_datetime,
+    profile,
+    is_open,
+    notes,
   });
 
   axios({
     method: "post",
-    url: `${process.env.REACT_APP_ROOT_URL}/api/shifts/`,
+    url: `${process.env.REACT_APP_ROOT_URL}/api/shifts/${
+      getState().user.currentUser.account.id
+    }`,
     headers: headers,
     data: body,
   })
@@ -99,26 +91,19 @@ export const updateShift = (
     headers["Authorization"] = `Bearer ${token}`;
   }
 
-  // DUMMY ACCOUNT -- REMOVE ME AND GRAB CORRECT ONE FROM STORE
-  const account = 1;
-  // DUMMY DATES -- REMOVE ME AND FILL IN CORRECT ONES
-  let date = new Date();
-  date = date.toISOString();
-
-  // SENDS ACCOUNT ID, STARTTIME, ENDTIME, OPTIONAL USER PROFILE, OPTIONAL OPEN FLAG
   const body = JSON.stringify({
-    account: account,
-    profile: profile,
-    start_datetime: date,
-    end_datetime: date,
-    is_open: is_open,
-    notes: notes,
+    start_datetime,
+    end_datetime,
+    profile,
+    is_open,
+    notes,
   });
 
   axios({
     method: "put",
-    // TODO: use dynamic ID of SHIFT
-    url: `${process.env.REACT_APP_ROOT_URL}/api/shifts/1/`,
+    url: `${process.env.REACT_APP_ROOT_URL}/api/shifts/${
+      getState().user.currentUser.account.id
+    }`,
     headers: headers,
     data: body,
   })
