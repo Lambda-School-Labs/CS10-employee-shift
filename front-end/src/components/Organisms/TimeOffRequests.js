@@ -48,8 +48,7 @@ class TimeOffRequest extends Component {
             focusedInput={this.state.focusedInput} // PropTypes.oneOf([START_DATE, END_DATE]) or null,
             onFocusChange={focusedInput => this.setState({ focusedInput })} // PropTypes.func.isRequired,
           />
-          <FormItem>
-            {/* Better date picker */}
+          {/* <FormItem>
             Date Start:{" "}
             <input
               value={this.state.start_datetime}
@@ -60,7 +59,6 @@ class TimeOffRequest extends Component {
             />
           </FormItem>
           <FormItem>
-            {/* Better date picker */}
             Date End:{" "}
             <input
               value={this.state.end_datetime}
@@ -69,7 +67,7 @@ class TimeOffRequest extends Component {
               name="end_datetime"
               placeholder="end date"
             />
-          </FormItem>
+          </FormItem> */}
           <FormItem>
             Reason:{" "}
             <input
