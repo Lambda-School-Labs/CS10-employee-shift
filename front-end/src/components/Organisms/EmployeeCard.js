@@ -1,37 +1,35 @@
-import React from "react";
+import React, { Component } from "react";
+
 
 import { EmployeeCardContainer, CardInner } from "../../styles/Employees";
 
-const EmployeeCard = () => {
-  const dummydata = [
-    {
-      name: "George",
-      email: "george@thiscompany.com",
-      phone: "920-333-2203",
-      workingDays: "MWF",
-      workingTime: "3-10pm",
-    },
-  ];
-  return dummydata.map((employee, i) => {
-    return (
-      <EmployeeCardContainer key={i}>
-        <h2>{employee.name}</h2>
-        <h2>{employee.email}</h2>
-        <h2>{employee.phone}</h2>
+class EmployeeCard extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {}
+  }
+  render() {
+      const profile = this.props.profile;
+      return (
+        <EmployeeCardContainer key={profile.id}>
+          <h2>{profile.user.first_name} {profile.user.last_name}</h2>
+          <h2>{profile.user.email}</h2>
+          <h2>{profile.phone_number}</h2>
 
-        <CardInner>
-          <h1 className="card-title">Avability</h1>
-          <h2>{employee.workingDays}</h2>
-          <h2>{employee.workingTime}</h2>
-        </CardInner>
+          <CardInner>
+            <h1 className="card-title">Avability</h1>
 
-        <CardInner>
-          <h1 className="card-title">Requested Time Off</h1>
-          <span>something</span>
-        </CardInner>
-      </EmployeeCardContainer>
-    );
-  });
+            <h2>{profile.workingDays}</h2>
+            <h2>{profile.workingTime}</h2>
+          </CardInner>
+
+          <CardInner>
+            <h1 className="card-title">Requested Time Off</h1>
+            <span>something</span>
+          </CardInner>
+        </EmployeeCardContainer>
+      );
+  };
 };
 
 export default EmployeeCard;
