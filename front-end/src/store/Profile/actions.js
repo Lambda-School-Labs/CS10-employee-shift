@@ -21,7 +21,7 @@ export const getProfile = () => (dispatch, getState) => {
         dispatch({ type: "AUTHENTICATION_ERROR", data: err.data });
         throw err.data;
       } else {
-        dispatch({ type: "ERROR", data: res.data });
+        dispatch({ type: "ERROR", data: err.data });
         throw err.data;
       }
     });
@@ -30,18 +30,18 @@ export const getProfile = () => (dispatch, getState) => {
 /* Implement me on back-end */
 export const getAllProfiles = () => (dispatch, getState) => {
   dispatch({ type: "LOADING_PROFILE" });
-  const headers = { "Content-Type": "application/x-www-form-urlencoded" };
-  const { token } = getState().user.token;
+  const headers = { "Content-Type": "application/json" };
+  const token = getState().user.token;
 
   if (token) {
     headers["Authorization"] = `Bearer ${token}`;
   }
 
   axios
-    .get(`${process.env.REACT_APP_ROOT_URL}/api/profiles/`, headers)
+    .get(`${process.env.REACT_APP_ROOT_URL}/api/profiles/`, { headers })
     .then(res => {
       if (res.status === 200) {
-        return dispatch({ type: "READ_PROFILE", data: res.data });
+        return dispatch({ type: "READ_PROFILES", data: res.data });
       }
     })
     .catch(err => {
@@ -49,7 +49,7 @@ export const getAllProfiles = () => (dispatch, getState) => {
         dispatch({ type: "AUTHENTICATION_ERROR", data: err.data });
         throw err.data;
       } else {
-        dispatch({ type: "ERROR", data: res.data });
+        dispatch({ type: "ERROR", data: err.data });
         throw err.data;
       }
     });
@@ -59,7 +59,7 @@ export const getAllProfiles = () => (dispatch, getState) => {
 export const postProfile = data => (dispatch, getState) => {
   dispatch({ type: "LOADING_PROFILE" });
   const { token } = getState().user.token;
-  const headers = { "Content-Type": "application/x-www-form-urlencoded" };
+  const headers = { "Content-Type": "application/json" };
 
   if (token) {
     headers["Authorization"] = `Bearer ${token}`;
@@ -85,7 +85,7 @@ export const postProfile = data => (dispatch, getState) => {
         dispatch({ type: "AUTHENTICATION_ERROR", data: err.data });
         throw err.data;
       } else {
-        dispatch({ type: "ERROR", data: res.data });
+        dispatch({ type: "ERROR", data: err.data });
         throw err.data;
       }
     });
@@ -121,7 +121,7 @@ export const updateProfile = data => (dispatch, getState) => {
         dispatch({ type: "AUTHENTICATION_ERROR", data: err.data });
         throw err.data;
       } else {
-        dispatch({ type: "ERROR", data: res.data });
+        dispatch({ type: "ERROR", data: err.data });
         throw err.data;
       }
     });
@@ -157,7 +157,7 @@ export const deleteProfile = data => (dispatch, getState) => {
         dispatch({ type: "AUTHENTICATION_ERROR", data: err.data });
         throw err.data;
       } else {
-        dispatch({ type: "ERROR", data: res.data });
+        dispatch({ type: "ERROR", data: err.data });
         throw err.data;
       }
     });

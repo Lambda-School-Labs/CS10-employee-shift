@@ -6,7 +6,6 @@ import { device } from "./globals.js";
 
 export const CalendarContainer = styled.div`
   width: 100%;
-  height: 100%;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -31,6 +30,8 @@ export const TopNavHeader = styled.h1`
   align-self: baseline;
   margin-left: calc(50% - 200px);
   color: black;
+  display: flex;
+  justify-content: space-between;
 
   @media ${device.tablet} {
     font-size: 23px;
@@ -45,6 +46,10 @@ export const TopNavHeader = styled.h1`
   }
 `;
 
+export const TopNavHeaderText = styled.div`
+  min-width: 200px;
+`;
+
 export const ButtonContainer = styled.div`
   margin-left: auto;
   align-self: baseline;
@@ -54,15 +59,19 @@ export const ButtonContainer = styled.div`
   }
 `;
 
-export const HoOButton = styled.button`
-  border: none;
+export const HoOButton = styled.div`
+  width: 100%;
+  height: 60px;
+  display: flex;
+  padding: 5% 12%;
+  justify-content: space-between;
   cursor: pointer;
-  outline: none;
 `;
 
 export const GridContainer = styled.div`
   display: grid;
   width: 100%;
+  height: 100%;
   grid-template-column: repeat(8, 1fr);
   grid-template-rows: repeat(${props => props.rows}, 70px);
   padding: 1% 0;
@@ -105,21 +114,13 @@ export const GridItemOpenShift = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
-
-  // THE FOLLOW ARE STYLINGS FOR THE OPEN SHIFT
-  // background: #e0f6d8;
-  // color: #0c881d;
-  // border: #bfecaf solid 1px;
-  // border-right: #76db56 solid 2px;
-  // padding: 4px 6px;
-  // font-size: 12px;
-  // z-index: 1;
+  background: hsl(104, 62.5%, 95%);
 
   &::after {
     background: #ddd;
     content: "";
-    height: 5px;
-    width: 5px;
+    height: 6px;
+    width: 6px;
     position: absolute;
     right: -2.5px;
     bottom: -5px;
@@ -129,9 +130,7 @@ export const GridItemOpenShift = styled.div`
 `;
 
 export const GridItemOpenShiftHeader = styled.h3`
-  @media ${device.mobileL} {
-    // TODO: do some stuff here?
-  }
+  background: hsl(104, 62.5%, 96%);
 `;
 
 export const GridItemEmployee = styled.div`
@@ -142,7 +141,6 @@ export const GridItemEmployee = styled.div`
   position: relative;
   display: flex;
   align-items: center;
-  justify-content: center;
 
   &::after {
     background: #ddd;
@@ -164,10 +162,51 @@ export const GridItemShift = styled.div`
   grid-column-end: ${props => props.column};
   border-bottom: 1px solid #ddd;
   border-right: 1px solid #ddd;
+  background: ${props => props.background};
 
   &:hover {
     background: #f6f6f6;
     cursor: pointer;
+  }
+`;
+
+export const GridItemActiveShift = styled.div`
+  grid-row-start: ${props => props.row};
+  grid-row-end: ${props => props.row};
+  grid-column-start: ${props => props.column};
+  grid-column-end: ${props => props.column};
+  border-bottom: 1px solid #ddd;
+  border-right: 1px solid #ddd;
+  display: flex;
+  justify-content: ${props => props.justify};
+  align-items: center;
+
+  &:hover {
+    background: #f6f6f6;
+    cursor: pointer;
+  }
+`;
+
+export const GridItemActiveShiftInner = styled.div`
+  width: 70%;
+  height: 60%;
+  background: hsl(${props => props.hue}, 62%, 90%);
+  color: hsl(${props => props.hue}, 84%, 29%);
+  border: hsl(${props => props.hue}, 62%, 81%) solid 1px;
+  border-left: hsl(${props => props.hue}, 65%, 60%) solid 4px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 14px;
+
+  @media ${device.tablet} {
+    width: 100%;
+    height: 100%;
+  }
+
+  &:hover {
+    cursor: pointer;
+    background: hsl(${props => props.hue}, 62.5%, 75.6%);
   }
 `;
 
@@ -190,4 +229,15 @@ export const Form = styled.form`
 
 export const FormItem = styled.div`
   margin: 5%;
+`;
+
+export const ProfileIcon = styled.div`
+  color: white;
+  text-align: center;
+  margin-right: 10px;
+  background: hsl(${props => props.hue}, 65%, 60%);
+  height: 20px;
+  width: 20px;
+  border-radius: 50%;
+  font-size: 20px;
 `;
