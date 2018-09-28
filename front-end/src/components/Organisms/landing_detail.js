@@ -60,11 +60,6 @@ const Landing_Details = () => {
           </div>
         </div>
       </BackgroundHolder>
-      <FooterStyles>
-        <footer>
-          <span>Copyright 2018</span>
-        </footer>
-      </FooterStyles>
     </div>
   );
 };
