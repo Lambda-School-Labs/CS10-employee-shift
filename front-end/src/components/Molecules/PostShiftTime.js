@@ -5,8 +5,6 @@ import TimePicker from "../Atoms/TimePicker.js";
 import { HoOButton } from "../../styles/Calendar.js";
 import { Segment, Portal } from "semantic-ui-react";
 
-// TODO: add bounds to where the portal can open
-
 class PostShiftTime extends React.Component {
   state = {
     open: false,

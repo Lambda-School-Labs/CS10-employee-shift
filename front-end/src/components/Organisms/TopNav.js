@@ -4,7 +4,7 @@ import { connect } from "react-redux";
 
 import { signout } from "../../store/User/actions.js";
 
-import { TopNavContainer, Breadcrumb } from "../../styles/Template--main.js";
+import { TopNavContainer } from "../../styles/Template--main.js";
 
 const TopNav = props => {
   const clickSignout = () => {

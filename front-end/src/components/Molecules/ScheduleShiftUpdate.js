@@ -166,7 +166,7 @@ class ScheduleShiftUpdate extends React.Component {
                   : this.state.clickY - 100
               }px`,
               zIndex: 1005,
-              minWidth: "120px",
+              minWidth: "300px",
             }}
           >
             <Label

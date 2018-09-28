@@ -16,15 +16,11 @@ import {
   GridItemHeaderDate,
   GridItemEmployee,
   GridItemOpenShift,
-  GridItemActiveShift,
   GridContainer,
   GridItemOpenShiftHeader,
-  GridItemActiveShiftInner,
   ProfileIcon,
 } from "../../styles/Calendar.js";
 import { CalendarContainer } from "../../styles/Calendar.js";
-import { colors } from "../../styles/globals.js";
-import { Label } from "semantic-ui-react";
 
 // TODO: Make me more stylish
 // TODO: Check HoO against shifts to make sure that the time is filled, if not render cell red
@@ -74,9 +70,6 @@ class Calendar extends Component {
   };
 
   render() {
-    // TODO: get employees from store to make this dynamic
-    // this.props.profile.allProfiles.length
-    const employees = 8;
     return (
       <CalendarContainer>
         <CalendarTopNav
@@ -220,7 +213,7 @@ class Calendar extends Component {
                   id={shift.id}
                 />
               );
-            }
+            } else return null;
           })}
         </GridContainer>
       </CalendarContainer>
