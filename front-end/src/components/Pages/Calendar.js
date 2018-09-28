@@ -41,7 +41,6 @@ class Calendar extends Component {
   componentWillMount() {
     this.props.getAllProfiles();
     this.props.getShifts();
-    const currentDate = moment().format();
   }
 
   handleChangeDate = direction => {
@@ -87,6 +86,7 @@ class Calendar extends Component {
         <GridContainer rows={this.props.allProfiles.length + 2}>
           {/* Refactor into molecules - Column Header */}
           <GridItemHeader column="1" />
+          {/* Refactor - Dynamic */}
           <GridItemHeader column="2">
             <GridItemHeaderDay>Monday</GridItemHeaderDay>
             <GridItemHeaderDate>
@@ -177,6 +177,7 @@ class Calendar extends Component {
           })}
           {/* Refactor into molecules - Body */}
           {this.fillGrid(this.props.allProfiles.length)}
+
           {this.props.allShifts.map((shift, index) => {
             const currentDate = moment(this.state.date);
             const shiftInCurrentWeek = moment(shift.start_datetime).isBetween(
