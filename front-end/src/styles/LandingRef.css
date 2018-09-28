@@ -49,12 +49,21 @@
   font-family: "Josefin Slab", serif;
 }
 
+.frameContainer {
+  position: relative;
+}
+
 .frame1 {
    width: 100%;
    height: 700px;
    background-size: cover;
    margin:0; /* If you want no margin */
    padding:0; /*if your want to padding */
+}
+
+.frame1Text {
+  position: absolute;
+
 }
 
 .mid-container {
