@@ -27,68 +27,66 @@ class Signin extends Component {
     if (this.props.isAuthenticated) {
       // TODO: employee redirect
       return <Redirect to="/calendar" />;
-    }
-
-    // TODO: Restyle all this
-    return (
-      <Container>
-        <Segment raised padded="very">
-          <div
-            style={{
-              height: "100%",
-              width: "100%",
-            }}
-          >
-            <Header>Welcome back!</Header>
-            <FormItem>
-              <h3>Username</h3>
-              <Input
-                fluid
-                value={this.state.email}
-                onChange={this.inputChangeHandler}
-                name="email"
-                icon="user"
-                iconPosition="left"
-                placeholder="E-mail address"
-              />
-            </FormItem>
-            <FormItem>
-              <h3>Password</h3>
-              <Input
-                fluid
-                value={this.state.password}
-                onChange={this.inputChangeHandler}
-                name="password"
-                icon="lock"
-                iconPosition="left"
-                placeholder="Password"
-                type="password"
-              />
-            </FormItem>
-            <FormItem>
-              <Button
-                color="teal"
-                fluid
-                size="large"
-                onClick={this.submitHandler}
-              >
-                Login
-              </Button>
-            </FormItem>
-            <p
+    } else
+      return (
+        <Container>
+          <Segment raised padded="very">
+            <div
               style={{
-                display: "flex",
-                flexDirection: "column",
-                alignItems: "center",
-                justifyContent: "center",
+                height: "100%",
+                width: "100%",
               }}
             >
-              New user? <Link to="/signup">Register</Link>
-            </p>
-          </div>
-        </Segment>
-      </Container>
-    );
+              <Header>Welcome back!</Header>
+              <FormItem>
+                <h3>Username</h3>
+                <Input
+                  fluid
+                  value={this.state.email}
+                  onChange={this.inputChangeHandler}
+                  name="email"
+                  icon="user"
+                  iconPosition="left"
+                  placeholder="E-mail address"
+                />
+              </FormItem>
+              <FormItem>
+                <h3>Password</h3>
+                <Input
+                  fluid
+                  value={this.state.password}
+                  onChange={this.inputChangeHandler}
+                  name="password"
+                  icon="lock"
+                  iconPosition="left"
+                  placeholder="Password"
+                  type="password"
+                />
+              </FormItem>
+              <FormItem>
+                <Button
+                  color="teal"
+                  fluid
+                  size="large"
+                  onClick={this.submitHandler}
+                >
+                  Login
+                </Button>
+              </FormItem>
+              <p
+                style={{
+                  display: "flex",
+                  flexDirection: "column",
+                  alignItems: "center",
+                  justifyContent: "center",
+                }}
+              >
+                New user? <Link to="/signup">Register</Link>
+              </p>
+            </div>
+          </Segment>
+        </Container>
+      );
   }
 }
 

@@ -4,6 +4,7 @@ import { connect } from "react-redux";
 import moment from "moment";
 
 import { getShifts } from "../../store/Shift/actions.js";
+import { getAllProfiles } from "../../store/Profile/actions.js";
 
 import CalendarTopNav from "../Organisms/CalendarTopNav.js";
 import ScheduleShift from "../Molecules/ScheduleShift.js";
@@ -26,10 +27,11 @@ import { colors } from "../../styles/globals.js";
 import { Label } from "semantic-ui-react";
 
 // TODO: Make me more stylish
-// TODO: Make own "label" so colors show up correctly
 // TODO: Check HoO against shifts to make sure that the time is filled, if not render cell red
 // TODO: Turn cell red if conflict with employee's time off
 // TODO: Span shifts to multiple days
+// TODO: Dynamic employees
+// TODO: test CRUD
 
 class Calendar extends Component {
   state = {
@@ -37,6 +39,7 @@ class Calendar extends Component {
   };
 
   componentWillMount() {
+    this.props.getAllProfiles();
     this.props.getShifts();
     const currentDate = moment().format();
   }
@@ -54,13 +57,15 @@ class Calendar extends Component {
     // Rows = employees + 2 (one for column headers, one for open shifts)
     const output = [];
     for (let column = 2; column <= 7 + 1; column++) {
-      for (let row = 2; row <= employees + 2; row++) {
+      for (let row = 2; row <= this.props.allProfiles.length + 2; row++) {
         output.push(
           <ScheduleShift
             key={`${row}-${column}`}
             handleClick={this.handleClick}
             row={row}
-            column={column}
+            date={moment(this.state.date)
+              .day(column - 1)
+              .format()}
           />
         );
       }
@@ -78,7 +83,7 @@ class Calendar extends Component {
           changeDate={this.handleChangeDate}
           displayDate={this.state.date}
         />
-        <GridContainer rows={employees + 2}>
+        <GridContainer rows={this.props.allProfiles.length + 2}>
           {/* Refactor into molecules - Column Header */}
           <GridItemHeader column="1" />
           <GridItemHeader column="2">
@@ -151,50 +156,27 @@ class Calendar extends Component {
               }
             </GridItemHeaderDate>
           </GridItemHeader>
-          {/* Refactor into molecules - Row Header 
-        TODO: Make this dynamically from the number of employees */}
+          {/* Refactor into molecules - Row Header  */}
           <GridItemEmployee row="1" />
           <GridItemOpenShift row="2">
             <GridItemOpenShiftHeader>Open Shifts</GridItemOpenShiftHeader>
           </GridItemOpenShift>
-          <GridItemEmployee row="3">
-            <ProfileIcon hue={1 * 40}>
-              {/* TODO: dynamically use user.id from user state in store */}0
-              {/* TODO: make dynamic number of shifts */}
-            </ProfileIcon>
-            Vlad
-          </GridItemEmployee>
-          <GridItemEmployee row="4">
-            <ProfileIcon hue={2 * 40}>0</ProfileIcon>
-            Brandon
-          </GridItemEmployee>
-          <GridItemEmployee row="5">
-            <ProfileIcon hue={3 * 40}>0</ProfileIcon>
-            Kyle
-          </GridItemEmployee>
-          <GridItemEmployee row="6">
-            <ProfileIcon hue={4 * 40}>0</ProfileIcon>
-            Justin
-          </GridItemEmployee>
-          <GridItemEmployee row="7">
-            <ProfileIcon hue={5 * 40}>0</ProfileIcon>
-            Obo
-          </GridItemEmployee>
-          <GridItemEmployee row="8">
-            <ProfileIcon hue={6 * 40}>0</ProfileIcon>
-            Terrie
-          </GridItemEmployee>
-          <GridItemEmployee row="9">
-            <ProfileIcon hue={7 * 40}>0</ProfileIcon>
-            Brian Doyle
-          </GridItemEmployee>
-          <GridItemEmployee row="10">
-            <ProfileIcon hue={8 * 40}>0</ProfileIcon>
-            Boomer
-          </GridItemEmployee>
+          {this.props.allProfiles.map((profile, index) => {
+            return (
+              <GridItemEmployee
+                row={index + 3}
+                key={profile.user.last_name + index}
+              >
+                <ProfileIcon hue={(index + 3) * 40}>0</ProfileIcon>
+                <h5>
+                  {profile.user.first_name} {profile.user.last_name}
+                </h5>
+              </GridItemEmployee>
+            );
+          })}
           {/* Refactor into molecules - Body */}
-          {this.fillGrid(employees)}
-          {this.props.allShifts.map(shift => {
+          {this.fillGrid(this.props.allProfiles.length)}
+          {this.props.allShifts.map((shift, index) => {
             const currentDate = moment(this.state.date);
             const shiftInCurrentWeek = moment(shift.start_datetime).isBetween(
               currentDate
@@ -213,18 +195,27 @@ class Calendar extends Component {
                   text1={moment(shift.start_datetime).format("h:mm A")}
                   text2={moment(shift.end_datetime).format("h:mm A")}
                   key={shift.id}
-                  row={shift.profile + 2}
+                  row={
+                    this.props.allProfiles.indexOf(
+                      this.props.allProfiles.filter(
+                        profile => profile.id === shift.profile
+                      )[0]
+                    ) + 3
+                  }
                   // add span to second day if applicable
                   column={moment(shift.start_datetime).isoWeekday() + 1}
                   justify={
                     moment(shift.start_datetime).format("k") <= 9
                       ? "flex-start"
-                      : moment(shift.start_datetime).format("k") >= 5
+                      : moment(shift.start_datetime).format("k") >= 17
                         ? "flex-end"
                         : "center"
                   }
                   start={moment(shift.start_datetime).format("H:mm A")}
                   end={moment(shift.end_datetime).format("H:mm A")}
+                  notes={shift.notes}
+                  id={shift.id}
+                  profile={shift.profile}
                 />
               );
             }
@@ -238,7 +229,7 @@ class Calendar extends Component {
 const mapStateToProps = state => {
   return {
     allShifts: state.shift.allShifts,
-    // all users
+    allProfiles: state.profile.allProfiles,
   };
 };
 
@@ -246,6 +237,9 @@ const mapDispatchToProps = dispatch => {
   return {
     getShifts: () => {
       return dispatch(getShifts());
+    },
+    getAllProfiles: () => {
+      return dispatch(getAllProfiles());
     },
   };
 };

@@ -12,9 +12,7 @@ export const Container = styled.div`
 `;
 
 export const Header = styled.h1`
-  padding: 0 0;
-  margin: 0;
-  height: 100px;
+  text-align: center;
 `;
 
 export const Form = styled.form`
@@ -36,8 +34,7 @@ export const RegisterForm = styled.form`
 `;
 
 export const FormItem = styled.div`
-  min-width: 200px;
-  max-width: 300px;
+  min-width: 250px;
   padding: 5% 0;
 `;
 

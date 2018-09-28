@@ -59,13 +59,13 @@ export const ButtonContainer = styled.div`
   }
 `;
 
-export const HoOButton = styled.button`
+export const HoOButton = styled.div`
+  width: 100%;
+  height: 60px;
   display: flex;
-  align-items: center;
-  justify-content: center;
-  border: none;
+  padding: 5% 12%;
+  justify-content: space-between;
   cursor: pointer;
-  outline: none;
 `;
 
 export const GridContainer = styled.div`
@@ -141,7 +141,6 @@ export const GridItemEmployee = styled.div`
   position: relative;
   display: flex;
   align-items: center;
-  justify-content: center;
 
   &::after {
     background: #ddd;
@@ -240,4 +239,5 @@ export const ProfileIcon = styled.div`
   height: 20px;
   width: 20px;
   border-radius: 50%;
+  font-size: 20px;
 `;

@@ -15,7 +15,7 @@ class HoODay extends React.Component {
     clickY: 0,
   };
 
-  submitTimeChange(newTime) {
+  submitTimeChange(time, newTime) {
     this.props.postHoO(this.props.day, newTime);
   }
 
@@ -35,6 +35,7 @@ class HoODay extends React.Component {
         <HoOButton onClick={this.handleOpen}>
           <h4>{this.props.day}</h4>
           <h5>{this.props.start}</h5>
+          <h5>-</h5>
           <h5>{this.props.end}</h5>
         </HoOButton>
         <Portal open={this.state.open} onClose={this.handleClose}>
