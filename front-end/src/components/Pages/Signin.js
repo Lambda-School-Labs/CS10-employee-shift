@@ -2,7 +2,8 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import { Link, Redirect } from "react-router-dom";
 
-import { Container, FormItem, Form } from "../../styles/signin.js";
+import { Segment, Input, Button } from "semantic-ui-react";
+import { Container, FormItem, Header } from "../../styles/signin.js";
 
 import { signin } from "../../store/User/actions.js";
 
@@ -26,39 +27,66 @@ class Signin extends Component {
     if (this.props.isAuthenticated) {
       // TODO: employee redirect
       return <Redirect to="/calendar" />;
-    }
-
-    // TODO: Restyle all this
-    return (
-      <Container>
-        <Form onSubmit={this.submitHandler}>
-          <FormItem>
-            <h3>Username</h3>
-            <input
-              value={this.state.email}
-              onChange={this.inputChangeHandler}
-              name="email"
-              type="text"
-            />
-          </FormItem>
-          <FormItem>
-            <h3>Password</h3>
-            <input
-              value={this.state.password}
-              onChange={this.inputChangeHandler}
-              name="password"
-              type="password"
-            />
-          </FormItem>
-          <FormItem>
-            <button type="submit">Sign in</button>
-          </FormItem>
-        </Form>
-        <p>
-          New user? <Link to="/signup">Register</Link>
-        </p>
-      </Container>
-    );
+    } else
+      return (
+        <Container>
+          <Segment raised padded="very">
+            <div
+              style={{
+                height: "100%",
+                width: "100%",
+              }}
+            >
+              <Header>Welcome back!</Header>
+              <FormItem>
+                <h3>Username</h3>
+                <Input
+                  fluid
+                  value={this.state.email}
+                  onChange={this.inputChangeHandler}
+                  name="email"
+                  icon="user"
+                  iconPosition="left"
+                  placeholder="E-mail address"
+                />
+              </FormItem>
+              <FormItem>
+                <h3>Password</h3>
+                <Input
+                  fluid
+                  value={this.state.password}
+                  onChange={this.inputChangeHandler}
+                  name="password"
+                  icon="lock"
+                  iconPosition="left"
+                  placeholder="Password"
+                  type="password"
+                />
+              </FormItem>
+              <FormItem>
+                <Button
+                  color="teal"
+                  fluid
+                  size="large"
+                  onClick={this.submitHandler}
+                >
+                  Login
+                </Button>
+              </FormItem>
+              <p
+                style={{
+                  display: "flex",
+                  flexDirection: "column",
+                  alignItems: "center",
+                  justifyContent: "center",
+                }}
+              >
+                New user? <Link to="/signup">Register</Link>
+              </p>
+            </div>
+          </Segment>
+        </Container>
+      );
   }
 }
 

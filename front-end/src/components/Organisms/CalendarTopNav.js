@@ -1,20 +1,39 @@
 import React from "react";
 
+import moment from "moment";
+
 import HoO from "./HoO.js";
 
-import { TopNavContainer, TopNavHeader } from "../../styles/Calendar.js";
+import {
+  TopNavContainer,
+  TopNavHeader,
+  TopNavHeaderText,
+} from "../../styles/Calendar.js";
 import { Icon } from "semantic-ui-react";
 
 // TODO: figure out dynamic date
 // TODO: Make buttons functional after the above
 
-const CalendarTopNav = () => {
+const CalendarTopNav = props => {
+  const clickHandlerLeft = () => {
+    props.changeDate(false);
+  };
+  const clickHandlerRight = () => {
+    props.changeDate(true);
+  };
   return (
     <TopNavContainer>
       <TopNavHeader>
-        <Icon link onClick={() => "do something"} name="angle double left" />
-        September 17 - 23, 2018
-        <Icon link onClick={() => "do something"} name="angle double right" />
+        <Icon link onClick={clickHandlerLeft} name="angle double left" />
+        <TopNavHeaderText>
+          {`${moment(props.displayDate)
+            .day(1)
+            .format("MMMM D")} - 
+        ${moment(props.displayDate)
+          .day(7)
+          .format("D, YYYY")}`}
+        </TopNavHeaderText>
+        <Icon link onClick={clickHandlerRight} name="angle double right" />
       </TopNavHeader>
       <HoO />
     </TopNavContainer>
