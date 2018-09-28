@@ -1,9 +1,7 @@
 import React from "react";
 
-import Landing_Card from "../Organisms/landing_card.js";
-import Landing_Detail from "../Organisms/landing_detail.js";
-import LandingLearning from "../Organisms/landingLearn.js";
-import LandingFooter from "../Organisms/landing_detail.js";
+import Landing_Card from "../Organisms/landing_card.js"
+import Landing_Detail from "../Organisms/landing_detail.js"
 
 const Landing = () => {
   return (
