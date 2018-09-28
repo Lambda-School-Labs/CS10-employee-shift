@@ -3,12 +3,7 @@ import { Link, Redirect } from "react-router-dom";
 import { connect } from "react-redux";
 
 import { Segment, Input, Button, Icon } from "semantic-ui-react";
-import {
-  Container,
-  FormItem,
-  RegisterForm,
-  Header,
-} from "../../styles/signin.js";
+import { Container, FormItem, Header } from "../../styles/signin.js";
 
 import { signup } from "../../store/User/actions.js";
 

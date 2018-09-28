@@ -51,8 +51,8 @@ export const ScheduleButton = styled.div`
     display: flex;
     position: relative;
     justify-content: center;
-    margin-top: 6%;
-    margin-left: 215%;
+    margin-top: 70%;
+    margin-left: 197%;
     outline: none;
     border: none;
     cursor: pointer;
@@ -81,14 +81,14 @@ export const ScheduleButtonButton = styled.button`
     box-shadow: 5px 10px 20px hsl(178, 53%, 43%);
     font-size: 2em;
     align-self: flex-end;
-    margin-left: 345%;
+    // margin-left: 0%;
     z-index: 2;
     position: relative;
   `;
 
 export const Circle_div = styled.div `
     position: absolute;
-    margin-left: -10%;
+    margin-left: -25%;
     top: -200px;
     z - index: 1;
     transistion: 2s;
@@ -119,3 +119,7 @@ export const FooterStyles = styled.div`
     margin-top: -15px;
   `;
 
+export const UserButton = styled.button`
+    // padding: 5px;
+    // border: none;
+`

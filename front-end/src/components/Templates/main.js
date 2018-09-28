@@ -4,7 +4,6 @@ import TopNav from "../Organisms/TopNav.js";
 
 import {
   MainContainer,
-  HorizontalContainer,
   ComponentContainer,
 } from "../../styles/Template--main.js";
 
