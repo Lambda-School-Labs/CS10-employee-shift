@@ -30,7 +30,8 @@ class ScheduleShiftUpdate extends React.Component {
     end_time: this.props.end,
     start_time24: "",
     end_time24: "",
-    profile: this.props.row - 2,
+    profile: this.props.profile,
+    id: this.props.id,
   };
 
   handleOpen = e => {
@@ -55,7 +56,7 @@ class ScheduleShiftUpdate extends React.Component {
 
   submitHandler = event => {
     event.preventDefault();
-
+    console.log(this.state);
     if (this.state.start_time24 && this.state.end_time24) {
       let start_hour;
       if (this.state.start_time24.length === 4)
@@ -109,10 +110,10 @@ class ScheduleShiftUpdate extends React.Component {
       const notes = this.state.notes ? this.state.notes : "";
 
       this.props.updateShift(
-        this.props.id,
+        this.state.id,
+        profile,
         start_datetime,
         end_datetime,
-        profile,
         is_open,
         notes
       );
@@ -179,13 +180,13 @@ class ScheduleShiftUpdate extends React.Component {
             <PostShiftTime
               day={"Start Time"}
               start={this.props.start}
-              data={"start_datetime"}
+              data={"start"}
               inputChangeHandler={this.inputChangeHandler}
             />
             <PostShiftTime
               day={"End Time"}
               end={this.props.end}
-              data={"end_datetime"}
+              data={"end"}
               inputChangeHandler={this.inputChangeHandler}
             />
             <Input
@@ -215,14 +216,14 @@ const mapDispatchToProps = dispatch => {
   return {
     updateShift: (
       id,
+      profile,
       start_datetime,
       end_datetime,
-      profile,
       is_open,
       notes
     ) => {
       return dispatch(
-        updateShift(id, start_datetime, end_datetime, profile, is_open, notes)
+        updateShift(id, profile, start_datetime, end_datetime, is_open, notes)
       );
     },
     deleteShift: id => {

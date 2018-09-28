@@ -66,6 +66,7 @@ class Calendar extends Component {
             date={moment(this.state.date)
               .day(column - 1)
               .format()}
+            profile={row > 2 ? this.props.allProfiles[row - 3].id : null}
           />
         );
       }
@@ -189,19 +190,19 @@ class Calendar extends Component {
                 .set({ hour: 23, minute: 59, "second:": 59, millisecond: 999 })
             );
             if (shiftInCurrentWeek) {
+              const profileRow =
+                this.props.allProfiles.indexOf(
+                  this.props.allProfiles.filter(
+                    profile => profile.id === shift.profile
+                  )[0]
+                ) + 3;
               return (
                 <ScheduleShiftUpdate
-                  hue={shift.profile ? shift.profile * 40 : 102}
+                  hue={profileRow ? profileRow * 40 : 102}
                   text1={moment(shift.start_datetime).format("h:mm A")}
                   text2={moment(shift.end_datetime).format("h:mm A")}
                   key={shift.id}
-                  row={
-                    this.props.allProfiles.indexOf(
-                      this.props.allProfiles.filter(
-                        profile => profile.id === shift.profile
-                      )[0]
-                    ) + 3
-                  }
+                  row={profileRow}
                   // add span to second day if applicable
                   column={moment(shift.start_datetime).isoWeekday() + 1}
                   justify={
@@ -214,8 +215,8 @@ class Calendar extends Component {
                   start={moment(shift.start_datetime).format("H:mm A")}
                   end={moment(shift.end_datetime).format("H:mm A")}
                   notes={shift.notes}
-                  id={shift.id}
                   profile={shift.profile}
+                  id={shift.id}
                 />
               );
             }

@@ -20,20 +20,20 @@ export default (state = initialState, action) => {
       return { ...state, allShifts: shifts, shiftsLoading: false };
 
     case "UPDATE_SHIFT":
-      // DEV CONSOLE LOG, REMOVE ME!
-      console.log("UPDATED SHIFT", action.data);
-      // grab shift using its index, maybe handle this differently
-      const shiftToUpdate = shifts[action.index];
-      // do some updates
-      shifts.splice(action.index, 1, shiftToUpdate);
+      const updatedShift = action.updatedShift;
+      const indexToUpdate = shifts.indexOf(
+        shifts.filter(shift => shift.id === updatedShift.id)
+      );
+      shifts.splice(
+        indexToUpdate === 0 ? indexToUpdate : indexToUpdate - 1,
+        1,
+        updatedShift
+      );
       return { ...state, allShifts: shifts, shiftsLoading: false };
 
     case "DELETE_SHIFT":
-      const index = shifts.indexOf(
-        shifts.filter(shift => shift.id === action.id)
-      );
-      shifts.splice(index - 1, 1);
-      return { ...state, allShifts: shifts, shiftsLoading: false };
+      const new_shifts = shifts.filter(shift => shift.id != action.data);
+      return { ...state, allShifts: new_shifts, shiftsLoading: false };
 
     // TODO: double check this
     case "ERROR":

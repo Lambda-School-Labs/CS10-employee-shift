@@ -61,7 +61,7 @@ export const postShift = (
     data: body,
   })
     .then(res => {
-      if (res.status === 200) {
+      if (res.status === 201) {
         return dispatch({ type: "CREATE_SHIFT", data: res.data });
       }
     })
@@ -77,9 +77,10 @@ export const postShift = (
 };
 
 export const updateShift = (
+  id,
+  profile,
   start_datetime,
   end_datetime,
-  profile,
   is_open,
   notes
 ) => (dispatch, getState) => {
@@ -91,23 +92,22 @@ export const updateShift = (
   }
 
   const body = JSON.stringify({
+    profile,
     start_datetime,
     end_datetime,
-    profile,
+    account: getState().user.currentUser.account.id,
     is_open,
     notes,
   });
 
   axios({
     method: "put",
-    url: `${process.env.REACT_APP_ROOT_URL}/api/shifts/${
-      getState().user.currentUser.account.id
-    }`,
+    url: `${process.env.REACT_APP_ROOT_URL}/api/shifts/${id}/`,
     headers: headers,
     data: body,
   })
     .then(res => {
-      if (res.status === 200) {
+      if (res.status === 200 || res.status === 204) {
         return dispatch({ type: "UPDATE_SHIFT", data: res.data });
       }
     })
@@ -135,7 +135,7 @@ export const deleteShift = id => (dispatch, getState) => {
     headers: headers,
   })
     .then(res => {
-      if (res.status === 204) {
+      if (res.status === 200 || res.status === 204) {
         return dispatch({ type: "DELETE_SHIFT", data: id });
       }
     })
