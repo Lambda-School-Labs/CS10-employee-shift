@@ -38,7 +38,7 @@ class Calendar extends Component {
     date: moment().format(),
   };
 
-  componentWillMount() {
+  componentDidMount() {
     this.props.getAllProfiles();
     this.props.getShifts();
   }
@@ -200,8 +200,6 @@ class Calendar extends Component {
               return (
                 <ScheduleShiftUpdate
                   hue={profileRow ? profileRow * 40 : 102}
-                  text1={moment(shift.start_datetime).format("h:mm A")}
-                  text2={moment(shift.end_datetime).format("h:mm A")}
                   key={shift.id}
                   row={profileRow}
                   // add span to second day if applicable
@@ -213,8 +211,10 @@ class Calendar extends Component {
                         ? "flex-end"
                         : "center"
                   }
-                  start={moment(shift.start_datetime).format("H:mm A")}
-                  end={moment(shift.end_datetime).format("H:mm A")}
+                  start={moment(shift.start_datetime).format("h:mm A")}
+                  end={moment(shift.end_datetime).format("h:mm A")}
+                  start24={moment(shift.start_datetime).format("H:mm")}
+                  end24={moment(shift.end_datetime).format("H:mm")}
                   notes={shift.notes}
                   profile={shift.profile}
                   id={shift.id}

@@ -28,8 +28,8 @@ class ScheduleShiftUpdate extends React.Component {
     notes: this.props.notes,
     start_time: this.props.start,
     end_time: this.props.end,
-    start_time24: "",
-    end_time24: "",
+    start_time24: this.props.start24,
+    end_time24: this.props.end24,
     profile: this.props.profile,
     id: this.props.id,
   };
@@ -120,6 +120,8 @@ class ScheduleShiftUpdate extends React.Component {
         notes
       );
     }
+
+    this.handleClose();
   };
 
   inputChangeHandler = event => {
@@ -143,7 +145,7 @@ class ScheduleShiftUpdate extends React.Component {
           onClick={this.handleOpen}
           hue={this.props.hue}
         >
-          {this.props.text1} - {this.props.text2}
+          {this.props.start} - {this.props.end}
         </GridItemActiveShiftInner>
         <Portal
           open={this.state.open}
@@ -188,13 +190,13 @@ class ScheduleShiftUpdate extends React.Component {
             <Divider />
             <PostShiftTime
               day={"Start Time"}
-              start={this.props.start}
+              start={this.state.start_time}
               data={"start"}
               inputChangeHandler={this.inputChangeHandler}
             />
             <PostShiftTime
               day={"End Time"}
-              end={this.props.end}
+              end={this.state.end_time}
               data={"end"}
               inputChangeHandler={this.inputChangeHandler}
             />

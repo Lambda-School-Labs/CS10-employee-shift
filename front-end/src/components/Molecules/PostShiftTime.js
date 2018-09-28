@@ -35,6 +35,7 @@ class PostShiftTime extends React.Component {
 
   render() {
     this.submitTimeChange = this.submitTimeChange.bind(this);
+
     return (
       <div>
         <HoOButton onClick={this.handleOpen}>
@@ -53,6 +54,7 @@ class PostShiftTime extends React.Component {
             }}
           >
             <TimePicker
+              currentTime={this.props.start ? this.props.start : this.props.end}
               handleClose={this.handleClose}
               submitTimeChange={this.submitTimeChange}
             />
