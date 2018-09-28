@@ -28,12 +28,14 @@ const LandingLearning = () => {
 
       <div className="frameContainer">
         <img className="frame1" src={bgPicture} />
-        <div className="frame2">
-          <h2 className="frame2Heading">Employee Scheduling Software. Reinvented.</h2>
-          <div className="cta-button">
-            <p>START SCHEDULING</p>
+        <a href="#">
+          <div className="frame2">
+            <h2 className="frame2Heading">Employee Scheduling Software. Reinvented.</h2>
+            <div className="cta-button">
+              <p>START SCHEDULING</p>
+            </div>
           </div>
-        </div>
+        </a>
       </div>
     </div>
   )

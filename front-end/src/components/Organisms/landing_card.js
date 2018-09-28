@@ -12,6 +12,7 @@ import {
   WelcomeText,
   circle_img,
   Circle_div,
+  UserButton
 } from "../../styles/Landing.js";
 
 import "../../styles/LandingRef.css";
@@ -39,58 +40,58 @@ class Landing_Card extends Component {
             <div className="container">
             <BackgroundHolder>
                 <WelcomeHolder>
-                <WelcomeSide>
-                <WelcomeH1>Welcome</WelcomeH1>
-                < WelcomeText>
-                    <p>Build your Work Schedule in Minutes.</p>
-                </WelcomeText>
-                <ScheduleButton>
-                    <Link to="/calendar">
-                    <ScheduleButtonButton className="btn">Welcome</ScheduleButtonButton>
-                    </Link>
-                </ScheduleButton>
-                </WelcomeSide>
+                    <WelcomeSide>
+                        <WelcomeH1>Welcome</WelcomeH1>
+                        <WelcomeText>
+                            <p>Build your Work Schedule in Minutes.</p>
+                        </WelcomeText>
+                        <ScheduleButton>
+                            <Link to="/calendar">
+                            <ScheduleButtonButton className="btn">Welcome</ScheduleButtonButton>
+                            </Link>
+                        </ScheduleButton>
+                    </WelcomeSide>
                 
-                <Circle_div className="fade_1">
-                    <circle_img>
-                        <img src={talkingLogo}/>
-                    </circle_img>
-                </Circle_div>
-                <Circle_div className="fade_2">
-                    <circle_img>
-                        <img src={women}/>
-                    </circle_img>
-                </Circle_div>
-                <Circle_div className="fade_3">
-                    <circle_img>
-                        <img src={chat_at_table}/>
-                    </circle_img>
-                </Circle_div>
-                <Circle_div className="fade_4">
-                    <circle_img>
-                        <img src={coding_at_work}/>
-                    </circle_img>
-                </Circle_div>
-                <Circle_div className="fade_5">
-                    <circle_img>
-                        <img src={working_at_comp}/>
-                    </circle_img>
-                </Circle_div>
-                <Circle_div className="fade_6">
-                    <circle_img>
-                        <img src={working_solo}/>
-                    </circle_img>
-                </Circle_div>
-                <WelcomeLogo>
-                <LandingNavBar>
-                <Link to="/signup">
-                    <button>Sign up</button>
-                </Link>
-                <Link to="/signin">
-                    <button>Sign in</button>
-                </Link>
-                </LandingNavBar>
-                </WelcomeLogo>
+                    <Circle_div className="fade_1">
+                        <circle_img>
+                            <img src={talkingLogo}/>
+                        </circle_img>
+                    </Circle_div>
+                    <Circle_div className="fade_2">
+                        <circle_img>
+                            <img src={women}/>
+                        </circle_img>
+                    </Circle_div>
+                    <Circle_div className="fade_3">
+                        <circle_img>
+                            <img src={chat_at_table}/>
+                        </circle_img>
+                    </Circle_div>
+                    <Circle_div className="fade_4">
+                        <circle_img>
+                            <img src={coding_at_work}/>
+                        </circle_img>
+                    </Circle_div>
+                    <Circle_div className="fade_5">
+                        <circle_img>
+                            <img src={working_at_comp}/>
+                        </circle_img>
+                    </Circle_div>
+                    <Circle_div className="fade_6">
+                        <circle_img>
+                            <img src={working_solo}/>
+                        </circle_img>
+                    </Circle_div>
+                    <WelcomeLogo>
+                        <LandingNavBar>
+                            <Link to="/signup">
+                                <button>Sign up</button>
+                            </Link>
+                            <Link to="/signin">
+                                <button>Sign in</button>
+                            </Link>
+                        </LandingNavBar>
+                    </WelcomeLogo>
                 </WelcomeHolder>
             </BackgroundHolder>
             </div>
