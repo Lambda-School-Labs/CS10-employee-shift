@@ -1,8 +1,5 @@
 import React from "react";
-
 import moment from "moment";
-
-import HoO from "./HoO.js";
 
 import {
   TopNavContainer,
@@ -35,7 +32,6 @@ const CalendarTopNav = props => {
         </TopNavHeaderText>
         <Icon link onClick={clickHandlerRight} name="angle double right" />
       </TopNavHeader>
-      <HoO />
     </TopNavContainer>
   );
 };

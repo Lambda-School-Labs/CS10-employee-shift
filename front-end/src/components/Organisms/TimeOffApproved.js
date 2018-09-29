@@ -3,13 +3,12 @@ import { connect } from "react-redux";
 
 import { getRequestOffs } from "../../store/requestOff/action.js";
 
-import { OrganismContainer } from "../../styles/Dashboard.js";
-
+import { TimeOffApprovedContainer } from "../../styles/Dashboard.js";
 
 class TimeOffApproved extends Component {
   state = {
     start_datetime: "2018-10-30T00:00:00",
-    end_datetime: "2018-10-30T00:00:00"
+    end_datetime: "2018-10-30T00:00:00",
   };
 
   componentDidMount() {
@@ -18,18 +17,19 @@ class TimeOffApproved extends Component {
 
   render() {
     return (
-      <OrganismContainer>
+      <TimeOffApprovedContainer>
         <h1>TimeOffApproved</h1>
-        { this.props.allRequestOffs.map((requestOff, index) => 
-            (requestOff.status === "A") &&
+        {this.props.allRequestOffs.map(
+          (requestOff, index) =>
+            requestOff.status === "A" && (
               <div key={index}>
                 <div>----</div>
                 <div>Start : {requestOff.start_datetime} </div>
                 <div>End : {requestOff.end_datetime} </div>
               </div>
-          )
-        }
-      </OrganismContainer>
+            )
+        )}
+      </TimeOffApprovedContainer>
     );
   }
 }

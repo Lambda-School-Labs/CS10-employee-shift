@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-// STYLES FOR DASHBOARD PAGE
+// STYLES FOR EMPLOYEE DASHBOARD PAGE
 
 export const DashboardContainer = styled.div`
   height: 100%;
@@ -19,7 +19,25 @@ export const DashboardHeader = styled.h1`
   fontweight: 300;
 `;
 
-export const OrganismContainer = styled.div`
+export const AssignedShiftsContainer = styled.div`
+  width: 100%;
+  height: 89vh;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  border: 1px solid black;
+`;
+
+export const TimeOffApprovedContainer = styled.div`
+  width: 100%;
+  height: 89vh;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  border: 1px solid black;
+`;
+
+export const TimeOffRequestContainer = styled.div`
   width: 100%;
   height: 89vh;
   display: flex;

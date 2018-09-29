@@ -12,7 +12,6 @@ flexDirection: column,
 export const ComponentContainer = styled.div`
   height: 100vh;
   width: 100vw;
-  padding-top: 2%;
 `;
 
 export const TopNavContainer = styled.div`

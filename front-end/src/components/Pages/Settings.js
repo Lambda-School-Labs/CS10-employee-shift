@@ -3,6 +3,7 @@ import { connect } from "react-redux";
 
 import { updateUser } from "../../store/User/actions.js";
 
+import { Segment, Input, Button, Icon, Header } from "semantic-ui-react";
 import { SettingsContainer, FormItem, Form } from "../../styles/Settings.js";
 
 class Settings extends Component {
@@ -13,15 +14,15 @@ class Settings extends Component {
     email_enabled: false,
     old_password: "",
     password: "",
-    re_password: ""
+    re_password: "",
   };
   componentDidMount() {
     this.setState({
       email: this.props.email,
       phone_number: this.props.phone_number,
       email_enabled: this.props.email_enabled,
-      text_enabled: this.props.text_enabled
-    })
+      text_enabled: this.props.text_enabled,
+    });
   }
 
   submitForm = event => {
@@ -47,6 +48,7 @@ class Settings extends Component {
   render() {
     return (
       <SettingsContainer>
+        <Header>Settings</Header>
         <Form onSubmit={this.submitForm}>
           <FormItem>
             <label>Email</label>
@@ -130,11 +132,11 @@ const mapStateToProps = state => {
   //TODO: check for empty profile - error
   return {
     errors,
-    
+
     email: userProfile.user.email,
     phone_number: userProfile.phone_number,
     email_enabled: userProfile.email_enabled,
-    text_enabled: userProfile.text_enabled
+    text_enabled: userProfile.text_enabled,
   };
 };
 

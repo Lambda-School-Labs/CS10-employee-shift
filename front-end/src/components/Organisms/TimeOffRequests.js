@@ -6,7 +6,7 @@ import { postRequestOff } from "../../store/requestOff/action.js";
 
 import { DateRangePicker } from "react-dates";
 
-import { OrganismContainer } from "../../styles/Dashboard.js";
+import { TimeOffRequestContainer } from "../../styles/Dashboard.js";
 import { FormItem, Form } from "../../styles/signin.js";
 
 class TimeOffRequest extends Component {
@@ -34,7 +34,7 @@ class TimeOffRequest extends Component {
 
   render() {
     return (
-      <OrganismContainer>
+      <TimeOffRequestContainer>
         <h1>Submit Time Off Request</h1>
         <Form onSubmit={this.submitHandler}>
           <DateRangePicker
@@ -82,7 +82,7 @@ class TimeOffRequest extends Component {
             <input type="submit" value="submit" />
           </FormItem>
         </Form>
-      </OrganismContainer>
+      </TimeOffRequestContainer>
     );
   }
 }
