@@ -147,6 +147,7 @@ class AvailabilityViewSet(viewsets.ModelViewSet):
     """
     serializer_class = AvailabilitySerializer
     queryset = Availability.objects.all()
+    
 
 
 

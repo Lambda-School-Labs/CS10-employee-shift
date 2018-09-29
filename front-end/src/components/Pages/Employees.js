@@ -20,7 +20,7 @@ class Employees extends Component {
     return (
       <EmployeesContainer>
         {/* <EmployeeCard allProfiles={this.props.allProfiles}/> */}
-        {this.props.allProfiles.map( profile => <EmployeeCard profile={profile} /> )}
+        {this.props.allProfiles.map( profile => <EmployeeCard profile={profile} allAvailabilities={this.props.allAvailabilities} /> )}
         <NewEmployee />
       </EmployeesContainer>
     );
