@@ -1,9 +1,9 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 
-import { signin } from "../../store/User/actions.js";
-import { getAllProfiles } from "../../store/Profile/actions.js";
-import { getAvailabilities } from "../../store/Availability/action.js";
+import { getAllProfiles } from "../../store/Profile/actions";
+import { getAvailabilities } from "../../store/Availability/action";
+import { getRequestOffs } from "../../store/requestOff/action"
 
 import EmployeeCard from "../Organisms/EmployeeCard.js";
 import NewEmployee from "../Organisms/NewEmployee.js";
@@ -13,14 +13,20 @@ import { EmployeesContainer } from "../../styles/Employees.js";
 class Employees extends Component {
   componentDidMount() {
     this.props.getAllProfiles();
-    this.props.getAvailabilities()
+    this.props.getAvailabilities();
+    this.props.getRequestOffs();
   };
 
   render() {
     return (
       <EmployeesContainer>
         {/* <EmployeeCard allProfiles={this.props.allProfiles}/> */}
-        {this.props.allProfiles.map( profile => <EmployeeCard profile={profile} allAvailabilities={this.props.allAvailabilities} /> )}
+        {this.props.allProfiles.map( profile => 
+          <EmployeeCard key={profile.id}
+            profile={profile} 
+            allAvailabilities={this.props.allAvailabilities}
+            allRequestOffs={this.props.allRequestOffs} />
+        )}
         <NewEmployee />
       </EmployeesContainer>
     );
@@ -33,20 +39,21 @@ const mapStateToProps = state => {
   return {
     isAuthenticated: state.user.isAuthenticated,
     allProfiles: state.profile.allProfiles,
-    allAvailabilities: state.availability.allAvailabilities
+    allAvailabilities: state.availability.allAvailabilities,
+    allRequestOffs: state.requestOff.allRequestOffs
   };
 };
 
 const mapDispatchToProps = dispatch => {
   return {
-    signin: (username, password) => {
-      return dispatch(signin(username, password));
-    },
     getAllProfiles: () => {
       return dispatch(getAllProfiles());
     },
     getAvailabilities: () => {
       return dispatch(getAvailabilities());
+    },
+    getRequestOffs: () => {
+      return dispatch(getRequestOffs());
     },
   };
 };
