@@ -1,5 +1,7 @@
 import styled from "styled-components";
 
+import { device } from "./globals.js";
+
 // STYLES FOR SETTINGS PAGE
 
 export const SettingsContainer = styled.div`
@@ -15,9 +17,28 @@ export const Form = styled.form`
   justify-content: space-evenly;
   align-items: center;
   flex-direction: column;
-  margin: 10%;
 `;
 
 export const FormItem = styled.div`
-  margin: 5%;
+  min-width: 250px;
+  padding: 5%;
+`;
+
+export const FormRow = styled.div`
+  width: 100%;
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+
+  @media ${device.tablet} {
+    flex-direction: column;
+  }
+`;
+
+export const CheckboxContainer = styled.div`
+  width: 100%;
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  padding: 0 20%;
 `;

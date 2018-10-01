@@ -1,30 +1,23 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import AssignedShift from "../Organisms/AssignedShift.js";
-import TimeOffApproved from "../Organisms/TimeOffApproved.js";
-import TimeOffRequest from "../Organisms/TimeOffRequests.js";
 
-import {
-  DashboardContainer,
-  HorizontalContainer,
-  DashboardHeader,
-} from "../../styles/Dashboard.js";
+import HoO from "../Organisms/HoO.js";
+
+import { Header } from "semantic-ui-react";
+import { AdminContainer, AdminHeader, Welcome } from "../../styles/Admin.js";
 
 class Admin extends Component {
   render() {
     return (
-      <DashboardContainer>
-        <DashboardHeader>
-          Welcome,
-          {this.props.first_name}
-          {this.props.last_name}
-        </DashboardHeader>
-        <HorizontalContainer>
-          <AssignedShift />
-          <TimeOffApproved />
-          <TimeOffRequest />
-        </HorizontalContainer>
-      </DashboardContainer>
+      <AdminContainer>
+        <AdminHeader>
+          <Welcome>
+            {`Welcome, ${this.props.first_name} ${this.props.last_name}`}
+          </Welcome>
+          <Header>Dashboard</Header>
+          <HoO />
+        </AdminHeader>
+      </AdminContainer>
     );
   }
 }

@@ -1,15 +1,16 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
+import moment from "moment";
 
 import { getRequestOffs } from "../../store/requestOff/action.js";
 
-import { OrganismContainer } from "../../styles/Dashboard.js";
-
+import { Segment, Header, Label } from "semantic-ui-react";
+import { TimeOffApprovedContainer } from "../../styles/Dashboard.js";
 
 class TimeOffApproved extends Component {
   state = {
     start_datetime: "2018-10-30T00:00:00",
-    end_datetime: "2018-10-30T00:00:00"
+    end_datetime: "2018-10-30T00:00:00",
   };
 
   componentDidMount() {
@@ -18,22 +19,42 @@ class TimeOffApproved extends Component {
 
   render() {
     return (
-      <OrganismContainer>
-        <h1>TimeOffApproved</h1>
-        { this.props.allRequestOffs.map((requestOff, index) => 
-            (requestOff.status === "A") &&
-              <div key={index}>
-                <div>----</div>
-                <div>Start : {requestOff.start_datetime} </div>
-                <div>End : {requestOff.end_datetime} </div>
-              </div>
-          )
-        }
-      </OrganismContainer>
+      <TimeOffApprovedContainer>
+        <Header>TimeOffApproved</Header>
+        {this.props.allRequestOffs
+          .slice()
+          .sort(function(a, b) {
+            if (a.start_datetime > b.start_datetime) return 1;
+            else return -1;
+          })
+          .map(
+            (requestOff, index) =>
+              requestOff.is_open === false &&
+              requestOff.end_datetime >
+                moment()
+                  .utc()
+                  .format() && (
+                <Segment.Group key={index}>
+                  <Segment>
+                    <Label>Start :</Label>
+                    {moment(requestOff.start_datetime).format("MMM Do h:mm a")}
+                  </Segment>
+                  <Segment>
+                    <Label>End :</Label>
+                    {moment(requestOff.end_datetime).format("MMM Do h:mm a")}
+                  </Segment>
+                  {/* <Segment>
+                    <Label>Notes :</Label>
+                    {requestOff.notes}
+                  </Segment> */}
+                </Segment.Group>
+              )
+          )}
+      </TimeOffApprovedContainer>
     );
   }
 }
-
+//moment().isAfter
 const mapStateToProps = state => {
   return {
     allRequestOffs: state.requestOff.allRequestOffs,

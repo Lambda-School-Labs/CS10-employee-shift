@@ -180,6 +180,7 @@ const mapStateToProps = state => {
   return {
     errors,
     isAuthenticated: state.user.isAuthenticated,
+    user: state.user,
   };
 };
 

@@ -2,7 +2,7 @@ import React from "react";
 
 import TimePicker from "../Atoms/TimePicker.js";
 
-import { HoOButton } from "../../styles/Calendar.js";
+import { PortalButton } from "../../styles/Calendar.js";
 import { Segment, Portal } from "semantic-ui-react";
 
 class PostShiftTime extends React.Component {
@@ -36,11 +36,11 @@ class PostShiftTime extends React.Component {
 
     return (
       <div>
-        <HoOButton onClick={this.handleOpen}>
+        <PortalButton onClick={this.handleOpen}>
           <h4>{this.props.day}</h4>
           {this.props.start ? <h5>{this.props.start}</h5> : null}
           {this.props.end ? <h5>{this.props.end}</h5> : null}
-        </HoOButton>
+        </PortalButton>
         <Portal open={this.state.open} onClose={this.handleClose}>
           <Segment
             style={{

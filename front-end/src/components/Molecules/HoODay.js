@@ -2,7 +2,7 @@ import React from "react";
 
 import TimePicker from "../Atoms/TimePicker.js";
 
-import { HoOButton } from "../../styles/Calendar.js";
+import { HoOButton } from "../../styles/Admin.js";
 
 import { Segment, Portal } from "semantic-ui-react";
 

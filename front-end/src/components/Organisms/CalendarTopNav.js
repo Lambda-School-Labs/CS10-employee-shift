@@ -1,8 +1,5 @@
 import React from "react";
-
 import moment from "moment";
-
-import HoO from "./HoO.js";
 
 import {
   TopNavContainer,
@@ -10,9 +7,6 @@ import {
   TopNavHeaderText,
 } from "../../styles/Calendar.js";
 import { Icon } from "semantic-ui-react";
-
-// TODO: figure out dynamic date
-// TODO: Make buttons functional after the above
 
 const CalendarTopNav = props => {
   const clickHandlerLeft = () => {
@@ -35,7 +29,6 @@ const CalendarTopNav = props => {
         </TopNavHeaderText>
         <Icon link onClick={clickHandlerRight} name="angle double right" />
       </TopNavHeader>
-      <HoO />
     </TopNavContainer>
   );
 };

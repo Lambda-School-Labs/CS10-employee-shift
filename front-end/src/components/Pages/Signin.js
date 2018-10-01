@@ -24,9 +24,10 @@ class Signin extends Component {
   };
 
   render() {
-    if (this.props.isAuthenticated) {
-      // TODO: employee redirect
-      return <Redirect to="/calendar" />;
+    if (this.props.isAuthenticated && this.props.user.currentUser) {
+      if (this.props.user.currentUser.user.groups[0].name === "manager")
+        return <Redirect to="/calendar" />;
+      else return <Redirect to="/dashboard" />;
     } else
       return (
         <Container>
@@ -100,6 +101,7 @@ const mapStateToProps = state => {
   return {
     errors,
     isAuthenticated: state.user.isAuthenticated,
+    user: state.user,
   };
 };
 
