@@ -12,6 +12,7 @@ flexDirection: column,
 export const ComponentContainer = styled.div`
   height: 100vh;
   width: 100vw;
+  overflow: auto;
 `;
 
 export const TopNavContainer = styled.div`

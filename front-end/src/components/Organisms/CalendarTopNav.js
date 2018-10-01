@@ -8,9 +8,6 @@ import {
 } from "../../styles/Calendar.js";
 import { Icon } from "semantic-ui-react";
 
-// TODO: figure out dynamic date
-// TODO: Make buttons functional after the above
-
 const CalendarTopNav = props => {
   const clickHandlerLeft = () => {
     props.changeDate(false);

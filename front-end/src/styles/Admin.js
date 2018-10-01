@@ -5,6 +5,7 @@ import { device } from "./globals.js";
 // STYLES FOR ADMIN DASHBOARD PAGE
 
 export const AdminContainer = styled.div`
+  width: 100%;
   height: 100%;
   display: flex;
   flex-direction: column;
@@ -13,20 +14,23 @@ export const AdminContainer = styled.div`
 
 export const AdminHeader = styled.div`
   display: flex;
-  justify-content: center;
+  width: 100%;
+  justify-content: space-between;
   align-items: center;
-  align-self: center;
+  padding: 0 10%;
+
+  @media ${device.tablet} {
+    padding: 10% 0;
+  }
 `;
 
 export const Welcome = styled.h2`
   fontsize: 30px;
   fontweight: 300;
-  align-self: center;
 `;
 
 export const ButtonContainer = styled.div`
-  margin-left: auto;
-  align-self: baseline;
+  padding-left: auto;
 
   @media ${device.tablet} {
     max-width: 92px;
