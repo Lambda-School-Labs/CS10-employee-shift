@@ -74,7 +74,7 @@
 
 .textBox {
   display: flex;
-  width: 300px;
+  width: 125px;
   height: 350px;
   flex-direction: column;
   background-color: #fff;
@@ -105,7 +105,7 @@
 
     @keyframes float_1 {
       0% {
-        transform: translate(0, 300px);
+        transform: translate(150px, 125px);
         opacity: 0.0;
       }
       25% {
@@ -138,7 +138,7 @@
 
       @keyframes float_2 {
       0% {
-        transform: translate(150px, 300px);
+        transform: translate(150px, 125px);
         opacity: 0.0;
       }
       25% {
@@ -171,7 +171,7 @@
 
       @keyframes float_3 {
       0% {
-        transform: translate(120px, 300px);
+        transform: translate(150px, 125px);
         opacity: 0.0;
       }
       25% {
@@ -204,7 +204,7 @@
 
       @keyframes float_4 {
       0% {
-        transform: translate(-200px,420px);
+        transform: translate(150px, 125px);
         opacity: 0.0;
       }
       25% {
@@ -237,7 +237,7 @@
 
       @keyframes float_5 {
       0% {
-        transform: translate(150px, 200px);
+        transform: translate(150px, 125px);
         opacity: 0.0;
       }
       25% {
@@ -270,7 +270,7 @@
 
       @keyframes float_6 {
       0% {
-        transform: translate(250px, 400px);
+        transform: translate(150px, 125px);
         opacity: 0.0;
       }
       25% {
