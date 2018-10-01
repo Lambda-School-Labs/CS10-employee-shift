@@ -204,10 +204,8 @@ class Calendar extends Component {
                         ? "flex-end"
                         : "center"
                   }
-                  start={moment(shift.start_datetime).format("h:mm A")}
-                  end={moment(shift.end_datetime).format("h:mm A")}
-                  start24={moment(shift.start_datetime).format("H:mm")}
-                  end24={moment(shift.end_datetime).format("H:mm")}
+                  start={shift.start_datetime}
+                  end={shift.end_datetime}
                   notes={shift.notes}
                   profile={shift.profile}
                   id={shift.id}
