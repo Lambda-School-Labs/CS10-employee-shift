@@ -1,9 +1,9 @@
 import axios from "axios";
 
-// Get 7 days of shifts to fill the calendar view
 export const getShifts = () => (dispatch, getState) => {
   dispatch({ type: "LOADING_SHIFTS" });
   const token = getState().user.token;
+  // Get a smaller block of shifts ?
   // Send query with datetime to get current week, next week, and previous week
   if (token) {
     const headers = {
