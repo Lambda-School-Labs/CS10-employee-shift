@@ -97,8 +97,10 @@ export const Circle_div = styled.div `
   
 export const circle_img = styled.div `
     display: flex;
+    margin-right: 150px;
+    position: relative;
     justify-content: center;
-    border: red 1px solid;
+    border:red solid 1px;
     z-index: -1;
     `;
 
