@@ -158,7 +158,7 @@ export const FooterStyles = styled.div`
     display: flex;
     background-color: #4B9CD3;
     justify-content: center;
-    margin-top: -15px;
+    z-index: 5;
   `;
 
 export const UserButton = styled.button`
