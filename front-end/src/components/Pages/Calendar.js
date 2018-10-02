@@ -5,6 +5,7 @@ import moment from "moment";
 
 import { getShifts } from "../../store/Shift/actions.js";
 import { getAllProfiles } from "../../store/Profile/actions.js";
+import { getHoursOfOperation } from "../../store/hourOfOperation/actions.js";
 
 import CalendarTopNav from "../Organisms/CalendarTopNav.js";
 import ScheduleShift from "../Molecules/ScheduleShift.js";
@@ -37,6 +38,7 @@ class Calendar extends Component {
   componentDidMount() {
     this.props.getAllProfiles();
     this.props.getShifts();
+    this.props.getHoursOfOperation();
   }
 
   handleChangeDate = direction => {
@@ -69,7 +71,104 @@ class Calendar extends Component {
     return output;
   };
 
+  findGaps = () => {
+    // This function takes the shifts in the current week and compares it against the HoO to find any gaps
+    const currentDate = moment(this.state.date);
+    const shiftsByDay = [[], [], [], [], [], [], []];
+
+    // refactor this out so it isn't run twice V
+    this.props.allShifts.forEach((shift, index) => {
+      const momentStart = moment(shift.start_datetime);
+      const shiftInCurrentWeek = momentStart.isBetween(
+        currentDate
+          .clone()
+          .day(1)
+          .set({ hour: 0, minute: 0, "second:": 0, millisecond: 0 }),
+        currentDate
+          .clone()
+          .day(7)
+          .set({ hour: 23, minute: 59, "second:": 59, millisecond: 999 })
+      );
+
+      if (shiftInCurrentWeek) {
+        const weekday = momentStart.isoWeekday();
+        shiftsByDay[weekday - 1].push(shift);
+      }
+    });
+
+    // function getGapsFromRangesArray(start_time, end_time, ranges) {
+    //   let chunks = [],
+    //     i = 0,
+    //     len = ranges.length,
+    //     range;
+
+    //   let _from = start_time;
+
+    //   // If there are no ranges cached, create one big chunk for entire range.
+    //   if (!len) {
+    //     chunks.push({ start_time: start_time, end_time: end_time });
+    //   } else {
+    //     for (; i < len; i++) {
+    //       range = ranges[i];
+
+    //       // Cache is complete or start_time is higher then end_time, we can stop looping
+    //       if (
+    //         range.start_time >= end_time ||
+    //         (range.start_time <= start_time && range.end_time >= end_time)
+    //       ) {
+    //         _from = end_time;
+    //         break;
+    //       }
+
+    //       // Range hasn't gotten to end_time date yet, so continue
+    //       if (range.end_time < start_time) continue;
+
+    //       // This range is lower then the current _from time, so we can go ahead to its end_time time
+    //       if (range.end_time <= _from) {
+    //         _from = range.end_time;
+    //       }
+    //       // This range is higher then the current _from time, so we are missing a piece
+    //       else {
+    //         chunks.push({
+    //           from: _from,
+    //           until: range.end_time,
+    //         });
+    //         _from = range.end_time;
+    //       }
+    //     }
+
+    //     // Final piece (if required)
+    //     if (_from < end_time) {
+    //       chunks.push({
+    //         start_time: _from,
+    //         end_time: end_time,
+    //       });
+    //     }
+    //   }
+
+    //   return chunks;
+    // }
+
+    // console.log(
+    //   getGapsFromRangesArray("12:00:00", "22:00:00", [
+    //     {
+    //       start_time: "13:00:00", // 1st of August
+    //       end_time: "14:00:00", // 10th of August
+    //     },
+    //     {
+    //       start_time: "14:00:00", // 15th of August
+    //       end_time: "20:00:00", // 20th of August
+    //     },
+    //     {
+    //       start_time: "20:30:00", // 25th of August
+    //       end_time: "22:00:00", // 31t of August
+    //     },
+    //   ])
+    // );
+  };
+
   render() {
+    const currentDate = moment(this.state.date);
     return (
       <CalendarContainer>
         <CalendarTopNav
@@ -156,23 +255,46 @@ class Calendar extends Component {
             <GridItemOpenShiftHeader>Open Shifts</GridItemOpenShiftHeader>
           </GridItemOpenShift>
           {this.props.allProfiles.map((profile, index) => {
+            // Shift counter for this week
+            let shiftCount = 0;
+            this.props.allShifts.forEach((shift, index) => {
+              const shiftInCurrentWeek = moment(shift.start_datetime).isBetween(
+                currentDate
+                  .clone()
+                  .day(1)
+                  .set({ hour: 0, minute: 0, "second:": 0, millisecond: 0 }),
+                currentDate
+                  .clone()
+                  .day(7)
+                  .set({
+                    hour: 23,
+                    minute: 59,
+                    "second:": 59,
+                    millisecond: 999,
+                  })
+              );
+              if (shiftInCurrentWeek && shift.profile === profile.id) {
+                shiftCount++;
+              }
+            });
+
             return (
               <GridItemEmployee
                 row={index + 3}
                 key={profile.user.last_name + index}
               >
-                <ProfileIcon hue={(index + 3) * 40}>0</ProfileIcon>
+                <ProfileIcon hue={(index + 3) * 40}>{shiftCount}</ProfileIcon>
                 <h5>
                   {profile.user.first_name} {profile.user.last_name}
                 </h5>
               </GridItemEmployee>
             );
           })}
+
           {/* Refactor into molecules - Body */}
           {this.fillGrid(this.props.allProfiles.length)}
 
           {this.props.allShifts.map((shift, index) => {
-            const currentDate = moment(this.state.date);
             const shiftInCurrentWeek = moment(shift.start_datetime).isBetween(
               currentDate
                 .clone()
@@ -213,6 +335,8 @@ class Calendar extends Component {
               );
             } else return null;
           })}
+
+          {this.findGaps()}
         </GridContainer>
       </CalendarContainer>
     );
@@ -223,6 +347,7 @@ const mapStateToProps = state => {
   return {
     allShifts: state.shift.allShifts,
     allProfiles: state.profile.allProfiles,
+    allHoOs: state.hourOfOperation.allHoOs,
   };
 };
 
@@ -233,6 +358,9 @@ const mapDispatchToProps = dispatch => {
     },
     getAllProfiles: () => {
       return dispatch(getAllProfiles());
+    },
+    getHoursOfOperation: () => {
+      return dispatch(getHoursOfOperation());
     },
   };
 };
