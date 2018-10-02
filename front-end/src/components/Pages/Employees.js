@@ -16,7 +16,7 @@ import { EmployeesContainer } from "../../styles/Employees.js";
 
 class Employees extends Component {
   state = { 
-    activeIndex: 0
+    activeIndex: -1
   }
 
 
