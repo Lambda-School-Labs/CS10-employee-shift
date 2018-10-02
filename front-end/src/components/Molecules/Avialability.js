@@ -2,6 +2,7 @@ import React, { Component } from "react";
 
 
 import { EmployeeCardContainer, CardInner } from "../../styles/Employees";
+import { Container } from "../../../node_modules/semantic-ui-react";
 
 class Availability extends Component {
   constructor(props) {
@@ -11,9 +12,9 @@ class Availability extends Component {
   render() {
       const availability = this.props.availability;
       return (
-        <div key={availability.id}>
-          <h3>{availability.day} {availability.start_time} {availability.end_time}</h3>
-        </div>
+        <Container>
+          <h4>{availability.day} {availability.start_time} {availability.end_time}</h4>
+        </Container>
       );
   };
 };

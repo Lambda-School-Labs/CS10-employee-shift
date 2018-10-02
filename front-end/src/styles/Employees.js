@@ -2,10 +2,8 @@ import styled from "styled-components";
 // Maybe combine with all other "cards" styling
 
 export const EmployeesContainer = styled.div`
-  height: 100%;
   display: flex;
-  justify-content: center;
-  align-items: center;
+  margin: 50px 150px;
   flex-direction: column;
 `;
 
