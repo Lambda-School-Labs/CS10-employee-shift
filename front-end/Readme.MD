@@ -4,17 +4,24 @@
  * React w/ Redux
 	- https://reactjs.org/docs/getting-started.html
 	- https://redux.js.org/
+	  - We are using redux for state management to effectifly reduce the ammount of server calls.
 * React Timekeeper
 	- https://catc.github.io/react-timekeeper/
-*	Moments.js
-	-	https://momentjs.com/docs/
-*	Styled Components
-	-	https://www.styled-components.com/docs
-*	Semantic UI
-	-	https://semantic-ui.com/
-
+* Moments.js
+	- https://momentjs.com/docs/
+	  - for the time managment of the app
+* Styled Components
+	- https://www.styled-components.com/docs
+	  - to help increase the readability of the codebase
+* Semantic UI
+	- https://semantic-ui.com/
+	  - to provide a baseline for styling
+	
 
 # Folder structure  
+
+ * Atomic Design
+ 	- http://bradfrost.com/blog/post/atomic-web-design/
 
 ----
 * Assets
