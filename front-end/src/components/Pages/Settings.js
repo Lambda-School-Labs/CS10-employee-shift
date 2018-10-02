@@ -3,7 +3,14 @@ import { connect } from "react-redux";
 
 import { updateUser } from "../../store/User/actions.js";
 
-import { SettingsContainer, FormItem, Form } from "../../styles/Settings.js";
+import { Input, Button, Header, Checkbox } from "semantic-ui-react";
+import {
+  SettingsContainer,
+  FormItem,
+  FormRow,
+  Form,
+  CheckboxContainer,
+} from "../../styles/Settings.js";
 
 class Settings extends Component {
   state = {
@@ -13,15 +20,16 @@ class Settings extends Component {
     email_enabled: false,
     old_password: "",
     password: "",
-    re_password: ""
+    re_password: "",
   };
+
   componentDidMount() {
     this.setState({
       email: this.props.email,
       phone_number: this.props.phone_number,
       email_enabled: this.props.email_enabled,
-      text_enabled: this.props.text_enabled
-    })
+      text_enabled: this.props.text_enabled,
+    });
   }
 
   submitForm = event => {
@@ -37,81 +45,106 @@ class Settings extends Component {
     );
   };
 
-  inputChangeHandler = event => {
-    const target = event.target;
+  inputChangeHandler = (event, data) => {
+    const target = data ? data : event.target;
     const value = target.type === "checkbox" ? target.checked : target.value;
-    const name = event.target.name;
+    const name = target.name;
     this.setState({ [name]: value });
   };
 
   render() {
     return (
       <SettingsContainer>
+        <Header>Settings</Header>
         <Form onSubmit={this.submitForm}>
-          <FormItem>
-            <label>Email</label>
-            <input
-              value={this.state.email}
-              onChange={this.inputChangeHandler}
-              name="email"
-              type="text"
-            />
-          </FormItem>
-          <FormItem>
-            <label>Phone</label>
-            <input
-              value={this.state.phone_number}
-              onChange={this.inputChangeHandler}
-              name="phone"
-              type="text"
-            />
-          </FormItem>
-          <FormItem>
-            <label>Emails?</label>
-            <input
+          <FormRow>
+            <FormItem>
+              <h5>Email</h5>
+              <Input
+                fluid
+                value={this.state.email}
+                onChange={this.inputChangeHandler}
+                name="email"
+                icon="mail"
+                iconPosition="left"
+                type="text"
+              />
+            </FormItem>
+            <FormItem>
+              <h5>Phone</h5>
+              <Input
+                fluid
+                value={this.state.phone_number}
+                onChange={this.inputChangeHandler}
+                name="phone"
+                icon="phone"
+                iconPosition="left"
+                type="text"
+              />
+            </FormItem>
+          </FormRow>
+          <CheckboxContainer>
+            <h5>Emails?</h5>
+            <Checkbox
+              toggle
               checked={this.state.text_enabled}
               onChange={this.inputChangeHandler}
               type="checkbox"
               name="text_enabled"
             />
-          </FormItem>
-          <FormItem>
-            <label>Texts?</label>
-            <input
+          </CheckboxContainer>
+          <CheckboxContainer>
+            <h5>Texts?</h5>
+            <Checkbox
+              toggle
               checked={this.state.email_enabled}
               onChange={this.inputChangeHandler}
               type="checkbox"
               name="email_enabled"
             />
-          </FormItem>
+          </CheckboxContainer>
+          <FormRow>
+            <FormItem>
+              <h5>New Password</h5>
+
+              <Input
+                fluid
+                value={this.state.password}
+                onChange={this.inputChangeHandler}
+                name="password"
+                icon="lock"
+                iconPosition="left"
+                type="password"
+              />
+            </FormItem>
+            <FormItem>
+              <h5>Retype Password</h5>
+              <Input
+                fluid
+                value={this.state.re_password}
+                onChange={this.inputChangeHandler}
+                name="re_password"
+                icon="lock"
+                iconPosition="left"
+                type="password"
+              />
+            </FormItem>
+          </FormRow>
           <FormItem>
-            <label>Old Password</label>
-            <input
+            <h5>Old Password</h5>
+            <Input
+              fluid
               value={this.state.old_password}
               onChange={this.inputChangeHandler}
               name="old_password"
+              icon="lock"
+              iconPosition="left"
               type="password"
             />
           </FormItem>
-          <FormItem>
-            <label>New Password</label>
-            <input
-              value={this.state.password}
-              onChange={this.inputChangeHandler}
-              name="password"
-              type="password"
-            />
-          </FormItem>
-          <FormItem>
-            <label>Retype Password</label>
-            <input
-              value={this.state.re_password}
-              onChange={this.inputChangeHandler}
-              name="re_password"
-              type="password"
-            />
-          </FormItem>
-          <button type="submit">Save</button>
+          <Button type="submit" size="large" fluid>
+            Save
+          </Button>
         </Form>
       </SettingsContainer>
     );
@@ -130,11 +163,11 @@ const mapStateToProps = state => {
   //TODO: check for empty profile - error
   return {
     errors,
-    
+
     email: userProfile.user.email,
     phone_number: userProfile.phone_number,
     email_enabled: userProfile.email_enabled,
-    text_enabled: userProfile.text_enabled
+    text_enabled: userProfile.text_enabled,
   };
 };
 

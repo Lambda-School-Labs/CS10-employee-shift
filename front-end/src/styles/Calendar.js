@@ -7,6 +7,7 @@ import { device } from "./globals.js";
 export const CalendarContainer = styled.div`
   width: 100%;
   height: 100%;
+  padding-top: 3%;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -17,31 +18,25 @@ export const CalendarContainer = styled.div`
 
 export const TopNavContainer = styled.div`
   width: 100%;
+  height: 5%;
   display: flex;
-  align-items: baseline;
+  align-items: center;
   justify-content: center;
-
-  @media ${device.mobileL} {
-    justify-content: space-between;
-  }
 `;
 
 export const TopNavHeader = styled.h1`
   min-width: 380px;
-  align-self: baseline;
-  margin-left: calc(50% - 200px);
   color: black;
   display: flex;
   justify-content: space-between;
+  align-items: baseline;
 
   @media ${device.tablet} {
     font-size: 23px;
     min-width: 260px;
-    margin-left: calc(50% - 158px);
   }
 
   @media ${device.mobileL} {
-    margin-left: 16px;
     font-size: 21px;
     min-width: 200px;
   }
@@ -49,24 +44,6 @@ export const TopNavHeader = styled.h1`
 
 export const TopNavHeaderText = styled.div`
   min-width: 200px;
-`;
-
-export const ButtonContainer = styled.div`
-  margin-left: auto;
-  align-self: baseline;
-
-  @media ${device.tablet} {
-    max-width: 92px;
-  }
-`;
-
-export const HoOButton = styled.div`
-  width: 100%;
-  height: 60px;
-  display: flex;
-  padding: 5% 12%;
-  justify-content: space-between;
-  cursor: pointer;
 `;
 
 export const GridContainer = styled.div`
@@ -209,6 +186,15 @@ export const GridItemActiveShiftInner = styled.div`
     cursor: pointer;
     background: hsl(${props => props.hue}, 62.5%, 75.6%);
   }
+`;
+
+export const PortalButton = styled.div`
+  width: 100%;
+  height: 60px;
+  display: flex;
+  padding: 5% 12%;
+  justify-content: space-between;
+  cursor: pointer;
 `;
 
 // TODO: REFACTOR BELOW

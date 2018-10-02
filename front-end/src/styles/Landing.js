@@ -77,11 +77,51 @@ export const ScheduleButton = styled.div`
     }
   `;
 
+
+
 export const ScheduleButtonButton = styled.button`
     box-shadow: 5px 10px 20px hsl(178, 53%, 43%);
     font-size: 2em;
     align-self: flex-end;
     // margin-left: 0%;
+    z-index: 2;
+    position: relative;
+  `;
+
+export const NavButton = styled.div `
+    .btn{
+    display: flex;
+    position: relative;
+    justify-content: flex-end;
+    margin-top: 5%;
+    margin-left: 10%;
+    border: none;
+    cursor: pointer;
+    font-size: 12px;
+    font-weight: 20px;
+    color: black;
+    letter-spacing: 2px;
+    padding: 5px 5px;
+    border-radius: 10px;
+    box-shadow: 10px 6px #13294B
+    }
+
+    .btn: hover {
+        background-color: #007FAE;
+        box-shadow: 6px 2px #13294B;
+        top: 2px;
+    }
+
+    .btn: action {
+        box-shadow: none;
+        top: 6px;
+    }
+  `;
+
+export const NavButtonButton = styled.button `
+    box-shadow: 5px 10px 20px hsl(178, 53%, 43%);
+    font-size: 1em;
+    align-self: flex-end;
     z-index: 2;
     position: relative;
   `;
@@ -97,8 +137,10 @@ export const Circle_div = styled.div `
   
 export const circle_img = styled.div `
     display: flex;
+    margin-right: 150px;
+    position: relative;
     justify-content: center;
-    border: red 1px solid;
+    border:red solid 1px;
     z-index: -1;
     `;
 

@@ -12,7 +12,9 @@ import {
   WelcomeText,
   circle_img,
   Circle_div,
-  UserButton
+  UserButton,
+  NavButtonButton,
+  NavButton
 } from "../../styles/Landing.js";
 
 import "../../styles/LandingRef.css";
@@ -51,7 +53,6 @@ class Landing_Card extends Component {
                             </Link>
                         </ScheduleButton>
                     </WelcomeSide>
-                
                     <Circle_div className="fade_1">
                         <circle_img>
                             <img src={talkingLogo}/>
@@ -84,12 +85,16 @@ class Landing_Card extends Component {
                     </Circle_div>
                     <WelcomeLogo>
                         <LandingNavBar>
-                            <Link to="/signup">
-                                <button>Sign up</button>
-                            </Link>
-                            <Link to="/signin">
-                                <button>Sign in</button>
-                            </Link>
+                            <NavButton>
+                                <Link to="/signup">
+                                    <NavButtonButton className="btn">Sign up</NavButtonButton>
+                                </Link>
+                            </NavButton>
+                            <NavButton>
+                                <Link to="/signin">
+                                    <NavButtonButton className="btn">Sign in</NavButtonButton>
+                                </Link>
+                            </NavButton>
                         </LandingNavBar>
                     </WelcomeLogo>
                 </WelcomeHolder>

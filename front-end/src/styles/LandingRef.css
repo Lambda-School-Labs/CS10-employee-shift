@@ -177,19 +177,19 @@
 
 @keyframes float_1 {
   0% {
-    transform: translate(0, 300px);
+    transform: translate(220px, 300px);
     opacity: 0;
   }
   25% {
-    transform: translate(0, -540px);
+    transform: translate(220px, -540px);
     opacity: 1;
   }
   26% {
-    transform: translate(0, -550px);
+    transform: translate(220px, -550px);
     opacity: 1;
   }
   100% {
-    transform: translate(0, -550px);
+    transform: translate(220px, -550px);
     opacity: 0;
   }
 }
@@ -210,19 +210,19 @@
 
 @keyframes float_2 {
   0% {
-    transform: translate(150px, 300px);
+    transform: translate(395px, 200px);
     opacity: 0;
   }
   25% {
-    transform: translate(150, -540px);
+    transform: translate(395px, -540px);
     opacity: 0.7;
   }
   26% {
-    transform: translate(200px, -550px);
+    transform: translate(395px, -550px);
     opacity: 1;
   }
   100% {
-    transform: translate(100px, -550px);
+    transform: translate(395px, -550px);
     opacity: 0;
   }
 }
@@ -243,19 +243,19 @@
 
 @keyframes float_3 {
   0% {
-    transform: translate(120px, 300px);
+    transform: translate(400px, 200px);
     opacity: 0;
   }
   25% {
-    transform: translate(150px, -540px);
+    transform: translate(400px, -540px);
     opacity: 1;
   }
   26% {
-    transform: translate(50px, -550px);
+    transform: translate(400px, -550px);
     opacity: 1;
   }
   100% {
-    transform: translate(100px, -550px);
+    transform: translate(400px, -550px);
     opacity: 0;
   }
 }
@@ -276,19 +276,19 @@
 
 @keyframes float_4 {
   0% {
-    transform: translate(-200px, 420px);
+    transform: translate(400px, 220px);
     opacity: 0;
   }
   25% {
-    transform: translate(-50, -540px);
+    transform: translate(400px, -540px);
     opacity: 0.7;
   }
   26% {
-    transform: translate(-20px, -550px);
+    transform: translate(400px, -550px);
     opacity: 1;
   }
   100% {
-    transform: translate(100px, -550px);
+    transform: translate(200px, -550px);
     opacity: 0;
   }
 }
@@ -309,7 +309,7 @@
 
 @keyframes float_5 {
   0% {
-    transform: translate(150px, 200px);
+    transform: translate(120px, 200px);
     opacity: 0;
   }
   25% {
@@ -342,7 +342,7 @@
 
 @keyframes float_6 {
   0% {
-    transform: translate(250px, 400px);
+    transform: translate(120px, 200px);
     opacity: 0;
   }
   25% {
@@ -359,7 +359,3 @@
   }
 }
 
-/* @keyframes float{
-        from{ transform: translateY(400px); opacity: 1}
-        to{ transform: translateY(-550px); opacity: 0}
-      } */

@@ -25,14 +25,14 @@ class main extends Component {
             handleSidebarHide={this.handleSidebarHide}
           />
           <Sidebar.Pusher>
+            <Button
+              style={{ position: "fixed", top: "1%", left: "1%" }}
+              onClick={this.handleButtonClick}
+            >
+              <Icon name="sidebar" />
+            </Button>
+            <TopNav />
             <ComponentContainer>
-              <Button
-                style={{ position: "fixed", top: "1%", left: "1%" }}
-                onClick={this.handleButtonClick}
-              >
-                <Icon name="sidebar" />
-              </Button>
-              <TopNav />
               <this.props.component />
             </ComponentContainer>
           </Sidebar.Pusher>

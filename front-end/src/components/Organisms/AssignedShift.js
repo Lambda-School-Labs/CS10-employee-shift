@@ -1,43 +1,58 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
+import moment from "moment";
 
 import { getShifts } from "../../store/Shift/actions.js";
 
-import { OrganismContainer } from "../../styles/Dashboard.js";
-
+import { AssignedShiftsContainer } from "../../styles/Dashboard.js";
+import { Segment, Header, Label } from "semantic-ui-react";
 
 class AssignedShift extends Component {
-  state = {
-    start_datetime: "2018-10-30T00:00:00",
-    end_datetime: "2018-10-30T00:00:00"
-  };
-
   componentDidMount() {
     this.props.getShifts();
   }
 
   render() {
     return (
-      <OrganismContainer>
-        <h1>Assigned Shifts</h1>
-        { this.props.allShifts.map((allShifts, index) => 
-            (allShifts.is_open === false) &&
-              <div key={index}>
-                <div>----</div>
-                <div>Start : {allShifts.start_datetime} </div>
-                <div>End : {allShifts.end_datetime} </div>
-                <div>Notes : {allShifts.notes} </div>
-              </div>
-          )
-        }
-      </OrganismContainer>
+      <AssignedShiftsContainer>
+        <Header>Assigned Shifts</Header>
+        {this.props.allShifts
+          .slice()
+          .sort(function(a, b) {
+            if (a.start_datetime > b.start_datetime) return 1;
+            else return -1;
+          })
+          .map(
+            (shift, index) =>
+              shift.is_open === false &&
+              shift.end_datetime >
+                moment()
+                  .utc()
+                  .format() && (
+                <Segment.Group key={index}>
+                  <Segment>
+                    <Label>Start :</Label>
+                    {moment(shift.start_datetime).format("MMM Do h:mm a")}
+                  </Segment>
+                  <Segment>
+                    <Label>End :</Label>
+                    {moment(shift.end_datetime).format("MMM Do h:mm a")}
+                  </Segment>
+                  <Segment>
+                    <Label>Notes :</Label>
+                    {shift.notes}
+                  </Segment>
+                </Segment.Group>
+              )
+          )}
+      </AssignedShiftsContainer>
     );
   }
 }
 
 const mapStateToProps = state => {
   return {
-    allShifts: state.shift.allShifts
+    allShifts: state.shift.allShifts,
   };
 };
 

@@ -10,7 +10,7 @@ import {
 
 import HoODay from "../Molecules/HoODay.js";
 
-import { ButtonContainer, HoOButton } from "../../styles/Calendar.js";
+import { ButtonContainer, HoOButton } from "../../styles/Admin.js";
 import { Header, Segment, Portal, Label, Divider } from "semantic-ui-react";
 
 // TODO: Make me more stylish

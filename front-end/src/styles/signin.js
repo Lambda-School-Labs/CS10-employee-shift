@@ -38,23 +38,7 @@ export const FormItem = styled.div`
   padding: 5% 0;
 `;
 
-export const SettingsContainer = styled.div`
-  height: 100%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-direction: column;
-`;
-
 export const BillingContainer = styled.div`
-  height: 100%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-direction: column;
-`;
-
-export const DashboardContainer = styled.div`
   height: 100%;
   display: flex;
   justify-content: center;
