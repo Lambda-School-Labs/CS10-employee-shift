@@ -36,15 +36,21 @@ class HourOfOperation(models.Model):
     open_time = models.TimeField(auto_now=False, auto_now_add=False)
     close_time = models.TimeField(auto_now=False, auto_now_add=False)
 
+    def __str__(self):
+        return self.account.company
+
 
 class Profile(models.Model):
-    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    user = models.OneToOneField(User, on_delete=models.CASCADE)
     account = models.ForeignKey(Account, on_delete=models.CASCADE)
 
-    phone_number = models.CharField(max_length=14)
+    phone_number = models.CharField(max_length=14, blank=True, null=True)
     notes = models.TextField(max_length=400, blank=True, null=True)
     text_enabled = models.BooleanField(default=False)
     email_enabled = models.BooleanField(default=False)
+
+    def __str__(self):
+        return self.user.username
 
 
 class RequestedTimeOff(models.Model):
@@ -66,6 +72,8 @@ class RequestedTimeOff(models.Model):
         default='P'
     )
 
+    def __str__(self):
+        return self.profile.user.username
        
 class Shift(models.Model):
     account = models.ForeignKey(Account, on_delete=models.CASCADE)
@@ -76,6 +84,8 @@ class Shift(models.Model):
     notes = models.TextField(max_length=400, blank=True, null=True)
     is_open = models.BooleanField(default=True)
 
+    def __str__(self):
+        return self.account.company
 
 class Availability(models.Model):
     DAY_CHOICES = (
@@ -97,3 +107,6 @@ class Availability(models.Model):
     )
     start_time = models.TimeField(auto_now=False, auto_now_add=False)
     end_time = models.TimeField(auto_now=False, auto_now_add=False)
+
+    def __str__(self):
+        return self.profile.user.username

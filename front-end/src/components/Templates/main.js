@@ -4,11 +4,10 @@ import TopNav from "../Organisms/TopNav.js";
 
 import {
   MainContainer,
-  HorizontalContainer,
   ComponentContainer,
 } from "../../styles/Template--main.js";
 
-import { Button, Segment, Sidebar } from "semantic-ui-react";
+import { Button, Segment, Sidebar, Icon } from "semantic-ui-react";
 
 class main extends Component {
   state = { visible: false };
@@ -20,26 +19,24 @@ class main extends Component {
   render() {
     return (
       <MainContainer>
-        <TopNav component={"hi"} />
-        <HorizontalContainer>
-          <Button
-            style={{ position: "fixed", top: "0" }}
-            onClick={this.handleButtonClick}
-          >
-            Nav
-          </Button>
-          <Sidebar.Pushable as={Segment}>
-            <SideNav
-              visible={this.state.visible}
-              handleSidebarHide={this.handleSidebarHide}
-            />
-            <Sidebar.Pusher>
-              <ComponentContainer>
-                <this.props.component />
-              </ComponentContainer>
-            </Sidebar.Pusher>
-          </Sidebar.Pushable>
-        </HorizontalContainer>
+        <Sidebar.Pushable as={Segment}>
+          <SideNav
+            visible={this.state.visible}
+            handleSidebarHide={this.handleSidebarHide}
+          />
+          <Sidebar.Pusher>
+            <Button
+              style={{ position: "fixed", top: "1%", left: "1%" }}
+              onClick={this.handleButtonClick}
+            >
+              <Icon name="sidebar" />
+            </Button>
+            <TopNav />
+            <ComponentContainer>
+              <this.props.component />
+            </ComponentContainer>
+          </Sidebar.Pusher>
+        </Sidebar.Pushable>
       </MainContainer>
     );
   }

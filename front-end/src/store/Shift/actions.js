@@ -1,9 +1,9 @@
 import axios from "axios";
 
-// Get 7 days of shifts to fill the calendar view
 export const getShifts = () => (dispatch, getState) => {
   dispatch({ type: "LOADING_SHIFTS" });
   const token = getState().user.token;
+  // Get a smaller block of shifts ?
   // Send query with datetime to get current week, next week, and previous week
   if (token) {
     const headers = {
@@ -31,8 +31,6 @@ export const getShifts = () => (dispatch, getState) => {
   }
 };
 
-// TESTING
-// TODO: fill in correct data to send
 export const postShift = (
   start_datetime,
   end_datetime,
@@ -47,20 +45,13 @@ export const postShift = (
   if (token) {
     headers["Authorization"] = `Bearer ${token}`;
   }
-
-  // DUMMY ACCOUNT -- REMOVE ME AND GRAB CORRECT ONE FROM STORE
-  const account = 1;
-  // DUMMY DATES -- REMOVE ME AND FILL IN CORRECT ONES
-  let date = new Date();
-  date = date.toISOString();
-
   const body = JSON.stringify({
-    account: account,
-    profile: profile,
-    start_datetime: date,
-    end_datetime: date,
-    is_open: is_open,
-    notes: notes,
+    start_datetime,
+    end_datetime,
+    is_open,
+    notes,
+    account: getState().user.currentUser.account.id,
+    profile,
   });
 
   axios({
@@ -70,7 +61,7 @@ export const postShift = (
     data: body,
   })
     .then(res => {
-      if (res.status === 200) {
+      if (res.status === 201) {
         return dispatch({ type: "CREATE_SHIFT", data: res.data });
       }
     })
@@ -86,9 +77,10 @@ export const postShift = (
 };
 
 export const updateShift = (
+  id,
+  profile,
   start_datetime,
   end_datetime,
-  profile,
   is_open,
   notes
 ) => (dispatch, getState) => {
@@ -99,31 +91,23 @@ export const updateShift = (
     headers["Authorization"] = `Bearer ${token}`;
   }
 
-  // DUMMY ACCOUNT -- REMOVE ME AND GRAB CORRECT ONE FROM STORE
-  const account = 1;
-  // DUMMY DATES -- REMOVE ME AND FILL IN CORRECT ONES
-  let date = new Date();
-  date = date.toISOString();
-
-  // SENDS ACCOUNT ID, STARTTIME, ENDTIME, OPTIONAL USER PROFILE, OPTIONAL OPEN FLAG
   const body = JSON.stringify({
-    account: account,
-    profile: profile,
-    start_datetime: date,
-    end_datetime: date,
-    is_open: is_open,
-    notes: notes,
+    profile,
+    start_datetime,
+    end_datetime,
+    account: getState().user.currentUser.account.id,
+    is_open,
+    notes,
   });
 
   axios({
     method: "put",
-    // TODO: use dynamic ID of SHIFT
-    url: `${process.env.REACT_APP_ROOT_URL}/api/shifts/1/`,
+    url: `${process.env.REACT_APP_ROOT_URL}/api/shifts/${id}/`,
     headers: headers,
     data: body,
   })
     .then(res => {
-      if (res.status === 200) {
+      if (res.status === 200 || res.status === 204) {
         return dispatch({ type: "UPDATE_SHIFT", data: res.data });
       }
     })
@@ -139,8 +123,6 @@ export const updateShift = (
 };
 
 export const deleteShift = id => (dispatch, getState) => {
-  dispatch({ type: "LOADING_SHIFTS" });
-
   const token = getState().user.token;
   const headers = {};
   if (token) {
@@ -149,13 +131,12 @@ export const deleteShift = id => (dispatch, getState) => {
 
   axios({
     method: "delete",
-    // TODO: use ID of the SHIFT dynamically
-    url: `${process.env.REACT_APP_ROOT_URL}/api/shifts/1`,
+    url: `${process.env.REACT_APP_ROOT_URL}/api/shifts/${id}/`,
     headers: headers,
   })
     .then(res => {
-      if (res.status === 200) {
-        return dispatch({ type: "DELETE_SHIFT", data: res.data });
+      if (res.status === 200 || res.status === 204) {
+        return dispatch({ type: "DELETE_SHIFT", data: id });
       }
     })
     .catch(err => {

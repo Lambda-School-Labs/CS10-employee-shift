@@ -63,7 +63,7 @@ export default (state = initialState, action) => {
       console.log("UPDATED USER");
       return {
         ...state,
-        ...action.data,
+        currentUser: action.data,
         errors: null,
       };
 

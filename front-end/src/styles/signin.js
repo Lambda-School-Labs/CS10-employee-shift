@@ -11,6 +11,10 @@ export const Container = styled.div`
   background-color: hsl(178, 53%, 83%);
 `;
 
+export const Header = styled.h1`
+  text-align: center;
+`;
+
 export const Form = styled.form`
   display: flex;
   justify-content: space-evenly;
@@ -22,27 +26,19 @@ export const Form = styled.form`
   border: 1px solid black;
 `;
 
-export const FormItem = styled.div`
-  margin: 5%;
-`;
-
-export const SettingsContainer = styled.div`
-  height: 100%;
+export const RegisterForm = styled.form`
   display: flex;
   justify-content: center;
+  flex-wrap: wrap;
   align-items: center;
-  flex-direction: column;
+`;
+
+export const FormItem = styled.div`
+  min-width: 250px;
+  padding: 5% 0;
 `;
 
 export const BillingContainer = styled.div`
-  height: 100%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-direction: column;
-`;
-
-export const DashboardContainer = styled.div `
   height: 100%;
   display: flex;
   justify-content: center;

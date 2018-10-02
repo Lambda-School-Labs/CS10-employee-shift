@@ -13,6 +13,7 @@ import {
   Settings,
   Signin,
   Signup,
+  Admin,
 } from "./Pages";
 
 import Template from "./Templates/main.js";
@@ -48,6 +49,7 @@ class App extends Component {
     return (
       <BrowserRouter>
         <Switch>
+          <PrivateRoute exact path="/admin" component={Admin} />
           <PrivateRoute exact path="/calendar" component={Calendar} />
           <PrivateRoute exact path="/billing" component={Billing} />
           <PrivateRoute exact path="/dashboard" component={Dashboard} />

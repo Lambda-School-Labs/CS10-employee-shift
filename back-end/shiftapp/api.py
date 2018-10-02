@@ -27,6 +27,14 @@ from rest_framework.response import Response
 from shiftapp.models import Profile, Account, RequestedTimeOff, Shift, HourOfOperation, Availability
 # Create the API views
 
+def is_employee(user):
+    return user.groups.filter(name='employee').exists()
+
+def is_manager(user):
+    return user.groups.filter(name='manager').exists()
+
+def is_owner(user):
+    return user.groups.filter(name='owner').exists()
 
 class UserViewSet(viewsets.ModelViewSet):
     permission_classes = [permissions.IsAuthenticated, TokenHasReadWriteScope]
@@ -67,11 +75,15 @@ class ProfileViewSet(viewsets.ModelViewSet):
     search_fields = ['user__username', 'user__first_name']
 
     def get_queryset(self, *args, **kwargs):
-        queryset = Profile.objects.all()
-        username = self.request.query_params.get('username', None)
-        if username is not None:
-            queryset = queryset.filter(user__username=username)
-        return queryset
+        user = self.request.user
+        profile = Profile.objects.filter(user=user)
+        account_id = profile[0].account
+
+        if is_manager(user):
+            return Profile.objects.filter(account=account_id).exclude(user=user)
+        else:
+            if is_employee(user):
+              return Profile.objects.filter(user=user)
 
 class UserProfileViewSet(viewsets.ModelViewSet):
     """
@@ -84,12 +96,8 @@ class UserProfileViewSet(viewsets.ModelViewSet):
 
     def get_queryset(self, *args, **kwargs):
         user = self.request.user
-        print(user)
 
-        if user.is_anonymous:
-            return Profile.objects.none()
-        else:
-            return Profile.objects.filter(user=user)
+        return Profile.objects.filter(user=user)
 
 
 class RequestedTimeOffViewSet(viewsets.ModelViewSet):
@@ -99,12 +107,36 @@ class RequestedTimeOffViewSet(viewsets.ModelViewSet):
     serializer_class = RequestedTimeOffSerializer
     queryset = RequestedTimeOff.objects.all()
 
+    # def get_queryset(self, *args, **kwargs):
+    #     user = self.request.user
+
+    #     profile = Profile.objects.filter(user=user)
+    #     account_id = profile[0].account
+    #     print()
+
+    #     if is_manager(user):
+    #         return RequestedTimeOff.objects.filter(account=account_id)
+    #     else:
+    #         if is_employee(user):
+    #           return RequestedTimeOff.objects.filter(account=account_id, profile__user=user)
+
 class ShiftViewSet(viewsets.ModelViewSet):
     """
     API endpoint that allows groups to be viewed or edited.
     """
     serializer_class = ShiftSerializer
     queryset = Shift.objects.all()
+
+    def get_queryset(self, *args, **kwargs):
+        user = self.request.user
+        profile = Profile.objects.filter(user=user)
+        account_id = profile[0].account
+
+        if is_manager(user):
+            return Shift.objects.filter(account=account_id)
+        else:
+            if is_employee(user):
+              return Shift.objects.filter(account=account_id, profile__user=user)
 
 class HourOfOperationViewSet(viewsets.ModelViewSet):
     """
@@ -113,13 +145,13 @@ class HourOfOperationViewSet(viewsets.ModelViewSet):
     serializer_class = HourOfOperationSerializer
     queryset = HourOfOperation.objects.all()
 
+
 class AvailabilityViewSet(viewsets.ModelViewSet):
     """
     API endpoint that allows groups to be viewed or edited.
     """
     serializer_class = AvailabilitySerializer
     queryset = Availability.objects.all()
-
 
 
 

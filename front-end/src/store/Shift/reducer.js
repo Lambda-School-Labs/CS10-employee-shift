@@ -5,7 +5,6 @@ const initialState = {
 };
 
 export default (state = initialState, action) => {
-  // return shallow copy of shifts
   const shifts = state.allShifts.slice();
 
   switch (action.type) {
@@ -13,30 +12,23 @@ export default (state = initialState, action) => {
       return { ...state, shiftsLoading: true };
 
     case "READ_SHIFT":
-      // DEV CONSOLE LOG, REMOVE ME!
-      console.log("FETCHED SHIFTS", action.data);
       return { ...state, allShifts: action.data, shiftsLoading: false };
 
     case "CREATE_SHIFT":
-      // DEV CONSOLE LOG, REMOVE ME!
-      console.log("CREATED SHIFT", action.data);
       shifts.push(action.data);
       return { ...state, allShifts: shifts, shiftsLoading: false };
 
     case "UPDATE_SHIFT":
-      // DEV CONSOLE LOG, REMOVE ME!
-      console.log("UPDATED SHIFT", action.data);
-      // grab shift using its index, maybe handle this differently
-      const shiftToUpdate = shifts[action.index];
-      // do some updates
-      shifts.splice(action.index, 1, shiftToUpdate);
+      const updatedShift = action.data;
+      const indexToUpdate = shifts.indexOf(
+        shifts.filter(shift => shift.id === updatedShift.id)
+      );
+      shifts.splice(indexToUpdate, 1, updatedShift);
       return { ...state, allShifts: shifts, shiftsLoading: false };
 
     case "DELETE_SHIFT":
-      // DEV CONSOLE LOG, REMOVE ME!
-      console.log("DELETED SHIFT", action.data);
-      shifts.splice(action.index, 1);
-      return { ...state, allShifts: shifts, shiftsLoading: false };
+      const new_shifts = shifts.filter(shift => shift.id !== action.data);
+      return { ...state, allShifts: new_shifts, shiftsLoading: false };
 
     // TODO: double check this
     case "ERROR":

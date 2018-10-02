@@ -1,25 +1,41 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 
+import "react-dates/initialize";
+import { DateRangePicker } from "react-dates";
+import moment from "moment";
+
 import { postRequestOff } from "../../store/requestOff/action.js";
 
-import { OrganismContainer } from "../../styles/Dashboard.js";
-import { FormItem, Form } from "../../styles/signin.js";
+import { Segment, Input, Button, Header } from "semantic-ui-react";
+import { TimeOffRequestContainer, FormItem } from "../../styles/Dashboard.js";
+
 class TimeOffRequest extends Component {
   state = {
-    start_datetime: "",
-    end_datetime: "",
+    start_datetime: moment(),
+    end_datetime: moment(),
     reason: "",
   };
 
   submitHandler = e => {
-    // dummy dates, remove me
-    let date = new Date();
-    date = date.toISOString();
-
     e.preventDefault();
-    // TODO: Fill with correct data to send
-    this.props.postRequestOff(date, date, this.state.reason);
+    console.log(
+      "postRequestOff FIRE",
+      this.state.start_datetime
+        .clone()
+        .utc()
+        .format(),
+      this.state.end_datetime
+        .clone()
+        .utc()
+        .format(),
+      this.state.reason
+    );
+    // this.props.postRequestOff(
+    //   this.state.start_datetime,
+    //   this.state.end_datetime,
+    //   this.state.reason
+    // );
   };
 
   inputChangeHandler = event => {
@@ -29,46 +45,43 @@ class TimeOffRequest extends Component {
 
   render() {
     return (
-      <OrganismContainer>
-        <h1>Submit Time Off Request</h1>
-        <Form onSubmit={this.submitHandler}>
+      <TimeOffRequestContainer>
+        <Header>Request Time Off</Header>
+        <Segment padded="very">
+          <DateRangePicker
+            startDate={this.state.start_datetime} // momentPropTypes.momentObj or null,
+            startDateId="your_unique_start_date_id" // PropTypes.string.isRequired,
+            endDate={this.state.end_datetime} // momentPropTypes.momentObj or null,
+            endDateId="your_unique_end_date_id" // PropTypes.string.isRequired,
+            onDatesChange={({ startDate, endDate }) =>
+              this.setState({
+                start_datetime: startDate,
+                end_datetime: endDate,
+              })
+            } // PropTypes.func.isRequired,
+            focusedInput={this.state.focusedInput} // PropTypes.oneOf([START_DATE, END_DATE]) or null,
+            onFocusChange={focusedInput => this.setState({ focusedInput })} // PropTypes.func.isRequired,
+            numberOfMonths={1}
+            minimumNights={0}
+          />
+          <FormItem>Timepickers</FormItem>
           <FormItem>
-            {/* Better date picker */}
-            Date Start:{" "}
-            <input
-              value={this.state.start_datetime}
-              onChange={this.inputChangeHandler}
-              type="text"
-              name="start_datetime"
-              placeholder="start date"
-            />
-          </FormItem>
-          <FormItem>
-            {/* Better date picker */}
-            Date End:{" "}
-            <input
-              value={this.state.end_datetime}
-              onChange={this.inputChangeHandler}
-              type="text"
-              name="end_datetime"
-              placeholder="end date"
-            />
-          </FormItem>
-          <FormItem>
-            Reason:{" "}
-            <input
+            <Input
+              fluid
               value={this.state.reason}
               onChange={this.inputChangeHandler}
-              type="text"
               name="reason"
-              placeholder="reason"
+              icon="sticky note"
+              iconPosition="left"
+              type="text"
+              placeholder="Reason"
             />
           </FormItem>
-          <FormItem>
-            <input type="submit" value="submit" />
+          <FormItem style={{ display: "flex", justifyContent: "center" }}>
+            <Button onClick={this.submitHandler}>Submit</Button>
           </FormItem>
-        </Form>
-      </OrganismContainer>
+        </Segment>
+      </TimeOffRequestContainer>
     );
   }
 }
