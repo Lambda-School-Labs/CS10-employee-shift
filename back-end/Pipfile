@@ -16,6 +16,9 @@ django-cors-middleware = "*"
 dj-stripe = "*"
 stripe = "*"
 django-dotenv = "*"
+twilio = "*"
+celery = "*"
+django-twilio = "*"
 
 [dev-packages]
 
