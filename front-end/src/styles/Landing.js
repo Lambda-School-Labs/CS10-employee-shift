@@ -158,6 +158,7 @@ export const FooterStyles = styled.div`
     display: flex;
     background-color: #4B9CD3;
     justify-content: center;
+    flex-direction: row;
     z-index: 5;
   `;
 

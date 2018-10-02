@@ -1,8 +1,6 @@
 import React, { Component } from "react";
-import {
-  FooterStyles
-} from "../../styles/Landing.js";
-
+import { FooterStyles } from "../../styles/Landing.js";
+import Twitter from "../Molecules/TwitterIcon.js";
 import "../../styles/LandingRef.css";
 
 
@@ -11,8 +9,12 @@ class LandingFooter extends Component {
         return (
             <div>
             <FooterStyles>
-                <footer>
-                    <span>Copyright 2018</span>
+                <footer className="landingFooter">
+                    <span className="copyright">Copyright 2018</span>
+                    
+                <div className="twitterLogo">
+                    <Twitter/> 
+                </div>  
                 </footer>
             </FooterStyles>
             </div>
