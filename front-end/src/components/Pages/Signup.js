@@ -19,20 +19,36 @@ class Signup extends Component {
     firstName: "",
     lastName: "",
     currentPage: 0,
+    error: [false, false, false, false, false, false],
   };
 
   submitHandler = e => {
     // TODO: validate password
     e.preventDefault();
-    console.log(this.state);
-    this.props.signup(
-      this.state.username,
-      this.state.password,
-      this.state.re_password,
-      this.state.email,
-      this.state.firstName,
-      this.state.lastName
-    );
+    const newError = [
+      this.state.error[0],
+      this.state.error[1],
+      this.state.error[2],
+      !this.state.username,
+      !this.state.password,
+      !this.state.re_password,
+    ];
+    this.setState({ error: newError });
+
+    if (
+      this.state.password === this.state.re_password &&
+      !newError[3] &&
+      !newError[4] &&
+      !newError[5]
+    )
+      this.props.signup(
+        this.state.username,
+        this.state.password,
+        this.state.re_password,
+        this.state.email,
+        this.state.firstName,
+        this.state.lastName
+      );
   };
 
   inputChangeHandler = event => {
@@ -41,8 +57,19 @@ class Signup extends Component {
   };
 
   turnPageHandler = () => {
-    if (this.state.currentPage === 0) this.setState({ currentPage: 1 });
-    else this.setState({ currentPage: 0 });
+    const newError = [
+      !this.state.email,
+      !this.state.firstName,
+      !this.state.lastName,
+      this.state.error[3],
+      this.state.error[4],
+      this.state.error[5],
+    ];
+    this.setState({ error: newError });
+    if (!newError[0] && !newError[1] && !newError[2]) {
+      if (this.state.currentPage === 0) this.setState({ currentPage: 1 });
+      else this.setState({ currentPage: 0 });
+    }
   };
 
   render() {
@@ -66,6 +93,7 @@ class Signup extends Component {
                 icon="mail"
                 iconPosition="left"
                 placeholder="Email"
+                error={this.state.error[0]}
               />
             </FormItem>
             <FormItem>
@@ -78,6 +106,7 @@ class Signup extends Component {
                 icon="user circle"
                 iconPosition="left"
                 placeholder="First Name"
+                error={this.state.error[1]}
               />
             </FormItem>
             <FormItem>
@@ -90,6 +119,7 @@ class Signup extends Component {
                 icon="user circle"
                 iconPosition="left"
                 placeholder="Last Name"
+                error={this.state.error[2]}
               />
             </FormItem>
             <FormItem>
@@ -127,6 +157,7 @@ class Signup extends Component {
                 icon="user"
                 iconPosition="left"
                 placeholder="Username"
+                error={this.state.error[3]}
               />
             </FormItem>
             <FormItem>
@@ -140,6 +171,7 @@ class Signup extends Component {
                 iconPosition="left"
                 placeholder="Password"
                 type="password"
+                error={this.state.error[4]}
               />
             </FormItem>
             <FormItem>
@@ -153,6 +185,7 @@ class Signup extends Component {
                 iconPosition="left"
                 placeholder="Re-type Password"
                 type="password"
+                error={this.state.error[5]}
               />
             </FormItem>
             <Button

@@ -26,10 +26,10 @@ class ScheduleShiftUpdate extends React.Component {
     clickX: 0,
     clickY: 0,
     notes: this.props.notes,
-    start_time: this.props.start,
-    end_time: this.props.end,
-    start_time24: this.props.start24,
-    end_time24: this.props.end24,
+    start_time: moment(this.props.start).format("h:mm A"),
+    end_time: moment(this.props.end).format("h:mm A"),
+    start_time24: moment(this.props.start).format("H:mm"),
+    end_time24: moment(this.props.end).format("H:mm"),
     profile: this.props.profile,
     id: this.props.id,
   };
@@ -67,10 +67,10 @@ class ScheduleShiftUpdate extends React.Component {
         start_hour = this.state.start_time24.slice(0, 2);
         start_minutes = this.state.start_time24.slice(3, 5);
       }
-      const start_datetime = moment(this.props.date)
-        .hour(start_hour)
-        .minute(start_minutes)
+      const start_datetime = moment(this.props.start)
         .second(0)
+        .minute(start_minutes)
+        .hour(start_hour)
         .utc()
         .format();
 
@@ -85,16 +85,18 @@ class ScheduleShiftUpdate extends React.Component {
         end_minutes = this.state.end_time24.slice(3, 5);
       }
       if (end_hour < start_hour) {
+        // prettier-ignore
         end_datetime = moment(start_datetime)
-          .clone()
-          .add(24 - start_hour + end_hour, "h")
-          .add(end_minutes, "m")
-          .utc()
-          .format();
+            .clone()
+            .add((23 - start_hour) + Number(end_hour), "hours")
+            .add((60 - start_minutes) + Number(end_minutes), "minutes")
+            .utc()
+            .format();
       } else {
-        end_datetime = moment(this.props.date)
-          .hour(end_hour)
+        end_datetime = moment(this.props.end)
+          .second(0)
           .minute(end_minutes)
+          .hour(end_hour)
           .utc()
           .format();
       }
@@ -145,7 +147,8 @@ class ScheduleShiftUpdate extends React.Component {
           onClick={this.handleOpen}
           hue={this.props.hue}
         >
-          {this.props.start} - {this.props.end}
+          {moment(this.props.start).format("h:mm A")} -
+          {moment(this.props.end).format("h:mm A")}
         </GridItemActiveShiftInner>
         <Portal
           open={this.state.open}

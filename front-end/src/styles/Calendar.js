@@ -48,6 +48,7 @@ export const TopNavHeaderText = styled.div`
 
 export const GridContainer = styled.div`
   display: grid;
+  position: relative;
   width: 100%;
   height: 100%;
   grid-template-column: repeat(8, 1fr);
@@ -119,6 +120,7 @@ export const GridItemEmployee = styled.div`
   position: relative;
   display: flex;
   align-items: center;
+  justify-content: center;
 
   &::after {
     background: #ddd;
@@ -149,6 +151,9 @@ export const GridItemShift = styled.div`
 `;
 
 export const GridItemActiveShift = styled.div`
+  height: 100%;
+  width: 100%;
+  position: absolute;
   grid-row-start: ${props => props.row};
   grid-row-end: ${props => props.row};
   grid-column-start: ${props => props.column};

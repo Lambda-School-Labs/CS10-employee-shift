@@ -61,9 +61,9 @@ class ScheduleShift extends React.Component {
         start_minutes = this.state.start_time24.slice(3, 5);
       }
       const start_datetime = moment(this.props.date)
-        .hour(start_hour)
-        .minute(start_minutes)
         .second(0)
+        .minute(start_minutes)
+        .hour(start_hour)
         .utc()
         .format();
 
@@ -78,16 +78,18 @@ class ScheduleShift extends React.Component {
         end_minutes = this.state.end_time24.slice(3, 5);
       }
       if (end_hour < start_hour) {
+        // prettier-ignore
         end_datetime = moment(start_datetime)
           .clone()
-          .add(24 - start_hour + end_hour, "h")
-          .add(end_minutes, "m")
+          .add((23 - start_hour) + Number(end_hour), "hours")
+          .add((60 - start_minutes) + Number(end_minutes), "minutes")
           .utc()
           .format();
       } else {
         end_datetime = moment(this.props.date)
-          .hour(end_hour)
+          .second(0)
           .minute(end_minutes)
+          .hour(end_hour)
           .utc()
           .format();
       }
