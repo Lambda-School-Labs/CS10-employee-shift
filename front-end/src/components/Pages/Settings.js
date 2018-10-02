@@ -76,7 +76,7 @@ class Settings extends Component {
                 fluid
                 value={this.state.phone_number}
                 onChange={this.inputChangeHandler}
-                name="phone"
+                name="phone_number"
                 icon="phone"
                 iconPosition="left"
                 type="text"

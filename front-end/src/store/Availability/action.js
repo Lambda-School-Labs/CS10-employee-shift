@@ -2,7 +2,7 @@ import axios from "axios";
 
 export const getAvailabilities = () => (dispatch, getState) => {
   dispatch({ type: "LOADING_AVAILABILITIES" });
-  const headers = { "Content-Type": "application/x-www-form-urlencoded" };
+  const headers = { "Content-Type": "application/json" };
   const token = getState().user.token;
 
   if (token) {
@@ -11,7 +11,7 @@ export const getAvailabilities = () => (dispatch, getState) => {
 
   axios
     // Need user in body? Or is it read off of token?
-    .get(`${process.env.REACT_APP_ROOT_URL}/api/availabilities/`, headers)
+    .get(`${process.env.REACT_APP_ROOT_URL}/api/availabilities/`, { headers })
     .then(res => {
       if (res.status === 200) {
         return dispatch({ type: "READ_AVAILABILITIES", data: res.data });

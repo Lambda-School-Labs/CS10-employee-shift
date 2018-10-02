@@ -69,6 +69,7 @@ class UserSerializer(ModelSerializer):
 
 
 class AccountSerializer(ModelSerializer):
+
     class Meta:
         model = Account
         fields = ('id', 'logo', 'company', 'enabled', 'plan_expires', "profile_set")
@@ -84,6 +85,7 @@ class UserProfileSerializer(ModelSerializer):
     # user = UserSerializer(many=False, read_only=True)
     user = UserSerializer()
     account = AccountSerializer()
+
     class Meta:
         model = Profile
         fields = ('url', 'id', 'user', 'account', 'phone_number', 'notes', 'email_enabled', 'text_enabled')
@@ -110,6 +112,7 @@ class UserProfileSerializer(ModelSerializer):
 
 class RequestedTimeOffSerializer(ModelSerializer):
     # status = serializers.ChoiceField(choices=STATUS_CHOICES, default='Pending')
+    # profile = ProfileSerializer()
 
     class Meta:
         model = RequestedTimeOff
@@ -117,11 +120,11 @@ class RequestedTimeOffSerializer(ModelSerializer):
         fields = ('id', 'profile', 'start_datetime', 'end_datetime', 'reason', 'status')
 
 
-    def create(self, validated_data):
-      # TODO: check valid profile wuth user
-      roo = super(RequestedTimeOffSerializer, self).create(validated_data)
-      roo.save()
-      return roo
+    # def create(self, validated_data):
+    #   # TODO: check valid profile wuth user
+    #   roo = super(RequestedTimeOffSerializer, self).create(validated_data)
+    #   roo.save()
+    #   return roo
 
 
 

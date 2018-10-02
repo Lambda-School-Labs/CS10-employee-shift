@@ -1,37 +1,58 @@
-import React from "react";
+import React, { Component } from "react";
+import { Card, Image, Icon, Segment, Container } from "../../../node_modules/semantic-ui-react";
 
 import { EmployeeCardContainer, CardInner } from "../../styles/Employees";
 
-const EmployeeCard = () => {
-  const dummydata = [
-    {
-      name: "George",
-      email: "george@thiscompany.com",
-      phone: "920-333-2203",
-      workingDays: "MWF",
-      workingTime: "3-10pm",
-    },
-  ];
-  return dummydata.map((employee, i) => {
-    return (
-      <EmployeeCardContainer key={i}>
-        <h2>{employee.name}</h2>
-        <h2>{employee.email}</h2>
-        <h2>{employee.phone}</h2>
+import Availability from "../Molecules/Avialability";
+import RequestedTimeOff from "../Molecules/RequestedTimeOff"
 
-        <CardInner>
-          <h1 className="card-title">Avability</h1>
-          <h2>{employee.workingDays}</h2>
-          <h2>{employee.workingTime}</h2>
-        </CardInner>
 
-        <CardInner>
-          <h1 className="card-title">Requested Time Off</h1>
-          <span>something</span>
-        </CardInner>
-      </EmployeeCardContainer>
-    );
-  });
+class EmployeeCard extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {}
+  }
+  render() {
+      const profile = this.props.profile;
+      // const availabilities;
+      return (
+        <Segment.Group horizontal>
+          <Segment>
+            <Container>
+                <Card color='blue'>
+                  {/* <Image size='small' src='https://react.semantic-ui.com/images/avatar/large/matthew.png'/> */}
+                  <Card.Content>
+                    <Image rounded floated='right' size='tiny' src='https://react.semantic-ui.com/images/avatar/large/matthew.png'/>
+                    <Card.Header>{profile.user.first_name} {profile.user.last_name}</Card.Header>
+                    <Card.Description>
+                      <Icon name='mail' />
+                      {profile.user.email}
+                    </Card.Description>
+                    <Card.Description>
+                      <Icon name='phone' />
+                      {profile.phone_number}
+                    </Card.Description>  
+                  </Card.Content>
+                </Card>
+            </Container>
+          </Segment>
+          <Segment>
+              <h3>Availability</h3>
+              {this.props.allAvailabilities
+                .filter( availability => availability.profile === profile.id )
+                .map( availability =>
+                <Availability key={availability.id} availability={availability} /> )}
+          </Segment>
+          <Segment>
+              <h3>Requested Time Off</h3>
+              {this.props.allRequestOffs
+                .filter( requestOff => requestOff.profile === profile.id )
+                .map( requestOff =>
+                <RequestedTimeOff key={requestOff.id} requestOff={requestOff} /> )}
+          </Segment>
+        </Segment.Group>
+      );
+  };
 };
 
 export default EmployeeCard;
