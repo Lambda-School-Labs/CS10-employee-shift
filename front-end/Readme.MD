@@ -74,7 +74,7 @@
 * Light Gray
   - HEX #E1E1E1 
   - RGB 225, 225, 225
-    - _General page background_
+    - _Global button color_
 
 * Black
   - HEX #151515 
