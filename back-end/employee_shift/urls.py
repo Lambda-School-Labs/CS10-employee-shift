@@ -22,8 +22,7 @@ from rest_framework import generics, permissions, serializers, routers
 
 from oauth2_provider.contrib.rest_framework import TokenHasReadWriteScope, TokenHasScope 
 from stripe_payment.api import checkout, my_webhook_view
-from sms.views import sms
-
+from sms import urls
 
 from shiftapp.api import (
     UserViewSet, 
@@ -61,5 +60,5 @@ urlpatterns = [
    path('api/sign_up/', SignUp.as_view()),
    path(r'create-charge/', checkout, name="cout"),
    path(r'payments/', my_webhook_view, name="pay"),
-   path(r'sms/', sms, name="sms" )
+   path(r'sms/', include('sms.urls')),
 ]
