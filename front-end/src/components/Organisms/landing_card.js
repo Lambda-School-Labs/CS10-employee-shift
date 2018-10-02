@@ -101,8 +101,7 @@ class Landing_Card extends Component {
             </BackgroundHolder>
             </div>
         );
-}
-    
+    }
 }
 
 export default Landing_Card;

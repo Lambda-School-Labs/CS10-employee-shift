@@ -143,6 +143,10 @@
   padding: 5px 20px;
 }
 
+.cta-button: hover {
+  background-color: #fff;
+}
+
 
 .landingFooter {
   display: flex;
