@@ -1,10 +1,16 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 
-import HoO from "../Organisms/HoO.js";
+import AdminDetails from "../Organisms/AdminDetails.js";
+import AdminHours from "../Organisms/AdminHours.js";
 
 import { Header } from "semantic-ui-react";
-import { AdminContainer, AdminHeader, Welcome } from "../../styles/Admin.js";
+import {
+  AdminContainer,
+  AdminHeader,
+  Welcome,
+  AdminBody,
+} from "../../styles/Admin.js";
 
 class Admin extends Component {
   render() {
@@ -14,9 +20,12 @@ class Admin extends Component {
           <Welcome>
             {`Welcome, ${this.props.first_name} ${this.props.last_name}`}
           </Welcome>
-          <Header>Dashboard</Header>
-          <HoO />
         </AdminHeader>
+        <Header>Dashboard</Header>
+        <AdminBody>
+          <AdminHours />
+          <AdminDetails />
+        </AdminBody>
       </AdminContainer>
     );
   }

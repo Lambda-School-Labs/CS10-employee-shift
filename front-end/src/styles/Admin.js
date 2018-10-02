@@ -15,7 +15,7 @@ export const AdminContainer = styled.div`
 export const AdminHeader = styled.div`
   display: flex;
   width: 100%;
-  justify-content: space-between;
+  justify-content: center;
   align-items: center;
   padding: 0 10%;
 
@@ -24,13 +24,22 @@ export const AdminHeader = styled.div`
   }
 `;
 
+export const AdminBody = styled.div`
+  display: flex;
+  width: 100%;
+  justify-content: center;
+  align-items: center;
+`;
+
 export const Welcome = styled.h2`
+  padding-left: 10%;
+  align-self: flex-start;
   fontsize: 30px;
   fontweight: 300;
 `;
 
 export const ButtonContainer = styled.div`
-  padding-left: auto;
+  align-self: flex-end;
 
   @media ${device.tablet} {
     max-width: 92px;
@@ -44,4 +53,12 @@ export const HoOButton = styled.div`
   padding: 5% 12%;
   justify-content: space-between;
   cursor: pointer;
+`;
+
+export const AdminDetailsContainer = styled.div`
+  order: 3;
+`;
+
+export const AdminHoursContainer = styled.div`
+  padding-right: auto;
 `;
