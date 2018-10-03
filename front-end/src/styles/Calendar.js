@@ -71,6 +71,7 @@ export const GridItemHeader = styled.div`
 
 export const GridItemHeaderDate = styled.div`
   font-size: 30px;
+
   @media ${device.tablet} {
     font-size: 24px;
   }
@@ -78,6 +79,7 @@ export const GridItemHeaderDate = styled.div`
 
 export const GridItemHeaderDay = styled.div`
   font-size: 16px;
+
   @media ${device.tablet} {
     content: "M";
     font-size: 13px;
@@ -232,4 +234,18 @@ export const ProfileIcon = styled.div`
   width: 20px;
   border-radius: 50%;
   font-size: 20px;
+`;
+
+export const ScheduleShiftGap = styled.div`
+  width: ${props => props.end * 2}%;
+  opacity: 0.1;
+  height: ${props => (props.height + 2) * 100}%;
+  background: red;
+  position: absolute;
+  grid-row-start: 1;
+  grid-row-end: 1;
+  grid-column-start: ${props => props.column};
+  grid-column-end: ${props => props.column};
+  left: ${props => props.start * 4}%;
+  pointer-events: none;
 `;
