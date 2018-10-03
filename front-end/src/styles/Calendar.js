@@ -233,3 +233,15 @@ export const ProfileIcon = styled.div`
   border-radius: 50%;
   font-size: 20px;
 `;
+
+export const ScheduleShiftGap = styled.div`
+  width: 2px;
+  height: 100%;
+  background: red;
+  position: absolute;
+  grid-row-start: 1;
+  grid-row-end: 1;
+  grid-column-start: ${props => props.column};
+  grid-column-end: ${props => props.column};
+  left: ${props => props.start}%;
+`;

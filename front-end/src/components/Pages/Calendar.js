@@ -21,6 +21,7 @@ import {
   GridContainer,
   GridItemOpenShiftHeader,
   ProfileIcon,
+  ScheduleShiftGap,
 } from "../../styles/Calendar.js";
 import { CalendarContainer } from "../../styles/Calendar.js";
 
@@ -95,13 +96,14 @@ class Calendar extends Component {
       );
 
       if (shiftInCurrentWeek) {
+        // TODO: only take assigned shifts ??
         const weekday = momentStart.isoWeekday();
         shiftsByDay[weekday - 1].push(
           moment.range(momentStart, moment(shift.end_datetime))
         );
       }
     });
-
+    console.log(shiftsByDay);
     const gapsByDay = [[], [], [], [], [], [], []];
 
     function getGapsFromRangesArray(start_time, end_time, ranges, index) {
@@ -117,7 +119,6 @@ class Calendar extends Component {
         .second(Number(`${end_time[6]}${end_time[7]}`))
         .minute(Number(`${end_time[3]}${end_time[4]}`))
         .hour(Number(`${end_time[0]}${end_time[1]}`));
-      // const HoO_range = moment.range(HoO_start, HoO_end);
 
       // Join together shifts for the day
       const sortedRanges = ranges.slice().sort(function(a, b) {
@@ -135,15 +136,48 @@ class Calendar extends Component {
         }
       }
 
-      // clip HoO ends or subtract
-
-      // push to day of gapsByDay using index
-      gapsByDay[index].push();
+      // TODO: Maybe handle shifts out of HoO here
+      // if joinedRanges ??
+      // push gaps to day of gapsByDay using index
+      if (HoO_start >= joinedRanges[0].start) {
+        // if no gaps return
+        if (HoO_end <= joinedRanges[0].end) return;
+        for (let i = 0; i < joinedRanges.length - 1; i++) {
+          gapsByDay[index].push(
+            moment.range(joinedRanges[i].end, joinedRanges[i + 1].start)
+          );
+        }
+        gapsByDay[index].push(
+          moment.range(joinedRanges[joinedRanges.length - 1].end, HoO_end)
+        );
+      } else if (HoO_end <= joinedRanges[0].end) {
+        gapsByDay[index].push(moment.range(HoO_start, joinedRanges[0].start));
+        for (let i = 0; i < joinedRanges.length - 1; i++) {
+          gapsByDay[index].push(
+            moment.range(joinedRanges[i].end, joinedRanges[i + 1].start)
+          );
+        }
+      } else {
+        gapsByDay[index].push(moment.range(HoO_start, joinedRanges[0].start));
+        for (let i = 0; i < joinedRanges.length - 1; i++) {
+          gapsByDay[index].push(
+            moment.range(joinedRanges[i].end, joinedRanges[i + 1].start)
+          );
+        }
+        gapsByDay[index].push(
+          moment.range(joinedRanges[joinedRanges.length - 1].end, HoO_end)
+        );
+      }
     }
 
     this.props.allHoOs.forEach((HoO, index) => {
-      // if HoO.isOpen
-      // getGapsFromRangesArray(HoO.open_time, HoO.close_time, shiftsByDay[index], index);
+      if (HoO.isOpen)
+        getGapsFromRangesArray(
+          HoO.open_time,
+          HoO.close_time,
+          shiftsByDay[index],
+          index
+        );
     });
 
     return gapsByDay;
@@ -318,7 +352,27 @@ class Calendar extends Component {
             } else return null;
           })}
 
-          {this.findGaps()}
+          {this.findGaps().map((dayOfGaps, index) => {
+            const renderedGaps = [];
+            for (let i = 0; i < dayOfGaps.length; i++) {
+              renderedGaps.push(
+                <ScheduleShiftGap
+                  key={`gap ${index}-${i}`}
+                  column={index + 2}
+                  // justify={
+                  //   moment(shift.start_datetime).format("k") <= 9
+                  //     ? "flex-start"
+                  //     : moment(shift.start_datetime).format("k") >= 17
+                  //       ? "flex-end"
+                  //       : "center"
+                  // }
+                  start={dayOfGaps[i].start.format("k")}
+                  end={dayOfGaps[i].end}
+                />
+              );
+            }
+            return renderedGaps;
+          })}
         </GridContainer>
       </CalendarContainer>
     );
