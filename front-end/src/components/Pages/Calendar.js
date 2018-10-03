@@ -119,12 +119,6 @@ class Calendar extends Component {
         .hour(Number(`${end_time[0]}${end_time[1]}`))
         .isoWeekday(index);
 
-      // console.log(
-      //   index,
-      //   start_time,
-      //   HoO_start,
-      //   moment(currentDate).isoWeekday(1)
-      // );
       if (!ranges.length) {
         gapsByDay[index - 1].push(moment.range(HoO_start, HoO_end));
         return;
@@ -148,11 +142,6 @@ class Calendar extends Component {
       // TODO: Maybe handle shifts out of HoO here
       // push gaps between shifts to day of gapsByDay using the day's index
       if (joinedRanges.length) {
-        // console.log(
-        //   HoO_start,
-        //   joinedRanges[0].start,
-        //   HoO_start >= joinedRanges[0].start
-        // );
         if (HoO_start >= joinedRanges[0].start) {
           // if no gaps return
           if (HoO_end <= joinedRanges[0].end) return;
@@ -384,7 +373,6 @@ class Calendar extends Component {
           {this.findGaps().map((dayOfGaps, index) => {
             const renderedGaps = [];
             if (dayOfGaps.length) {
-              console.log(dayOfGaps);
               for (let i = 0; i < dayOfGaps.length; i++) {
                 renderedGaps.push(
                   <ScheduleShiftGap
