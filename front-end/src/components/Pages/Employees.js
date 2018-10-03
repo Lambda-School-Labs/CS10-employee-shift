@@ -39,7 +39,7 @@ class Employees extends Component {
         <EmployeesContainer>
           <SegmentGroup>
             {this.props.allProfiles.map( (profile, index) => 
-              <Segment raised key={index}>
+              <Segment key={index}>
                 <Accordion>
                   <Accordion.Title active={ this.state.activeIndex === index} index={index} onClick={this.handleTitleClick}>
                     <Label color='blue'>
