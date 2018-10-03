@@ -4,7 +4,7 @@ import { StripeProvider } from "react-stripe-elements";
 
 import MyStoreCheckout from "./test_pages/MyStoreCheckout";
 
-import { BillingContainer } from "../../styles/Billing.js";
+import { BillingContainer, StripeContainer } from "../../styles/Billing.js";
 import { Segment, Header } from "semantic-ui-react";
 
 //StripeProvider gives us access to the Stripe Object
@@ -35,6 +35,7 @@ class Billing extends Component {
     return (
       <BillingContainer>
         <Header>Billing</Header>
+        <StripeContainer>
         <Segment>
           {this.state.stripe ? (
             <StripeProvider stripe={this.state.stripe}>
@@ -42,6 +43,7 @@ class Billing extends Component {
             </StripeProvider>
           ) : null}
         </Segment>
+        </StripeContainer>
       </BillingContainer>
     );
   }

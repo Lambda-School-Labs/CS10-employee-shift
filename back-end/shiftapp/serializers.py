@@ -137,7 +137,7 @@ class ShiftSerializer(ModelSerializer):
 class HourOfOperationSerializer(ModelSerializer):
     class Meta:
         model = HourOfOperation
-        fields = ('id', 'account', 'day', 'open_time', 'close_time')
+        fields = ('id', 'account', 'day', 'open_time', 'close_time', 'is_open')
 
 
 class AvailabilitySerializer(ModelSerializer):

@@ -61,7 +61,18 @@ class AccountViewSet(viewsets.ModelViewSet):
     """
     permission_classes = [permissions.IsAuthenticated, TokenHasReadWriteScope]
     serializer_class = AccountSerializer
-    queryset = Account.objects.all()
+    queryset = Account.objects.none()
+
+    def get_queryset(self, *args, **kwargs):
+        user = self.request.user
+        profile = Profile.objects.filter(user=user)
+        account_id = profile[0].account
+
+        if is_manager(user):
+            return Account.objects.filter(account_id=account_id)
+        else:
+            if is_employee(user):
+              return Account.objects.none()
 
 class ProfileViewSet(viewsets.ModelViewSet):
     """
