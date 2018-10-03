@@ -112,21 +112,74 @@ endpoint_secret = settings.STRIPE_WEBHOOK_SECRET
 print(endpoint_secret)
 
 def my_webhook_view(request):
-  payload = request.body
-  sig_header = request.META['HTTP_STRIPE_SIGNATURE']
-  event = None
+    # You can use webhooks to receive information about asynchronous payment events.
+    # For more about our webhook events check out https://stripe.com/docs/webhooks.
+    webhook_secret = os.getenv('STRIPE_WEBHOOK_SECRET')
+    request_data = json.loads(request.data)
 
-  try:
-    event = stripe.Webhook.construct_event(
-      payload, sig_header, endpoint_secret
-    )
-  except ValueError as e:
-    # Invalid payload
-    return HttpResponse(status=400)
-  except stripe.error.SignatureVerificationError as e:
-    # Invalid signature
-    return HttpResponse(status=400)
+    if webhook_secret:
+        # Retrieve the event by verifying the signature using the raw body and secret if webhook signing is configured.
+        signature = request.headers.get('stripe-signature')
+        try:
+            event = stripe.Webhook.construct_event(payload=request.data, sig_header=signature, secret=webhook_secret)
+            data = event['data']
+        except Exception as e:
+            return e
+    else:
+        data = request_data['data']
 
-  # Do something with event
+    data_object = data['object']
 
-  return HttpResponse(status=200)
+    # Monitor `source.chargeable` events.
+    if data_object['object'] == 'source' \
+            and data_object['status'] == 'chargeable' \
+            and 'order' in data_object['metadata']:
+        source = data_object
+        print(f'Webhook received! The source {source["id"]} is chargeable')
+
+        # Find the corresponding Order this Source is for by looking in its metadata.
+        order = Inventory.retrieve_order(source['metadata']['order'])
+
+        # Verify that this Order actually needs to be paid.
+        order_status = order['metadata']['status']
+        if order_status in ['pending', 'paid', 'failed']:
+            return jsonify({'error': f'Order already has a status of {order_status}'}), 403
+
+        # Create a Charge to pay the Order using the Source we just received.
+        try:
+            charge = stripe.Charge.create(source=source['id'], amount=order['amount'], currency=order['currency'],
+                                          receipt_email=order['email'], idempotency_key=order['id'])
+
+            if charge and charge['status'] == 'succeeded':
+                status = 'paid'
+            elif charge:
+                status = charge['status']
+            else:
+                status = 'failed'
+
+        except stripe.error.CardError:
+            # This is where you handle declines and errors.
+            # For the demo, we simply set the status to mark the Order as failed.
+            status = 'failed'
+
+        Inventory.update_order(properties={'metadata': {'status': status}}, order=order)
+
+    # Monitor `charge.succeeded` events.
+    if data_object['object'] == 'charge' \
+            and data_object['status'] == 'succeeded' \
+            and 'order' in data_object['source']['metadata']:
+        charge = data_object
+        print(f'Webhook received! The charge {charge["id"]} succeeded.')
+        Inventory.update_order(properties={'metadata': {'status': 'paid'}},
+                                   order_id=charge['source']['metadata']['order'])
+
+    # Monitor `source.failed`, `source.canceled`, and `charge.failed` events.
+    if data_object['object'] in ['source', 'charge'] and data_object['status'] in ['failed', 'canceled']:
+        source = data_object['source'] if data_object['source'] else data_object
+        print(f'Webhook received! Failure for {data_object["id"]}.`')
+
+        if source['metadata']['order']:
+            Inventory.update_order(properties={'metadata': {'status': 'failed'}},
+                                       order_id=source['metadata']['order']['id'])
+
+    return HttpResponse(status=200)
