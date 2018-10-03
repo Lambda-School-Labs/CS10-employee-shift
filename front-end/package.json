@@ -6,6 +6,7 @@
     "axios": "^0.18.0",
     "date-fns": "^1.29.0",
     "moment": "^2.22.2",
+    "moment-range": "^4.0.1",
     "react": "^16.5.2",
     "react-dates": "^18.1.0",
     "react-dom": "^16.5.2",

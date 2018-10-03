@@ -1,7 +1,8 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 
-import moment from "moment";
+import Moment from "moment";
+import { extendMoment } from "moment-range";
 
 import { getShifts } from "../../store/Shift/actions.js";
 import { getAllProfiles } from "../../store/Profile/actions.js";
@@ -22,6 +23,8 @@ import {
   ProfileIcon,
 } from "../../styles/Calendar.js";
 import { CalendarContainer } from "../../styles/Calendar.js";
+
+const moment = extendMoment(Moment);
 
 // TODO: Make me more stylish
 // TODO: Check HoO against shifts to make sure that the time is filled, if not render cell red
@@ -54,7 +57,7 @@ class Calendar extends Component {
     // Rows = employees + 2 (one for column headers, one for open shifts)
     const output = [];
     for (let column = 2; column <= 7 + 1; column++) {
-      for (let row = 2; row <= this.props.allProfiles.length + 2; row++) {
+      for (let row = 2; row <= employees + 2; row++) {
         output.push(
           <ScheduleShift
             key={`${row}-${column}`}
@@ -76,7 +79,8 @@ class Calendar extends Component {
     const currentDate = moment(this.state.date);
     const shiftsByDay = [[], [], [], [], [], [], []];
 
-    // refactor this out so it isn't run twice V
+    // Sorts shifts by day of the week
+    // TODO: refactor this out so it isn't run twice V
     this.props.allShifts.forEach((shift, index) => {
       const momentStart = moment(shift.start_datetime);
       const shiftInCurrentWeek = momentStart.isBetween(
@@ -92,79 +96,57 @@ class Calendar extends Component {
 
       if (shiftInCurrentWeek) {
         const weekday = momentStart.isoWeekday();
-        shiftsByDay[weekday - 1].push(shift);
+        shiftsByDay[weekday - 1].push(
+          moment.range(momentStart, moment(shift.end_datetime))
+        );
       }
     });
 
-    // function getGapsFromRangesArray(start_time, end_time, ranges) {
-    //   let chunks = [],
-    //     i = 0,
-    //     len = ranges.length,
-    //     range;
+    const gapsByDay = [[], [], [], [], [], [], []];
 
-    //   let _from = start_time;
+    function getGapsFromRangesArray(start_time, end_time, ranges, index) {
+      const HoO_start = currentDate
+        .clone()
+        .isoWeekday(index)
+        .second(Number(`${start_time[6]}${start_time[7]}`))
+        .minute(Number(`${start_time[3]}${start_time[4]}`))
+        .hour(Number(`${start_time[0]}${start_time[1]}`));
+      const HoO_end = currentDate
+        .clone()
+        .isoWeekday(index)
+        .second(Number(`${end_time[6]}${end_time[7]}`))
+        .minute(Number(`${end_time[3]}${end_time[4]}`))
+        .hour(Number(`${end_time[0]}${end_time[1]}`));
+      // const HoO_range = moment.range(HoO_start, HoO_end);
 
-    //   // If there are no ranges cached, create one big chunk for entire range.
-    //   if (!len) {
-    //     chunks.push({ start_time: start_time, end_time: end_time });
-    //   } else {
-    //     for (; i < len; i++) {
-    //       range = ranges[i];
+      // Join together shifts for the day
+      const sortedRanges = ranges.slice().sort(function(a, b) {
+        if (a.start.format() > b.start.format()) return 1;
+        else return -1;
+      });
 
-    //       // Cache is complete or start_time is higher then end_time, we can stop looping
-    //       if (
-    //         range.start_time >= end_time ||
-    //         (range.start_time <= start_time && range.end_time >= end_time)
-    //       ) {
-    //         _from = end_time;
-    //         break;
-    //       }
+      const joinedRanges = [sortedRanges.shift()];
 
-    //       // Range hasn't gotten to end_time date yet, so continue
-    //       if (range.end_time < start_time) continue;
+      while (sortedRanges) {
+        const head = sortedRanges.shift();
+        if (head.overlaps(joinedRanges[joinedRanges.length - 1])) {
+          const newTail = joinedRanges.pop();
+          joinedRanges.push(newTail.add(head));
+        }
+      }
 
-    //       // This range is lower then the current _from time, so we can go ahead to its end_time time
-    //       if (range.end_time <= _from) {
-    //         _from = range.end_time;
-    //       }
-    //       // This range is higher then the current _from time, so we are missing a piece
-    //       else {
-    //         chunks.push({
-    //           from: _from,
-    //           until: range.end_time,
-    //         });
-    //         _from = range.end_time;
-    //       }
-    //     }
+      // clip HoO ends or subtract
 
-    //     // Final piece (if required)
-    //     if (_from < end_time) {
-    //       chunks.push({
-    //         start_time: _from,
-    //         end_time: end_time,
-    //       });
-    //     }
-    //   }
+      // push to day of gapsByDay using index
+      gapsByDay[index].push();
+    }
 
-    //   return chunks;
-    // }
+    this.props.allHoOs.forEach((HoO, index) => {
+      // if HoO.isOpen
+      // getGapsFromRangesArray(HoO.open_time, HoO.close_time, shiftsByDay[index], index);
+    });
 
-    // console.log(
-    //   getGapsFromRangesArray("12:00:00", "22:00:00", [
-    //     {
-    //       start_time: "13:00:00", // 1st of August
-    //       end_time: "14:00:00", // 10th of August
-    //     },
-    //     {
-    //       start_time: "14:00:00", // 15th of August
-    //       end_time: "20:00:00", // 20th of August
-    //     },
-    //     {
-    //       start_time: "20:30:00", // 25th of August
-    //       end_time: "22:00:00", // 31t of August
-    //     },
-    //   ])
-    // );
+    return gapsByDay;
   };
 
   render() {
