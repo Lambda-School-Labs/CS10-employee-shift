@@ -4,6 +4,9 @@ import { connect } from "react-redux";
 import { Segment, Card, Icon, Image } from "semantic-ui-react";
 import { AdminDetailsContainer } from "../../styles/Admin.js";
 
+
+
+
 const AdminDetails = props => {
   return (
     <AdminDetailsContainer>
@@ -15,7 +18,7 @@ const AdminDetails = props => {
             <Card.Meta>
               <span className="date">Joined in 2018</span>
             </Card.Meta>
-            <Card.Description>Description</Card.Description>
+            <Card.Description onClick={loging} contentEditable="true" id="description">Description</Card.Description>
           </Card.Content>
           <Card.Content extra>
             <a>
@@ -31,12 +34,26 @@ const AdminDetails = props => {
 };
 
 const mapStateToProps = state => {
+  console.log(state.user.currentUser.account)
   return {
     account: state.user.currentUser.account,
   };
 };
 
+function loging() {
+
+  let des = document.getElementById('description');
+  des.addEventListener("keydown", function (event) {
+    if (event.keyCode === 13) {
+      console.log("Spitting out:", des.innerHTML)
+      des.removeAttribute('contentEditable');
+    }
+  });
+
+}
+
 export default connect(
   mapStateToProps,
   null
-)(AdminDetails);
+  )(AdminDetails);
+  
