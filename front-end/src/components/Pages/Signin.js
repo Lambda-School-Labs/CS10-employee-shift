@@ -9,13 +9,58 @@ import { signin } from "../../store/User/actions.js";
 
 class Signin extends Component {
   state = {
-    email: "",
+    username: "",
     password: "",
+    validated: false,
+    errors: {}
   };
+
+  handleValidation(){
+      let errors = {};
+      let formIsValid = true;
+
+      //Username
+      if(!this.state.username){
+        formIsValid = false;
+        errors["username"] = "Username is required";
+      }
+
+      if(this.state.username){
+        if(!this.state.username.match(/^[a-zA-Z1-9]+$/)){
+            formIsValid = false;
+            errors["username"] = "Only letters and numbers";
+        }        
+      }
+
+      if(!this.state.password){
+        formIsValid = false;
+        errors["password"] = "Password is required";
+      }
+
+      // //Email
+      // if(!fields["email"]){
+      //   formIsValid = false;
+      //   errors["email"] = "Cannot be empty";
+      // }
+
+    //   if(typeof fields["email"] !== "undefined"){
+    //     let lastAtPos = fields["email"].lastIndexOf('@');
+    //     let lastDotPos = fields["email"].lastIndexOf('.');
+
+    //     if (!(lastAtPos < lastDotPos && lastAtPos > 0 && fields["email"].indexOf('@@') == -1 && lastDotPos > 2 && (fields["email"].length - lastDotPos) > 2)) {
+    //         formIsValid = false;
+    //         errors["email"] = "Email is not valid";
+    //       }
+    // }  
+
+    this.setState({errors: errors});
+    return formIsValid;
+  }
 
   submitHandler = e => {
     e.preventDefault();
-    this.props.signin(this.state.email, this.state.password);
+    if(this.handleValidation())
+      this.props.signin(this.state.username, this.state.password);
   };
 
   inputChangeHandler = event => {
@@ -24,6 +69,7 @@ class Signin extends Component {
   };
 
   render() {
+    console.log("render login : ", this.props.errors);
     if (this.props.isAuthenticated && this.props.user.currentUser) {
       if (this.props.user.currentUser.user.groups[0].name === "manager")
         return <Redirect to="/calendar" />;
@@ -39,18 +85,20 @@ class Signin extends Component {
               }}
             >
               <Header>Welcome back!</Header>
+              {this.props.errors && <span style={{color: "red"}}>{this.props.errors.error_description}</span>}
               <Form onSubmit={this.submitHandler}>
                 <FormItem>
                   <h3>Username</h3>
                   <Input
                     fluid
-                    value={this.state.email}
+                    value={this.state.username}
                     onChange={this.inputChangeHandler}
-                    name="email"
+                    name="username"
                     icon="user"
                     iconPosition="left"
-                    placeholder="E-mail address"
+                    placeholder="Username"
                   />
+                  <span style={{color: "red"}}>{this.state.errors["username"]}</span>
                 </FormItem>
                 <FormItem>
                   <h3>Password</h3>
@@ -64,6 +112,7 @@ class Signin extends Component {
                     placeholder="Password"
                     type="password"
                   />
+                  <span style={{color: "red"}}>{this.state.errors["password"]}</span>
                 </FormItem>
                 <FormItem>
                   <Button
@@ -94,14 +143,16 @@ class Signin extends Component {
 }
 
 const mapStateToProps = state => {
-  let errors = [];
-  if (state.user.errors) {
-    errors = Object.keys(state.user.errors).map(field => {
-      return { field, message: state.user.errors[field] };
-    });
-  }
+  // console.log('erroirrrrrrrr',state.user.errors);
+  // let errors = [];
+  // if (state.user.errors) {
+  //   console.log('erroirrrrrrrr',state.user.errors);
+  //   errors = Object.keys(state.user.errors).map(field => {
+  //     return { field, message: state.user.errors[field] };
+  //   });
+  // }
   return {
-    errors,
+    errors: state.user.errors,
     isAuthenticated: state.user.isAuthenticated,
     user: state.user,
   };
