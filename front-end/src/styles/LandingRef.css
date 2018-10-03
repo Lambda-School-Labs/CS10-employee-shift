@@ -143,23 +143,22 @@
   padding: 5px 20px;
 }
 
-
-.Test {
-  width: 100px;
-  padding: 50px 0;
-  line-height: 0;
-  margin: 60px auto;
-  background: pink;
-  color: white;
-  border-radius: 50px;
-  cursor: pointer;
-  z-index: 2;
-  transition: 1s;
+.landingFooter {
+  display: flex;
+  justify-content: center;
+  flex-direction: row;
 }
 
-.Test:hover {
-  background: salmon;
-  transform: rotate(360deg);
+.copyright {
+  margin-top: 10px;
+  margin-bottom: 7px;
+  margin-right: 15px;
+}
+
+.LandingLogo {
+  margin-top: 10px;
+  margin-bottom: 7px;
+  margin-right: 15px;
 }
 
 .fade_1 {
