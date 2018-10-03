@@ -79,9 +79,10 @@ class Calendar extends Component {
     // This function takes the shifts in the current week and compares it against the HoO to find any gaps
     const currentDate = moment(this.state.date);
     const shiftsByDay = [[], [], [], [], [], [], []];
+    const gapsByDay = [[], [], [], [], [], [], []];
 
     // Sorts shifts by day of the week
-    // TODO: refactor this out so it isn't run twice V
+    // TODO: refactor this out to component scope so it isn't run twice
     this.props.allShifts.forEach((shift, index) => {
       const momentStart = moment(shift.start_datetime);
       const shiftInCurrentWeek = momentStart.isBetween(
@@ -96,31 +97,40 @@ class Calendar extends Component {
       );
 
       if (shiftInCurrentWeek) {
-        // TODO: only take assigned shifts ??
+        // TODO: only take shifts that have been assigned ??
         const weekday = momentStart.isoWeekday();
         shiftsByDay[weekday - 1].push(
           moment.range(momentStart, moment(shift.end_datetime))
         );
       }
     });
-    console.log(shiftsByDay);
-    const gapsByDay = [[], [], [], [], [], [], []];
 
     function getGapsFromRangesArray(start_time, end_time, ranges, index) {
       const HoO_start = currentDate
         .clone()
-        .isoWeekday(index)
         .second(Number(`${start_time[6]}${start_time[7]}`))
         .minute(Number(`${start_time[3]}${start_time[4]}`))
-        .hour(Number(`${start_time[0]}${start_time[1]}`));
+        .hour(Number(`${start_time[0]}${start_time[1]}`))
+        .isoWeekday(index);
       const HoO_end = currentDate
         .clone()
-        .isoWeekday(index)
         .second(Number(`${end_time[6]}${end_time[7]}`))
         .minute(Number(`${end_time[3]}${end_time[4]}`))
-        .hour(Number(`${end_time[0]}${end_time[1]}`));
+        .hour(Number(`${end_time[0]}${end_time[1]}`))
+        .isoWeekday(index);
 
-      // Join together shifts for the day
+      // console.log(
+      //   index,
+      //   start_time,
+      //   HoO_start,
+      //   moment(currentDate).isoWeekday(1)
+      // );
+      if (!ranges.length) {
+        gapsByDay[index - 1].push(moment.range(HoO_start, HoO_end));
+        return;
+      }
+
+      // Otherwise join together shifts for the day
       const sortedRanges = ranges.slice().sort(function(a, b) {
         if (a.start.format() > b.start.format()) return 1;
         else return -1;
@@ -128,56 +138,75 @@ class Calendar extends Component {
 
       const joinedRanges = [sortedRanges.shift()];
 
-      while (sortedRanges) {
+      while (sortedRanges.length) {
         const head = sortedRanges.shift();
         if (head.overlaps(joinedRanges[joinedRanges.length - 1])) {
           const newTail = joinedRanges.pop();
           joinedRanges.push(newTail.add(head));
         }
       }
-
       // TODO: Maybe handle shifts out of HoO here
-      // if joinedRanges ??
-      // push gaps to day of gapsByDay using index
-      if (HoO_start >= joinedRanges[0].start) {
-        // if no gaps return
-        if (HoO_end <= joinedRanges[0].end) return;
-        for (let i = 0; i < joinedRanges.length - 1; i++) {
-          gapsByDay[index].push(
-            moment.range(joinedRanges[i].end, joinedRanges[i + 1].start)
+      // push gaps between shifts to day of gapsByDay using the day's index
+      if (joinedRanges.length) {
+        // console.log(
+        //   HoO_start,
+        //   joinedRanges[0].start,
+        //   HoO_start >= joinedRanges[0].start
+        // );
+        if (HoO_start >= joinedRanges[0].start) {
+          // if no gaps return
+          if (HoO_end <= joinedRanges[0].end) return;
+          for (let i = 0; i < joinedRanges.length - 1; i++) {
+            gapsByDay[index - 1].push(
+              moment.range(joinedRanges[i].end, joinedRanges[i + 1].start)
+            );
+          }
+          gapsByDay[index - 1].push(
+            moment.range(joinedRanges[joinedRanges.length - 1].end, HoO_end)
+          );
+        } else if (HoO_end <= joinedRanges[0].end) {
+          gapsByDay[index - 1].push(
+            moment.range(HoO_start, joinedRanges[0].start)
+          );
+          for (let i = 0; i < joinedRanges.length - 1; i++) {
+            gapsByDay[index - 1].push(
+              moment.range(joinedRanges[i].end, joinedRanges[i + 1].start)
+            );
+          }
+        } else {
+          gapsByDay[index - 1].push(
+            moment.range(HoO_start, joinedRanges[0].start)
+          );
+          for (let i = 0; i < joinedRanges.length - 1; i++) {
+            gapsByDay[index - 1].push(
+              moment.range(joinedRanges[i].end, joinedRanges[i + 1].start)
+            );
+          }
+          gapsByDay[index - 1].push(
+            moment.range(joinedRanges[joinedRanges.length - 1].end, HoO_end)
           );
         }
-        gapsByDay[index].push(
-          moment.range(joinedRanges[joinedRanges.length - 1].end, HoO_end)
-        );
-      } else if (HoO_end <= joinedRanges[0].end) {
-        gapsByDay[index].push(moment.range(HoO_start, joinedRanges[0].start));
-        for (let i = 0; i < joinedRanges.length - 1; i++) {
-          gapsByDay[index].push(
-            moment.range(joinedRanges[i].end, joinedRanges[i + 1].start)
-          );
-        }
-      } else {
-        gapsByDay[index].push(moment.range(HoO_start, joinedRanges[0].start));
-        for (let i = 0; i < joinedRanges.length - 1; i++) {
-          gapsByDay[index].push(
-            moment.range(joinedRanges[i].end, joinedRanges[i + 1].start)
-          );
-        }
-        gapsByDay[index].push(
-          moment.range(joinedRanges[joinedRanges.length - 1].end, HoO_end)
-        );
       }
     }
 
     this.props.allHoOs.forEach((HoO, index) => {
-      if (HoO.isOpen)
+      if (HoO.is_open) {
+        const dayLookupTable = {
+          M: 1,
+          T: 2,
+          W: 3,
+          R: 4,
+          F: 5,
+          S: 6,
+          U: 7,
+        };
         getGapsFromRangesArray(
           HoO.open_time,
           HoO.close_time,
-          shiftsByDay[index],
-          index
+          shiftsByDay[dayLookupTable[HoO.day] - 1],
+          dayLookupTable[HoO.day]
         );
+      }
     });
 
     return gapsByDay;
@@ -354,22 +383,19 @@ class Calendar extends Component {
 
           {this.findGaps().map((dayOfGaps, index) => {
             const renderedGaps = [];
-            for (let i = 0; i < dayOfGaps.length; i++) {
-              renderedGaps.push(
-                <ScheduleShiftGap
-                  key={`gap ${index}-${i}`}
-                  column={index + 2}
-                  // justify={
-                  //   moment(shift.start_datetime).format("k") <= 9
-                  //     ? "flex-start"
-                  //     : moment(shift.start_datetime).format("k") >= 17
-                  //       ? "flex-end"
-                  //       : "center"
-                  // }
-                  start={dayOfGaps[i].start.format("k")}
-                  end={dayOfGaps[i].end}
-                />
-              );
+            if (dayOfGaps.length) {
+              console.log(dayOfGaps);
+              for (let i = 0; i < dayOfGaps.length; i++) {
+                renderedGaps.push(
+                  <ScheduleShiftGap
+                    key={`gap ${index}-${i}`}
+                    column={index + 2}
+                    start={dayOfGaps[i].start.format("k")}
+                    end={dayOfGaps[i].end.format("k")}
+                    height={this.props.allProfiles.length}
+                  />
+                );
+              }
             }
             return renderedGaps;
           })}

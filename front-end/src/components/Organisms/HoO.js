@@ -221,9 +221,9 @@ const mapDispatchToProps = dispatch => {
     getHoursOfOperation: () => {
       return dispatch(getHoursOfOperation());
     },
-    postHoursOfOperation: (day, open_time, close_time) => {
-      return dispatch(postHoursOfOperation(day, open_time, close_time));
-    },
+    // postHoursOfOperation: (day, open_time, close_time) => {
+    //   return dispatch(postHoursOfOperation(day, open_time, close_time));
+    // },
     updateHoursOfOperation: (id, day, open_time, close_time) => {
       return dispatch(updateHoursOfOperation(id, day, open_time, close_time));
     },
