@@ -13,6 +13,7 @@ def sms_response(request):
     msg = resp.message("Hello from Myshift!")
 
     # Add a picture message
-    msg.media("")
+    msg.media("https://files.slack.com/files-pri/T4JUEB3ME-FD63ABE0M/screen_shot_2018-10-02_at_4.54.20_pm.png")
 
     return HttpResponse(str(resp))
+

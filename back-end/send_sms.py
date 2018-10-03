@@ -3,11 +3,11 @@ from django.conf import settings
 import os
 
 # Your Account SID from twilio.com/console
-account_sid = os.getenv("TWILIO_ACCOUNT_SID")
+account_sid = "AC7f3185b0bf8fee0fa0420042343c7871"
 # Your Auth Token from twilio.com/console
-auth_token  = os.getenv("TWILIO_AUTH_TOKEN")
+auth_token  = "4e6e06e41f1d741a0361d18583f30706"
 
-client = Client(settings.account_sid, settings.auth_token)
+client = Client(account_sid, auth_token)
 
 message = client.messages.create(
     to="+12162098986", 
@@ -15,5 +15,3 @@ message = client.messages.create(
     body="Hello from Myshift!")
 
 print(message.sid)
-print(accout_sid)
-print(auth_token)

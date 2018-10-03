@@ -19,6 +19,7 @@ django-dotenv = "*"
 twilio = "*"
 celery = "*"
 django-twilio = "*"
+flask = "*"
 
 [dev-packages]
 
