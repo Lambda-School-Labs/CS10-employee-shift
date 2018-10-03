@@ -18,6 +18,12 @@ export const WelcomeHolder = styled.div`
     display: flex;
 `;
 
+export const MainLogo = styled.img`
+    width: 300px;
+    margin-left: -100px;
+    margin-bottom: 200px;
+`;
+
 export const WelcomeH1 = styled.div`
     font-size: 4em;
 `;
@@ -25,7 +31,7 @@ export const WelcomeH1 = styled.div`
 export const WelcomeSide = styled.div`
     display: flex;
     flex-flow: column;
-    margin-top: 20%;
+    margin-top: 0%;
     margin-left: 10%;
 `;
 
