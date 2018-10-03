@@ -9,3 +9,10 @@ export const BillingContainer = styled.div`
   align-items: center;
   flex-direction: column;
 `;
+
+export const StripeContainer = styled.div`
+  width: 50%;
+  min-width: 360px;
+  max-width: 600px;
+`;
+

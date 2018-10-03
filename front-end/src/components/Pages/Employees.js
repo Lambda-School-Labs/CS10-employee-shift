@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { Accordion, Icon, Segment, SegmentGroup, Image, Label } from 'semantic-ui-react'
+import { Accordion, Icon, Segment, SegmentGroup, Label } from 'semantic-ui-react'
 
 
 import { getAllProfiles } from "../../store/Profile/actions";
@@ -42,7 +42,6 @@ class Employees extends Component {
               <Segment key={index}>
                 <Accordion>
                   <Accordion.Title active={ this.state.activeIndex === index} index={index} onClick={this.handleTitleClick}>
-                    {/* <Image src='https://react.semantic-ui.com/images/avatar/large/matthew.png' avatar /> */}
                     <Label color='blue'>
                       <Icon name='dropdown' />
                       {profile.user.first_name} {profile.user.last_name}

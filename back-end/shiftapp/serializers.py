@@ -112,7 +112,7 @@ class UserProfileSerializer(ModelSerializer):
 
 class RequestedTimeOffSerializer(ModelSerializer):
     # status = serializers.ChoiceField(choices=STATUS_CHOICES, default='Pending')
-    # profile = ProfileSerializer()
+    profile = ProfileSerializer()
 
     class Meta:
         model = RequestedTimeOff
@@ -137,7 +137,7 @@ class ShiftSerializer(ModelSerializer):
 class HourOfOperationSerializer(ModelSerializer):
     class Meta:
         model = HourOfOperation
-        fields = ('id', 'account', 'day', 'open_time', 'close_time')
+        fields = ('id', 'account', 'day', 'open_time', 'close_time', 'is_open')
 
 
 class AvailabilitySerializer(ModelSerializer):

@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Card, Image, Icon, Segment, Container } from "../../../node_modules/semantic-ui-react";
+import { Card, Image, Icon, Segment, Container, Grid } from "../../../node_modules/semantic-ui-react";
 
 import { EmployeeCardContainer, CardInner } from "../../styles/Employees";
 
@@ -16,14 +16,14 @@ class EmployeeCard extends Component {
       const profile = this.props.profile;
       // const availabilities;
       return (
-        <Segment.Group horizontal>
-          <Segment>
-            <Container>
-                <Card color='blue'>
-                  {/* <Image size='small' src='https://react.semantic-ui.com/images/avatar/large/matthew.png'/> */}
+        <Grid columns={3} divided>
+          <Grid.Column>
+                <Card centered color='blue'>
                   <Card.Content>
-                    <Image rounded floated='right' size='tiny' src='https://react.semantic-ui.com/images/avatar/large/matthew.png'/>
+                    <Image floated='right' size='tiny' src='https://react.semantic-ui.com/images/avatar/large/matthew.png'/>
                     <Card.Header>{profile.user.first_name} {profile.user.last_name}</Card.Header>
+                  </Card.Content>
+                  <Card.Content>
                     <Card.Description>
                       <Icon name='mail' />
                       {profile.user.email}
@@ -34,23 +34,22 @@ class EmployeeCard extends Component {
                     </Card.Description>  
                   </Card.Content>
                 </Card>
-            </Container>
-          </Segment>
-          <Segment>
+          </Grid.Column>
+          <Grid.Column>
               <h3>Availability</h3>
               {this.props.allAvailabilities
                 .filter( availability => availability.profile === profile.id )
                 .map( availability =>
                 <Availability key={availability.id} availability={availability} /> )}
-          </Segment>
-          <Segment>
+          </Grid.Column>
+          <Grid.Column>
               <h3>Requested Time Off</h3>
               {this.props.allRequestOffs
                 .filter( requestOff => requestOff.profile === profile.id )
                 .map( requestOff =>
                 <RequestedTimeOff key={requestOff.id} requestOff={requestOff} /> )}
-          </Segment>
-        </Segment.Group>
+          </Grid.Column>
+        </Grid>
       );
   };
 };
