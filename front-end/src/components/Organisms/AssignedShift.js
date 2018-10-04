@@ -16,7 +16,7 @@ class AssignedShift extends Component {
     return (
       <AssignedShiftsContainer>
         <Header>Assigned Shifts</Header>
-        <Segment style={{ width: "80%", minHeight: "500px" }}>
+        <Segment style={{ width: "80%", minHeight: "60vh" }}>
           {this.props.allShifts
             .slice()
             .sort(function(a, b) {

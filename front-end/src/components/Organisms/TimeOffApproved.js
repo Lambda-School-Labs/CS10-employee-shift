@@ -21,7 +21,7 @@ class TimeOffApproved extends Component {
     return (
       <TimeOffApprovedContainer>
         <Header>TimeOffApproved</Header>
-        <Segment style={{ width: "80%", minHeight: "500px" }}>
+        <Segment style={{ width: "80%", minHeight: "60vh" }}>
           {this.props.allRequestOffs
             .slice()
             .sort(function(a, b) {

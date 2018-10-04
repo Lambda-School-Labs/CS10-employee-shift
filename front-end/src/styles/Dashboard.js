@@ -12,6 +12,11 @@ export const DashboardContainer = styled.div`
 
   @media ${device.laptop} {
     padding-top: 80px;
+    margin: 16px 18% 0 18%;
+  }
+
+  @media ${device.tablet} {
+    margin: 16px 1% 0 1%;
   }
 `;
 
@@ -74,8 +79,9 @@ export const TimeOffRequestContainer = styled.div`
 `;
 
 export const FormItem = styled.div`
-  min-width: 250px;
-  padding: 5% 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 `;
 
 export const Form = styled.form`
