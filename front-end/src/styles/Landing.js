@@ -129,28 +129,26 @@ export const Circle_div = styled.div`
     display: flex;
     justify-content: center;
     position: absolute;
-    margin-left: 0;
+    margin-left: 0%;
     top: -200px;
     z-index: 1;
     transistion: 2s;
     width: 20%;
     border-width: 2px;
     border: red solid;
+    
+    @media ${device.tablet} {
+        display: none;
+    }
+
+    @media ${device.mobileL} {
+        display: none;
+    }
 
 `;
 
-// export const circle_img = styled.div`
-//     position: relative;
-//     z-index: -1;
-
-//     @media ${device.tablet} {
-//         display: none;
-//     }
-
-//   @media ${device.mobileL} {
-//         display: none;
-//     }
-// `;
+export const Circle_img = styled.img`
+`;
 
 export const FooterStyles = styled.div`
     display: flex;
@@ -158,9 +156,4 @@ export const FooterStyles = styled.div`
     justify-content: center;
     flex-direction: row;
     z-index: 5;
-`;
-
-export const UserButton = styled.button`
-    // padding: 5px;
-    // border: none;
 `;
