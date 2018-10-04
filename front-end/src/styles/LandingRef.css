@@ -160,6 +160,8 @@
   animation-duration: 50s;
   animation-fill-mode: both;
   animation-iteration-count: infinite;
+  border: orange solid;
+  border-radius: 1px;
 }
 
 @keyframes float_1 {
