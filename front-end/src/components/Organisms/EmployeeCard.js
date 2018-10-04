@@ -49,19 +49,26 @@ class EmployeeCard extends Component {
         </Grid.Column>
         <Grid.Column>
           <h3>Availability</h3>
-          {this.props.allAvailabilities
-            .filter(availability => availability.profile === profile.id)
-            .map(availability => (
-              <Availability key={availability.id} availability={availability} />
-            ))}
+          <Segment style={{ minHeight: "80%" }}>
+            {this.props.allAvailabilities
+              .filter(availability => availability.profile === profile.id)
+              .map(availability => (
+                <Availability
+                  key={availability.id}
+                  availability={availability}
+                />
+              ))}
+          </Segment>
         </Grid.Column>
         <Grid.Column>
           <h3>Requested Time Off</h3>
-          {this.props.allRequestOffs
-            .filter(requestOff => requestOff.profile === profile.id)
-            .map(requestOff => (
-              <RequestedTimeOff key={requestOff.id} requestOff={requestOff} />
-            ))}
+          <Segment style={{ minHeight: "80%" }}>
+            {this.props.allRequestOffs
+              .filter(requestOff => requestOff.profile === profile.id)
+              .map(requestOff => (
+                <RequestedTimeOff key={requestOff.id} requestOff={requestOff} />
+              ))}
+          </Segment>
         </Grid.Column>
       </Grid>
     );
