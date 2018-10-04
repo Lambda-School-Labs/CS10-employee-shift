@@ -6,8 +6,7 @@ import { device } from "./globals.js";
 
 export const CalendarContainer = styled.div`
   width: 100%;
-  height: 100%;
-  padding-top: 3%;
+  margin-top: 40px;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -17,6 +16,7 @@ export const CalendarContainer = styled.div`
 `;
 
 export const TopNavContainer = styled.div`
+  margin: 30px;
   width: 100%;
   height: 5%;
   display: flex;

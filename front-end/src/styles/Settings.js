@@ -5,11 +5,16 @@ import { device } from "./globals.js";
 // STYLES FOR SETTINGS PAGE
 
 export const SettingsContainer = styled.div`
-  height: 100%;
   display: flex;
   justify-content: center;
   align-items: center;
   flex-direction: column;
+  margin: 70px 10% 0 10%;
+`;
+
+export const SettingsHeader = styled.h1`
+  margin: 30px auto;
+  color: black;
 `;
 
 export const Form = styled.form`
