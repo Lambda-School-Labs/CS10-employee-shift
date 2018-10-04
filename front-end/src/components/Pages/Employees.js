@@ -1,24 +1,26 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { Accordion, Icon, Segment, SegmentGroup, Label } from 'semantic-ui-react'
-
+import {
+  Accordion,
+  Icon,
+  Segment,
+  SegmentGroup,
+  Label,
+} from "semantic-ui-react";
 
 import { getAllProfiles } from "../../store/Profile/actions";
 import { getAvailabilities } from "../../store/Availability/action";
-import { getRequestOffs } from "../../store/requestOff/action"
+import { getRequestOffs } from "../../store/requestOff/action";
 
 import EmployeeCard from "../Organisms/EmployeeCard.js";
 import NewEmployee from "../Organisms/NewEmployee.js";
 
-import { EmployeesContainer } from "../../styles/Employees.js";
-
-
+import { EmployeesContainer, EmployeeHeader } from "../../styles/Employees.js";
 
 class Employees extends Component {
-  state = { 
-    activeIndex: -1
-  }
-
+  state = {
+    activeIndex: -1,
+  };
 
   handleTitleClick = (e, itemProps) => {
     const { index } = itemProps;
@@ -32,38 +34,50 @@ class Employees extends Component {
     this.props.getAllProfiles();
     this.props.getAvailabilities();
     this.props.getRequestOffs();
-  };
+  }
 
   render() {
     return (
-        <EmployeesContainer>
-          <SegmentGroup>
-            {this.props.allProfiles.map( (profile, index) => 
-              <Segment key={index}>
-                <Accordion>
-                  <Accordion.Title active={ this.state.activeIndex === index} index={index} onClick={this.handleTitleClick}>
-                    <Label color='blue'>
-                      <Icon name='dropdown' />
-                      {profile.user.first_name} {profile.user.last_name}
-                      <Label.Detail>{profile.user.username}</Label.Detail>
-                    </Label>
-                  </Accordion.Title>
-                  <Accordion.Content active={this.state.activeIndex === index} children={
-                      <EmployeeCard
-                        profile={profile} 
-                        allAvailabilities={this.props.allAvailabilities}
-                        allRequestOffs={this.props.allRequestOffs} />
-                    }>
-                  </Accordion.Content>
-                </Accordion>
-              </Segment>    
-            )}
-          </SegmentGroup>
-          {/* <NewEmployee /> */}
-        </EmployeesContainer>
+      <EmployeesContainer>
+        <EmployeeHeader>Employees</EmployeeHeader>
+        <SegmentGroup>
+          <NewEmployee
+            active={this.state.activeIndex === 0}
+            index={0}
+            click={this.handleTitleClick}
+          />
+          {this.props.allProfiles.map((profile, index) => (
+            <Segment key={index + 1}>
+              <Accordion>
+                <Accordion.Title
+                  active={this.state.activeIndex === index + 1}
+                  index={index + 1}
+                  onClick={this.handleTitleClick}
+                >
+                  <Label color="blue">
+                    <Icon name="dropdown" />
+                    {profile.user.first_name} {profile.user.last_name}
+                    <Label.Detail>{profile.user.username}</Label.Detail>
+                  </Label>
+                </Accordion.Title>
+                <Accordion.Content
+                  active={this.state.activeIndex === index + 1}
+                  children={
+                    <EmployeeCard
+                      profile={profile}
+                      allAvailabilities={this.props.allAvailabilities}
+                      allRequestOffs={this.props.allRequestOffs}
+                    />
+                  }
+                />
+              </Accordion>
+            </Segment>
+          ))}
+        </SegmentGroup>
+      </EmployeesContainer>
     );
-  };
-};
+  }
+}
 
 // TODO: Use correct actions and state
 
@@ -72,7 +86,7 @@ const mapStateToProps = state => {
     isAuthenticated: state.user.isAuthenticated,
     allProfiles: state.profile.allProfiles,
     allAvailabilities: state.availability.allAvailabilities,
-    allRequestOffs: state.requestOff.allRequestOffs
+    allRequestOffs: state.requestOff.allRequestOffs,
   };
 };
 

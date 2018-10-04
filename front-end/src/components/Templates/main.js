@@ -2,10 +2,15 @@ import React, { Component } from "react";
 import SideNav from "../Organisms/SideNav.js";
 import TopNav from "../Organisms/TopNav.js";
 
+import { Link } from "react-router-dom";
+
 import {
   MainContainer,
   ComponentContainer,
+  MainLogo,
 } from "../../styles/Template--main.js";
+
+import main_logo from "../../styles/logos/employee_scheduler2.png";
 
 import { Button, Segment, Sidebar, Icon } from "semantic-ui-react";
 
@@ -26,11 +31,14 @@ class main extends Component {
           />
           <Sidebar.Pusher>
             <Button
-              style={{ position: "fixed", top: "1%", left: "1%" }}
+              style={{ position: "absolute", top: "18px", left: "18px" }}
               onClick={this.handleButtonClick}
             >
               <Icon name="sidebar" />
             </Button>
+            <Link to="/">
+              <MainLogo src={main_logo} />
+            </Link>
             <TopNav />
             <ComponentContainer>
               <this.props.component />

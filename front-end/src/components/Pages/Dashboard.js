@@ -8,6 +8,7 @@ import {
   DashboardContainer,
   HorizontalContainer,
   DashboardHeader,
+  Welcome,
 } from "../../styles/Dashboard.js";
 
 class Dashboard extends Component {
@@ -15,9 +16,11 @@ class Dashboard extends Component {
     return (
       <DashboardContainer>
         <DashboardHeader>
-          Welcome,
-          {this.props.first_name}
-          {this.props.last_name}
+          <Welcome>
+            Welcome,
+            {this.props.first_name}
+            {this.props.last_name}
+          </Welcome>
         </DashboardHeader>
         <HorizontalContainer>
           <AssignedShift />
