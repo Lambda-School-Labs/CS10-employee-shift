@@ -23,6 +23,7 @@ from rest_framework import generics, permissions, serializers, routers
 from oauth2_provider.contrib.rest_framework import TokenHasReadWriteScope, TokenHasScope 
 from stripe_payment.api import checkout, my_webhook_view
 from sms import urls
+from send_grid.views import index
 
 from shiftapp.api import (
     UserViewSet, 
@@ -62,4 +63,5 @@ urlpatterns = [
    path(r'create-charge/', checkout, name="cout"),
    path(r'payments/', my_webhook_view, name="pay"),
    path(r'sms/', include('sms.urls')),
+   path(r'sendgrid/', index, name='sendgrid'),
 ]
