@@ -22,6 +22,6 @@ Make your change. Follow the style convention of using default settings [prettie
 
 Make sure the tests pass.
 
-Push to your fork. Write a [good commit message][commit]. Submit a pull request.
+Push to your fork. Write a [good commit message](http://tbaggery.com/2008/04/19/a-note-about-git-commit-messages.html). Submit a [pull request](pull_request_template.md).
 
-[commit]: http://tbaggery.com/2008/04/19/a-note-about-git-commit-messages.html
+From here your changes will be discussed and hopefully merged in!
