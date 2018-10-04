@@ -1,18 +1,23 @@
-# Employee Shift
+# myShifts.app
 
-Scheduling shifts for your employees made simple!
+**The scheduling solution that grows with your business. :muscle:**
 
-### Built With
+Managing work shifts made easy. Quickly see the gaps in your schedule that need to be filled.
+Made with small business users in mind :blue_heart:. Only pay per employee once you grow beyond 2.
+Premium features include text and email notifications for managers and your employees.
 
-React, Redux, Django
+### Specific documentation
 
-### Authors
+- [Front End](front-end/README.md)
+- [Back End](back-end/README.md)
+- [Contribution Guide] [/CONTRIBUTING.md]
 
-Brandon Hopper
-Kyle Kauzlarich
-Obo Agboghidi
-Justin Kaseman
-Wladimir Fraga
+### Contributors
+
+* @Hopperb Brandon Hopper 
+* @oagboghi2 Obo Agboghidi
+* @Jkasem Justin Kaseman
+* @wladimir917 Wladimir Fraga
 
 ### License
 
