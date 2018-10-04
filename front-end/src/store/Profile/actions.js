@@ -58,7 +58,9 @@ export const getAllProfiles = () => (dispatch, getState) => {
 // TODO: fill in correct data to send
 export const postProfile = data => (dispatch, getState) => {
   dispatch({ type: "LOADING_PROFILE" });
-  const { token } = getState().user.token;
+  const token = getState().user.token;
+  const account = getState().user.currentUser.account.id;
+
   const headers = { "Content-Type": "application/json" };
 
   if (token) {
@@ -66,7 +68,28 @@ export const postProfile = data => (dispatch, getState) => {
   }
 
   // fill me
-  const body = JSON.stringify({ data });
+  // const body = JSON.stringify({ data });
+
+  const body = {
+    // username: "admin", 500 error when you send "username" and "password"
+    user: {
+      username: data.email,
+      password: "password.123",
+      first_name: data.first_name,
+      last_name: data.last_name,
+      email: data.email,
+      groups: [1],
+    },
+    re_password: "password.123",
+    account,
+    phone_number: data.phone_number,
+    notes: data.notes,
+    text_enabled: false,
+    email_enabled: true
+  };
+
+  console.log(body);
+
 
   axios({
     method: "post",

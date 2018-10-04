@@ -11,7 +11,6 @@ import {
   GridItemActiveShift,
 } from "../../styles/Calendar.js";
 import {
-  Segment,
   Portal,
   Label,
   Header,
@@ -155,7 +154,7 @@ class ScheduleShiftUpdate extends React.Component {
           onClose={this.handleClose}
           closeOnDocumentClick={false}
         >
-          <Segment
+          <div
             style={{
               position: "fixed",
               left: `${
@@ -219,7 +218,7 @@ class ScheduleShiftUpdate extends React.Component {
             >
               Submit
             </Button>
-          </Segment>
+          </div>
         </Portal>
       </GridItemActiveShift>
     );

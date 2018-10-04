@@ -16,6 +16,11 @@ django-cors-middleware = "*"
 dj-stripe = "*"
 stripe = "*"
 django-dotenv = "*"
+twilio = "*"
+celery = "*"
+django-twilio = "*"
+flask = "*"
+sendgrid = "*"
 
 [dev-packages]
 

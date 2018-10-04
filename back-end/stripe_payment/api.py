@@ -109,7 +109,6 @@ def checkout(request):
 
 
 endpoint_secret = settings.STRIPE_WEBHOOK_SECRET
-print(endpoint_secret)
 
 def my_webhook_view(request):
   payload = request.body

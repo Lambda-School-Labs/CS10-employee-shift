@@ -5,10 +5,19 @@ import { device } from "./globals.js";
 // STYLES FOR EMPLOYEE DASHBOARD PAGE
 
 export const DashboardContainer = styled.div`
-  width: 100%;
-  height: 100%;
   display: flex;
   flex-direction: column;
+  align-items: center;
+  margin: 16px 10% 0 10%;
+
+  @media ${device.laptop} {
+    padding-top: 80px;
+    margin: 16px 18% 0 18%;
+  }
+
+  @media ${device.tablet} {
+    margin: 16px 1% 0 1%;
+  }
 `;
 
 export const HorizontalContainer = styled.div`
@@ -16,12 +25,20 @@ export const HorizontalContainer = styled.div`
   width: 100%;
   display: flex;
 
-  @media ${device.tablet} {
+  @media ${device.laptop} {
     flex-direction: column;
   }
 `;
 
-export const DashboardHeader = styled.h1`
+export const DashboardHeader = styled.div`
+  display: flex;
+  width: 100%;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 50px;
+`;
+
+export const Welcome = styled.h1`
   fontsize: 30px;
   fontweight: 300;
 `;
@@ -42,6 +59,10 @@ export const TimeOffApprovedContainer = styled.div`
   align-items: center;
   padding-top: 5%;
   flex-direction: column;
+
+  @media ${device.laptop} {
+    padding-top: 80px;
+  }
 `;
 
 export const TimeOffRequestContainer = styled.div`
@@ -51,11 +72,16 @@ export const TimeOffRequestContainer = styled.div`
   align-items: center;
   padding-top: 5%;
   flex-direction: column;
+
+  @media ${device.laptop} {
+    padding-top: 80px;
+  }
 `;
 
 export const FormItem = styled.div`
-  min-width: 250px;
-  padding: 5% 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 `;
 
 export const Form = styled.form`

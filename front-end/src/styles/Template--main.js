@@ -1,5 +1,7 @@
 import styled from "styled-components";
 
+import { device } from "./globals.js";
+
 // STYLES FOR MAIN TEMPLATE
 
 export const MainContainer = styled.div`
@@ -20,4 +22,16 @@ export const TopNavContainer = styled.div`
   margin-left: auto;
   top: 2%;
   right: 2%;
+`;
+
+export const MainLogo = styled.img`
+  width: 180px;
+  position: absolute;
+  left: 120px;
+  top: 14px;
+  z-index: 5000;
+
+  @media ${device.laptop} {
+    left: calc(50% - 70px);
+  }
 `;

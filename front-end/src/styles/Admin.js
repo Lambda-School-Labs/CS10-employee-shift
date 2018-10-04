@@ -5,11 +5,14 @@ import { device } from "./globals.js";
 // STYLES FOR ADMIN DASHBOARD PAGE
 
 export const AdminContainer = styled.div`
-  width: 100%;
-  height: 100%;
   display: flex;
   flex-direction: column;
   align-items: center;
+  margin: 16px 10% 0 10%;
+
+  @media ${device.laptop} {
+    padding-top: 80px;
+  }
 `;
 
 export const AdminHeader = styled.div`
@@ -17,25 +20,19 @@ export const AdminHeader = styled.div`
   width: 100%;
   justify-content: center;
   align-items: center;
-  padding: 0 10%;
+  margin-bottom: 50px;
+`;
 
-  @media ${device.tablet} {
-    padding: 10% 0;
-  }
+export const Welcome = styled.h1`
+  fontsize: 30px;
+  fontweight: 300;
 `;
 
 export const AdminBody = styled.div`
   display: flex;
   width: 100%;
-  justify-content: center;
+  justify-content: space-evenly;
   align-items: center;
-`;
-
-export const Welcome = styled.h2`
-  padding-left: 10%;
-  align-self: flex-start;
-  fontsize: 30px;
-  fontweight: 300;
 `;
 
 export const ButtonContainer = styled.div`
@@ -60,5 +57,21 @@ export const AdminDetailsContainer = styled.div`
 `;
 
 export const AdminHoursContainer = styled.div`
-  padding-right: auto;
+  width: 50%;
+`;
+
+export const Day = styled.div`
+  display: flex;
+  width: 100%;
+  justify-content: space-evenly;
+  align-items: center;
+  border-bottom: 1px solid #eee;
+`;
+
+export const HorizontalContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  align-items: center;
+  margin: 10px 0;
 `;
