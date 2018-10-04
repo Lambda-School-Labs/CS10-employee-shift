@@ -1,4 +1,4 @@
-![alt text]( https://github.com/Lambda-School-Labs/CS10-employee-shift/blob/master/front-end/src/styles/logos/employee_scheduler2.png "Logo Title Text")
+![alt text]( https://github.com/Lambda-School-Labs/CS10-employee-shift/blob/master/front-end/src/styles/logos/employee_scheduler2.png "myShifts.app Logo Title Text")
 
 ### The scheduling solution that grows with your business
 Managing work shifts made easy. Quickly see the gaps in your schedule that need to be filled.
@@ -16,10 +16,10 @@ Premium features include text and email notifications for managers and your empl
 
 ### Contributors:
 
-* @Hopperb Brandon Hopper 
-* @oagboghi2 Obo Agboghidi
-* @Jkasem Justin Kaseman
-* @wladimir917 Wladimir Fraga
+* Brandon Hopper - [@Hopperb](https://github.com/Hopperb)
+* Obo Agboghidi - [@oagboghi2](https://github.com/oagboghi2)
+* Justin Kaseman - [@Jkasem](https://github.com/Jkasem)
+* Wladimir Fraga - [@wladimir917](https://github.com/wladimir917)
 
 ### License:
 
