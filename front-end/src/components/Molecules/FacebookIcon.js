@@ -4,7 +4,7 @@ import "../../styles/LandingRef.css";
 
 
 const Facebook = () => (
-  <Header as='h3'>
+  <Header as='h1'>
     <Icon.Group size='small'>
       <Icon name='facebook' />
       <Icon corner name='add' />
