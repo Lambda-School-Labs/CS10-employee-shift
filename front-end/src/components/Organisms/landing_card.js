@@ -46,7 +46,7 @@ class Landing_Card extends Component {
                             <p>Build your Work Schedule in Minutes.</p>
                         </WelcomeText>
                         <ScheduleButton>
-                            <Link to="/calendar">
+                            <Link to="/signup">
                                 <ScheduleButton className="btn">Schedule Now</ScheduleButton>
                             </Link>
                         </ScheduleButton>

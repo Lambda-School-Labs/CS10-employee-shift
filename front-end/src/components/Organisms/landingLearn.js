@@ -1,8 +1,5 @@
 import React from "react";
-
-import {
-  BackgroundHolder
-} from "../../styles/Landing.js";
+import { Link } from "react-router-dom";
 
 import "../../styles/LandingRef.css";
 
@@ -28,14 +25,14 @@ const LandingLearning = () => {
 
       <div className="frameContainer">
         <img className="frame1" src={bgPicture} />
-        <a href="#">
           <div className="frame2">
             <h2 className="frame2Heading">Employee Scheduling Software. Reinvented.</h2>
-            <div className="cta-button">
-              <p>START SCHEDULING</p>
-            </div>
+            <Link to="/signup">
+              <div className="cta-button">
+                <p>START SCHEDULING</p>
+              </div>
+            </Link>
           </div>
-        </a>
       </div>
     </div>
   )
