@@ -10,12 +10,11 @@ class Twitter extends Component {
 
   render(){
     return(
-      <Header as='h3'>
+      <Header as='h1'>
         <Icon.Group size='small'>
           <Icon name='twitter' />
           <Icon corner name='add' />
         </Icon.Group>
-        Add on Twitter
       </Header>
     )
   }
