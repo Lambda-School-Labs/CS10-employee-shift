@@ -25,6 +25,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = config('SECRET_KEY')
 STRIPE_SECRET_KEY = config("STRIPE_SECRET_KEY")
 STRIPE_WEBHOOK_SECRET = config("STRIPE_WEBHOOK_SECRET")
+SENDGRID_API_KEY=config("SENDGRID_API_KEY")
 
 
 
@@ -47,6 +48,7 @@ INSTALLED_APPS = [
     'corsheaders',
     'oauth2_provider',
     'rest_framework',
+    'send_grid',
     'sms',
     'stripe_payment',
     'shiftapp',
