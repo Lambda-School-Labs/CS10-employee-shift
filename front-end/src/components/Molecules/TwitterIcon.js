@@ -15,7 +15,6 @@ class Twitter extends Component {
           <Icon name='twitter' />
           <Icon corner name='add' />
         </Icon.Group>
-        Add on Twitter
       </Header>
     )
   }

@@ -9,7 +9,6 @@ const Facebook = () => (
       <Icon name='facebook' />
       <Icon corner name='add' />
     </Icon.Group>
-    Add on Facebook
   </Header>
 )
 
