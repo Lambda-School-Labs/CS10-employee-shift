@@ -1,7 +1,9 @@
 import React from "react";
 
-import HoODay from "../Molecules/HoODay.js";
+import Availability from "../Molecules/Availability.js";
+import PostAvailability from "../Molecules/PostAvailability.js";
 
+import { Day, HorizontalContainer } from "../../styles/Admin.js";
 import { Header, Segment, Portal, Label, Divider } from "semantic-ui-react";
 
 const NewEmployeeAvailability = props => {
@@ -11,13 +13,55 @@ const NewEmployeeAvailability = props => {
         Availability
       </Header>
       <Divider />
-      <HoODay day="Monday" postHoO={props.addTime} start={1} end={2} />
-      <HoODay day="Tuesday" postHoO={props.addTime} start={1} end={2} />
-      <HoODay day="Wednesday" postHoO={props.addTime} start={1} end={2} />
-      <HoODay day="Thursday" postHoO={props.addTime} start={1} end={2} />
-      <HoODay day="Friday" postHoO={props.addTime} start={1} end={2} />
-      <HoODay day="Saturday" postHoO={props.addTime} start={1} end={2} />
-      <HoODay day="Sunday" postHoO={props.addTime} start={1} end={2} />
+      <Day>
+        <h4>Monday</h4>
+        <HorizontalContainer>
+          <Availability day="Monday" start_time={1} end_time={2} />
+          <PostAvailability day="Monday" />
+        </HorizontalContainer>
+      </Day>
+      <Day>
+        <h4>Tuesday</h4>
+        <HorizontalContainer>
+          <Availability day="Tuesday" start_time={1} end_time={2} />
+          <PostAvailability day="Monday" />
+        </HorizontalContainer>
+      </Day>
+      <Day>
+        <h4>Wednesday</h4>
+        <HorizontalContainer>
+          <Availability day="Wednesday" start_time={1} end_time={2} />
+          <PostAvailability day="Monday" />
+        </HorizontalContainer>
+      </Day>
+      <Day>
+        <h4>Thursday</h4>
+        <HorizontalContainer>
+          <Availability day="Thursday" start_time={1} end_time={2} />
+          <PostAvailability day="Monday" />
+        </HorizontalContainer>
+      </Day>
+      <Day>
+        <h4>Friday</h4>
+        <HorizontalContainer>
+          <Availability day="Friday" start_time={1} end_time={2} />
+          <PostAvailability day="Monday" />
+        </HorizontalContainer>
+      </Day>
+      <Day>
+        <h4>Saturday</h4>
+        <HorizontalContainer>
+          <Availability day="Saturday" start_time={1} end_time={2} />
+          <PostAvailability day="Monday" />
+        </HorizontalContainer>
+      </Day>
+      <Day>
+        <h4>Sunday</h4>
+        <HorizontalContainer>
+          <Availability day="Sunday" start_time={1} end_time={2} />
+          <PostAvailability day="Monday" />
+        </HorizontalContainer>
+      </Day>
     </Segment>
   );
 };

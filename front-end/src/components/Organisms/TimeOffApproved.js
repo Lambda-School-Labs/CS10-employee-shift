@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import moment from "moment";
 
-import { getRequestOffs } from "../../store/requestOff/action.js";
+import { getRequestOffs } from "../../store/requestOff/actions.js";
 
 import { Segment, Header, Label } from "semantic-ui-react";
 import { TimeOffApprovedContainer } from "../../styles/Dashboard.js";
@@ -21,7 +21,7 @@ class TimeOffApproved extends Component {
     return (
       <TimeOffApprovedContainer>
         <Header>TimeOffApproved</Header>
-        <Segment style={{ width: "80%", minHeight: "500px" }}>
+        <Segment style={{ width: "80%", minHeight: "60vh" }}>
           {this.props.allRequestOffs
             .slice()
             .sort(function(a, b) {

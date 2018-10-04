@@ -29,6 +29,7 @@ export const MainLogo = styled.img`
   position: absolute;
   left: 120px;
   top: 14px;
+  z-index: 5000;
 
   @media ${device.laptop} {
     left: calc(50% - 70px);

@@ -1,8 +1,6 @@
 @import url("https://fonts.googleapis.com/css?family=Josefin+Slab");
 @import url("https://fonts.googleapis.com/css?family=Oswald");
 
-
-
 .top-container {
   display: flex;
   flex-direction: row;
@@ -131,9 +129,9 @@
   border-width: 2px;
   align-self: center;
   width: 300px;
-  font-size: 2.0em;
+  font-size: 2em;
   padding: 5px 20px;
-} 
+}
 
 .landingFooter {
   display: flex;
@@ -183,26 +181,26 @@
   }
 }
 
-@media(max-width:768px){
-        @keyframes float_1 {
-      0% {
-        transform: translate(450px, 300px);
-        opacity: 0;
-      }
-      25% {
-        transform: translate(450px, -540px);
-        opacity: ;
-      }
-      26% {
-        transform: translate(50px, -550px);
-        opacity: 1;
-      }
-      100% {
-        transform: translate(250px, -550px);
-        opacity: 0;
-      }
+@media (max-width: 768px) {
+  @keyframes float_1 {
+    0% {
+      transform: translate(450px, 300px);
+      opacity: 0;
+    }
+    25% {
+      transform: translate(450px, -540px);
+      opacity: ;
+    }
+    26% {
+      transform: translate(50px, -550px);
+      opacity: 1;
+    }
+    100% {
+      transform: translate(250px, -550px);
+      opacity: 0;
     }
   }
+}
 
 .fade_2 {
   opacity: 1;
@@ -234,7 +232,7 @@
   100% {
     transform: translate(295px, -550px);
     opacity: 0;
-  }  
+  }
 }
 
 .fade_3 {
@@ -369,33 +367,33 @@
   }
 }
 
-@media(max-width: 768px) {
-   .fade_1 {
-    animation-name:none;
+@media (max-width: 768px) {
+  .fade_1 {
+    animation-name: none;
     display: none;
-   }
+  }
   .fade_2 {
-    animation-name:none;
+    animation-name: none;
     display: none;
   }
 
   .fade_3 {
-    animation-name:none;
+    animation-name: none;
     display: none;
   }
 
   .fade_4 {
-    animation-name:none;
+    animation-name: none;
     display: none;
   }
 
   .fade_5 {
-    animation-name:none;
+    animation-name: none;
     display: none;
   }
 
   .fade_6 {
-    animation-name:none;
+    animation-name: none;
     display: none;
   }
 }

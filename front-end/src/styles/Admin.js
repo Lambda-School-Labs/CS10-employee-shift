@@ -57,5 +57,21 @@ export const AdminDetailsContainer = styled.div`
 `;
 
 export const AdminHoursContainer = styled.div`
-  padding-right: auto;
+  width: 50%;
+`;
+
+export const Day = styled.div`
+  display: flex;
+  width: 100%;
+  justify-content: space-evenly;
+  align-items: center;
+  border-bottom: 1px solid #eee;
+`;
+
+export const HorizontalContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  align-items: center;
+  margin: 10px 0;
 `;
