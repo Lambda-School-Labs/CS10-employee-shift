@@ -39,7 +39,7 @@ class HoODay extends React.Component {
           <h5>{this.props.end}</h5>
         </HoOButton>
         <Portal open={this.state.open} onClose={this.handleClose}>
-          <Segment
+          <div
             style={{
               position: "fixed",
               top: `${this.state.clickY - 200}px`,
@@ -52,7 +52,7 @@ class HoODay extends React.Component {
               handleClose={this.handleClose}
               submitTimeChange={this.submitTimeChange}
             />
-          </Segment>
+          </div>
         </Portal>
       </div>
     );

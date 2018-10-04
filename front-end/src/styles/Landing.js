@@ -1,5 +1,8 @@
 import styled from "styled-components";
 
+import { device } from "./globals.js";
+
+
 export const BackgroundHolder = styled.div`
     background-color: #4B9CD3;
     width: 100%;
@@ -10,12 +13,29 @@ export const BackgroundHolder = styled.div`
 export const LandingNavBar = styled.div`
     display: flex;
     justify-content: flex-end;
-    position: absolute;
     z-index: 5;
+
+    @media ${device.tablet} {
+     font-size: 23px;
+     min-width: 260px;
+  }
+
+    @media ${device.mobileL} {
+     font-size: 21px;
+     min-width: 200px;
+  }
   `;
+
+ 
 
 export const WelcomeHolder = styled.div`
     display: flex;
+`;
+
+export const MainLogo = styled.img`
+    width: 300px;
+    margin-left: -100px;
+    margin-bottom: 200px;
 `;
 
 export const WelcomeH1 = styled.div`
@@ -25,7 +45,7 @@ export const WelcomeH1 = styled.div`
 export const WelcomeSide = styled.div`
     display: flex;
     flex-flow: column;
-    margin-top: 20%;
+    margin-top: 0%;
     margin-left: 10%;
 `;
 
@@ -75,6 +95,12 @@ export const ScheduleButton = styled.div`
         box-shadow: none;
         top: 6px;
     }
+
+    @media ${device.mobileL} {
+    font-size: 21px;
+    min-width: 200px;
+    margin-left: 97%;
+  }
   `;
 
 
@@ -132,6 +158,8 @@ export const Circle_div = styled.div `
     top: -200px;
     z - index: 1;
     transistion: 2s;
+
+    
   `;
 
   
@@ -142,6 +170,14 @@ export const circle_img = styled.div `
     justify-content: center;
     border:red solid 1px;
     z-index: -1;
+
+    @media ${device.tablet} {
+    display: none;
+  }
+
+  @media ${device.mobileL} {
+    display: none;
+  }
     `;
 
 export const textBox = styled.div `
@@ -158,7 +194,8 @@ export const FooterStyles = styled.div`
     display: flex;
     background-color: #4B9CD3;
     justify-content: center;
-    margin-top: -15px;
+    flex-direction: row;
+    z-index: 5;
   `;
 
 export const UserButton = styled.button`
