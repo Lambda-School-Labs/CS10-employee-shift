@@ -41,6 +41,7 @@ from shiftapp.api import (
 router = routers.DefaultRouter()    
 
 router.register(r'users', UserViewSet)
+router.register(r'groups', GroupViewSet)
 router.register(r'profiles', ProfileViewSet)
 router.register(r'userprofile', UserProfileViewSet)
 router.register(r'accounts', AccountViewSet)
