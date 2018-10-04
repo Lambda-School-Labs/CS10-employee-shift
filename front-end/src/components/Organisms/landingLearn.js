@@ -12,7 +12,7 @@ const LandingLearning = () => {
     <div>
       <div className="frame1TextContainer">
         <h2 className="frameHeading">Employee Scheduling Software for Your Industry</h2>
-        <p className="frameText">When Exact was built to serve the employee 
+        <p className="frameText">When MyShifts was built to serve the employee 
           scheduling and communication needs of workplaces
             across a wide range of industries. 
             

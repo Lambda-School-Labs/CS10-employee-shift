@@ -30,6 +30,14 @@ export const WelcomeHolder = styled.div`
     display: flex;
 `;
 
+export const WelcomeSide = styled.div`
+    display: flex;
+    flex-direction: column;
+    width: 60%;
+    min-height: 800px;
+    text-align: center;
+`;
+
 export const MainLogo = styled.img`
     width: 300px;
 `;
@@ -37,15 +45,13 @@ export const MainLogo = styled.img`
 export const WelcomeH1 = styled.div`
     font-size: 4em;
     margin-top: 45%;
-    margin-left: 10%;
+    align-self: center;
+    font-size: 45px;
+    width: 65%;
+    line-height: 50px;
+    // margin-left: 10%;
 `;
 
-export const WelcomeSide = styled.div`
-    display: flex;
-    flex-flow: column;
-    width: 60%;
-    min-height: 800px;
-`;
 
 export const WelcomeLogo = styled.div`
     min-height: 800px;
@@ -55,13 +61,17 @@ export const WelcomeLogo = styled.div`
 
 export const WelcomeText = styled.div`
     margin-top: 10%;
-    margin-left: 10%;
+    // margin-left: 10%;
     font-size: 1.5em;
+    align-self: center;
 `;
 
 export const ScheduleButton = styled.div`
+    align-self: center;
+    margin-top: 5%;
+
     .btn{
-        align-self: flex-end;
+        align-self: center;
         background-color: #4B9CD3;
         color: #fff;
         cursor: pointer;
@@ -71,8 +81,7 @@ export const ScheduleButton = styled.div`
         font-size: 20px;
         font-weight: 300px;
         letter-spacing: 2px;
-        margin-top: 7%;
-        margin-left: 10%;
+        // margin-left: 10%;
         position: relative;
         padding: 25px 50px;
         text-align: center;
