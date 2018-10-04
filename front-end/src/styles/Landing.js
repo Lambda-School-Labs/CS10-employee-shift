@@ -6,27 +6,25 @@ import { device } from "./globals.js";
 export const BackgroundHolder = styled.div`
     background-color: #4B9CD3;
     width: 100%;
-    height: 700px;
+    // height: 700px;
     max-height: 80%;
-  `;
+`;
 
 export const LandingNavBar = styled.div`
     display: flex;
     justify-content: flex-end;
-    z-index: 5;
+    z-index: 2;
 
     @media ${device.tablet} {
-     font-size: 23px;
-     min-width: 260px;
-  }
+        font-size: 23px;
+        min-width: 260px;
+    }
 
     @media ${device.mobileL} {
-     font-size: 21px;
-     min-width: 200px;
-  }
-  `;
-
- 
+        font-size: 21px;
+        min-width: 200px;
+    }
+`;
 
 export const WelcomeHolder = styled.div`
     display: flex;
@@ -34,61 +32,56 @@ export const WelcomeHolder = styled.div`
 
 export const MainLogo = styled.img`
     width: 300px;
-    margin-left: -100px;
-    margin-bottom: 200px;
 `;
 
 export const WelcomeH1 = styled.div`
     font-size: 4em;
+    margin-top: 45%;
+    margin-left: 10%;
 `;
 
 export const WelcomeSide = styled.div`
     display: flex;
     flex-flow: column;
-    margin-top: 0%;
-    margin-left: 10%;
+    width: 60%;
+    min-height: 800px;
 `;
 
 export const WelcomeLogo = styled.div`
-    height: 700px;
-    width: 75%;
-    background-color: #13294B;
-    margin-left: 30%;
-    
+    min-height: 800px;
+    width: 40%;
+    background-color: #13294B;    
 `;
 
-{/* possibly depreciated */}
 export const WelcomeText = styled.div`
-    display: flex;
-    width: 200px;
-    justify-content: center;
-    padding-top: 17%;
+    margin-top: 10%;
+    margin-left: 10%;
     font-size: 1.5em;
-  `;
+`;
 
 export const ScheduleButton = styled.div`
     .btn{
-    display: flex;
-    position: relative;
-    justify-content: center;
-    margin-top: 70%;
-    margin-left: 197%;
-    outline: none;
-    border: none;
-    cursor: pointer;
-    font-size: 16px;
-    font-weight: 300px;
-    color: black;
-    letter-spacing: 2px;
-    padding: 25px 50px;
-    border-radius: 10px;
-    box-shadow: 10px 6px #13294B
+        align-self: flex-end;
+        background-color: #4B9CD3;
+        color: #fff;
+        cursor: pointer;
+        border: none;
+        border-radius: 7px;
+        display: flex;
+        font-size: 20px;
+        font-weight: 300px;
+        letter-spacing: 2px;
+        margin-top: 7%;
+        margin-left: 10%;
+        position: relative;
+        padding: 25px 50px;
+        text-align: center;
+        width: 260px;
+        z-index: 5;
     }
 
     .btn: hover {
         background-color: #007FAE;
-        box-shadow: 6px 2px #13294B;
-        top: 2px;
     }
 
     .btn: action {
@@ -97,98 +90,67 @@ export const ScheduleButton = styled.div`
     }
 
     @media ${device.mobileL} {
-    font-size: 21px;
-    min-width: 200px;
-    margin-left: 97%;
-  }
-  `;
+        font-size: 21px;
+        min-width: 200px;
+        margin-left: 97%;
+    }
+`;
 
-
-
-export const ScheduleButtonButton = styled.button`
-    box-shadow: 5px 10px 20px hsl(178, 53%, 43%);
-    font-size: 2em;
-    align-self: flex-end;
-    // margin-left: 0%;
-    z-index: 2;
-    position: relative;
-  `;
-
-export const NavButton = styled.div `
+export const NavButton = styled.div`
     .btn{
-    display: flex;
-    position: relative;
-    justify-content: flex-end;
-    margin-top: 5%;
-    margin-left: 10%;
-    border: none;
-    cursor: pointer;
-    font-size: 12px;
-    font-weight: 20px;
-    color: black;
-    letter-spacing: 2px;
-    padding: 5px 5px;
-    border-radius: 10px;
-    box-shadow: 10px 6px #13294B
+        align-self: flex-end;
+        background-color: #4B9CD3;
+        border: none;
+        border-radius: 5px;
+        color: #fff;
+        cursor: pointer;
+        font-size: 17px;
+        font-weight: 20px;
+        letter-spacing: 2px;
+        margin: 5%;
+        padding: 5px 5px;
+        position: relative;
+        text-align: center;
+        width: 100px;
+        z-index: 3;
     }
 
     .btn: hover {
         background-color: #007FAE;
-        box-shadow: 6px 2px #13294B;
-        top: 2px;
     }
 
     .btn: action {
         box-shadow: none;
         top: 6px;
     }
-  `;
+`;
 
-export const NavButtonButton = styled.button `
-    box-shadow: 5px 10px 20px hsl(178, 53%, 43%);
-    font-size: 1em;
-    align-self: flex-end;
-    z-index: 2;
-    position: relative;
-  `;
-
-export const Circle_div = styled.div `
-    position: absolute;
-    margin-left: -25%;
-    top: -200px;
-    z - index: 1;
-    transistion: 2s;
-
-    
-  `;
-
-  
-export const circle_img = styled.div `
+export const Circle_div = styled.div`
     display: flex;
-    margin-right: 150px;
-    position: relative;
     justify-content: center;
-    border:red solid 1px;
-    z-index: -1;
+    position: absolute;
+    margin-left: 0;
+    top: -200px;
+    z-index: 1;
+    transistion: 2s;
+    width: 20%;
+    border-width: 2px;
+    border: red solid;
 
-    @media ${device.tablet} {
-    display: none;
-  }
+`;
 
-  @media ${device.mobileL} {
-    display: none;
-  }
-    `;
+// export const circle_img = styled.div`
+//     position: relative;
+//     z-index: -1;
 
-export const textBox = styled.div `
-    display: flex;
-    width: 25%;
-    height: 700px;
-    justify-content: flex-start;
-    flex-direction: row;
-    border: red 1px solid;
-    background-color: white;
-    `;
+//     @media ${device.tablet} {
+//         display: none;
+//     }
+
+//   @media ${device.mobileL} {
+//         display: none;
+//     }
+// `;
 
 export const FooterStyles = styled.div`
     display: flex;
@@ -196,9 +158,9 @@ export const FooterStyles = styled.div`
     justify-content: center;
     flex-direction: row;
     z-index: 5;
-  `;
+`;
 
 export const UserButton = styled.button`
     // padding: 5px;
     // border: none;
-`
+`;
