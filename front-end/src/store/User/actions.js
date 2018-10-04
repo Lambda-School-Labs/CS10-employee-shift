@@ -55,11 +55,11 @@ export const signin = (username, password) => dispatch => {
       }
     })
     .catch(err => {
-      if (err.status < 500) {
-        return { status: err.status, data: err.data };
-      } else if (err.status === 403 || err.status === 401) {
-        dispatch({ type: "ERROR", data: err.data });
-        throw err.data;
+      if (err.response.status >= 500) {
+        return { status: err.response.status, data: err.response.data };
+      } else if (err.response.status === 403 || err.response.status === 401) {
+        dispatch({ type: "ERROR", data: err.response.data });
+        // throw err.data;
       }
     });
 };
