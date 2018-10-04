@@ -4,7 +4,7 @@ import { connect } from "react-redux";
 import AdminDetails from "../Organisms/AdminDetails.js";
 import AdminHours from "../Organisms/AdminHours.js";
 
-import { Header, Segment } from "semantic-ui-react";
+import { Segment } from "semantic-ui-react";
 import {
   AdminContainer,
   AdminHeader,
@@ -23,7 +23,7 @@ class Admin extends Component {
         </AdminHeader>
         <Segment
           padded="very"
-          style={{ width: "100%", margin: "70px 10% 0 10%;" }}
+          style={{ width: "100%", margin: "70px 10% 0 10%" }}
         >
           <AdminBody>
             <AdminDetails />

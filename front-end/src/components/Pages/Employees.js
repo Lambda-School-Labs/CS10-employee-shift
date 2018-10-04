@@ -9,8 +9,8 @@ import {
 } from "semantic-ui-react";
 
 import { getAllProfiles } from "../../store/Profile/actions";
-import { getAvailabilities } from "../../store/Availability/action";
-import { getRequestOffs } from "../../store/requestOff/action";
+import { getAvailabilities } from "../../store/Availability/actions";
+import { getRequestOffs } from "../../store/requestOff/actions";
 
 import EmployeeCard from "../Organisms/EmployeeCard.js";
 import NewEmployee from "../Organisms/NewEmployee.js";
