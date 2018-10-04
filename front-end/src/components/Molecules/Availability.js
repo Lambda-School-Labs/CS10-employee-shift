@@ -21,7 +21,8 @@ class Availability extends Component {
   }
 
   submitTimeChange = (time, newTime) => {
-    this.props.postHoO(this.props.day, newTime);
+    console.log(time, newTime);
+    // this.props.postHoO(this.props.day, newTime);
   };
 
   handleOpen = (e, itemProps) => {
