@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 
 import NewEmployeeAvailability from "./NewEmployeeAvailability.js";
+import { postProfile } from "../../store/Profile/actions.js";
 
 import {
   Accordion,
@@ -15,16 +16,22 @@ import {
   Grid,
   Input,
   Button,
+  CardContent,
+  TextArea
 } from "semantic-ui-react";
 
 import { NewEmployeeCard } from "../../styles/Employees";
 
 class NewEmployee extends Component {
   state = {
+    username: "",
+    password: "",
+    re_password: "",
     first_name: "",
     last_name: "",
     email: "",
     phone_number: "",
+    notes: "",
     monday: [],
     tuesday: [],
     wednesday: [],
@@ -41,7 +48,7 @@ class NewEmployee extends Component {
 
   handleSubmit = event => {
     console.log("Submit!");
-    // props.postUserProfile
+    this.props.postProfile(this.state);
   };
 
   addTime = (time, time24) => {
@@ -120,6 +127,19 @@ class NewEmployee extends Component {
                       />
                     </Card.Description>
                   </Card.Content>
+                  <Card.Content>
+                    <Card.Description>
+                      <TextArea
+                        fluid
+                        value={this.state.notes}
+                        onChange={this.inputChangeHandler}
+                        name="notes"
+                        icon="sticky note"
+                        iconPosition="left"
+                        placeholder="Some note"
+                      />
+                    </Card.Description>
+                  </Card.Content>
                 </Card>
               </Grid.Column>
               <Grid.Column>
@@ -145,9 +165,9 @@ class NewEmployee extends Component {
 
 const mapDispatchToProps = dispatch => {
   return {
-    // postUserProfile: () => {
-    //   return dispatch(postUserProfile());
-    // },
+    postProfile: (data) => {
+      return dispatch(postProfile(data));
+    },
   };
 };
 
