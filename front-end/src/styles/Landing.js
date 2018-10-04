@@ -97,6 +97,9 @@ export const ScheduleButton = styled.div`
 `;
 
 export const NavButton = styled.div`
+    margin: 5px;
+    margin-left: 2px;
+
     .btn{
         align-self: flex-end;
         background-color: #4B9CD3;
@@ -107,7 +110,6 @@ export const NavButton = styled.div`
         font-size: 17px;
         font-weight: 20px;
         letter-spacing: 2px;
-        margin: 5%;
         padding: 5px 5px;
         position: relative;
         text-align: center;
