@@ -8,7 +8,7 @@ export const getRequestOffs = () => (dispatch, getState) => {
   if (token) {
     headers["Authorization"] = `Bearer ${token}`;
   }
-  console.log(headers);
+
   axios
     .get(`${process.env.REACT_APP_ROOT_URL}/api/requestoff/`, { headers })
     .then(res => {
@@ -27,14 +27,14 @@ export const getRequestOffs = () => (dispatch, getState) => {
     });
 };
 
-export const postRequestOff = (start_datetime, end_datetime, reason) => (
-  dispatch,
-  getState
-) => {
+export const postRequestOff = (
+  profile,
+  start_datetime,
+  end_datetime,
+  reason
+) => (dispatch, getState) => {
   dispatch({ type: "LOADING_REQUESTOFF" });
   const token = getState().user.token;
-  const profile = getState().user.currentUser.id;
-  //const user = getState().user.currentUser.id; Implement once getUser works correctly
   const headers = { "Content-Type": "application/json" };
 
   if (token) {
@@ -42,10 +42,10 @@ export const postRequestOff = (start_datetime, end_datetime, reason) => (
   }
 
   const body = JSON.stringify({
-    end_datetime,
     profile,
-    reason,
     start_datetime,
+    end_datetime,
+    reason,
   });
 
   axios({
@@ -60,9 +60,9 @@ export const postRequestOff = (start_datetime, end_datetime, reason) => (
       }
     })
     .catch(err => {
-      if (err.status === 401 || err.status === 403) {
-        dispatch({ type: "AUTHENTICATION_ERROR", data: err.data });
-        throw err.data;
+      if (err.status < 500) {
+        console.log("Server Error!");
+        return { status: err.status, data: err.data };
       } else {
         dispatch({ type: "ERROR", data: err.data });
         throw err.data;
@@ -70,14 +70,16 @@ export const postRequestOff = (start_datetime, end_datetime, reason) => (
     });
 };
 
-export const updateRequestOff = (id, startTime, endTime) => (
-  dispatch,
-  getState
-) => {
+export const updateRequestOff = (
+  id,
+  profile,
+  status,
+  start_datetime,
+  end_datetime,
+  reason
+) => (dispatch, getState) => {
   dispatch({ type: "LOADING_REQUESTOFF" });
   const token = getState().user.token;
-  const profile = getState().user.currentUser.id;
-
   const headers = { "Content-Type": "application/json" };
 
   if (token) {
@@ -85,13 +87,16 @@ export const updateRequestOff = (id, startTime, endTime) => (
   }
 
   const body = JSON.stringify({
-    startTime: startTime,
-    endTime: endTime,
+    profile,
+    status,
+    start_datetime,
+    end_datetime,
+    reason,
   });
 
   axios({
-    method: "update",
-    url: `${process.env.REACT_APP_ROOT_URL}/api/requestoff/${profile}//`,
+    method: "put",
+    url: `${process.env.REACT_APP_ROOT_URL}/api/requestoff/${id}/`,
     headers: headers,
     data: body,
   })
@@ -101,9 +106,9 @@ export const updateRequestOff = (id, startTime, endTime) => (
       }
     })
     .catch(err => {
-      if (err.status === 401 || err.status === 403) {
-        dispatch({ type: "AUTHENTICATION_ERROR", data: err.data });
-        throw err.data;
+      if (err.status < 500) {
+        console.log("Server Error!");
+        return { status: err.status, data: err.data };
       } else {
         dispatch({ type: "ERROR", data: err.data });
         throw err.data;
@@ -130,13 +135,13 @@ export const deleteRequestOff = id => (dispatch, getState) => {
   })
     .then(res => {
       if (res.status === 200) {
-        return dispatch({ type: "DELETE_REQUESTOFF", data: res.data });
+        return dispatch({ type: "DELETE_REQUESTOFF", data: id });
       }
     })
     .catch(err => {
-      if (err.status === 401 || err.status === 403) {
-        dispatch({ type: "AUTHENTICATION_ERROR", data: err.data });
-        throw err.data;
+      if (err.status < 500) {
+        console.log("Server Error!");
+        return { status: err.status, data: err.data };
       } else {
         dispatch({ type: "ERROR", data: err.data });
         throw err.data;
