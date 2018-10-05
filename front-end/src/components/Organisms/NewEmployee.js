@@ -127,6 +127,7 @@ class NewEmployee extends Component {
             >
               Submit
             </Button>
+
           </Accordion.Content>
         </Accordion>
       </Segment>

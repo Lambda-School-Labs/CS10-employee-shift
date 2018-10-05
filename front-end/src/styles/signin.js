@@ -8,7 +8,7 @@ export const Container = styled.div`
   justify-content: center;
   align-items: center;
   flex-direction: column;
-  background-color: hsl(178, 53%, 83%);
+  background-color: #bfd4ea;
 `;
 
 export const Header = styled.h1`
