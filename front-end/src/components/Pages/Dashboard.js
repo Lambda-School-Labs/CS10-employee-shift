@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import AssignedShift from "../Organisms/AssignedShift.js";
 import TimeOffApproved from "../Organisms/TimeOffApproved.js";
-import TimeOffRequest from "../Organisms/TimeOffRequests.js";
+import TimeOffRequests from "../Organisms/TimeOffRequests.js";
 
 import {
   DashboardContainer,
@@ -25,7 +25,7 @@ class Dashboard extends Component {
         <HorizontalContainer>
           <AssignedShift />
           <TimeOffApproved />
-          <TimeOffRequest />
+          <TimeOffRequests id={this.props.id} />
         </HorizontalContainer>
       </DashboardContainer>
     );
@@ -38,6 +38,7 @@ const mapStateToProps = state => {
   return {
     first_name: userProfile.user.first_name,
     last_name: userProfile.user.last_name,
+    id: state.user.currentUser.user.id,
   };
 };
 

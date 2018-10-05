@@ -41,8 +41,6 @@ const EmployeeAvailability = props => {
 
   return (
     <Segment>
-      <Header textAlign="center">Availability</Header>
-      <Divider />
       <Day>
         <h4>Monday</h4>
         <HorizontalContainer>
