@@ -52,12 +52,17 @@ class EmployeeCard extends Component {
           <Segment style={{ minHeight: "80%" }}>
             {this.props.allAvailabilities
               .filter(availability => availability.profile === profile.id)
-              .map(availability => (
-                <Availability
-                  key={availability.id}
-                  availability={availability}
-                />
-              ))}
+              .map(availability =>
+                console.log(availability)
+                //   <Availability
+                //   type="hoursOfOperation"
+                //   id={time.id}
+                //   day={time.day}
+                //   start_time={time.open_time}
+                //   end_time={time.close_time}
+                //   key={time.day + index}
+                // />
+              )}
           </Segment>
         </Grid.Column>
         <Grid.Column>

@@ -17,7 +17,7 @@ import {
   Input,
   Button,
   CardContent,
-  TextArea
+  TextArea,
 } from "semantic-ui-react";
 
 import { NewEmployeeCard } from "../../styles/Employees";
@@ -143,7 +143,7 @@ class NewEmployee extends Component {
                 </Card>
               </Grid.Column>
               <Grid.Column>
-                <NewEmployeeAvailability addTime={this.addTime} />
+                {/* <NewEmployeeAvailability addTime={this.addTime} /> */}
               </Grid.Column>
               <Grid.Row columns={1}>
                 <Button
@@ -165,7 +165,7 @@ class NewEmployee extends Component {
 
 const mapDispatchToProps = dispatch => {
   return {
-    postProfile: (data) => {
+    postProfile: data => {
       return dispatch(postProfile(data));
     },
   };
