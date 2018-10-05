@@ -2,10 +2,11 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 
 import { postAvailabilities } from "../../store/Availability/actions.js";
+import { postHoursOfOperation } from "../../store/hourOfOperation/actions.js";
 
 import TimePicker from "../Atoms/TimePicker.js";
 
-import { Portal, Accordion, Icon } from "semantic-ui-react";
+import { Portal, Accordion, Icon, Button } from "semantic-ui-react";
 
 class PostAvailability extends Component {
   constructor(props) {
@@ -14,6 +15,8 @@ class PostAvailability extends Component {
       day: this.props.day,
       start_time: "",
       end_time: "",
+      start_time24: "",
+      end_time24: "",
       open: 0,
       clickX: 0,
       clickY: 0,
@@ -22,8 +25,19 @@ class PostAvailability extends Component {
   }
 
   submitTimeChange = (time, newTime) => {
-    console.log(time, newTime);
-    // this.props.postHoO(this.props.day, newTime);
+    if (this.state.open === 1) {
+      this.setState({
+        open: 2,
+        start_time: newTime,
+        start_time24: time,
+        clickX: this.state.clickX + 100,
+      });
+    } else if (this.state.open === 2) {
+      this.setState({
+        end_time: newTime,
+        end_time24: time,
+      });
+    }
   };
 
   handleOpen = (e, itemProps) => {
@@ -42,28 +56,70 @@ class PostAvailability extends Component {
     this.setState({ open: 0 });
   };
 
+  handleSubmit = () => {
+    this.handleClose();
+
+    // handle error of end time less than start time
+
+    if (this.props.type === "availability") {
+      console.log(
+        this.props.profile,
+        this.state.day,
+        this.state.start_time24 + ":00",
+        this.state.end_time24 + ":00"
+      );
+      this.props.postAvailabilities(
+        this.props.profile,
+        this.state.day,
+        this.state.start_time24 + ":00",
+        this.state.end_time24 + ":00"
+      );
+    } else if (this.props.type === "hoursOfOperation")
+      this.props.postHoursOfOperation(
+        this.state.day,
+        this.state.start_time24,
+        this.state.end_time24 + ":00"
+      );
+
+    this.setState({
+      day: this.props.day,
+      start_time: "",
+      end_time: "",
+      open: 0,
+      clickX: 0,
+      clickY: 0,
+      revealed: false,
+    });
+  };
+
   render() {
     this.submitTimeChange = this.submitTimeChange.bind(this);
     return (
       <div
         style={{
-          minWidth: "200px",
-          minHeight: "20px",
+          minWidth: "130px",
+          minHeight: "22px",
           display: "flex",
+          padding: "5px 0",
         }}
       >
-        <Icon name="plus" onClick={this.handleReveal} />
+        <Icon name="plus" link onClick={this.handleReveal} />{" "}
+        <span>{this.state.revealed ? null : "add"}</span>
         {!this.state.revealed ? null : (
           <div
             style={{
-              width: "50%",
+              width: "100%",
               display: "flex",
-              paddingLeft: "30%",
-              justifyContent: "space-evenly",
+              justifyContent: "center",
+              alignItems: "center",
             }}
           >
             <Accordion.Title index={1} onClick={this.handleOpen}>
-              Start
+              {this.state.start_time ? (
+                this.state.start_time
+              ) : (
+                <input style={{ width: "40px" }} />
+              )}
             </Accordion.Title>
             <Portal open={this.state.open === 1} onClose={this.handleClose}>
               <div
@@ -90,7 +146,11 @@ class PostAvailability extends Component {
               -{" "}
             </span>
             <Accordion.Title index={2} onClick={this.handleOpen}>
-              End
+              {this.state.end_time ? (
+                this.state.end_time
+              ) : (
+                <input style={{ width: "40px" }} />
+              )}
             </Accordion.Title>
             <Portal open={this.state.open === 2} onClose={this.handleClose}>
               <div
@@ -108,6 +168,7 @@ class PostAvailability extends Component {
                 />
               </div>
             </Portal>
+            <Icon name="check" color="green" onClick={this.handleSubmit} />
           </div>
         )}
       </div>
@@ -117,8 +178,11 @@ class PostAvailability extends Component {
 
 const mapDispatchToProps = dispatch => {
   return {
-    postAvailabilities: () => {
-      return dispatch(postAvailabilities());
+    postAvailabilities: (profile, day, open_time, close_time) => {
+      return dispatch(postAvailabilities(profile, day, open_time, close_time));
+    },
+    postHoursOfOperation: (day, open_time, close_time) => {
+      return dispatch(postHoursOfOperation(day, open_time, close_time));
     },
   };
 };

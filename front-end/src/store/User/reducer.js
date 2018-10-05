@@ -47,8 +47,6 @@ export default (state = initialState, action) => {
       };
 
     case "SIGNUP_SUCCESS":
-      localStorage.setItem("token", action.data.access_token);
-      // DEV CONSOLE LOG, REMOVE ME!
       return {
         ...state,
         ...action.data,
@@ -58,7 +56,6 @@ export default (state = initialState, action) => {
       };
 
     case "UPDATE_SUCCESS":
-      // DEV CONSOLE LOG, REMOVE ME!
       return {
         ...state,
         currentUser: action.data,

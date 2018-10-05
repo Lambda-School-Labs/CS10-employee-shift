@@ -4,11 +4,14 @@ import TimeKeeper from "react-timekeeper";
 class TimePicker extends React.Component {
   state = {
     time: this.props.currentTime || "2:50 pm",
-    time24: "",
+    time24: this.props.currentTime24 || "14:50",
   };
 
   handleTimeChange(newTime) {
-    this.setState({ time: newTime.formatted, time24: newTime.formatted24 });
+    this.setState({
+      time: newTime.formatted,
+      time24: newTime.formatted24,
+    });
   }
 
   render() {
@@ -25,11 +28,11 @@ class TimePicker extends React.Component {
           DONE_BUTTON_BORDER_COLOR: "#ededed",
         }}
         onDoneClick={() => {
+          this.props.handleClose();
           this.props.submitTimeChange(
             this.state.time24,
             this.state.time.toUpperCase()
           );
-          this.props.handleClose();
         }}
       />
     );

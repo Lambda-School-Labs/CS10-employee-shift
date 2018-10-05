@@ -1,28 +1,80 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 
-import { updateAvailabilities } from "../../store/Availability/actions.js";
+import {
+  updateAvailabilities,
+  deleteAvailabilities,
+} from "../../store/Availability/actions.js";
+
+import {
+  updateHoursOfOperation,
+  deleteHoursOfOperation,
+} from "../../store/hourOfOperation/actions.js";
 
 import TimePicker from "../Atoms/TimePicker.js";
 
-import { Container, Portal, Accordion } from "semantic-ui-react";
+import { Icon, Portal, Accordion } from "semantic-ui-react";
+
+const convertTime24to12 = time24h => {
+  let [hours, minutes] = time24h.split(":");
+  let modifier;
+
+  if (hours > 11) modifier = "PM";
+  else modifier = "AM";
+
+  if (modifier === "PM") hours = hours - 12;
+  else if (hours === "00") hours = "12";
+
+  if (hours[0] === "0") hours = hours[1];
+
+  return `${hours}:${minutes} ${modifier}`;
+};
 
 class Availability extends Component {
   constructor(props) {
     super(props);
     this.state = {
       day: this.props.day,
-      start_time: this.props.start_time,
-      end_time: this.props.end_time,
+      start_time: convertTime24to12(this.props.start_time),
+      start_time24: this.props.start_time,
+      end_time: convertTime24to12(this.props.end_time),
+      end_time24: this.props.end_time,
       open: 0,
       clickX: 0,
       clickY: 0,
     };
   }
 
-  submitTimeChange = (time, newTime) => {
-    console.log(time, newTime);
-    // this.props.postHoO(this.props.day, newTime);
+  submitTimeChange = (time24, time12) => {
+    if (this.state.open === 1) {
+      this.setState({
+        open: 2,
+        start_time: time12,
+        start_time24:
+          time24.length === 5 ? time24 + ":00" : "0" + time24 + ":00",
+        clickX: this.state.clickX + 100,
+      });
+    } else if (this.state.open === 2) {
+      this.setState({
+        end_time: time12,
+        end_time24: time24.length === 5 ? time24 + ":00" : "0" + time24 + ":00",
+      });
+      if (this.props.type === "availability")
+        this.props.updateAvailabilities(
+          this.props.id,
+          this.props.profile,
+          this.state.day,
+          this.state.start_time24,
+          this.state.end_time24
+        );
+      else if (this.props.type === "hoursOfOperation")
+        this.props.updateHoursOfOperation(
+          this.props.id,
+          this.state.day,
+          this.state.start_time24,
+          this.state.end_time24
+        );
+    }
   };
 
   handleOpen = (e, itemProps) => {
@@ -37,12 +89,19 @@ class Availability extends Component {
     this.setState({ open: 0 });
   };
 
+  handleDelete = () => {
+    if (this.props.type === "availability")
+      this.props.deleteAvailabilities(this.props.id);
+    else if (this.props.type === "hoursOfOperation")
+      this.props.deleteHoursOfOperation(this.props.id);
+  };
+
   render() {
     this.submitTimeChange = this.submitTimeChange.bind(this);
     return (
       <div
         style={{
-          width: "50%",
+          width: "100%",
           display: "flex",
           justifyContent: "space-evenly",
         }}
@@ -63,6 +122,8 @@ class Availability extends Component {
             <TimePicker
               handleClose={this.handleClose}
               submitTimeChange={this.submitTimeChange}
+              currentTime={this.state.start_time}
+              currentTime24={this.state.start_time24}
             />
           </div>
         </Portal>
@@ -83,9 +144,12 @@ class Availability extends Component {
             <TimePicker
               handleClose={this.handleClose}
               submitTimeChange={this.submitTimeChange}
+              currentTime={this.state.end_time}
+              currentTime24={this.state.end_time24}
             />
           </div>
         </Portal>
+        <Icon name="close" color="red" link onClick={this.handleDelete} />
       </div>
     );
   }
@@ -93,8 +157,19 @@ class Availability extends Component {
 
 const mapDispatchToProps = dispatch => {
   return {
-    updateAvailabilities: () => {
-      return dispatch(updateAvailabilities());
+    updateAvailabilities: (id, profile, day, open_time, close_time) => {
+      return dispatch(
+        updateAvailabilities(id, profile, day, open_time, close_time)
+      );
+    },
+    deleteAvailabilities: id => {
+      return dispatch(deleteAvailabilities(id));
+    },
+    updateHoursOfOperation: (id, day, open_time, close_time) => {
+      return dispatch(updateHoursOfOperation(id, day, open_time, close_time));
+    },
+    deleteHoursOfOperation: id => {
+      return dispatch(deleteHoursOfOperation(id));
     },
   };
 };

@@ -10,8 +10,7 @@ export const getUser = () => (dispatch, getState) => {
       "Content-Type": "application/json",
       Authorization: `Bearer ${token}`,
     };
-    // TODO: GET ACCOUNT ID
-    // TODO: Redo with correct endpoint to get user (not list of users)
+
     axios
       .get(`${process.env.REACT_APP_ROOT_URL}/api/userprofile/`, {
         headers,
@@ -59,7 +58,6 @@ export const signin = (username, password) => dispatch => {
         return { status: err.response.status, data: err.response.data };
       } else if (err.response.status === 403 || err.response.status === 401) {
         dispatch({ type: "ERROR", data: err.response.data });
-        // throw err.data;
       }
     });
 };
@@ -169,7 +167,7 @@ export const updateUser = (
     };
 
     // More form items for validation
-    
+
     const body = {
       // username: "admin", 500 error when you send "username" and "password"
       user: {
@@ -177,14 +175,13 @@ export const updateUser = (
       },
       phone_number,
       text_enabled,
-      email_enabled
+      email_enabled,
     };
     if (password) {
       body.user.password = password;
       body.old_password = old_password;
       body.re_password = re_password;
-    };
-
+    }
 
     axios({
       method: "patch",

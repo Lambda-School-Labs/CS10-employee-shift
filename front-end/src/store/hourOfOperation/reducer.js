@@ -9,34 +9,27 @@ export default (state = initialState, action) => {
   const newHoO = state.allHoOs.slice();
 
   switch (action.type) {
-    case "LOADING":
+    case "LOADING_HOO":
       return { ...state, HoOLoading: true };
 
     case "READ_HOO":
-      // DEV CONSOLE LOG, REMOVE ME!
-      console.log("READ HOO", action.data);
       return { ...state, allHoOs: action.data, HoOLoading: false };
 
     case "CREATE_HOO":
-      // DEV CONSOLE LOG, REMOVE ME!
-      console.log("CREATED HOO", action.data);
       newHoO.push(action.data);
       return { ...state, allHoOs: newHoO, HoOLoading: false };
 
     case "UPDATE_HOO":
-      // DEV CONSOLE LOG, REMOVE ME!
-      console.log("UPDATE HOO", action.data);
-      // grab shift using its index, maybe handle this differently
-      const hooToUpdate = newHoO[action.index];
-      // do some updates
-      newHoO.splice(action.index, 1, hooToUpdate);
-      return { ...state, allHoOs: newHoO, HoOLoading: false };
+      const updatedHoO = action.data;
+      const indexToUpdate = newHoO.indexOf(
+        newHoO.filter(shift => shift.id === updatedHoO.id)
+      );
+      newHoO.splice(indexToUpdate, 1, updatedHoO);
+      return { ...state, allHoOs: newHoO, newHoOLoading: false };
 
     case "DELETE_HOO":
-      // DEV CONSOLE LOG, REMOVE ME!
-      console.log("DELETE HOO", action.data);
-      newHoO.splice(action.index, 1);
-      return { ...state, allHoOs: newHoO, HoOLoading: false };
+      const new_hoO = newHoO.filter(HoO => HoO.id !== action.data);
+      return { ...state, allHoOs: new_hoO, HoOLoading: false };
 
     // TODO: double check this
     case "ERROR":
