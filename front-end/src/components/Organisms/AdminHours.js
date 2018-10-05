@@ -1,14 +1,11 @@
 import React, { Component } from "react";
-import moment from "moment";
 import { connect } from "react-redux";
 
 import {
   getHoursOfOperation,
-  postHoursOfOperation,
   updateHoursOfOperation,
 } from "../../store/hourOfOperation/actions.js";
 
-import HoODay from "../Molecules/HoODay.js";
 import Availability from "../Molecules/Availability.js";
 import PostAvailability from "../Molecules/PostAvailability.js";
 
@@ -17,31 +14,14 @@ import {
   Day,
   HorizontalContainer,
 } from "../../styles/Admin.js";
-import { Segment, Card, Icon, Image, Header, Divider } from "semantic-ui-react";
+import { Segment, Header, Divider } from "semantic-ui-react";
 
 class AdminHours extends Component {
-  state = {
-    monday: [],
-    tuesday: [],
-    wednesday: [],
-    thursday: [],
-    friday: [],
-    saturday: [],
-    sunday: [],
-  };
-
   componentDidMount() {
-    //if Hoo
     this.props.getHoursOfOperation();
   }
 
-  addTime = () => {
-    console.log("Add time!");
-  };
-
   fillTimes = () => {
-    //if Hoo
-
     const hoosByDay = [[], [], [], [], [], [], []];
 
     const dayLookupTable = {
@@ -62,7 +42,6 @@ class AdminHours extends Component {
     sorted.forEach((hoo, index) => {
       hoosByDay[dayLookupTable[hoo.day] - 1].push(hoo);
     });
-
     return hoosByDay;
   };
 

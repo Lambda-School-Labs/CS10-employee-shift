@@ -61,13 +61,20 @@ class PostAvailability extends Component {
 
     // handle error of end time less than start time
 
-    if (this.props.type === "availability")
-      this.props.postAvailabilities(
+    if (this.props.type === "availability") {
+      console.log(
+        this.props.profile,
         this.state.day,
-        this.state.start_time24,
+        this.state.start_time24 + ":00",
         this.state.end_time24 + ":00"
       );
-    else if (this.props.type === "hoursOfOperation")
+      this.props.postAvailabilities(
+        this.props.profile,
+        this.state.day,
+        this.state.start_time24 + ":00",
+        this.state.end_time24 + ":00"
+      );
+    } else if (this.props.type === "hoursOfOperation")
       this.props.postHoursOfOperation(
         this.state.day,
         this.state.start_time24,
@@ -93,9 +100,11 @@ class PostAvailability extends Component {
           minWidth: "130px",
           minHeight: "22px",
           display: "flex",
+          padding: "5px 0",
         }}
       >
-        <Icon name="plus" onClick={this.handleReveal} />
+        <Icon name="plus" link onClick={this.handleReveal} />{" "}
+        <span>{this.state.revealed ? null : "add"}</span>
         {!this.state.revealed ? null : (
           <div
             style={{
@@ -159,7 +168,7 @@ class PostAvailability extends Component {
                 />
               </div>
             </Portal>
-            <Icon name="check" onClick={this.handleSubmit} />
+            <Icon name="check" color="green" onClick={this.handleSubmit} />
           </div>
         )}
       </div>
@@ -169,8 +178,8 @@ class PostAvailability extends Component {
 
 const mapDispatchToProps = dispatch => {
   return {
-    postAvailabilities: () => {
-      return dispatch(postAvailabilities());
+    postAvailabilities: (profile, day, open_time, close_time) => {
+      return dispatch(postAvailabilities(profile, day, open_time, close_time));
     },
     postHoursOfOperation: (day, open_time, close_time) => {
       return dispatch(postHoursOfOperation(day, open_time, close_time));

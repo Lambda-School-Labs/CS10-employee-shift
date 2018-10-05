@@ -79,7 +79,7 @@ export const updateHoursOfOperation = (id, day, open_time, close_time) => (
 ) => {
   dispatch({ type: "LOADING_HOO" });
   const token = getState().user.token;
-  const headers = { "Content-Type": "application/x-www-form-urlencoded" };
+  const headers = { "Content-Type": "application/json" };
   if (token) {
     headers["Authorization"] = `Bearer ${token}`;
   }

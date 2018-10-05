@@ -59,13 +59,19 @@ class Availability extends Component {
         end_time: time12,
         end_time24: time24.length === 5 ? time24 + ":00" : "0" + time24 + ":00",
       });
-      if (this.props.type === "availabilities")
+      if (this.props.type === "availability")
         this.props.updateAvailabilities(
           this.props.id,
           this.state.day,
           this.state.start_time24,
           this.state.end_time24
         );
+      // console.log(
+      //   this.props.id,
+      //   this.state.day,
+      //   this.state.start_time24,
+      //   this.state.end_time24
+      // );
       else if (this.props.type === "hoursOfOperation")
         this.props.updateHoursOfOperation(
           this.props.id,
@@ -89,14 +95,13 @@ class Availability extends Component {
   };
 
   handleDelete = () => {
-    if (this.props.type === "availabilities")
+    if (this.props.type === "availability")
       this.props.deleteAvailabilities(this.props.id);
     else if (this.props.type === "hoursOfOperation")
       this.props.deleteHoursOfOperation(this.props.id);
   };
 
   render() {
-    console.log(this.state);
     this.submitTimeChange = this.submitTimeChange.bind(this);
     return (
       <div

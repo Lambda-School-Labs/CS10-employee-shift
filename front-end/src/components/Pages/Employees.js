@@ -79,8 +79,6 @@ class Employees extends Component {
   }
 }
 
-// TODO: Use correct actions and state
-
 const mapStateToProps = state => {
   return {
     isAuthenticated: state.user.isAuthenticated,

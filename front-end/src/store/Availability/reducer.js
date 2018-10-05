@@ -13,8 +13,6 @@ export default (state = initialState, action) => {
       return { ...state, availabilityLoading: true };
 
     case "READ_AVAILABILITIES":
-      // DEV CONSOLE LOG, REMOVE ME!
-      console.log("FETCHED Availabilities", action.data);
       return {
         ...state,
         allAvailabilities: action.data,
@@ -22,8 +20,6 @@ export default (state = initialState, action) => {
       };
 
     case "CREATE_AVAILABILITIES":
-      // DEV CONSOLE LOG, REMOVE ME!
-      console.log("CREATED AVAILABILITIES", action.data);
       newAvailabilities.push(action.data);
       return {
         ...state,
@@ -32,12 +28,11 @@ export default (state = initialState, action) => {
       };
 
     case "UPDATE_AVAILABILITIES":
-      // DEV CONSOLE LOG, REMOVE ME!
-      console.log("UPDATED AVAILABILITIES", action.data);
-      // grab shift using its index, maybe handle this differently
-      const availabilityUpdate = newAvailabilities[action.data.index];
-      // do some updates
-      newAvailabilities.splice(action.index, 1, availabilityUpdate);
+      const updatedAvailability = action.data;
+      const indexToUpdate = newAvailabilities.indexOf(
+        newAvailabilities.filter(avail => avail.id === updatedAvailability.id)
+      );
+      newAvailabilities.splice(indexToUpdate, 1, updatedAvailability);
       return {
         ...state,
         allAvailabilities: newAvailabilities,
@@ -45,12 +40,12 @@ export default (state = initialState, action) => {
       };
 
     case "DELETE_AVAILABILITIES":
-      // DEV CONSOLE LOG, REMOVE ME!
-      console.log("DELETED AVAILABILITIES", action.data);
-      newAvailabilities.splice(action.index, 1);
+      const new_avail = newAvailabilities.filter(
+        avail => avail.id !== action.data
+      );
       return {
         ...state,
-        allAvailabilities: newAvailabilities,
+        allAvailabilities: new_avail,
         availabilityLoading: false,
       };
 

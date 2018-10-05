@@ -4,7 +4,7 @@ import TimeKeeper from "react-timekeeper";
 class TimePicker extends React.Component {
   state = {
     time: this.props.currentTime || "2:50 pm",
-    time24: this.props.currentTime24 || "",
+    time24: this.props.currentTime24 || "14:50",
   };
 
   handleTimeChange(newTime) {

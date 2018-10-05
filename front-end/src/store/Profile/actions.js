@@ -85,15 +85,13 @@ export const postProfile = data => (dispatch, getState) => {
     phone_number: data.phone_number,
     notes: data.notes,
     text_enabled: false,
-    email_enabled: true
+    email_enabled: true,
   };
 
   console.log(body);
 
-
   axios({
     method: "post",
-    // TODO: fill correct end point
     url: `${process.env.REACT_APP_ROOT_URL}/api/profiles/`,
     headers: headers,
     data: body,
@@ -114,7 +112,6 @@ export const postProfile = data => (dispatch, getState) => {
     });
 };
 
-// TODO: fill in correct data to send
 export const updateProfile = data => (dispatch, getState) => {
   dispatch({ type: "LOADING_PROFILE" });
   const { token } = getState().user.token;
@@ -124,12 +121,10 @@ export const updateProfile = data => (dispatch, getState) => {
     headers["Authorization"] = `Bearer ${token}`;
   }
 
-  // fill me
   const body = JSON.stringify({ data });
 
   axios({
     method: "update",
-    // TODO: fill correct end point
     url: `${process.env.REACT_APP_ROOT_URL}/api/profiles/`,
     headers: headers,
     data: body,
@@ -150,7 +145,6 @@ export const updateProfile = data => (dispatch, getState) => {
     });
 };
 
-// TODO: fill in correct data to send
 export const deleteProfile = data => (dispatch, getState) => {
   dispatch({ type: "LOADING_PROFILE" });
   const { token } = getState().user.token;
@@ -160,12 +154,10 @@ export const deleteProfile = data => (dispatch, getState) => {
     headers["Authorization"] = `Bearer ${token}`;
   }
 
-  // fill me
   const body = JSON.stringify({ data });
 
   axios({
     method: "delete",
-    // TODO: fill correct end point
     url: `${process.env.REACT_APP_ROOT_URL}/api/profiles/`,
     headers: headers,
     data: body,
