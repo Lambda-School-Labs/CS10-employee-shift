@@ -106,7 +106,8 @@ export const signup = (
   re_password,
   email,
   first_name,
-  last_name
+  last_name,
+  company,
 ) => dispatch => {
   const body = JSON.stringify({
     username,
@@ -115,7 +116,9 @@ export const signup = (
     email,
     first_name,
     last_name,
-    is_staff: "true",
+    company,
+    groups: [1],
+    is_staff: "false",
   });
 
   axios({

@@ -18,6 +18,7 @@ class Signup extends Component {
     email: "",
     firstName: "",
     lastName: "",
+    company: "",
     currentPage: 0,
     error: [false, false, false, false, false, false],
   };
@@ -232,9 +233,9 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
   return {
-    signup: (username, password, re_password, email, firstName, lastName) => {
+    signup: (username, password, re_password, email, firstName, lastName, company) => {
       return dispatch(
-        signup(username, password, re_password, email, firstName, lastName)
+        signup(username, password, re_password, email, firstName, lastName, company)
       );
     },
   };

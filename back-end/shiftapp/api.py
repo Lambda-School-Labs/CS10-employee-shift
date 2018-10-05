@@ -13,7 +13,8 @@ from .permissions import IsAuthenticatedOrCreate, IsOwnerOrReadOnly
 from shiftapp.serializers import (
     UserSerializer,
     ProfileSerializer,
-    UserProfileSerializer, 
+    UserProfileSerializer,
+    AccountUserProfileSerializer, 
     GroupSerializer, 
     AccountSerializer, 
     RequestedTimeOffSerializer, 
@@ -48,11 +49,12 @@ class GroupViewSet(viewsets.ModelViewSet):
     serializer_class = GroupSerializer
 
 
-class SignUp(generics.CreateAPIView):
+class SignUp(generics.ListCreateAPIView):
     # permission_classes = (IsAuthenticatedOrCreate,)
     permission_classes = [permissions.AllowAny]
-    queryset = User.objects.all()
-    serializer_class = UserSerializer
+    # permission_classes = [permissions.IsAuthenticated, TokenHasReadWriteScope]
+    queryset = Profile.objects.all()
+    serializer_class = AccountUserProfileSerializer
 
 
 class AccountViewSet(viewsets.ModelViewSet):
