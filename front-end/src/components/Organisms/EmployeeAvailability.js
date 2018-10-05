@@ -51,6 +51,7 @@ const EmployeeAvailability = props => {
               <Availability
                 type="availability"
                 id={time.id}
+                profile={time.profile}
                 day={time.day}
                 start_time={time.start_time}
                 end_time={time.end_time}
@@ -73,6 +74,7 @@ const EmployeeAvailability = props => {
               <Availability
                 type="availability"
                 id={time.id}
+                profile={time.profile}
                 day={time.day}
                 start_time={time.start_time}
                 end_time={time.end_time}
@@ -95,6 +97,7 @@ const EmployeeAvailability = props => {
               <Availability
                 type="availability"
                 id={time.id}
+                profile={time.profile}
                 day={time.day}
                 start_time={time.start_time}
                 end_time={time.end_time}
@@ -117,6 +120,7 @@ const EmployeeAvailability = props => {
               <Availability
                 type="availability"
                 id={time.id}
+                profile={time.profile}
                 day={time.day}
                 start_time={time.start_time}
                 end_time={time.end_time}
@@ -139,6 +143,7 @@ const EmployeeAvailability = props => {
               <Availability
                 type="availability"
                 id={time.id}
+                profile={time.profile}
                 day={time.day}
                 start_time={time.start_time}
                 end_time={time.end_time}
@@ -161,6 +166,7 @@ const EmployeeAvailability = props => {
               <Availability
                 type="availability"
                 id={time.id}
+                profile={time.profile}
                 day={time.day}
                 start_time={time.start_time}
                 end_time={time.end_time}
@@ -183,6 +189,7 @@ const EmployeeAvailability = props => {
               <Availability
                 type="availability"
                 id={time.id}
+                profile={time.profile}
                 day={time.day}
                 start_time={time.start_time}
                 end_time={time.end_time}

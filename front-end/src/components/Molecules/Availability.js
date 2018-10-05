@@ -62,16 +62,11 @@ class Availability extends Component {
       if (this.props.type === "availability")
         this.props.updateAvailabilities(
           this.props.id,
+          this.props.profile,
           this.state.day,
           this.state.start_time24,
           this.state.end_time24
         );
-      // console.log(
-      //   this.props.id,
-      //   this.state.day,
-      //   this.state.start_time24,
-      //   this.state.end_time24
-      // );
       else if (this.props.type === "hoursOfOperation")
         this.props.updateHoursOfOperation(
           this.props.id,
@@ -162,8 +157,10 @@ class Availability extends Component {
 
 const mapDispatchToProps = dispatch => {
   return {
-    updateAvailabilities: (id, day, open_time, close_time) => {
-      return dispatch(updateAvailabilities(id, day, open_time, close_time));
+    updateAvailabilities: (id, profile, day, open_time, close_time) => {
+      return dispatch(
+        updateAvailabilities(id, profile, day, open_time, close_time)
+      );
     },
     deleteAvailabilities: id => {
       return dispatch(deleteAvailabilities(id));

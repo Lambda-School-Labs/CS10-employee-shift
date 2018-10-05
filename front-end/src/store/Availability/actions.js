@@ -68,23 +68,26 @@ export const postAvailabilities = (profile, day, start_time, end_time) => (
     });
 };
 
-export const updateAvailabilities = (id, day, open_time, close_time) => (
-  dispatch,
-  getState
-) => {
+export const updateAvailabilities = (
+  id,
+  profile,
+  day,
+  start_time,
+  end_time
+) => (dispatch, getState) => {
   dispatch({ type: "LOADING_AVAILABILITIES" });
   const token = getState().user.token;
-  const headers = { "Content-Type": "application/x-www-form-urlencoded" };
+  const headers = { "Content-Type": "application/json" };
 
   if (token) {
     headers["Authorization"] = `Bearer ${token}`;
   }
 
   const body = JSON.stringify({
-    id,
+    profile,
     day,
-    open_time,
-    close_time,
+    start_time,
+    end_time,
   });
 
   axios({

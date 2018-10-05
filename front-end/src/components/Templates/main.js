@@ -31,7 +31,12 @@ class main extends Component {
           />
           <Sidebar.Pusher>
             <Button
-              style={{ position: "absolute", top: "18px", left: "18px" }}
+              style={{
+                position: "absolute",
+                top: "18px",
+                left: "18px",
+                zIndex: "5000",
+              }}
               onClick={this.handleButtonClick}
             >
               <Icon name="sidebar" />
