@@ -1,6 +1,10 @@
 @import url("https://fonts.googleapis.com/css?family=Josefin+Slab");
 @import url("https://fonts.googleapis.com/css?family=Oswald");
 
+.signin_btn {
+  margin-top: 2px;
+}
+
 .top-container {
   display: flex;
   flex-direction: row;
@@ -9,15 +13,6 @@
   height: 200px;
   padding-top: 100px;
 }
-
-/* .title {
-  display: flex;
-  position: relative;
-  bottom: -75px;
-  height: 200px;
-  margin-top: auto;
-  margin-bottom: auto;
-} */
 
 .ouricon {
   width: 100px;
@@ -105,6 +100,7 @@
 
 .frame1 {
   width: 100%;
+  /* height: 90%; */
 }
 
 .frame2Heading {
@@ -123,7 +119,7 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  margin-bottom: 500px;
+  margin-bottom: 340px; 
 }
 
 .cta-button {
@@ -144,7 +140,7 @@
 }
 
 .copyright {
-  margin-top: 10px;
+  margin-top: 17px;
   margin-right: 20px;
 }
 

@@ -55,12 +55,12 @@ class Landing_Card extends Component {
                         <LandingNavBar>
                             <NavButton>
                                 <Link to="/signup">
-                                    <NavButton className="btn">Sign up</NavButton>
+                                    <NavButton className="signup_btn">Sign up</NavButton>
                                 </Link>
                             </NavButton>
                             <NavButton>
                                 <Link to="/signin">
-                                    <NavButton className="btn">Sign in</NavButton>
+                                    <NavButton className="signin_btn">Sign in</NavButton>
                                 </Link>
                             </NavButton>
                         </LandingNavBar>
