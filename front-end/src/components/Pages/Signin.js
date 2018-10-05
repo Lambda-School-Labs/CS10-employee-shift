@@ -18,41 +18,34 @@ class Signin extends Component {
   handleValidation(){
       let errors = {};
       let formIsValid = true;
+      let isEmail = false;
 
       //Username
       if(!this.state.username){
         formIsValid = false;
-        errors["username"] = "Username is required";
+        errors["username"] = "Username or Email is required";
       }
 
+      
       if(this.state.username){
-        if(!this.state.username.match(/^[a-zA-Z1-9]+$/)){
-            formIsValid = false;
-            errors["username"] = "Only letters and numbers";
-        }        
+        if(this.state.username.match(/^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/)){
+            isEmail = true;
+            // errors["username"] = "Valid email";
+        }       
       }
+
+      // if(this.state.username){
+      //   if(!this.state.username.match(/^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/)){
+      //       formIsValid = false;
+      //       errors["username"] = "Invalid email";
+      //   }        
+      // }
 
       if(!this.state.password){
         formIsValid = false;
         errors["password"] = "Password is required";
       }
-
-      // //Email
-      // if(!fields["email"]){
-      //   formIsValid = false;
-      //   errors["email"] = "Cannot be empty";
-      // }
-
-    //   if(typeof fields["email"] !== "undefined"){
-    //     let lastAtPos = fields["email"].lastIndexOf('@');
-    //     let lastDotPos = fields["email"].lastIndexOf('.');
-
-    //     if (!(lastAtPos < lastDotPos && lastAtPos > 0 && fields["email"].indexOf('@@') == -1 && lastDotPos > 2 && (fields["email"].length - lastDotPos) > 2)) {
-    //         formIsValid = false;
-    //         errors["email"] = "Email is not valid";
-    //       }
-    // }  
-
+  
     this.setState({errors: errors});
     return formIsValid;
   }
@@ -96,7 +89,7 @@ class Signin extends Component {
                     name="username"
                     icon="user"
                     iconPosition="left"
-                    placeholder="Username"
+                    placeholder="Username or Email"
                   />
                   <span style={{color: "red"}}>{this.state.errors["username"]}</span>
                 </FormItem>
@@ -116,7 +109,7 @@ class Signin extends Component {
                 </FormItem>
                 <FormItem>
                   <Button
-                    color="teal"
+                    color='blue'
                     fluid
                     size="large"
                     onClick={this.submitHandler}

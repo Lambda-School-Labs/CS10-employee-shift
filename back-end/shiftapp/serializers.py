@@ -188,8 +188,6 @@ class UserProfileSerializer(ModelSerializer):
 
 class RequestedTimeOffSerializer(ModelSerializer):
     # status = serializers.ChoiceField(choices=STATUS_CHOICES, default='Pending')
-    profile = ProfileSerializer()
-
     class Meta:
         model = RequestedTimeOff
         # model.STATUS_CHOICES

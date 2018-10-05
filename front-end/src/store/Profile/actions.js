@@ -84,8 +84,8 @@ export const postProfile = data => (dispatch, getState) => {
     account,
     phone_number: data.phone_number,
     notes: data.notes,
-    text_enabled: false,
-    email_enabled: true
+    email_enabled: true,
+    text_enabled: false
   };
 
   console.log(body);

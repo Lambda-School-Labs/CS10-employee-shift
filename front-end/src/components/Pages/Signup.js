@@ -84,29 +84,16 @@ class Signup extends Component {
           <Segment raised padded="very">
             <Header>Hi, nice to meet you!</Header>
             <FormItem>
-              <h3>Email</h3>
-              <Input
-                fluid
-                value={this.state.email}
-                onChange={this.inputChangeHandler}
-                name="email"
-                icon="mail"
-                iconPosition="left"
-                placeholder="Email"
-                error={this.state.error[0]}
-              />
-            </FormItem>
-            <FormItem>
               <h3>First Name</h3>
               <Input
                 fluid
                 value={this.state.firstName}
                 onChange={this.inputChangeHandler}
                 name="firstName"
-                icon="user circle"
+                icon="user"
                 iconPosition="left"
                 placeholder="First Name"
-                error={this.state.error[1]}
+                error={this.state.error[0]}
               />
             </FormItem>
             <FormItem>
@@ -116,15 +103,41 @@ class Signup extends Component {
                 value={this.state.lastName}
                 onChange={this.inputChangeHandler}
                 name="lastName"
-                icon="user circle"
+                icon="user"
                 iconPosition="left"
                 placeholder="Last Name"
+                error={this.state.error[1]}
+              />
+            </FormItem>
+            <FormItem>
+              <h3>Email</h3>
+              <Input
+                fluid
+                value={this.state.email}
+                onChange={this.inputChangeHandler}
+                name="email"
+                icon="mail"
+                iconPosition="left"
+                placeholder="Email"
                 error={this.state.error[2]}
               />
             </FormItem>
             <FormItem>
+              <h3>Company</h3>
+              <Input
+                fluid
+                value={this.state.company}
+                onChange={this.inputChangeHandler}
+                name="company"
+                icon="building"
+                iconPosition="left"
+                placeholder="Company Name"
+                error={this.state.error[3]}
+              />
+            </FormItem>
+            <FormItem>
               <Button
-                color="teal"
+                color="blue"
                 fluid
                 size="large"
                 onClick={this.turnPageHandler}
@@ -189,7 +202,7 @@ class Signup extends Component {
               />
             </FormItem>
             <Button
-              color="teal"
+              color="blue"
               fluid
               size="large"
               onClick={this.submitHandler}

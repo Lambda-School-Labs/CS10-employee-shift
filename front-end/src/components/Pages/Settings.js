@@ -38,8 +38,8 @@ class Settings extends Component {
     this.props.updateUser(
       this.state.email,
       this.state.phone_number,
-      this.state.text_enabled,
       this.state.email_enabled,
+      this.state.text_enabled,
       this.state.old_password,
       this.state.password,
       this.state.re_password
@@ -89,20 +89,20 @@ class Settings extends Component {
               <h5>Emails?</h5>
               <Checkbox
                 toggle
-                checked={this.state.text_enabled}
+                checked={this.state.email_enabled}
                 onChange={this.inputChangeHandler}
                 type="checkbox"
-                name="text_enabled"
+                name="email_enabled"
               />
             </CheckboxContainer>
             <CheckboxContainer>
               <h5>Texts?</h5>
               <Checkbox
                 toggle
-                checked={this.state.email_enabled}
+                checked={this.state.text_enabled}
                 onChange={this.inputChangeHandler}
                 type="checkbox"
-                name="email_enabled"
+                name="text_enabled"
               />
             </CheckboxContainer>
             <FormRow>

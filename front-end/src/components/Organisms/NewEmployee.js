@@ -31,7 +31,6 @@ class NewEmployee extends Component {
     last_name: "",
     email: "",
     phone_number: "",
-    notes: "",
     monday: [],
     tuesday: [],
     wednesday: [],
@@ -124,19 +123,6 @@ class NewEmployee extends Component {
                         icon="phone"
                         iconPosition="left"
                         placeholder="Phone number"
-                      />
-                    </Card.Description>
-                  </Card.Content>
-                  <Card.Content>
-                    <Card.Description>
-                      <TextArea
-                        fluid
-                        value={this.state.notes}
-                        onChange={this.inputChangeHandler}
-                        name="notes"
-                        icon="sticky note"
-                        iconPosition="left"
-                        placeholder="Some note"
                       />
                     </Card.Description>
                   </Card.Content>
