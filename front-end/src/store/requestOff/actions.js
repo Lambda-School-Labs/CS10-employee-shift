@@ -47,7 +47,7 @@ export const postRequestOff = (
     end_datetime,
     reason,
   });
-
+  console.log(body);
   axios({
     method: "post",
     url: `${process.env.REACT_APP_ROOT_URL}/api/requestoff/`,

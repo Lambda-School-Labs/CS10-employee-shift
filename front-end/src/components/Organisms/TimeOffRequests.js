@@ -16,8 +16,8 @@ class TimeOffRequest extends Component {
   state = {
     start_date: moment(),
     end_date: moment(),
-    start_time: "00:00:00",
-    end_time: "00:00:00",
+    start_time: "",
+    end_time: "",
     reason: "",
     open: false,
     clickX: 0,
@@ -25,7 +25,6 @@ class TimeOffRequest extends Component {
   };
 
   submitTimeChange(time, newTime) {
-    console.log(this.state);
     if (this.state.open === 1) {
       this.setState({
         start_time: newTime,
@@ -66,19 +65,23 @@ class TimeOffRequest extends Component {
       const end_datetime = this.state.end_date
         .clone()
         .second(0)
-        .minute(start_minutes)
-        .hour(start_hours)
+        .minute(end_minutes)
+        .hour(end_hours)
         .utc()
         .format();
 
-      console.log(start_datetime, end_datetime, this.state.reason);
-      // this.props.postRequestOff(start_datetime, end_datetime, this.state.reason);
+      this.props.postRequestOff(
+        this.props.id,
+        start_datetime,
+        end_datetime,
+        this.state.reason
+      );
 
       this.setState({
         start_date: moment(),
         end_date: moment(),
-        start_time: "00:00:00",
-        end_time: "00:00:00",
+        start_time: "",
+        end_time: "",
         reason: "",
         open: false,
         clickX: 0,
@@ -122,6 +125,7 @@ class TimeOffRequest extends Component {
                 icon="clock"
                 iconPosition="left"
                 type="text"
+                placeholder="00:00:00"
                 onClick={this.handleOpen}
               />
               <Portal
@@ -171,6 +175,7 @@ class TimeOffRequest extends Component {
                 icon="clock"
                 iconPosition="left"
                 type="text"
+                placeholder="00:00:00"
                 onClick={this.handleOpen}
               />
               <Portal
@@ -217,8 +222,10 @@ class TimeOffRequest extends Component {
 
 const mapDispatchToProps = dispatch => {
   return {
-    postRequestOff: (start_datetime, end_datetime, reason) => {
-      return dispatch(postRequestOff(start_datetime, end_datetime, reason));
+    postRequestOff: (profile, start_datetime, end_datetime, reason) => {
+      return dispatch(
+        postRequestOff(profile, start_datetime, end_datetime, reason)
+      );
     },
   };
 };
