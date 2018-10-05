@@ -1,9 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
-
 import "../../styles/LandingRef.css";
-
-import bgPicture from "../../styles/background/background.png";
+import bgPicture from "../../styles/background/worklife.png";
 
 
 
