@@ -11,7 +11,7 @@ export const AdminContainer = styled.div`
   margin: 16px 10% 0 10%;
 
   @media ${device.laptop} {
-    padding-top: 80px;
+    margin: 96px 2% 2% 2%;
   }
 `;
 
@@ -20,7 +20,7 @@ export const AdminHeader = styled.div`
   width: 100%;
   justify-content: center;
   align-items: center;
-  margin-bottom: 50px;
+  margin-bottom: 2%;
 `;
 
 export const Welcome = styled.h1`
@@ -33,6 +33,10 @@ export const AdminBody = styled.div`
   width: 100%;
   justify-content: space-evenly;
   align-items: center;
+
+  @media ${device.laptop} {
+    flex-direction: column;
+  }
 `;
 
 export const ButtonContainer = styled.div`
@@ -53,11 +57,21 @@ export const HoOButton = styled.div`
 `;
 
 export const AdminDetailsContainer = styled.div`
-  order: 3;
+  @media ${device.laptop} {
+    padding-bottom: 80px;
+  }
 `;
 
 export const AdminHoursContainer = styled.div`
   width: 50%;
+
+  @media ${device.laptop} {
+    width: 90%;
+  }
+
+  @media ${device.mobileL} {
+    width: 100%;
+  }
 `;
 
 export const Day = styled.div`
@@ -66,6 +80,10 @@ export const Day = styled.div`
   justify-content: space-evenly;
   align-items: center;
   border-bottom: 1px solid #eee;
+
+  @media ${device.mobileL} {
+    flex-direction: column;
+  }
 `;
 
 export const HorizontalContainer = styled.div`
@@ -74,4 +92,8 @@ export const HorizontalContainer = styled.div`
   justify-content: space-evenly;
   align-items: center;
   margin: 10px 0;
+
+  @media ${device.mobileL} {
+    width: 100%;
+  }
 `;

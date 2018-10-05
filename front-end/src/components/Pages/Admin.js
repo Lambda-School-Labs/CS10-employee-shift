@@ -21,10 +21,7 @@ class Admin extends Component {
             {`Welcome ${this.props.first_name} ${this.props.last_name}`}
           </Welcome>
         </AdminHeader>
-        <Segment
-          padded="very"
-          style={{ width: "100%", margin: "70px 10% 0 10%" }}
-        >
+        <Segment padded="very" style={{ width: "100%", margin: "0 10% 0 10%" }}>
           <AdminBody>
             <AdminDetails />
             <AdminHours />

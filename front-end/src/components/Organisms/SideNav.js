@@ -18,6 +18,7 @@ const SideNav = props => {
           vertical
           visible={props.visible}
           width="thin"
+          onMouseLeave={props.handleSidebarHide}
         >
           <Menu.Item as={Link} to={"/admin"}>
             <Icon name="dashboard" />

@@ -30,11 +30,45 @@ class AdminHours extends Component {
     sunday: [],
   };
 
+  componentDidMount() {
+    //if Hoo
+    this.props.getHoursOfOperation();
+  }
+
   addTime = () => {
     console.log("Add time!");
   };
 
+  fillTimes = () => {
+    //if Hoo
+
+    const hoosByDay = [[], [], [], [], [], [], []];
+
+    const dayLookupTable = {
+      M: 1,
+      T: 2,
+      W: 3,
+      R: 4,
+      F: 5,
+      S: 6,
+      U: 7,
+    };
+
+    const sorted = this.props.allHoOs.slice().sort(function(a, b) {
+      if (a.open_time > b.open_time) return 1;
+      else return -1;
+    });
+
+    sorted.forEach((hoo, index) => {
+      hoosByDay[dayLookupTable[hoo.day] - 1].push(hoo);
+    });
+
+    return hoosByDay;
+  };
+
   render() {
+    const times = this.fillTimes();
+
     return (
       <AdminHoursContainer>
         <Segment padded="very">
@@ -43,50 +77,127 @@ class AdminHours extends Component {
           <Day>
             <h4>Monday</h4>
             <HorizontalContainer>
-              <Availability day="Monday" start_time={1} end_time={2} />
-              <PostAvailability day="Monday" />
+              {times[0].map((time, index) => {
+                return (
+                  <Availability
+                    type="hoursOfOperation"
+                    id={time.id}
+                    day={time.day}
+                    start_time={time.open_time}
+                    end_time={time.close_time}
+                    key={time.day + index}
+                  />
+                );
+              })}
+              <PostAvailability type="hoursOfOperation" day="M" />
             </HorizontalContainer>
           </Day>
           <Day>
             <h4>Tuesday</h4>
             <HorizontalContainer>
-              <Availability day="Tuesday" start_time={1} end_time={2} />
-              <PostAvailability day="Monday" />
+              {times[1].map((time, index) => {
+                return (
+                  <Availability
+                    type="hoursOfOperation"
+                    id={time.id}
+                    day={time.day}
+                    start_time={time.open_time}
+                    end_time={time.close_time}
+                    key={time.day + index}
+                  />
+                );
+              })}
+              <PostAvailability type="hoursOfOperation" day="T" />
             </HorizontalContainer>
           </Day>
           <Day>
             <h4>Wednesday</h4>
             <HorizontalContainer>
-              <Availability day="Wednesday" start_time={1} end_time={2} />
-              <PostAvailability day="Monday" />
+              {times[2].map((time, index) => {
+                return (
+                  <Availability
+                    type="hoursOfOperation"
+                    id={time.id}
+                    day={time.day}
+                    start_time={time.open_time}
+                    end_time={time.close_time}
+                    key={time.day + index}
+                  />
+                );
+              })}
+              <PostAvailability type="hoursOfOperation" day="W" />
             </HorizontalContainer>
           </Day>
           <Day>
             <h4>Thursday</h4>
             <HorizontalContainer>
-              <Availability day="Thursday" start_time={1} end_time={2} />
-              <PostAvailability day="Monday" />
+              {times[3].map((time, index) => {
+                return (
+                  <Availability
+                    type="hoursOfOperation"
+                    id={time.id}
+                    day={time.day}
+                    start_time={time.open_time}
+                    end_time={time.close_time}
+                    key={time.day + index}
+                  />
+                );
+              })}
+              <PostAvailability type="hoursOfOperation" day="R" />
             </HorizontalContainer>
           </Day>
           <Day>
             <h4>Friday</h4>
             <HorizontalContainer>
-              <Availability day="Friday" start_time={1} end_time={2} />
-              <PostAvailability day="Monday" />
+              {times[4].map((time, index) => {
+                return (
+                  <Availability
+                    type="hoursOfOperation"
+                    id={time.id}
+                    day={time.day}
+                    start_time={time.open_time}
+                    end_time={time.close_time}
+                    key={time.day + index}
+                  />
+                );
+              })}
+              <PostAvailability type="hoursOfOperation" day="F" />
             </HorizontalContainer>
           </Day>
           <Day>
             <h4>Saturday</h4>
             <HorizontalContainer>
-              <Availability day="Saturday" start_time={1} end_time={2} />
-              <PostAvailability day="Monday" />
+              {times[5].map((time, index) => {
+                return (
+                  <Availability
+                    type="hoursOfOperation"
+                    id={time.id}
+                    day={time.day}
+                    start_time={time.open_time}
+                    end_time={time.close_time}
+                    key={time.day + index}
+                  />
+                );
+              })}
+              <PostAvailability type="hoursOfOperation" day="S" />
             </HorizontalContainer>
           </Day>
           <Day>
             <h4>Sunday</h4>
             <HorizontalContainer>
-              <Availability day="Sunday" start_time={1} end_time={2} />
-              <PostAvailability day="Monday" />
+              {times[6].map((time, index) => {
+                return (
+                  <Availability
+                    type="hoursOfOperation"
+                    id={time.id}
+                    day={time.day}
+                    start_time={time.open_time}
+                    end_time={time.close_time}
+                    key={time.day + index}
+                  />
+                );
+              })}
+              <PostAvailability type="hoursOfOperation" day="U" />
             </HorizontalContainer>
           </Day>
         </Segment>
@@ -106,13 +217,9 @@ const mapDispatchToProps = dispatch => {
     getHoursOfOperation: () => {
       return dispatch(getHoursOfOperation());
     },
-    // postHoursOfOperation: (day, open_time, close_time) => {
-    //   return dispatch(postHoursOfOperation(day, open_time, close_time));
-    // },
     updateHoursOfOperation: (id, day, open_time, close_time) => {
       return dispatch(updateHoursOfOperation(id, day, open_time, close_time));
     },
-    // delete?
   };
 };
 

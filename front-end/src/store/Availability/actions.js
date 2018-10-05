@@ -69,7 +69,7 @@ export const postAvailabilities = (startTime, endTime) => (
     });
 };
 
-export const updateAvailabilities = (id, startTime, endTime) => (
+export const updateAvailabilities = (id, day, open_time, close_time) => (
   dispatch,
   getState
 ) => {
@@ -82,9 +82,10 @@ export const updateAvailabilities = (id, startTime, endTime) => (
   }
 
   const body = JSON.stringify({
-    id: id,
-    startTime: startTime,
-    endTime: endTime,
+    id,
+    day,
+    open_time,
+    close_time,
   });
 
   axios({
@@ -119,14 +120,11 @@ export const deleteAvailabilities = id => (dispatch, getState) => {
     headers["Authorization"] = `Bearer ${token}`;
   }
 
-  const body = JSON.stringify({ id: id });
-
   axios({
     method: "delete",
     // TODO: fill correct end point
-    url: `${process.env.REACT_APP_ROOT_URL}/api/availabilities/`,
+    url: `${process.env.REACT_APP_ROOT_URL}/api/availabilities/${id}/`,
     headers: headers,
-    data: body,
   })
     .then(res => {
       if (res.status === 200) {

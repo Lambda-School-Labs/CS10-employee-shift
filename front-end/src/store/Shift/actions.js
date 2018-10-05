@@ -3,7 +3,7 @@ import axios from "axios";
 export const getShifts = () => (dispatch, getState) => {
   dispatch({ type: "LOADING_SHIFTS" });
   const token = getState().user.token;
-  // Get a smaller block of shifts ?
+  // TODO: Get a smaller block of shifts for efficiency ?
   // Send query with datetime to get current week, next week, and previous week
   if (token) {
     const headers = {
@@ -27,7 +27,6 @@ export const getShifts = () => (dispatch, getState) => {
           throw err.data;
         }
       });
-    // else do something, logout?
   }
 };
 
