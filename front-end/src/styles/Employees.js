@@ -12,10 +12,6 @@ export const EmployeeHeader = styled.h1`
   color: black;
 `;
 
-export const EmployeeCardContainer = styled.div`
-  border: 1px solid black;
-`;
-
 export const CardInner = styled.div`
   border: 1px solid black;
   max-width: 80%;

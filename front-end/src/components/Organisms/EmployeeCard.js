@@ -4,7 +4,6 @@ import {
   Image,
   Icon,
   Segment,
-  Container,
   Grid,
 } from "../../../node_modules/semantic-ui-react";
 
@@ -12,6 +11,7 @@ import { EmployeeCardContainer, CardInner } from "../../styles/Employees";
 
 import Availability from "../Molecules/Availability";
 import RequestedTimeOff from "../Molecules/RequestedTimeOff";
+import EmployeeAvailability from "./EmployeeAvailability";
 
 class EmployeeCard extends Component {
   constructor(props) {
@@ -20,11 +20,10 @@ class EmployeeCard extends Component {
   }
   render() {
     const profile = this.props.profile;
-    // const availabilities;
     return (
       <Grid columns={3} divided>
-        <Grid.Column>
-          <Card centered color="blue">
+        <Grid.Column verticalAlign="middle">
+          <Card color="blue">
             <Card.Content>
               <Image
                 floated="right"
@@ -49,20 +48,18 @@ class EmployeeCard extends Component {
         </Grid.Column>
         <Grid.Column>
           <h3>Availability</h3>
-          <Segment style={{ minHeight: "80%" }}>
-            {this.props.allAvailabilities
-              .filter(availability => availability.profile === profile.id)
-              .map(availability => (
-                <Availability
-                  key={availability.id}
-                  availability={availability}
-                />
-              ))}
-          </Segment>
+          {
+            <EmployeeAvailability
+              availability={this.props.allAvailabilities.filter(
+                availability => availability.profile === profile.id
+              )}
+              profile={profile.id}
+            />
+          }
         </Grid.Column>
         <Grid.Column>
           <h3>Requested Time Off</h3>
-          <Segment style={{ minHeight: "80%" }}>
+          <Segment style={{ minHeight: "92%" }}>
             {this.props.allRequestOffs
               .filter(requestOff => requestOff.profile === profile.id)
               .map(requestOff => (

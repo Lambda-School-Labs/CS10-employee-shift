@@ -10,7 +10,6 @@ export const getAccount = () => (dispatch, getState) => {
   }
 
   axios
-    // TODO: fill correct end point
     .get(`${process.env.REACT_APP_ROOT_URL}/api/accounts/`, headers)
     .then(res => {
       if (res.status === 200) {
@@ -28,7 +27,6 @@ export const getAccount = () => (dispatch, getState) => {
     });
 };
 
-// TODO: fill in correct data to send
 export const postAccount = data => (dispatch, getState) => {
   dispatch({ type: "LOADING_ACCOUNT" });
   const token = getState().user.token;
@@ -38,12 +36,10 @@ export const postAccount = data => (dispatch, getState) => {
     headers["Authorization"] = `Bearer ${token}`;
   }
 
-  // fill me
   const body = JSON.stringify({ data });
 
   axios({
     method: "post",
-    // TODO: fill correct end point
     url: `${process.env.REACT_APP_ROOT_URL}/api/accounts/`,
     headers: headers,
     data: body,
@@ -64,7 +60,6 @@ export const postAccount = data => (dispatch, getState) => {
     });
 };
 
-// TODO: fill in correct data to send
 export const updateAccount = data => (dispatch, getState) => {
   dispatch({ type: "LOADING_ACCOUNT" });
   const token = getState().user.token;
@@ -74,12 +69,10 @@ export const updateAccount = data => (dispatch, getState) => {
     headers["Authorization"] = `Bearer ${token}`;
   }
 
-  // fill me
   const body = JSON.stringify({ data });
 
   axios({
     method: "update",
-    // TODO: fill correct end point
     url: `${process.env.REACT_APP_ROOT_URL}/api/accounts/`,
     headers: headers,
     data: body,
@@ -100,7 +93,6 @@ export const updateAccount = data => (dispatch, getState) => {
     });
 };
 
-// TODO: fill in correct data to send
 export const deleteAccount = data => (dispatch, getState) => {
   dispatch({ type: "LOADING_ACCOUNT" });
   const token = getState().user.token;
@@ -110,12 +102,10 @@ export const deleteAccount = data => (dispatch, getState) => {
     headers["Authorization"] = `Bearer ${token}`;
   }
 
-  // fill me
   const body = JSON.stringify({ data });
 
   axios({
     method: "delete",
-    // TODO: fill correct end point
     url: `${process.env.REACT_APP_ROOT_URL}/api/accounts/`,
     headers: headers,
     data: body,

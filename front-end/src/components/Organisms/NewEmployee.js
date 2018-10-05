@@ -1,26 +1,18 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 
-import NewEmployeeAvailability from "./NewEmployeeAvailability.js";
 import { postProfile } from "../../store/Profile/actions.js";
 
 import {
   Accordion,
   Icon,
   Segment,
-  SegmentGroup,
   Label,
   Card,
   Image,
-  Container,
-  Grid,
   Input,
   Button,
-  CardContent,
-  TextArea
 } from "semantic-ui-react";
-
-import { NewEmployeeCard } from "../../styles/Employees";
 
 class NewEmployee extends Component {
   state = {
@@ -32,13 +24,6 @@ class NewEmployee extends Component {
     email: "",
     phone_number: "",
     notes: "",
-    monday: [],
-    tuesday: [],
-    wednesday: [],
-    thursday: [],
-    friday: [],
-    saturday: [],
-    sunday: [],
   };
 
   inputChangeHandler = event => {
@@ -47,12 +32,9 @@ class NewEmployee extends Component {
   };
 
   handleSubmit = event => {
-    console.log("Submit!");
-    this.props.postProfile(this.state);
-  };
+    // TODO: Check number of employees on business, if more than 2 must be paying
 
-  addTime = (time, time24) => {
-    console.log(time, time24, "AddTime!");
+    this.props.postProfile(this.state);
   };
 
   render() {
@@ -73,89 +55,78 @@ class NewEmployee extends Component {
             </Label>
           </Accordion.Title>
           <Accordion.Content active={this.props.active}>
-            <Grid columns={2} verticalAlign={"center"}>
-              <Grid.Column floated={"left"}>
-                <Card centered color="green">
-                  <Card.Content>
-                    <Image
-                      floated="right"
-                      size="tiny"
-                      src="https://react.semantic-ui.com/images/avatar/large/matthew.png"
-                    />
-                    <Card.Header>
-                      <Input
-                        fluid
-                        value={this.state.first_name}
-                        onChange={this.inputChangeHandler}
-                        name="first_name"
-                        icon="person"
-                        iconPosition="left"
-                        placeholder="First name"
-                      />
-                      <Input
-                        fluid
-                        value={this.state.last_name}
-                        onChange={this.inputChangeHandler}
-                        name="last_name"
-                        icon="person"
-                        iconPosition="left"
-                        placeholder="Last name"
-                      />
-                    </Card.Header>
-                  </Card.Content>
-                  <Card.Content>
-                    <Card.Description>
-                      <Input
-                        fluid
-                        value={this.state.email}
-                        onChange={this.inputChangeHandler}
-                        name="email"
-                        icon="mail"
-                        iconPosition="left"
-                        placeholder="E-mail address"
-                      />
-                    </Card.Description>
-                    <Card.Description>
-                      <Input
-                        fluid
-                        value={this.state.phone_number}
-                        onChange={this.inputChangeHandler}
-                        name="phone_number"
-                        icon="phone"
-                        iconPosition="left"
-                        placeholder="Phone number"
-                      />
-                    </Card.Description>
-                  </Card.Content>
-                  <Card.Content>
-                    <Card.Description>
-                      <TextArea
-                        fluid
-                        value={this.state.notes}
-                        onChange={this.inputChangeHandler}
-                        name="notes"
-                        icon="sticky note"
-                        iconPosition="left"
-                        placeholder="Some note"
-                      />
-                    </Card.Description>
-                  </Card.Content>
-                </Card>
-              </Grid.Column>
-              <Grid.Column>
-                <NewEmployeeAvailability addTime={this.addTime} />
-              </Grid.Column>
-              <Grid.Row columns={1}>
-                <Button
-                  style={{ margin: "0 14%" }}
-                  color="green"
-                  fluid
-                  onClick={this.handleSubmit}
-                >
-                  Submit
-                </Button>
-              </Grid.Row>
-            </Grid>
+            <Card centered color="green">
+              <Card.Content>
+                <Image
+                  floated="right"
+                  size="tiny"
+                  src="https://react.semantic-ui.com/images/avatar/large/matthew.png"
+                />
+                <Card.Header>
+                  <Input
+                    fluid
+                    value={this.state.first_name}
+                    onChange={this.inputChangeHandler}
+                    name="first_name"
+                    iconPosition="left"
+                    placeholder="First name"
+                    style={{ paddingBottom: "10px" }}
+                  />
+                  <Input
+                    fluid
+                    value={this.state.last_name}
+                    onChange={this.inputChangeHandler}
+                    name="last_name"
+                    iconPosition="left"
+                    placeholder="Last name"
+                  />
+                </Card.Header>
+              </Card.Content>
+              <Card.Content>
+                <Card.Description>
+                  <Input
+                    fluid
+                    value={this.state.email}
+                    onChange={this.inputChangeHandler}
+                    name="email"
+                    icon="mail"
+                    iconPosition="left"
+                    placeholder="E-mail address"
+                    style={{ paddingBottom: "10px" }}
+                  />
+                </Card.Description>
+                <Card.Description>
+                  <Input
+                    fluid
+                    value={this.state.phone_number}
+                    onChange={this.inputChangeHandler}
+                    name="phone_number"
+                    icon="phone"
+                    iconPosition="left"
+                    placeholder="Phone number"
+                  />
+                </Card.Description>
+              </Card.Content>
+              <Card.Content>
+                <Card.Description>
+                  <Input
+                    label={{ tag: true, content: "Note" }}
+                    labelPosition="left"
+                    value={this.state.notes}
+                    onChange={this.inputChangeHandler}
+                    name={"notes"}
+                  />
+                </Card.Description>
+              </Card.Content>
+            </Card>
+            <Button
+              style={{ marginTop: "10px" }}
+              color="green"
+              fluid
+              onClick={this.handleSubmit}
+            >
+              Submit
+            </Button>
           </Accordion.Content>
         </Accordion>
       </Segment>
@@ -165,7 +136,7 @@ class NewEmployee extends Component {
 
 const mapDispatchToProps = dispatch => {
   return {
-    postProfile: (data) => {
+    postProfile: data => {
       return dispatch(postProfile(data));
     },
   };
