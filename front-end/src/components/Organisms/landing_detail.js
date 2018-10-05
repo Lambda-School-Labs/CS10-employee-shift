@@ -1,6 +1,6 @@
 import React from "react";
 
-import { BackgroundHolder, FooterStyles } from "../../styles/Landing.js";
+import { BackgroundHolder } from "../../styles/Landing.js";
 
 import "../../styles/LandingRef.css";
 
@@ -19,7 +19,7 @@ const Landing_Details = () => {
       <BackgroundHolder style={divStyle}>
         <div className="top-container">
           <h1 className="font-title">
-          The Benefits of Exact
+          The Benefits of MyShifts
           </h1>
         </div>
 

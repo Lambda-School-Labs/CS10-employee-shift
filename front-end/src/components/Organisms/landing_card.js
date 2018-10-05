@@ -41,12 +41,12 @@ class Landing_Card extends Component {
                 <WelcomeHolder>
                     <WelcomeSide>
                         <MainLogo src={main_logo} />
-                        <WelcomeH1>Welcome</WelcomeH1>
-                        <WelcomeText>
+                        <WelcomeH1>Build your Work Schedule in Minutes.</WelcomeH1>
+                        {/* <WelcomeText>
                             <p>Build your Work Schedule in Minutes.</p>
-                        </WelcomeText>
+                        </WelcomeText> */}
                         <ScheduleButton>
-                            <Link to="/calendar">
+                            <Link to="/signup">
                                 <ScheduleButton className="btn">Schedule Now</ScheduleButton>
                             </Link>
                         </ScheduleButton>
