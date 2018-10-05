@@ -1,6 +1,10 @@
 @import url("https://fonts.googleapis.com/css?family=Josefin+Slab");
 @import url("https://fonts.googleapis.com/css?family=Oswald");
 
+.signin_btn {
+  margin-top: 2px;
+}
+
 .top-container {
   display: flex;
   flex-direction: row;
@@ -9,15 +13,6 @@
   height: 200px;
   padding-top: 100px;
 }
-
-/* .title {
-  display: flex;
-  position: relative;
-  bottom: -75px;
-  height: 200px;
-  margin-top: auto;
-  margin-bottom: auto;
-} */
 
 .ouricon {
   width: 100px;

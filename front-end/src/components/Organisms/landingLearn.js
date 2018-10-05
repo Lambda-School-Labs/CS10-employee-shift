@@ -10,11 +10,11 @@ const LandingLearning = () => {
     <div>
       <div className="frame1TextContainer">
         <h2 className="frameHeading">Employee Scheduling Software for Your Industry</h2>
-        <p className="frameText">When MyShifts was built to serve the employee 
+        <p className="frameText">MyShift was built to serve the employee 
           scheduling and communication needs of workplaces
             across a wide range of industries. 
             
-            We make scheduling staff easy for coffee shops, restaurants, customer service departments, 
+            MyShift make scheduling staff easy for coffee shops, restaurants, customer service departments, 
             retail shops, colleges, healthcare organizations, nonprofits, and many, many other types of workplaces. 
             If you have hourly employees, we can help make scheduling, communication, 
             and collaboration easier for you and your team.
