@@ -28,10 +28,13 @@ export default (state = initialState, action) => {
       };
 
     case "UPDATE_REQUESTOFF":
-      // grab requestOff using its index, maybe handle this differently
-      const requestOffToUpdate = newRequestOffs[action.index];
-      // do some updates
-      newRequestOffs.splice(action.index, 1, requestOffToUpdate);
+      const updatedRequestsOff = action.data;
+      const indexToUpdate = newRequestOffs.indexOf(
+        newRequestOffs.filter(
+          requestOff => requestOff.id === updatedRequestsOff.id
+        )
+      );
+      newRequestOffs.splice(indexToUpdate, 1, updatedRequestsOff);
       return {
         ...state,
         allRequestOffs: newRequestOffs,
@@ -39,10 +42,12 @@ export default (state = initialState, action) => {
       };
 
     case "DELETE_REQUESTOFF":
-      newRequestOffs.splice(action.index, 1);
+      const deletedRequestOff = newRequestOffs.filter(
+        requestOff => requestOff.id !== action.data
+      );
       return {
         ...state,
-        allRequestOffs: newRequestOffs,
+        allRequestOffs: deletedRequestOff,
         requestOffsLoading: false,
       };
 

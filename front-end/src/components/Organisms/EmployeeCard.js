@@ -60,10 +60,19 @@ class EmployeeCard extends Component {
         <Grid.Column>
           <h3>Requested Time Off</h3>
           <Segment style={{ minHeight: "92%" }}>
-            {this.props.allRequestOffs
+            {// TODO: Also filter by dates
+            this.props.allRequestOffs
               .filter(requestOff => requestOff.profile === profile.id)
               .map(requestOff => (
-                <RequestedTimeOff key={requestOff.id} requestOff={requestOff} />
+                <RequestedTimeOff
+                  key={requestOff.id}
+                  requestOff={requestOff}
+                  profile={profile.id}
+                  id={requestOff.id}
+                  start_datetime={requestOff.start_datetime}
+                  end_datetime={requestOff.end_datetime}
+                  reason={requestOff.reason}
+                />
               ))}
           </Segment>
         </Grid.Column>
