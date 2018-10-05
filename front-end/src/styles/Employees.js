@@ -22,3 +22,9 @@ export const CardInner = styled.div`
 export const NewEmployeeCard = styled.div`
   border: 1px solid black;
 `;
+
+export const EmployeesRequestedTimeOffContainer = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+`;

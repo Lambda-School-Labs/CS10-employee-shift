@@ -85,10 +85,8 @@ export const postProfile = data => (dispatch, getState) => {
     phone_number: data.phone_number,
     notes: data.notes,
     email_enabled: true,
-    text_enabled: false
+    text_enabled: false,
   };
-
-  console.log(body);
 
   axios({
     method: "post",

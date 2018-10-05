@@ -108,7 +108,24 @@ export const NavButton = styled.div`
     margin-left: 2px;
     background-color: transparent;
 
-    .btn{
+    .signup_btn{
+        align-self: flex-end;
+        background-color: #4B9CD3;
+        border: none;
+        border-radius: 5px;
+        color: #fff;
+        cursor: pointer;
+        font-size: 17px;
+        font-weight: 20px;
+        letter-spacing: 2px;
+        padding: 5px 5px;
+        position: relative;
+        text-align: center;
+        width: 100px;
+        z-index: 3;
+    }
+
+    .signin_btn{
         align-self: flex-end;
         background-color: #4B9CD3;
         border: none;
