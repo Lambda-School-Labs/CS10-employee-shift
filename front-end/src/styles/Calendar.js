@@ -197,10 +197,10 @@ export const GridItemActiveShiftInner = styled.div`
 
 export const PortalButton = styled.div`
   width: 100%;
-  height: 60px;
   display: flex;
-  padding: 5% 12%;
-  justify-content: space-between;
+  margin: 5% 0;
+  justify-content: space-evenly;
+  align-items: baseline;
   cursor: pointer;
 `;
 
@@ -238,7 +238,7 @@ export const ProfileIcon = styled.div`
 
 export const ScheduleShiftGap = styled.div`
   width: ${props => props.end * 2}%;
-  opacity: 0.1;
+  opacity: 0.15;
   height: ${props => (props.height + 2) * 100}%;
   background: red;
   position: absolute;
@@ -248,4 +248,18 @@ export const ScheduleShiftGap = styled.div`
   grid-column-end: ${props => props.column};
   left: ${props => props.start * 4}%;
   pointer-events: none;
+
+  &hover: {
+    background: black;
+  }
+`;
+
+export const ModalBackground = styled.div`
+  position: fixed;
+  top: 0;
+  right: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 0.1;
+  background: grey;
 `;

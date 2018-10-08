@@ -36,7 +36,6 @@ class RequestedTimeOff extends Component {
   }
 
   handleSubmit = value => {
-    console.log(this.state.value);
     this.props.updateRequestOff(
       this.props.id,
       this.props.profile,

@@ -16,18 +16,18 @@ import {
   Button,
   Divider,
 } from "semantic-ui-react";
-import { GridItemShift } from "../../styles/Calendar.js";
+import { GridItemShift, ModalBackground } from "../../styles/Calendar.js";
 
 class ScheduleShift extends React.Component {
   state = {
     open: false,
     clickX: 0,
     clickY: 0,
-    notes: "",
-    start_time: "",
-    end_time: "",
-    start_time24: "",
-    end_time24: "",
+    notes: undefined,
+    start_time: undefined,
+    end_time: undefined,
+    start_time24: undefined,
+    end_time24: undefined,
     profile: this.props.profile,
   };
 
@@ -144,65 +144,68 @@ class ScheduleShift extends React.Component {
           onClose={this.handleClose}
           closeOnDocumentClick={false}
         >
-          <Segment
-            style={{
-              position: "fixed",
-              left: `${
-                this.state.clickX > window.innerWidth - 142
-                  ? this.state.clickX - 262
-                  : this.state.clickX + 20
-              }px`,
-              top: `${
-                this.state.clickY > window.innerHeight - 242
-                  ? this.state.clickY - 362
-                  : this.state.clickY - 100
-              }px`,
-              zIndex: 1005,
-              minWidth: "300px",
-            }}
-          >
-            <Label
-              as="a"
-              corner={"left"}
-              color="red"
-              onClick={this.handleClose}
-              icon="close"
-            />
-            <Form>
-              <Header as="h2" textAlign={"center"}>
-                New Shift
-              </Header>
-              <Divider />
-              <PostShiftTime
-                day={"Start Time"}
-                data={"start"}
-                start={this.state.start_time}
-                inputChangeHandler={this.inputChangeHandler}
+          <div>
+            <ModalBackground onClick={this.handleClose} />
+            <Segment
+              style={{
+                position: "fixed",
+                left: `${
+                  this.state.clickX > window.innerWidth - 142
+                    ? this.state.clickX - 262
+                    : this.state.clickX
+                }px`,
+                top: `${
+                  this.state.clickY > window.innerHeight - 242
+                    ? this.state.clickY - 362
+                    : this.state.clickY - 100
+                }px`,
+                zIndex: 1005,
+                minWidth: "300px",
+              }}
+            >
+              <Label
+                as="a"
+                corner={"left"}
+                color="red"
+                onClick={this.handleClose}
+                icon="close"
               />
-              <PostShiftTime
-                day={"End Time"}
-                data={"end"}
-                end={this.state.end_time}
-                inputChangeHandler={this.inputChangeHandler}
-              />
-              <Input
-                label={{ tag: true, content: "Note" }}
-                labelPosition="left"
-                style={{ width: "70%", padding: "8% 8%" }}
-                value={this.state.notes}
-                onChange={this.inputChangeHandler}
-                name={"notes"}
-              />
-              <Button
-                fluid
-                size="large"
-                color="teal"
-                onClick={this.submitHandler}
-              >
-                Submit
-              </Button>
-            </Form>
-          </Segment>
+              <Form>
+                <Header as="h2" textAlign={"center"}>
+                  New Shift
+                </Header>
+                <Divider />
+                <PostShiftTime
+                  day={"Start Time"}
+                  data={"start"}
+                  start={this.state.start_time}
+                  inputChangeHandler={this.inputChangeHandler}
+                />
+                <PostShiftTime
+                  day={"End Time"}
+                  data={"end"}
+                  end={this.state.end_time}
+                  inputChangeHandler={this.inputChangeHandler}
+                />
+                <Input
+                  label={{ tag: true, content: "Note" }}
+                  labelPosition="left"
+                  style={{ width: "60%", margin: "8% 8%" }}
+                  value={this.state.notes}
+                  onChange={this.inputChangeHandler}
+                  name={"notes"}
+                />
+                <Button
+                  fluid
+                  size="large"
+                  color="teal"
+                  onClick={this.submitHandler}
+                >
+                  Submit
+                </Button>
+              </Form>
+            </Segment>
+          </div>
         </Portal>
       </GridItemShift>
     );
