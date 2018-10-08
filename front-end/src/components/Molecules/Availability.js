@@ -55,9 +55,11 @@ class Availability extends Component {
         clickX: this.state.clickX + 100,
       });
     } else if (this.state.open === 2) {
+      const new_end_time24 =
+        time24.length === 5 ? time24 + ":00" : "0" + time24 + ":00";
       this.setState({
         end_time: time12,
-        end_time24: time24.length === 5 ? time24 + ":00" : "0" + time24 + ":00",
+        end_time24: new_end_time24,
       });
       if (this.props.type === "availability")
         this.props.updateAvailabilities(
@@ -65,14 +67,14 @@ class Availability extends Component {
           this.props.profile,
           this.state.day,
           this.state.start_time24,
-          this.state.end_time24
+          new_end_time24
         );
       else if (this.props.type === "hoursOfOperation")
         this.props.updateHoursOfOperation(
           this.props.id,
           this.state.day,
           this.state.start_time24,
-          this.state.end_time24
+          new_end_time24
         );
     }
   };

@@ -30,7 +30,9 @@ export default (state = initialState, action) => {
     case "UPDATE_AVAILABILITIES":
       const updatedAvailability = action.data;
       const indexToUpdate = newAvailabilities.indexOf(
-        newAvailabilities.filter(avail => avail.id === updatedAvailability.id)
+        newAvailabilities.filter(
+          avail => avail.id === updatedAvailability.id
+        )[0]
       );
       newAvailabilities.splice(indexToUpdate, 1, updatedAvailability);
       return {
