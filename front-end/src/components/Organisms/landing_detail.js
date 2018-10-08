@@ -1,6 +1,17 @@
 import React from "react";
+import styled from "styled-components";
 
-import { BackgroundHolder } from "../../styles/Landing.js";
+
+import { 
+  BackgroundHolder, 
+  TopContainer, 
+  FontTitle,
+  TextBox,
+  MidContainer,
+  InnerText,
+  TitleText,
+}
+from "../../styles/Landing.js";
 
 import "../../styles/LandingRef.css";
 
@@ -17,48 +28,44 @@ const Landing_Details = () => {
   return (
     <div>
       <BackgroundHolder style={divStyle}>
-        <div className="top-container">
-          <h1 className="font-title">
-          The Benefits of MyShifts
-          </h1>
-        </div>
+        <TopContainer>
+          <FontTitle>
+            The Benefits of MyShifts
+          </FontTitle>
+        </TopContainer>
 
-        <div className="mid-container">
-          <div className="textBox">
+        <MidContainer>
+          <TextBox>
             <img className="ouricon" src={Time} alt="time" />
-            <h2 className="vertical title-text">
+            <TitleText>
               Spend More Time Growing Your Business
-            </h2>
-            <h6 className="vertical inner-text">
+            </TitleText>
+            <InnerText>
               Spend more time working to grow your business and less time
               fighting fires.
-            </h6>
-          </div>
+            </InnerText>
+          </TextBox>
 
-          <div className="textBox">
-            <img
-              className="ouricon"
-              src={Accountability}
-              alt="accountability"
-            />
-            <h2 className="vertical title-text">
+          <TextBox>
+            <img className="ouricon" src={Accountability} alt="accountability" />
+            <TitleText>
               Increase Employee Accountability
-            </h2>
-            <h6 className="vertical inner-text">
+            </TitleText>
+            <InnerText>
               Reduce employee no-shows and improve accountability across your
               team by 25%
-            </h6>
-          </div>
+            </InnerText>
+          </TextBox>
 
-          <div className="textBox">
+          <TextBox>
             <img className="ouricon" src={Changes} alt="changes" />
-            <h2 className="vertical title-text">Handle Changes with Ease</h2>
-            <h6 className="vertical inner-text">
+            <TitleText>Handle Changes with Ease</TitleText>
+            <InnerText>
               Stop rebuilding schedules by reviewing and approving employee
               requests in real-time.
-            </h6>
-          </div>
-        </div>
+            </InnerText>
+          </TextBox>
+        </MidContainer>
       </BackgroundHolder>
     </div>
   );

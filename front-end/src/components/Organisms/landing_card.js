@@ -8,7 +8,6 @@ import {
   WelcomeH1,
   WelcomeLogo,
   WelcomeHolder,
-  WelcomeText,
   Circle_div,
   Circle_img,
   NavButton

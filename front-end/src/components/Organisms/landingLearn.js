@@ -1,5 +1,12 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import { 
+  Frame1TextContainer, 
+  FrameHeading, 
+  FrameText, 
+  FrameContainer, 
+  Frame2,
+  Frame2Heading } from "../../styles/Landing.js";
 import "../../styles/LandingRef.css";
 import bgPicture from "../../styles/background/worklife.png";
 
@@ -8,9 +15,9 @@ import bgPicture from "../../styles/background/worklife.png";
 const LandingLearning = () => {
   return (
     <div>
-      <div className="frame1TextContainer">
-        <h2 className="frameHeading">Employee Scheduling Software for Your Industry</h2>
-        <p className="frameText">MyShift was built to serve the employee 
+      <Frame1TextContainer>
+        <FrameHeading>Employee Scheduling Software for Your Industry</FrameHeading>
+        <FrameText>MyShift was built to serve the employee 
           scheduling and communication needs of workplaces
             across a wide range of industries. 
             
@@ -18,20 +25,20 @@ const LandingLearning = () => {
             retail shops, colleges, healthcare organizations, nonprofits, and many, many other types of workplaces. 
             If you have hourly employees, we can help make scheduling, communication, 
             and collaboration easier for you and your team.
-        </p>
-      </div>
+        </FrameText>
+    </Frame1TextContainer>
 
-      <div className="frameContainer">
+      <FrameContainer>
         <img className="frame1" src={bgPicture} />
-          <div className="frame2">
-            <h2 className="frame2Heading">Employee Scheduling Software. Reinvented.</h2>
+          <Frame2>
+            <Frame2Heading>Employee Scheduling Software. Reinvented.</Frame2Heading>
             <Link to="/signup">
               <div className="cta-button">
                 <p>START SCHEDULING</p>
               </div>
             </Link>
-          </div>
-      </div>
+          </Frame2>
+      </FrameContainer>
     </div>
   )
 };
