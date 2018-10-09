@@ -297,3 +297,23 @@ export const ScheduleClosedDay = styled.div`
   height: ${props => (props.height + 2) * 100}%;
   z-index: -1;
 `;
+
+export const ScheduleTimeOff = styled.div`
+  position: absolute;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  top: 0;
+  right: 0;
+  width: 100%;
+  opacity: 0.5;
+  background: black;
+  grid-row-start: ${props => props.row};
+  grid-row-end: ${props => props.row};
+  grid-column-start: ${props => (props.startColumn ? props.startColumn : 2)};
+  grid-column-end: ${props => (props.endColumn ? props.endColumn : 8)};
+  height: 100%;
+  z-index: -1;
+  color: white;
+  font-weight: bold;
+`;

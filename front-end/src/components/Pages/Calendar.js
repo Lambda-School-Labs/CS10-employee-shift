@@ -7,6 +7,8 @@ import { extendMoment } from "moment-range";
 import { getShifts } from "../../store/Shift/actions.js";
 import { getAllProfiles } from "../../store/Profile/actions.js";
 import { getHoursOfOperation } from "../../store/hourOfOperation/actions.js";
+import { getRequestOffs } from "../../store/requestOff/actions.js";
+import { getAvailabilities } from "../../store/Availability/actions.js";
 
 import CalendarTopNav from "../Organisms/CalendarTopNav.js";
 import ScheduleShift from "../Molecules/ScheduleShift.js";
@@ -25,6 +27,7 @@ import {
   ScheduleShiftGapHeader,
   CalendarContainer,
   ScheduleClosedDay,
+  ScheduleTimeOff,
 } from "../../styles/Calendar.js";
 import { Label } from "semantic-ui-react";
 
@@ -53,6 +56,8 @@ class Calendar extends Component {
     this.props.getAllProfiles();
     this.props.getShifts();
     this.props.getHoursOfOperation();
+    this.props.getRequestOffs();
+    this.props.getAvailabilities();
   }
 
   handleChangeDate = direction => {
@@ -377,6 +382,63 @@ class Calendar extends Component {
             } else return null;
           })}
 
+          {this.props.allRequestOffs.map(requestOff => {
+            if (requestOff.status === "A") {
+              const startMoment = moment(requestOff.start_datetime);
+              const startInCurrentWeek = startMoment.isBetween(
+                currentDate
+                  .clone()
+                  .day(1)
+                  .set({ hour: 0, minute: 0, "second:": 0, millisecond: 0 }),
+                currentDate
+                  .clone()
+                  .day(7)
+                  .set({
+                    hour: 23,
+                    minute: 59,
+                    "second:": 59,
+                    millisecond: 999,
+                  })
+              );
+              const endMoment = moment(requestOff.end_datetime);
+              const endInCurrentWeek = endMoment.isBetween(
+                currentDate
+                  .clone()
+                  .day(1)
+                  .set({ hour: 0, minute: 0, "second:": 0, millisecond: 0 }),
+                currentDate
+                  .clone()
+                  .day(7)
+                  .set({
+                    hour: 23,
+                    minute: 59,
+                    "second:": 59,
+                    millisecond: 999,
+                  })
+              );
+              if (startInCurrentWeek || endInCurrentWeek) {
+                const profileRow =
+                  this.props.allProfiles.indexOf(
+                    this.props.allProfiles.filter(
+                      profile => profile.id === requestOff.profile
+                    )[0]
+                  ) + 3;
+                return (
+                  <ScheduleTimeOff
+                    row={profileRow}
+                    startColumn={
+                      startInCurrentWeek ? startMoment.isoWeekday() : false
+                    }
+                    endColumn={
+                      endInCurrentWeek ? endMoment.isoWeekday() : false
+                    }
+                  >
+                    Time Off
+                  </ScheduleTimeOff>
+                );
+              }
+            }
+          })}
           {this.findGaps().map((dayOfGaps, index) => {
             const renderedGaps = [];
             if (dayOfGaps.length) {
@@ -441,6 +503,8 @@ const mapStateToProps = state => {
     allShifts: state.shift.allShifts,
     allProfiles: state.profile.allProfiles,
     allHoOs: state.hourOfOperation.allHoOs,
+    allRequestOffs: state.requestOff.allRequestOffs,
+    allAvailabilities: state.availability.allAvailabilities,
   };
 };
 
@@ -454,6 +518,12 @@ const mapDispatchToProps = dispatch => {
     },
     getHoursOfOperation: () => {
       return dispatch(getHoursOfOperation());
+    },
+    getAvailabilities: () => {
+      return dispatch(getAvailabilities());
+    },
+    getRequestOffs: () => {
+      return dispatch(getRequestOffs());
     },
   };
 };
