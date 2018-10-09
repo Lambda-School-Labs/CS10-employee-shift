@@ -1,27 +1,43 @@
 import React from "react";
 import { connect } from "react-redux";
+import moment from "moment";
 
-import { Card, Icon, Image } from "semantic-ui-react";
+import { Card, Icon, Image, CardDescription } from "semantic-ui-react";
 import { AdminDetailsContainer } from "../../styles/Admin.js";
 
 const AdminDetails = props => {
+  console.log(props.account);
   return (
     <AdminDetailsContainer>
-      <Card>
+      <Card raised>
+        {props.account.enabled ? (
+          <Icon
+            name="star"
+            size="huge"
+            color="yellow"
+            inverted
+            style={{ position: "absolute", top: -30, left: -30, zIndex: 50 }}
+          />
+        ) : null}
         <Image src={props.account.logo} size="small" />
         <Card.Content>
           <Card.Header>{props.account.company}</Card.Header>
-          <Card.Meta>
-            <span className="date">Joined in 2018</span>
+          <Card.Meta style={{ padding: "10px" }}>
+            <Icon name="user" />
+            {`  Size:  ${props.account ? props.account.profile_set.length : 0}`}
           </Card.Meta>
-          <Card.Description>Description</Card.Description>
         </Card.Content>
         <Card.Content extra>
-          <a>
-            <Icon name="user" />
-            {props.account ? props.account.profile_set.length : 0}
-            Employees
-          </a>
+          {props.account.enabled ? (
+            <div>
+              <Card.Description>Plan Expires:</Card.Description>
+              <Card.Description>
+                {moment(props.account.plan_expires).format(
+                  "dddd, MMMM Do YYYY, h:mm a"
+                )}
+              </Card.Description>
+            </div>
+          ) : null}
         </Card.Content>
       </Card>
     </AdminDetailsContainer>

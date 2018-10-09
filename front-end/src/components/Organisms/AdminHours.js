@@ -24,9 +24,7 @@ const AdminHours = props => {
           <RowHeader row={1}>Monday</RowHeader>
           <HorizontalContainer row={1}>
             {props.times[0].map((time, index) => {
-              // DEV CONSOLE LOG: REMOVE ME
               // BUG: HoOs not updating correctly
-              console.log(time);
               return (
                 <Availability
                   type="hoursOfOperation"
