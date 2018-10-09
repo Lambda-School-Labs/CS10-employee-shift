@@ -142,11 +142,12 @@ class ScheduleShiftUpdate extends React.Component {
         row={this.props.row}
         column={this.props.column}
         color={this.props.color}
-        justify={this.props.justify}
       >
         <GridItemActiveShiftInner
           onClick={this.handleOpen}
           hue={this.props.hue}
+          start={this.props.startHour}
+          end={this.props.endHour}
         >
           {moment(this.props.start).format("h:mm A")} -
           {moment(this.props.end).format("h:mm A")}

@@ -15,6 +15,8 @@ export const CalendarContainer = styled.div`
   overflow: auto;
 `;
 
+// Top Calendar Navigation Bar
+
 export const TopNavContainer = styled.div`
   margin: 30px;
   width: 100%;
@@ -45,6 +47,8 @@ export const TopNavHeader = styled.h1`
 export const TopNavHeaderText = styled.div`
   min-width: 200px;
 `;
+
+// Calendar Grid
 
 export const GridContainer = styled.div`
   display: grid;
@@ -167,7 +171,6 @@ export const GridItemActiveShift = styled.div`
   border-bottom: 1px solid #ddd;
   border-right: 1px solid #ddd;
   display: flex;
-  justify-content: ${props => props.justify};
   align-items: center;
 
   &:hover {
@@ -176,9 +179,11 @@ export const GridItemActiveShift = styled.div`
   }
 `;
 
+// width: ${props => (props.end - props.start) > 8 ? (props.end - props.start) * 5 : 8}%;
+
 export const GridItemActiveShiftInner = styled.div`
-  width: 70%;
-  height: 60%;
+  width: ${props => (props.end - props.start) * 4.7}%;
+  height: 70%;
   background: hsl(${props => props.hue}, 62%, 90%);
   color: hsl(${props => props.hue}, 84%, 29%);
   border: hsl(${props => props.hue}, 62%, 81%) solid 1px;
@@ -187,13 +192,22 @@ export const GridItemActiveShiftInner = styled.div`
   justify-content: center;
   align-items: center;
   font-size: 14px;
+  margin-left: calc(${props => props.start * 4}% + 6px);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 
-  @media ${device.tablet} {
+  @media ${device.laptop} {
     width: 100%;
     height: 100%;
+    font-size: 12px;
+    margin-left: 0;
   }
 
   &:hover {
+    width: 100%;
+    height: 100%;
+    margin-left: 0;
     cursor: pointer;
     background: hsl(${props => props.hue}, 62.5%, 75.6%);
   }
@@ -208,25 +222,12 @@ export const PortalButton = styled.div`
   cursor: pointer;
 `;
 
-// TODO: REFACTOR BELOW
 export const PostShiftContainer = styled.div`
   height: 50%;
   display: flex;
   justify-content: center;
   align-items: center;
   flex-direction: column;
-`;
-
-export const Form = styled.form`
-  display: flex;
-  justify-content: space-evenly;
-  align-items: center;
-  flex-direction: column;
-  padding: 5%;
-`;
-
-export const FormItem = styled.div`
-  margin: 5%;
 `;
 
 export const ProfileIcon = styled.div`
@@ -261,7 +262,7 @@ export const ScheduleShiftGapHeader = styled.div`
 `;
 
 export const ScheduleShiftGap = styled.div`
-  width: ${props => (props.end - props.start) * 4.7}%;
+  width: ${props => (props.end - props.start) * 5}%;
   opacity: 0.15;
   height: ${props => (props.height + 2) * 100}%;
   background: red;
@@ -280,7 +281,7 @@ export const ModalBackground = styled.div`
   right: 0;
   width: 100%;
   height: 100%;
-  opacity: 0.1;
+  opacity: 0.3;
   background: grey;
 `;
 

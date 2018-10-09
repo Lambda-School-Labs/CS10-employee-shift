@@ -106,8 +106,7 @@ class Calendar extends Component {
           .set({ hour: 23, minute: 59, "second:": 59, millisecond: 999 })
       );
 
-      if (shiftInCurrentWeek) {
-        // TODO: only take shifts that have been assigned ??
+      if (!shift.is_open && shiftInCurrentWeek) {
         const weekday = momentStart.isoWeekday();
         shiftsByDay[weekday - 1].push(
           moment.range(momentStart, moment(shift.end_datetime))
@@ -144,17 +143,21 @@ class Calendar extends Component {
 
       while (sortedRanges.length) {
         const head = sortedRanges.shift();
-        if (head.overlaps(joinedRanges[joinedRanges.length - 1])) {
+        if (
+          head.overlaps(joinedRanges[joinedRanges.length - 1], {
+            adjacent: true,
+          })
+        ) {
           const newTail = joinedRanges.pop();
-          joinedRanges.push(newTail.add(head));
+          joinedRanges.push(newTail.add(head, { adjacent: true }));
         }
       }
       // TODO: Maybe handle shifts out of HoO here
       // push gaps between shifts to day of gapsByDay using the day's index
       if (joinedRanges.length) {
         if (HoO_start >= joinedRanges[0].start) {
-          // if no gaps return
           if (HoO_end <= joinedRanges[0].end) return;
+          // if no gaps return
           for (let i = 0; i < joinedRanges.length - 1; i++) {
             gapsByDay[index - 1].push(
               moment.range(joinedRanges[i].end, joinedRanges[i + 1].start)
@@ -198,7 +201,6 @@ class Calendar extends Component {
         );
       }
     });
-
     return gapsByDay;
   };
 
@@ -363,13 +365,8 @@ class Calendar extends Component {
                   row={profileRow}
                   // add span to second day if applicable
                   column={moment(shift.start_datetime).isoWeekday() + 1}
-                  justify={
-                    moment(shift.start_datetime).format("k") <= 9
-                      ? "flex-start"
-                      : moment(shift.start_datetime).format("k") >= 17
-                        ? "flex-end"
-                        : "center"
-                  }
+                  startHour={moment(shift.start_datetime).hour()}
+                  endHour={moment(shift.end_datetime).hour()}
                   start={shift.start_datetime}
                   end={shift.end_datetime}
                   notes={shift.notes}
@@ -416,16 +413,12 @@ class Calendar extends Component {
           {this.fillClosedDays().map((day, index) => {
             if (day.length === 0) {
               return (
-                <div>
+                <div key={`closed ${index}-${index}`}>
                   <ScheduleClosedDay
-                    key={`closed ${index}-${index}`}
                     column={index + 2}
                     height={this.props.allProfiles.length}
                   />
-                  <ScheduleShiftGapHeader
-                    key={`closedhead ${index}-${index}`}
-                    column={index + 2}
-                  >
+                  <ScheduleShiftGapHeader column={index + 2}>
                     <Label
                       style={{ width: "100%", textAlign: "center" }}
                       color="grey"
