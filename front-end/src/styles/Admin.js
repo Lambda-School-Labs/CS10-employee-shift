@@ -91,6 +91,7 @@ export const RowHeader = styled.div`
   width: 100%;
   justify-content: space-evenly;
   align-items: center;
+  margin: 5px 0;
   grid-row-start: ${props => props.row};
   grid-row-end: ${props => props.row};
   grid-column: 1 / span 1;

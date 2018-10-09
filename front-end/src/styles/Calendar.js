@@ -56,6 +56,10 @@ export const GridContainer = styled.div`
   padding: 1% 0;
   place-items: stretch stretch;
   place-content: stretch stretch;
+
+  @media ${device.tablet} {
+    margin-top: 30px;
+  }
 `;
 
 export const GridItemHeader = styled.div`
@@ -236,8 +240,28 @@ export const ProfileIcon = styled.div`
   font-size: 20px;
 `;
 
+export const ScheduleShiftGapHeader = styled.div`
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  top: -25px;
+  position: absolute;
+  grid-row-start: 1;
+  grid-row-end: 1;
+  grid-column-start: ${props => props.column};
+  grid-column-end: ${props => props.column};
+
+  @media ${device.laptop} {
+    top: -36px;
+  }
+
+  @media ${device.tablet} {
+    top: -50px;
+  }
+`;
+
 export const ScheduleShiftGap = styled.div`
-  width: ${props => props.end * 2}%;
+  width: ${props => (props.end - props.start) * 4.7}%;
   opacity: 0.15;
   height: ${props => (props.height + 2) * 100}%;
   background: red;
@@ -248,10 +272,6 @@ export const ScheduleShiftGap = styled.div`
   grid-column-end: ${props => props.column};
   left: ${props => props.start * 4}%;
   pointer-events: none;
-
-  &hover: {
-    background: black;
-  }
 `;
 
 export const ModalBackground = styled.div`
@@ -262,4 +282,19 @@ export const ModalBackground = styled.div`
   height: 100%;
   opacity: 0.1;
   background: grey;
+`;
+
+export const ScheduleClosedDay = styled.div`
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 100%;
+  opacity: 0.5;
+  background: lightgrey;
+  grid-row-start: 1;
+  grid-row-end: 1;
+  grid-column-start: ${props => props.column};
+  grid-column-end: ${props => props.column};
+  height: ${props => (props.height + 2) * 100}%;
+  z-index: -1;
 `;

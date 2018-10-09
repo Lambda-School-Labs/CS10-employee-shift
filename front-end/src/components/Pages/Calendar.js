@@ -22,17 +22,27 @@ import {
   GridItemOpenShiftHeader,
   ProfileIcon,
   ScheduleShiftGap,
+  ScheduleShiftGapHeader,
+  CalendarContainer,
+  ScheduleClosedDay,
 } from "../../styles/Calendar.js";
-import { CalendarContainer } from "../../styles/Calendar.js";
+import { Label } from "semantic-ui-react";
 
 const moment = extendMoment(Moment);
 
 // TODO: Make me more stylish
-// TODO: Check HoO against shifts to make sure that the time is filled, if not render cell red
 // TODO: Turn cell red if conflict with employee's time off
 // TODO: Span shifts to multiple days
-// TODO: Dynamic employees
-// TODO: test CRUD
+
+const dayLookupTable = {
+  M: 1,
+  T: 2,
+  W: 3,
+  R: 4,
+  F: 5,
+  S: 6,
+  U: 7,
+};
 
 class Calendar extends Component {
   state = {
@@ -178,17 +188,8 @@ class Calendar extends Component {
       }
     }
 
-    this.props.allHoOs.forEach((HoO, index) => {
+    this.props.allHoOs.forEach(HoO => {
       if (HoO.is_open) {
-        const dayLookupTable = {
-          M: 1,
-          T: 2,
-          W: 3,
-          R: 4,
-          F: 5,
-          S: 6,
-          U: 7,
-        };
         getGapsFromRangesArray(
           HoO.open_time,
           HoO.close_time,
@@ -199,6 +200,15 @@ class Calendar extends Component {
     });
 
     return gapsByDay;
+  };
+
+  fillClosedDays = () => {
+    const hoosByDay = [[], [], [], [], [], [], []];
+
+    this.props.allHoOs.forEach(hoo => {
+      hoosByDay[dayLookupTable[hoo.day] - 1].push(hoo);
+    });
+    return hoosByDay;
   };
 
   render() {
@@ -378,14 +388,54 @@ class Calendar extends Component {
                   <ScheduleShiftGap
                     key={`gap ${index}-${i}`}
                     column={index + 2}
-                    start={dayOfGaps[i].start.format("k")}
-                    end={dayOfGaps[i].end.format("k")}
+                    start={dayOfGaps[i].start.hour()}
+                    end={dayOfGaps[i].end.hour()}
                     height={this.props.allProfiles.length}
                   />
+                );
+                renderedGaps.push(
+                  <ScheduleShiftGapHeader
+                    key={`gaphead ${index}-${i}`}
+                    column={index + 2}
+                  >
+                    <Label
+                      color="red"
+                      style={{ width: "100%", textAlign: "center" }}
+                    >
+                      {`Fill ${dayOfGaps[i].start.format(
+                        "h:mm A"
+                      )} to ${dayOfGaps[i].end.format("h:mm A")}`}
+                    </Label>
+                  </ScheduleShiftGapHeader>
                 );
               }
             }
             return renderedGaps;
+          })}
+
+          {this.fillClosedDays().map((day, index) => {
+            if (day.length === 0) {
+              return (
+                <div>
+                  <ScheduleClosedDay
+                    key={`closed ${index}-${index}`}
+                    column={index + 2}
+                    height={this.props.allProfiles.length}
+                  />
+                  <ScheduleShiftGapHeader
+                    key={`closedhead ${index}-${index}`}
+                    column={index + 2}
+                  >
+                    <Label
+                      style={{ width: "100%", textAlign: "center" }}
+                      color="grey"
+                    >
+                      CLOSED
+                    </Label>
+                  </ScheduleShiftGapHeader>
+                </div>
+              );
+            }
           })}
         </GridContainer>
       </CalendarContainer>

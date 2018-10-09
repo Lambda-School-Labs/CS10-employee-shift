@@ -22,11 +22,10 @@ const convertTime24to12 = time24h => {
   if (hours > 11) modifier = "PM";
   else modifier = "AM";
 
-  if (modifier === "PM") hours = hours - 12;
+  if (modifier === "PM" && hours > 12) hours = hours - 12;
   else if (hours === "00") hours = "12";
 
   if (hours[0] === "0") hours = hours[1];
-
   return `${hours}:${minutes} ${modifier}`;
 };
 
@@ -56,7 +55,11 @@ class Availability extends Component {
       });
     } else if (this.state.open === 2) {
       const new_end_time24 =
-        time24.length === 5 ? time24 + ":00" : "0" + time24 + ":00";
+        time24.length === 5
+          ? time24 + ":00"
+          : time24.length === 8
+            ? time24
+            : "0" + time24 + ":00";
       this.setState({
         end_time: time12,
         end_time24: new_end_time24,
@@ -69,13 +72,14 @@ class Availability extends Component {
           this.state.start_time24,
           new_end_time24
         );
-      else if (this.props.type === "hoursOfOperation")
+      else if (this.props.type === "hoursOfOperation") {
         this.props.updateHoursOfOperation(
           this.props.id,
           this.state.day,
           this.state.start_time24,
           new_end_time24
         );
+      }
     }
   };
 
