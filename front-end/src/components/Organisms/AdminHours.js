@@ -8,7 +8,8 @@ import PostAvailability from "../Molecules/PostAvailability.js";
 
 import {
   AdminHoursContainer,
-  Day,
+  GridContainer,
+  RowHeader,
   HorizontalContainer,
 } from "../../styles/Admin.js";
 import { Segment, Header, Divider } from "semantic-ui-react";
@@ -19,9 +20,9 @@ const AdminHours = props => {
       <Segment padded="very">
         <Header textAlign="center">Hours of Operation</Header>
         <Divider />
-        <Day>
-          <h4>Monday</h4>
-          <HorizontalContainer>
+        <GridContainer>
+          <RowHeader row={1}>Monday</RowHeader>
+          <HorizontalContainer row={1}>
             {props.times[0].map((time, index) => {
               // DEV CONSOLE LOG: REMOVE ME
               // BUG: HoOs not updating correctly
@@ -37,12 +38,11 @@ const AdminHours = props => {
                 />
               );
             })}
-            <PostAvailability type="hoursOfOperation" day="M" />
           </HorizontalContainer>
-        </Day>
-        <Day>
-          <h4>Tuesday</h4>
-          <HorizontalContainer>
+          <PostAvailability row={2} type="hoursOfOperation" day="M" />
+
+          <RowHeader row={3}>Tuesday</RowHeader>
+          <HorizontalContainer row={3}>
             {props.times[1].map((time, index) => {
               return (
                 <Availability
@@ -55,12 +55,11 @@ const AdminHours = props => {
                 />
               );
             })}
-            <PostAvailability type="hoursOfOperation" day="T" />
           </HorizontalContainer>
-        </Day>
-        <Day>
-          <h4>Wednesday</h4>
-          <HorizontalContainer>
+          <PostAvailability row={4} type="hoursOfOperation" day="T" />
+
+          <RowHeader row={5}>Wednesday</RowHeader>
+          <HorizontalContainer row={5}>
             {props.times[2].map((time, index) => {
               return (
                 <Availability
@@ -73,12 +72,11 @@ const AdminHours = props => {
                 />
               );
             })}
-            <PostAvailability type="hoursOfOperation" day="W" />
           </HorizontalContainer>
-        </Day>
-        <Day>
-          <h4>Thursday</h4>
-          <HorizontalContainer>
+          <PostAvailability row={6} type="hoursOfOperation" day="W" />
+
+          <RowHeader row={7}>Thursday</RowHeader>
+          <HorizontalContainer row={7}>
             {props.times[3].map((time, index) => {
               return (
                 <Availability
@@ -91,12 +89,11 @@ const AdminHours = props => {
                 />
               );
             })}
-            <PostAvailability type="hoursOfOperation" day="R" />
           </HorizontalContainer>
-        </Day>
-        <Day>
-          <h4>Friday</h4>
-          <HorizontalContainer>
+          <PostAvailability row={8} type="hoursOfOperation" day="R" />
+
+          <RowHeader row={9}>Friday</RowHeader>
+          <HorizontalContainer row={9}>
             {props.times[4].map((time, index) => {
               return (
                 <Availability
@@ -109,12 +106,11 @@ const AdminHours = props => {
                 />
               );
             })}
-            <PostAvailability type="hoursOfOperation" day="F" />
           </HorizontalContainer>
-        </Day>
-        <Day>
-          <h4>Saturday</h4>
-          <HorizontalContainer>
+          <PostAvailability row={10} type="hoursOfOperation" day="F" />
+
+          <RowHeader row={11}>Saturday</RowHeader>
+          <HorizontalContainer row={11}>
             {props.times[5].map((time, index) => {
               return (
                 <Availability
@@ -127,12 +123,11 @@ const AdminHours = props => {
                 />
               );
             })}
-            <PostAvailability type="hoursOfOperation" day="S" />
           </HorizontalContainer>
-        </Day>
-        <Day>
-          <h4>Sunday</h4>
-          <HorizontalContainer>
+          <PostAvailability row={12} type="hoursOfOperation" day="S" />
+
+          <RowHeader row={13}>Sunday</RowHeader>
+          <HorizontalContainer row={13}>
             {props.times[6].map((time, index) => {
               return (
                 <Availability
@@ -145,9 +140,9 @@ const AdminHours = props => {
                 />
               );
             })}
-            <PostAvailability type="hoursOfOperation" day="U" />
           </HorizontalContainer>
-        </Day>
+          <PostAvailability row={14} type="hoursOfOperation" day="U" />
+        </GridContainer>
       </Segment>
     </AdminHoursContainer>
   );

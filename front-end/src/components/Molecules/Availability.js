@@ -5,7 +5,6 @@ import {
   updateAvailabilities,
   deleteAvailabilities,
 } from "../../store/Availability/actions.js";
-
 import {
   updateHoursOfOperation,
   deleteHoursOfOperation,
@@ -13,8 +12,9 @@ import {
 
 import TimePicker from "../Atoms/TimePicker.js";
 
-import { Icon, Portal, Accordion } from "semantic-ui-react";
+import { Icon, Portal, Accordion, Segment, Label } from "semantic-ui-react";
 
+// Function to convert 24hour time to 12hour time
 const convertTime24to12 = time24h => {
   let [hours, minutes] = time24h.split(":");
   let modifier;
@@ -101,15 +101,18 @@ class Availability extends Component {
   render() {
     this.submitTimeChange = this.submitTimeChange.bind(this);
     return (
-      <div
+      <Segment
         style={{
           width: "100%",
           display: "flex",
           justifyContent: "space-evenly",
+          alignItems: "center",
+          padding: "4px",
+          margin: "4px",
         }}
       >
         <Accordion.Title index={1} onClick={this.handleOpen}>
-          {this.state.start_time}
+          <Label as="a">{this.state.start_time}</Label>
         </Accordion.Title>
         <Portal open={this.state.open === 1} onClose={this.handleClose}>
           <div
@@ -129,9 +132,9 @@ class Availability extends Component {
             />
           </div>
         </Portal>
-        <span> - </span>
+        <span> to </span>
         <Accordion.Title index={2} onClick={this.handleOpen}>
-          {this.state.end_time}
+          <Label as="a">{this.state.end_time}</Label>
         </Accordion.Title>
         <Portal open={this.state.open === 2} onClose={this.handleClose}>
           <div
@@ -151,8 +154,17 @@ class Availability extends Component {
             />
           </div>
         </Portal>
-        <Icon name="close" color="red" link onClick={this.handleDelete} />
-      </div>
+        <Icon
+          size="tiny"
+          circular
+          inverted
+          fitted
+          name="close"
+          color="red"
+          link
+          onClick={this.handleDelete}
+        />
+      </Segment>
     );
   }
 }
