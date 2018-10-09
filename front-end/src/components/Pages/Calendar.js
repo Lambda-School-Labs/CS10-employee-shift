@@ -127,7 +127,6 @@ class Calendar extends Component {
         .minute(Number(`${end_time[3]}${end_time[4]}`))
         .hour(Number(`${end_time[0]}${end_time[1]}`))
         .isoWeekday(index);
-
       if (!ranges.length) {
         gapsByDay[index - 1].push(moment.range(HoO_start, HoO_end));
         return;
@@ -140,7 +139,6 @@ class Calendar extends Component {
       });
 
       const joinedRanges = [sortedRanges.shift()];
-
       while (sortedRanges.length) {
         const head = sortedRanges.shift();
         if (
@@ -150,14 +148,15 @@ class Calendar extends Component {
         ) {
           const newTail = joinedRanges.pop();
           joinedRanges.push(newTail.add(head, { adjacent: true }));
-        }
+        } else joinedRanges.push(head);
       }
       // TODO: Maybe handle shifts out of HoO here
       // push gaps between shifts to day of gapsByDay using the day's index
       if (joinedRanges.length) {
         if (HoO_start >= joinedRanges[0].start) {
-          if (HoO_end <= joinedRanges[0].end) return;
+          if (HoO_end <= joinedRanges[[joinedRanges.length - 1]].end) return;
           // if no gaps return
+
           for (let i = 0; i < joinedRanges.length - 1; i++) {
             gapsByDay[index - 1].push(
               moment.range(joinedRanges[i].end, joinedRanges[i + 1].start)
@@ -166,7 +165,7 @@ class Calendar extends Component {
           gapsByDay[index - 1].push(
             moment.range(joinedRanges[joinedRanges.length - 1].end, HoO_end)
           );
-        } else if (HoO_end <= joinedRanges[0].end) {
+        } else if (HoO_end <= joinedRanges[joinedRanges.length - 1].end) {
           gapsByDay[index - 1].push(
             moment.range(HoO_start, joinedRanges[0].start)
           );

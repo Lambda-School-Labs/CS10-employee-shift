@@ -262,7 +262,8 @@ export const ScheduleShiftGapHeader = styled.div`
 `;
 
 export const ScheduleShiftGap = styled.div`
-  width: ${props => (props.end - props.start) * 5}%;
+  width: ${props =>
+    props.end - props.start ? (props.end - props.start) * 5 : 4}%;
   opacity: 0.15;
   height: ${props => (props.height + 2) * 100}%;
   background: red;
@@ -271,7 +272,7 @@ export const ScheduleShiftGap = styled.div`
   grid-row-end: 1;
   grid-column-start: ${props => props.column};
   grid-column-end: ${props => props.column};
-  left: ${props => props.start * 4}%;
+  left: ${props => props.start * 4.1}%;
   pointer-events: none;
 `;
 
