@@ -106,7 +106,7 @@ class Calendar extends Component {
           .set({ hour: 23, minute: 59, "second:": 59, millisecond: 999 })
       );
 
-      if (!shift.is_open && shiftInCurrentWeek) {
+      if (shift.profile && shiftInCurrentWeek) {
         const weekday = momentStart.isoWeekday();
         shiftsByDay[weekday - 1].push(
           moment.range(momentStart, moment(shift.end_datetime))
@@ -322,13 +322,14 @@ class Calendar extends Component {
                 shiftCount++;
               }
             });
-
             return (
               <GridItemEmployee
                 row={index + 3}
                 key={profile.user.last_name + index}
               >
-                <ProfileIcon hue={(index + 3) * 40}>{shiftCount}</ProfileIcon>
+                <ProfileIcon hue={260 - (index % 10) * 36}>
+                  {shiftCount}
+                </ProfileIcon>
                 <h5>
                   {profile.user.first_name} {profile.user.last_name}
                 </h5>
@@ -359,10 +360,10 @@ class Calendar extends Component {
                 ) + 3;
               return (
                 <ScheduleShiftUpdate
-                  hue={profileRow ? profileRow * 40 : 102}
+                  hue={profileRow ? 260 - ((profileRow - 3) % 10) * 36 : 102}
                   key={shift.id}
                   row={profileRow}
-                  // add span to second day if applicable
+                  // TODO: add span to second day
                   column={moment(shift.start_datetime).isoWeekday() + 1}
                   startHour={moment(shift.start_datetime).hour()}
                   endHour={moment(shift.end_datetime).hour()}

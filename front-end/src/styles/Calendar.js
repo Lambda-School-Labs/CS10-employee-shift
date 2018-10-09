@@ -189,13 +189,10 @@ export const GridItemActiveShiftInner = styled.div`
   border: hsl(${props => props.hue}, 62%, 81%) solid 1px;
   border-left: hsl(${props => props.hue}, 65%, 60%) solid 4px;
   display: flex;
-  justify-content: center;
-  align-items: center;
   font-size: 14px;
   margin-left: calc(${props => props.start * 4}% + 6px);
-  white-space: nowrap;
+  word-wrap: break-word;
   overflow: hidden;
-  text-overflow: ellipsis;
 
   @media ${device.laptop} {
     width: 100%;
@@ -218,7 +215,7 @@ export const PortalButton = styled.div`
   display: flex;
   margin: 5% 0;
   justify-content: space-evenly;
-  align-items: baseline;
+  align-items: center;
   cursor: pointer;
 `;
 
@@ -263,7 +260,7 @@ export const ScheduleShiftGapHeader = styled.div`
 
 export const ScheduleShiftGap = styled.div`
   width: ${props =>
-    props.end - props.start ? (props.end - props.start) * 5 : 4}%;
+    props.end - props.start ? (props.end - props.start) * 4.6 : 4}%;
   opacity: 0.15;
   height: ${props => (props.height + 2) * 100}%;
   background: red;
@@ -272,7 +269,7 @@ export const ScheduleShiftGap = styled.div`
   grid-row-end: 1;
   grid-column-start: ${props => props.column};
   grid-column-end: ${props => props.column};
-  left: ${props => props.start * 4.1}%;
+  left: ${props => props.start * 4}%;
   pointer-events: none;
 `;
 
