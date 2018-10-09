@@ -5,6 +5,7 @@
   margin-top: 2px;
 }
 
+/*
 .top-container {
   display: flex;
   flex-direction: row;
@@ -12,12 +13,6 @@
   width: 100%;
   height: 200px;
   padding-top: 100px;
-}
-
-.ouricon {
-  width: 100px;
-  align-self: center;
-  margin-top: -120px;
 }
 
 .title-text {
@@ -32,7 +27,6 @@
 }
 
 .font-title {
-  /* font-family: 'Oswald', sans-serif; */
   font-family: "PT Sans", sans-serif;
   font-size: 2.7em;
   font-weight: 100;
@@ -43,7 +37,7 @@
   font-family: "Josefin Slab", serif;
 }
 
-.mid-container {
+ .mid-container {
   display: flex;
   flex-direction: row;
   justify-content: center;
@@ -63,7 +57,8 @@
   font-size: 1.2em;
   line-height: 1.5em;
   color: #767676;
-}
+} */
+
 
 .frame1TextContainer {
   display: flex;
@@ -98,10 +93,7 @@
   text-align: center;
 }
 
-.frame1 {
-  width: 100%;
-  /* height: 90%; */
-}
+
 
 .frame2Heading {
   font-family: "PT Sans", sans-serif;
@@ -120,7 +112,7 @@
   justify-content: center;
   align-items: center;
   margin-bottom: 340px; 
-}
+} 
 
 .cta-button {
   margin-top: 35px;
@@ -132,6 +124,8 @@
   padding: 5px 20px;
   color: #fff;
 }
+
+
 
 .landingFooter {
   display: flex;
@@ -150,6 +144,16 @@
   margin-right: 20px;
 }
 
+.frame1 {
+  width: 100%;
+  height: 90%;
+}
+
+.ouricon {
+  width: 100px;
+  align-self: center;
+  margin-top: -120px;
+}
 
 @-webkit-keyframes scroll {
   0%      { margin-top: 0; }

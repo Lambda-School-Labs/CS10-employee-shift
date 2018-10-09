@@ -196,10 +196,158 @@ export const CircleImg = styled.img`
     // border: red solid;
 `;
 
+/////////landing Details////////////
+
+export const TopContainer = styled.div `
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    width: 100%;
+    height: 200px;
+    padding-top: 100px;
+`;
+
+export const FontTitle = styled.h1`
+  font-family: "PT Sans", sans-serif;
+  font-size: 2.7em;
+  font-weight: 100;
+  color: #767676;
+}
+`;
+
+export const MidContainer = styled.div`
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+`;
+
+export const TextBox = styled.div`
+    display: flex;
+    width: 300px;
+    height: 350px;
+    flex-direction: column;
+    background-color: #fff;
+    padding: 20px;
+    padding-top: 70px;
+    margin: 5% 15px;
+    font-family: "PT Sans", sans-serif;
+    text-align: center;
+    font-size: 1.2em;
+    line-height: 1.5em;
+    color: #767676;
+`;
+
+export const TitleText = styled.h2`
+    font-family: "PT Sans", sans-serif;
+    color: #4b9cd3;
+    padding: 0 15px; 
+`;
+
+export const InnerText = styled.h6`
+    align - self: center;
+    margin - bottom: 25 px;
+`;
+
+export const FontTitle2 = styled.h6`
+    font-family: "Josefin Slab", serif;
+`;
+
+
+/////////Landing Learnc////////////
+
+export const Frame1TextContainer = styled.div`
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    font-family: "PT Sans", sans-serif;
+    font-size: 1.5em;
+    padding: 50px;
+    text-align: center;
+`;
+
+export const FrameHeading = styled.h2`
+    font-family: "PT Sans", sans-serif;
+    color: #767676;
+    font-size: 1.8em;
+    font-weight: 100;
+`;
+
+export const FrameText = styled.p`
+    margin-top: 10px;
+    color: #767676;
+    width: 900px;
+    align-self: center;
+    font-size: 0.9em;
+    line-height: 1.5em;
+`;
+
+export const FrameContainer = styled.div`
+   display: flex;
+   flex-direction: column;
+   justify-content: center;
+   text-align: center;
+`;
+
+export const Frame1 = styled.p`
+   width: 100%;
+  /* height: 90%; */
+`;
+
+export const Frame2 = styled.div`
+   font-family: "PT Sans", sans-serif;
+   font-weight: 100;
+   margin-top: -500px;
+   color: #e6e6e6;
+   display: flex;
+   flex-direction: column;
+   justify-content: center;
+   align-items: center;
+   margin-bottom: 340px;
+`;
+
+export const Frame2Heading = styled.h2`
+   font-family: "PT Sans", sans-serif;
+   font-size: 2.8em;
+   font-weight: 100;
+   color: #fff;
+`;
+ 
+export const CtaButton = styled.div`
+    margin-top: 35 px;
+    border:solid# fff;
+    border-width: 2 px;
+    align-self: center;
+    width: 300 px;
+    font-size: 2 em;
+    padding:5px 20px;
+    color: #fff;
+`;
+
+
+
+/////////Landing Footer////////////
+
 export const FooterStyles = styled.div`
     display: flex;
     background-color: #4B9CD3;
     justify-content: center;
     flex-direction: row;
     z-index: 5;
+`;
+
+export const LandingFoot = styled.footer`
+    display: flex;
+    justify-content: center;
+    flex-direction: row;
+`;
+
+export const Copyright = styled.span`
+    margin-top: 17px;
+    margin-right: 20px;
+`;
+
+export const LandingLogo = styled.div`
+   margin-top: 10px;
+   margin-bottom: 10px;
+   margin-right: 20px;
 `;

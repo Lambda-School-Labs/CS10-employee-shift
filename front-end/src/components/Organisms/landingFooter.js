@@ -1,10 +1,12 @@
 import React, { Component } from "react";
-import { FooterStyles } from "../../styles/Landing.js";
-import { Route, Link } from "react-router-dom";
+import { 
+    FooterStyles, 
+    LandingFoot
+    } from "../../styles/Landing.js";
 import Twitter from "../Molecules/TwitterIcon.js";
 import Facebook from "../Molecules/FacebookIcon.js";
 
-import "../../styles/LandingRef.css";
+//import "../../styles/LandingRef.css";
 
 
 class LandingFooter extends Component {
@@ -12,7 +14,7 @@ class LandingFooter extends Component {
         return (
             <div>
             <FooterStyles>
-                <footer className="landingFooter">
+                <LandingFoot>
                 <span className="copyright">Copyright 2018</span>
                 <div className="LandingLogo">
                     <a href="http://twitter.com">
@@ -24,7 +26,7 @@ class LandingFooter extends Component {
                         <Facebook/>
                     </a>
                 </div> 
-                </footer>
+                </LandingFoot>
             </FooterStyles>
             </div>
         );
