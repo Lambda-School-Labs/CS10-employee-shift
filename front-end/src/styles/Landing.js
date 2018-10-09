@@ -6,7 +6,6 @@ import { device } from "./globals.js";
 export const BackgroundHolder = styled.div`
     background-color: #4B9CD3;
     width: 100%;
-    // height: 700px;
     max-height: 80%;
 `;
 
@@ -14,6 +13,8 @@ export const LandingNavBar = styled.div`
     display: flex;
     justify-content: flex-end;
     z-index: 2;
+    // border: pink solid;
+    background-color: transparent;
 
     @media ${device.tablet} {
         font-size: 23px;
@@ -49,7 +50,6 @@ export const WelcomeH1 = styled.div`
     font-size: 45px;
     width: 65%;
     line-height: 50px;
-    // margin-left: 10%;
 `;
 
 
@@ -61,7 +61,6 @@ export const WelcomeLogo = styled.div`
 
 export const WelcomeText = styled.div`
     margin-top: 10%;
-    // margin-left: 10%;
     font-size: 1.5em;
     align-self: center;
 `;
@@ -81,7 +80,6 @@ export const ScheduleButton = styled.div`
         font-size: 20px;
         font-weight: 300px;
         letter-spacing: 2px;
-        // margin-left: 10%;
         position: relative;
         padding: 25px 50px;
         text-align: center;
@@ -108,6 +106,7 @@ export const ScheduleButton = styled.div`
 export const NavButton = styled.div`
     margin: 5px;
     margin-left: 2px;
+    background-color: transparent;
 
     .signup_btn{
         align-self: flex-end;
@@ -153,17 +152,24 @@ export const NavButton = styled.div`
     }
 `;
 
-export const Circle_div = styled.div`
-    display: flex;
-    justify-content: center;
+export const CircleDiv = styled.div`
+    // display: flex;
+    // justify-content: center;
+    // margin-left: 0%;
+    // top: -200px;
+    // transistion: 2s;
+    // width: 20%;
+    // border-width: 2px;
+    // border: red solid;
+
+    z-index: 0;
     position: absolute;
-    margin-left: 0%;
-    top: -200px;
-    z-index: 1;
-    transistion: 2s;
-    width: 20%;
-    border-width: 2px;
-    border: red solid;
+    height: 800px;
+    margin: 0 auto;
+    padding: 0;
+    position: relative;
+    overflow: hidden;
+    text-align: center;
     
     @media ${device.tablet} {
         display: none;
@@ -175,7 +181,19 @@ export const Circle_div = styled.div`
 
 `;
 
-export const Circle_img = styled.img`
+export const Circles = styled.div`
+    -webkit-animation: scroll 40s infinite;
+    -moz-animation: scroll 40s infinite;
+    -ms-animation: scroll 40s infinite;
+`;
+
+export const CircleImg = styled.img`
+    max-width: 100%;
+    max-height: 800px;
+    margin: 0 auto;
+    padding: 200px 0;
+    display: block;
+    // border: red solid;
 `;
 
 /////////landing Details////////////

@@ -8,8 +8,10 @@ import {
   WelcomeH1,
   WelcomeLogo,
   WelcomeHolder,
-  Circle_div,
-  Circle_img,
+  WelcomeText,
+  CircleDiv,
+  Circles,
+  CircleImg,
   NavButton
 } from "../../styles/Landing.js";
 
@@ -63,24 +65,16 @@ class Landing_Card extends Component {
                                 </Link>
                             </NavButton>
                         </LandingNavBar>
-                        <Circle_div className="fade_1">
-                            <Circle_img src={talkingLogo}/>
-                        </Circle_div>
-                        <Circle_div className="fade_2">
-                            <Circle_img src={women}/>
-                        </Circle_div>
-                        <Circle_div className="fade_3">
-                            <Circle_img src={chat_at_table}/>
-                        </Circle_div>
-                        <Circle_div className="fade_4">
-                            <Circle_img src={coding_at_work}/>
-                        </Circle_div>
-                        <Circle_div className="fade_5">
-                            <Circle_img src={working_at_comp}/>
-                        </Circle_div>
-                        <Circle_div className="fade_6">
-                            <Circle_img src={working_solo}/>
-                        </Circle_div>
+                        <CircleDiv className="fade_1">
+                            <Circles>
+                                <CircleImg src={talkingLogo}/>
+                                <CircleImg src={women}/>
+                                <CircleImg src={chat_at_table}/>
+                                <CircleImg src={coding_at_work}/>
+                                <CircleImg src={working_at_comp}/>
+                                <CircleImg src={working_solo}/>
+                            </Circles>
+                        </CircleDiv>
                     </WelcomeLogo>
                 </WelcomeHolder>
             </div>
