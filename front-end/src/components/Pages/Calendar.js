@@ -435,7 +435,7 @@ class Calendar extends Component {
                   </ScheduleShiftGapHeader>
                 </div>
               );
-            }
+            } else return null;
           })}
         </GridContainer>
       </CalendarContainer>

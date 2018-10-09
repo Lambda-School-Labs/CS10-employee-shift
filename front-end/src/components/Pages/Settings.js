@@ -3,7 +3,7 @@ import { connect } from "react-redux";
 
 import { updateUser } from "../../store/User/actions.js";
 
-import { Input, Button, Header, Checkbox, Segment } from "semantic-ui-react";
+import { Input, Button, Checkbox, Segment } from "semantic-ui-react";
 import {
   SettingsContainer,
   FormItem,
