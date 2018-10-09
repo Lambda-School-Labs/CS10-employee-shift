@@ -48,7 +48,7 @@ class Admin extends Component {
       <AdminContainer>
         <AdminHeader>
           <Welcome>
-            {`Welcome ${this.props.first_name} ${this.props.last_name}`}
+            {`Welcome, ${this.props.first_name} ${this.props.last_name}`}
           </Welcome>
         </AdminHeader>
         <Segment padded="very" style={{ width: "100%", margin: "0 10% 0 10%" }}>

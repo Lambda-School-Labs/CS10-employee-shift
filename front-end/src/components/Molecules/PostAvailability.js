@@ -59,7 +59,7 @@ class PostAvailability extends Component {
   handleSubmit = () => {
     this.setState({ open: 0, revealed: false });
 
-    // TODO: handle validation of end time less than start time better
+    // TODO: handle validation better
     if (
       this.state.start_time24 < this.state.end_time24 &&
       this.state.start_time24 &&
@@ -94,6 +94,7 @@ class PostAvailability extends Component {
   render() {
     this.submitTimeChange = this.submitTimeChange.bind(this);
     return (
+      // TODO: refactor with styled components
       <div
         style={{
           width: "100%",

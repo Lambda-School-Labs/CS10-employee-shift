@@ -17,9 +17,9 @@ class Dashboard extends Component {
       <DashboardContainer>
         <DashboardHeader>
           <Welcome>
-            Welcome,
-            {this.props.first_name}
-            {this.props.last_name}
+            {`Welcome,
+            ${this.props.first_name}
+            ${this.props.last_name}`}
           </Welcome>
         </DashboardHeader>
         <HorizontalContainer>
