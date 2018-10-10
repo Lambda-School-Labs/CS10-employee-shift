@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-import { device } from "./globals.js";
+// import { device } from "./globals.js";
 
 // Maybe combine with all other "cards" styling
 

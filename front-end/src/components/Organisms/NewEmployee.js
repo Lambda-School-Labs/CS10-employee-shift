@@ -38,6 +38,7 @@ class NewEmployee extends Component {
   };
 
   render() {
+    // TODO: Check employee number & account flag : if more than 3 employees and no flag error
     return (
       <Segment>
         <Accordion>
@@ -127,7 +128,6 @@ class NewEmployee extends Component {
             >
               Submit
             </Button>
-
           </Accordion.Content>
         </Accordion>
       </Segment>

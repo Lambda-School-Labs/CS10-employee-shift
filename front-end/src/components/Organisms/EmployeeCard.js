@@ -1,4 +1,6 @@
 import React, { Component } from "react";
+import moment from "moment";
+
 import {
   Card,
   Image,
@@ -63,7 +65,11 @@ class EmployeeCard extends Component {
           <Segment style={{ minHeight: "92%" }}>
             {// TODO: Also filter by dates
             this.props.allRequestOffs
-              .filter(requestOff => requestOff.profile === profile.id)
+              .filter(
+                requestOff =>
+                  requestOff.profile === profile.id &&
+                  moment() < requestOff.end_datetime
+              )
               .map(requestOff => (
                 <RequestedTimeOff
                   key={requestOff.id}

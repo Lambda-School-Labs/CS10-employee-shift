@@ -15,6 +15,8 @@ export const CalendarContainer = styled.div`
   overflow: auto;
 `;
 
+// Top Calendar Navigation Bar
+
 export const TopNavContainer = styled.div`
   margin: 30px;
   width: 100%;
@@ -45,6 +47,8 @@ export const TopNavHeader = styled.h1`
 export const TopNavHeaderText = styled.div`
   min-width: 200px;
 `;
+
+// Calendar Grid
 
 export const GridContainer = styled.div`
   display: grid;
@@ -167,7 +171,6 @@ export const GridItemActiveShift = styled.div`
   border-bottom: 1px solid #ddd;
   border-right: 1px solid #ddd;
   display: flex;
-  justify-content: ${props => props.justify};
   align-items: center;
 
   &:hover {
@@ -177,20 +180,36 @@ export const GridItemActiveShift = styled.div`
 `;
 
 export const GridItemActiveShiftInner = styled.div`
-  width: 70%;
-  height: 60%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: ${props =>
+    props.end - props.start > 8 ? (props.end - props.start) * 5 : 45}%;
+  height: 70%;
   background: hsl(${props => props.hue}, 62%, 90%);
   color: hsl(${props => props.hue}, 84%, 29%);
   border: hsl(${props => props.hue}, 62%, 81%) solid 1px;
   border-left: hsl(${props => props.hue}, 65%, 60%) solid 4px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  font-size: 14px;
+  margin-left: calc(${props => props.start * 4}% + 6px);
+  font-size: 13px;
+  overflow: hidden;
+  padding-left: 2px;
 
-  @media ${device.tablet} {
+  ${props =>
+    props.conflict
+      ? `
+  background: hsl(0, 62%, 90%);
+  color: hsl(0, 84%, 29%);
+  border: hsl(0, 62%, 81%) solid 1px;
+  border-left: hsl(0, 65%, 60%) solid 4px;
+  `
+      : null};
+
+  @media ${device.laptop} {
     width: 100%;
     height: 100%;
+    font-size: 11px;
+    margin-left: 0;
   }
 
   &:hover {
@@ -199,34 +218,37 @@ export const GridItemActiveShiftInner = styled.div`
   }
 `;
 
+export const ShiftConflictText = styled.h5`
+  position: absolute;
+  top: -5px;
+  margin-left: -68px;
+  left: 50%;
+  grid-row-start: ${props => props.row};
+  grid-row-end: ${props => props.row};
+  grid-column-start: ${props => props.column};
+  grid-column-end: ${props => props.column};
+  color: hsl(0, 65%, 60%);
+
+  @media ${device.laptop} {
+    visibility: hidden;
+  }
+`;
+
 export const PortalButton = styled.div`
   width: 100%;
   display: flex;
   margin: 5% 0;
   justify-content: space-evenly;
-  align-items: baseline;
+  align-items: center;
   cursor: pointer;
 `;
 
-// TODO: REFACTOR BELOW
 export const PostShiftContainer = styled.div`
   height: 50%;
   display: flex;
   justify-content: center;
   align-items: center;
   flex-direction: column;
-`;
-
-export const Form = styled.form`
-  display: flex;
-  justify-content: space-evenly;
-  align-items: center;
-  flex-direction: column;
-  padding: 5%;
-`;
-
-export const FormItem = styled.div`
-  margin: 5%;
 `;
 
 export const ProfileIcon = styled.div`
@@ -261,7 +283,8 @@ export const ScheduleShiftGapHeader = styled.div`
 `;
 
 export const ScheduleShiftGap = styled.div`
-  width: ${props => (props.end - props.start) * 4.7}%;
+  width: ${props =>
+    props.end - props.start ? (props.end - props.start) * 4.6 : 4}%;
   opacity: 0.15;
   height: ${props => (props.height + 2) * 100}%;
   background: red;
@@ -280,7 +303,7 @@ export const ModalBackground = styled.div`
   right: 0;
   width: 100%;
   height: 100%;
-  opacity: 0.1;
+  opacity: 0.3;
   background: grey;
 `;
 
@@ -297,4 +320,24 @@ export const ScheduleClosedDay = styled.div`
   grid-column-end: ${props => props.column};
   height: ${props => (props.height + 2) * 100}%;
   z-index: -1;
+`;
+
+export const ScheduleTimeOff = styled.div`
+  position: absolute;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  top: 0;
+  right: 0;
+  width: 100%;
+  opacity: 0.5;
+  background: black;
+  grid-row-start: ${props => props.row};
+  grid-row-end: ${props => props.row};
+  grid-column-start: ${props => (props.startColumn ? props.startColumn : 2)};
+  grid-column-end: ${props => (props.endColumn ? props.endColumn : 8)};
+  height: 100%;
+  z-index: -1;
+  color: white;
+  font-weight: bold;
 `;

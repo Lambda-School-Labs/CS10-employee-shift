@@ -3,7 +3,7 @@ import React from "react";
 import TimePicker from "../Atoms/TimePicker.js";
 
 import { PortalButton } from "../../styles/Calendar.js";
-import { Portal } from "semantic-ui-react";
+import { Portal, Label } from "semantic-ui-react";
 
 class PostShiftTime extends React.Component {
   state = {
@@ -37,35 +37,33 @@ class PostShiftTime extends React.Component {
     return (
       <div>
         <PortalButton onClick={this.handleOpen}>
-          <h4>{this.props.day}</h4>
+          <h4 style={{ margin: 0, padding: 0 }}>{this.props.day}</h4>
           {this.props.start ? (
-            <span style={{ width: "60px" }}>{this.props.start}</span>
+            <Label as="a">{this.props.start}</Label>
           ) : this.props.day === "Start Time" ? (
-            <input
-              placeholder="00:00"
-              style={{ width: "60px", padding: "0", margin: "0" }}
-            />
+            <Label as="a" style={{ minWidth: "64px" }} size="huge" />
           ) : null}
           {this.props.end ? (
-            <span style={{ width: "60px" }}>{this.props.end}</span>
+            <Label as="a">{this.props.end}</Label>
           ) : this.props.day === "End Time" ? (
-            <input
-              placeholder="00:00"
-              style={{ width: "60px", padding: "0", margin: "0" }}
-            />
+            <Label as="a" style={{ minWidth: "64px" }} size="huge" />
           ) : null}
         </PortalButton>
-        <Portal open={this.state.open} onClose={this.handleClose}>
+        <Portal
+          open={this.state.open}
+          onClose={this.handleClose}
+          closeOnPortalMouseLeave
+        >
           <div
             style={{
               position: "absolute",
               top: `${
-                this.state.clickY > window.innerHeight - 262
+                this.state.clickY > window.innerHeight - 300
                   ? this.state.clickY - 362
                   : this.state.clickY - 100
               }px`,
               left: `${
-                this.state.clickX > window.innerWidth - 242
+                this.state.clickX > window.innerWidth - 260
                   ? this.state.clickX - 262
                   : this.state.clickX + 20
               }px`,
