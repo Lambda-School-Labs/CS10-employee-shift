@@ -477,6 +477,7 @@ class Calendar extends Component {
                 );
               }
             }
+            return null;
           })}
 
           {/* Renders Gaps in the business account's Hours of Operations versus what shifts are scheduled */}

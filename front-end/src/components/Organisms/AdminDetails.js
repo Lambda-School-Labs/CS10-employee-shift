@@ -2,7 +2,7 @@ import React from "react";
 import { connect } from "react-redux";
 import moment from "moment";
 
-import { Card, Icon, Image, CardDescription } from "semantic-ui-react";
+import { Card, Icon, Image } from "semantic-ui-react";
 import { AdminDetailsContainer } from "../../styles/Admin.js";
 
 const AdminDetails = props => {
