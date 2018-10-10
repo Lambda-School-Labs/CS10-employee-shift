@@ -86,7 +86,7 @@ class Settings extends Component {
               </FormItem>
             </FormRow>
             <CheckboxContainer>
-              <h5>Emails?</h5>
+              <h5>Receive Emails?</h5>
               <Checkbox
                 toggle
                 checked={this.state.email_enabled}
@@ -96,7 +96,7 @@ class Settings extends Component {
               />
             </CheckboxContainer>
             <CheckboxContainer>
-              <h5>Texts?</h5>
+              <h5>Receive Texts?</h5>
               <Checkbox
                 toggle
                 checked={this.state.text_enabled}
@@ -120,7 +120,7 @@ class Settings extends Component {
                 />
               </FormItem>
               <FormItem>
-                <h5>Retype Password</h5>
+                <h5>Retype New Password</h5>
                 <Input
                   fluid
                   value={this.state.re_password}
