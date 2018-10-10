@@ -35,6 +35,7 @@ class HourOfOperation(models.Model):
     )
     open_time = models.TimeField(auto_now=False, auto_now_add=False)
     close_time = models.TimeField(auto_now=False, auto_now_add=False)
+    is_open = models.BooleanField(default=False)
 
     def __str__(self):
         return self.account.company

@@ -6,6 +6,7 @@ import {
   ScheduleButton,
   BackgroundHolder,
   WelcomeSide,
+  MainLogo,
   WelcomeH1,
   WelcomeLogo,
   WelcomeHolder,
@@ -18,6 +19,8 @@ import {
 } from "../../styles/Landing.js";
 
 import "../../styles/LandingRef.css";
+
+import main_logo from "../../styles/logos/employee_scheduler2.png";
 
 import talkingLogo from "../../styles/logos/talking.png";
 import women from "../../styles/logos/3_women.png";
@@ -40,9 +43,10 @@ class Landing_Card extends Component {
         const { visible } = this.state
         return (
             <div className="container">
-            <BackgroundHolder>
+            {/* <BackgroundHolder> */}
                 <WelcomeHolder>
                     <WelcomeSide>
+                        <MainLogo src={main_logo} />
                         <WelcomeH1>Welcome</WelcomeH1>
                         <WelcomeText>
                             <p>Build your Work Schedule in Minutes.</p>
@@ -98,11 +102,10 @@ class Landing_Card extends Component {
                         </LandingNavBar>
                     </WelcomeLogo>
                 </WelcomeHolder>
-            </BackgroundHolder>
+            {/* </BackgroundHolder> */}
             </div>
         );
-}
-    
+    }
 }
 
 export default Landing_Card;

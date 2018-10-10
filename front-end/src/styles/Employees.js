@@ -3,8 +3,13 @@ import styled from "styled-components";
 
 export const EmployeesContainer = styled.div`
   display: flex;
-  margin: 50px 150px;
+  margin: 70px 10% 0 10%;
   flex-direction: column;
+`;
+
+export const EmployeeHeader = styled.h1`
+  margin: 30px auto;
+  color: black;
 `;
 
 export const EmployeeCardContainer = styled.div`

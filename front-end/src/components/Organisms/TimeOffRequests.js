@@ -47,7 +47,7 @@ class TimeOffRequest extends Component {
     return (
       <TimeOffRequestContainer>
         <Header>Request Time Off</Header>
-        <Segment padded="very">
+        <Segment padded="very" style={{ width: "80%", minHeight: "500px" }}>
           <DateRangePicker
             startDate={this.state.start_datetime} // momentPropTypes.momentObj or null,
             startDateId="your_unique_start_date_id" // PropTypes.string.isRequired,
