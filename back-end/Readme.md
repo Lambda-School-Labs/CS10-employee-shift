@@ -17,11 +17,16 @@ Currently, return format for all endpoints is [JSON](http://json.org/ "JSON").
 
 #### API Resources
 
+## Users
+
 - **[<code>GET</code> /api/users/]**
 - **[<code>POST</code> /api/users/]**
 - **[<code>DELETE</code> /api/users/:id/]**
 - **[<code>PUT</code> /api/users/:id/]**
 - **[<code>Patch</code> /api/users/:id/]**
+
+
+## Profiles
 
 - **[<code>GET</code> /api/profiles/]**
 - **[<code>POST</code> /api/profiles/]**
@@ -29,11 +34,15 @@ Currently, return format for all endpoints is [JSON](http://json.org/ "JSON").
 - **[<code>PUT</code> /api/profiles/:id/]**
 - **[<code>Patch</code> /api/profiles/:id/]**
 
+## Accounts
+
 - **[<code>GET</code> /api/accounts/]**
 - **[<code>POST</code> /api/accounts/]**
 - **[<code>DELETE</code> /api/accounts/:id/]**
 - **[<code>PUT</code> /api/accounts/:id/]**
 - **[<code>Patch</code> /api/accounts:id/]**
+
+## Requestoff
 
 - **[<code>GET</code> /api/requestoff/]**
 - **[<code>POST</code> /api/requestoff/]**
@@ -41,11 +50,15 @@ Currently, return format for all endpoints is [JSON](http://json.org/ "JSON").
 - **[<code>PUT</code> /api/requestoff/:id/]**
 - **[<code>Patch</code> /api/requestoff/:id/]**
 
+## Shifts
+
 - **[<code>GET</code> /api/shifts/]**
 - **[<code>POST</code> /api/shifts/]**
 - **[<code>DELETE</code> /api/shifts/:id/]**
 - **[<code>PUT</code> /api/shifts/:id/]**
 - **[<code>Patch</code> /api/shifts/:id/]**
+
+## Availabilities
 
 - **[<code>GET</code> /api/availabilities/]**
 - **[<code>POST</code> /api/availabilities/]**
@@ -53,11 +66,15 @@ Currently, return format for all endpoints is [JSON](http://json.org/ "JSON").
 - **[<code>PUT</code> /api/availabilities/:id/]**
 - **[<code>Patch</code> /api/availabilities/:id/]**
 
+## Hours of Operations
+
 - **[<code>GET</code> /api/hoos/]**
 - **[<code>POST</code> /api/hoos/]**
 - **[<code>DELETE</code> /api/hoos/:id/]**
 - **[<code>PUT</code> /api/hoos/:id/]**
 - **[<code>Patch</code> /api/hoos/:id/]**
+
+## Sign up
 
 - **[<code>GET</code> /api/sign_up/]**
 - **[<code>POST</code> /api/sign_up/]**
