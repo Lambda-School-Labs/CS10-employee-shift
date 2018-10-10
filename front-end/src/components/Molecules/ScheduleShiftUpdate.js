@@ -10,6 +10,7 @@ import {
   GridItemActiveShiftInner,
   GridItemActiveShift,
   ModalBackground,
+  ShiftConflictText,
 } from "../../styles/Calendar.js";
 import {
   Portal,
@@ -143,6 +144,9 @@ class ScheduleShiftUpdate extends React.Component {
         column={this.props.column}
         color={this.props.color}
       >
+        {this.props.conflict ? (
+          <ShiftConflictText>Availability Conflict</ShiftConflictText>
+        ) : null}
         <GridItemActiveShiftInner
           onClick={this.handleOpen}
           hue={this.props.hue}

@@ -179,34 +179,58 @@ export const GridItemActiveShift = styled.div`
   }
 `;
 
-// width: ${props => (props.end - props.start) > 8 ? (props.end - props.start) * 5 : 8}%;
-
 export const GridItemActiveShiftInner = styled.div`
-  width: ${props => (props.end - props.start) * 4.7}%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: ${props =>
+    props.end - props.start > 8 ? (props.end - props.start) * 5 : 45}%;
   height: 70%;
   background: hsl(${props => props.hue}, 62%, 90%);
   color: hsl(${props => props.hue}, 84%, 29%);
   border: hsl(${props => props.hue}, 62%, 81%) solid 1px;
   border-left: hsl(${props => props.hue}, 65%, 60%) solid 4px;
-  display: flex;
-  font-size: 14px;
   margin-left: calc(${props => props.start * 4}% + 6px);
-  word-wrap: break-word;
+  font-size: 13px;
   overflow: hidden;
+  padding-left: 2px;
+
+  ${props =>
+    props.conflict
+      ? `
+  background: hsl(0, 62%, 90%);
+  color: hsl(0, 84%, 29%);
+  border: hsl(0, 62%, 81%) solid 1px;
+  border-left: hsl(0, 65%, 60%) solid 4px;
+  `
+      : null};
 
   @media ${device.laptop} {
     width: 100%;
     height: 100%;
-    font-size: 12px;
+    font-size: 11px;
     margin-left: 0;
   }
 
   &:hover {
-    width: 100%;
-    height: 100%;
-    margin-left: 0;
     cursor: pointer;
     background: hsl(${props => props.hue}, 62.5%, 75.6%);
+  }
+`;
+
+export const ShiftConflictText = styled.h5`
+  position: absolute;
+  top: -5px;
+  margin-left: -68px;
+  left: 50%;
+  grid-row-start: ${props => props.row};
+  grid-row-end: ${props => props.row};
+  grid-column-start: ${props => props.column};
+  grid-column-end: ${props => props.column};
+  color: hsl(0, 65%, 60%);
+
+  @media ${device.laptop} {
+    visibility: hidden;
   }
 `;
 

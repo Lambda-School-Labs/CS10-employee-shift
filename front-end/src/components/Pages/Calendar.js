@@ -414,7 +414,7 @@ class Calendar extends Component {
           })}
 
           {/* Renders approved employee requests off */}
-          {this.props.allRequestOffs.map(requestOff => {
+          {this.props.allRequestOffs.map((requestOff, index) => {
             if (requestOff.status === "A") {
               const startMoment = moment(requestOff.start_datetime);
               const startInCurrentWeek = startMoment.isBetween(
@@ -464,6 +464,7 @@ class Calendar extends Component {
                     endColumn={
                       endInCurrentWeek ? endMoment.isoWeekday() : false
                     }
+                    key={`timeoff ${index}`}
                   >
                     Time Off
                   </ScheduleTimeOff>
