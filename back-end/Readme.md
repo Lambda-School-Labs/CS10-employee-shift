@@ -9,11 +9,15 @@ and uses [OAuth2](https://www.django-rest-framework.org/api-guide/authentication
 Currently, return format for all endpoints is [JSON](http://json.org/ "JSON").
 
 ***
+![alt text](C:\Users\brand\Lambda School\CS10-employee-shift\back-end\images\database.png)
+
 
 
 ## Endpoints
 
 #### API Resources
+
+## Users
 
 - **[<code>GET</code> /api/users/]**
 - **[<code>POST</code> /api/users/]**
@@ -21,11 +25,16 @@ Currently, return format for all endpoints is [JSON](http://json.org/ "JSON").
 - **[<code>PUT</code> /api/users/:id/]**
 - **[<code>Patch</code> /api/users/:id/]**
 
+
+## Profiles
+
 - **[<code>GET</code> /api/profiles/]**
 - **[<code>POST</code> /api/profiles/]**
 - **[<code>DELETE</code> /api/profiles/:id/]**
 - **[<code>PUT</code> /api/profiles/:id/]**
 - **[<code>Patch</code> /api/profiles/:id/]**
+
+## Accounts
 
 - **[<code>GET</code> /api/accounts/]**
 - **[<code>POST</code> /api/accounts/]**
@@ -33,11 +42,15 @@ Currently, return format for all endpoints is [JSON](http://json.org/ "JSON").
 - **[<code>PUT</code> /api/accounts/:id/]**
 - **[<code>Patch</code> /api/accounts:id/]**
 
+## Requestoff
+
 - **[<code>GET</code> /api/requestoff/]**
 - **[<code>POST</code> /api/requestoff/]**
 - **[<code>DELETE</code> /api/requestoff/:id/]**
 - **[<code>PUT</code> /api/requestoff/:id/]**
 - **[<code>Patch</code> /api/requestoff/:id/]**
+
+## Shifts
 
 - **[<code>GET</code> /api/shifts/]**
 - **[<code>POST</code> /api/shifts/]**
@@ -45,17 +58,23 @@ Currently, return format for all endpoints is [JSON](http://json.org/ "JSON").
 - **[<code>PUT</code> /api/shifts/:id/]**
 - **[<code>Patch</code> /api/shifts/:id/]**
 
+## Availabilities
+
 - **[<code>GET</code> /api/availabilities/]**
 - **[<code>POST</code> /api/availabilities/]**
 - **[<code>DELETE</code> /api/availabilities/:id/]**
 - **[<code>PUT</code> /api/availabilities/:id/]**
 - **[<code>Patch</code> /api/availabilities/:id/]**
 
+## Hours of Operations
+
 - **[<code>GET</code> /api/hoos/]**
 - **[<code>POST</code> /api/hoos/]**
 - **[<code>DELETE</code> /api/hoos/:id/]**
 - **[<code>PUT</code> /api/hoos/:id/]**
 - **[<code>Patch</code> /api/hoos/:id/]**
+
+## Sign up
 
 - **[<code>GET</code> /api/sign_up/]**
 - **[<code>POST</code> /api/sign_up/]**
@@ -68,6 +87,7 @@ Currently, return format for all endpoints is [JSON](http://json.org/ "JSON").
 
 ## Stripe
 - **[<code>POST</code> /api/creat-charge/]**
+![alt text](C:\Users\brand\Lambda School\CS10-employee-shift\back-end\images\stripe flow.png)
 
 ## Twilio
 - **[<code>POST</code> /api/sms/]**
@@ -96,4 +116,3 @@ The API is only available to authenticated clients. Clients should authenticate 
 
 ### What return formats do you support?
 Myshift API currently returns data in [JSON](http://json.org/ "JSON") format.
-W
