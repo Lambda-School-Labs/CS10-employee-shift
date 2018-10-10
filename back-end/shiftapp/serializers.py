@@ -57,7 +57,8 @@ class UserSerializer(ModelSerializer):
       try:
         validate_password(value)
       except ValidationError as exc:
-        raise serializers.ValidationError(str(exc))
+        print(exc)
+        raise exc
       return value
 
     def create(self, validated_data):
@@ -116,7 +117,7 @@ class AccountSerializer(ModelSerializer):
 
     class Meta:
         model = Account
-        fields = ('id', 'logo', 'company', 'enabled', 'plan_expires', "profile_set")
+        fields = ('id', 'logo', 'company', 'enabled', 'plan_expires')
 
 
 class ProfileSerializer(ModelSerializer):
@@ -185,6 +186,31 @@ class UserProfileSerializer(ModelSerializer):
         instance.save()
 
         return instance
+
+
+class AccountUserProfileSerializer(ModelSerializer):
+    # user = UserSerializer(many=False, read_only=True)
+    user = UserSerializer()
+    account = AccountSerializer()
+
+    class Meta:
+        model = Profile
+        fields = ('url', 'id', 'user', 'account', 'phone_number', 'notes', 'email_enabled', 'text_enabled')
+        
+
+    def create(self, validated_data):
+      user_data = validated_data.pop('user')
+      account_data = validated_data.pop('account')
+      user = UserSerializer.create(UserSerializer(), validated_data=user_data)
+      account = AccountSerializer.create(AccountSerializer(), validated_data=account_data)
+      # profile = super(ProfileSerializer, self).create(user=user)
+      profile, created = Profile.objects.update_or_create(user=user,  
+                            account=account,
+                            phone_number=validated_data.pop('phone_number'),
+                            notes=validated_data.pop('notes'),
+                            email_enabled=validated_data.pop('email_enabled'),
+                            text_enabled=validated_data.pop('text_enabled'))
+      return profile
 
 class RequestedTimeOffSerializer(ModelSerializer):
     # status = serializers.ChoiceField(choices=STATUS_CHOICES, default='Pending')

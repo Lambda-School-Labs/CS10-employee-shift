@@ -17,8 +17,8 @@ class Settings extends Component {
   state = {
     email: "",
     phone_number: "",
-    text_enabled: false,
     email_enabled: false,
+    text_enabled: false,
     old_password: "",
     password: "",
     re_password: "",
@@ -179,8 +179,8 @@ const mapDispatchToProps = dispatch => {
     updateUser: (
       email,
       phone,
-      text_enabled,
       email_enabled,
+      text_enabled,
       old_password,
       password,
       re_password
@@ -189,8 +189,8 @@ const mapDispatchToProps = dispatch => {
         updateUser(
           email,
           phone,
-          text_enabled,
           email_enabled,
+          text_enabled,
           old_password,
           password,
           re_password
