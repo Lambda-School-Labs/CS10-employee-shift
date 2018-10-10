@@ -19,28 +19,48 @@ import Signin from '../components/Pages/Signin.js'
 
 Enzyme.configure({ adapter: new EnzymeAdapter() })
 
+/*
+ * @function setup
+ * @param {object} props - Component prop specific for this setup
+ * @param {any} state - Initial state for setup.
+ * @returns {ShallowWrapper}
+ */
+
+const setup = (props={}, state=null) => {
+  return shallow(<LandingCard {...props}/>)
+}
+
+/*
+ * Return ShallowWrapper containing node(s) with the given data-test value
+ * @param {ShallowWrapper} wrapper - Enzyme shallow wrapper to search within
+ * @param {string} val - Value of data-test attribute for search.
+ * @returns {ShallowWrapper}
+ */
+const findByTestAttr = (wrapper, val) => {
+  return wrapper.find(`[data-test=${val}]`);
+}
 
 it('renders without crashing', () => {
-  const wrapper = shallow(<LandingCard />)
+  const wrapper = setup();
   const appComponent = wrapper.find("[data-test='component-LandingCard']")
   expect(appComponent.length).toBe(1);
 });
 
 it('renders login button', () => {
-  const wrapper = shallow(<LandingCard />)
+  const wrapper = setup();
   const button = wrapper.find("[data-test='schedule-button']")
   expect(button.length).toBe(1);
 })
 
 
 it('renders signup button', () => {
-  const wrapper = shallow(<LandingCard />)
+  const wrapper = setup();
   const button = wrapper.find("[data-test='signup-button']")
   expect(button.length).toBe(1);
 })
 
 it('renders signup button', () => {
-  const wrapper = shallow(<LandingCard />)
+  const wrapper = setup();
   const button = wrapper.find("[data-test='signin-button']")
   expect(button.length).toBe(1);
 })
