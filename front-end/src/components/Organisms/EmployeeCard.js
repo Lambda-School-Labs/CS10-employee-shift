@@ -9,7 +9,6 @@ import {
 
 import { EmployeeCardContainer, CardInner } from "../../styles/Employees";
 
-import Availability from "../Molecules/Availability";
 import RequestedTimeOff from "../Molecules/RequestedTimeOff";
 import EmployeeAvailability from "./EmployeeAvailability";
 
@@ -21,9 +20,11 @@ class EmployeeCard extends Component {
   render() {
     const profile = this.props.profile;
     return (
+      // TODO: REDO grid for media queries
+
       <Grid columns={3} divided>
         <Grid.Column verticalAlign="middle">
-          <Card color="blue">
+          <Card centered color="blue">
             <Card.Content>
               <Image
                 floated="right"

@@ -40,7 +40,7 @@ class CheckoutForm extends React.Component {
             result.token
           );
           let formData = new FormData();
-          formData.append("description", "My form description");
+          formData.append("description", "Payment for services");
           formData.append("currency", "usd");
           formData.append("amount", 237);
           formData.append("source", result.token.id);
@@ -80,6 +80,7 @@ class CheckoutForm extends React.Component {
                   color: "#fa755a",
                   iconColor: "#fa755a"
                 }
+                
               }}
               onChange={this.handleCardErrors}
             />

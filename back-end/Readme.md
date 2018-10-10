@@ -1,162 +1,99 @@
-## End Points
+# MyShift API
 
-* rest-auth/login/
-takes a post with username and password, returns auth token.
-
-
-## API Endpoints
-o/
-o/ ^authorize/$ [name='authorize']
-o/ ^token/$ [name='token']
-o/ ^revoke_token/$ [name='revoke-token']
-o/ ^introspect/$ [name='introspect']
-o/ ^applications/$ [name='list']
-o/ ^applications/register/$ [name='register']
-o/ ^applications/(?P<pk>[\w-]+)/$ [name='detail']
-o/ ^applications/(?P<pk>[\w-]+)/delete/$ [name='delete']
-o/ ^applications/(?P<pk>[\w-]+)/update/$ [name='update']
-o/ ^authorized_tokens/$ [name='authorized-token-list']
-o/ ^authorized_tokens/(?P<pk>[\w-]+)/delete/$ [name='authorized-token-delete']
-api/ ^users/$ [name='user-list']
-api/ ^users\.(?P<format>[a-z0-9]+)/?$ [name='user-list']
-api/ ^users/(?P<pk>[^/.]+)/$ [name='user-detail']
-api/ ^users/(?P<pk>[^/.]+)\.(?P<format>[a-z0-9]+)/?$ [name='user-detail']
-api/ ^profiles/$ [name='profile-list']
-api/ ^profiles\.(?P<format>[a-z0-9]+)/?$ [name='profile-list']
-api/ ^profiles/(?P<pk>[^/.]+)/$ [name='profile-detail']
-api/ ^profiles/(?P<pk>[^/.]+)\.(?P<format>[a-z0-9]+)/?$ [name='profile-detail']
-api/ ^userprofile/$ [name='profile-list']
-api/ ^userprofile\.(?P<format>[a-z0-9]+)/?$ [name='profile-list']
-api/ ^userprofile/(?P<pk>[^/.]+)/$ [name='profile-detail']
-api/ ^userprofile/(?P<pk>[^/.]+)\.(?P<format>[a-z0-9]+)/?$ [name='profile-detail']
-api/ ^accounts/$ [name='account-list']
-api/ ^accounts\.(?P<format>[a-z0-9]+)/?$ [name='account-list']
-api/ ^accounts/(?P<pk>[^/.]+)/$ [name='account-detail']
-api/ ^accounts/(?P<pk>[^/.]+)\.(?P<format>[a-z0-9]+)/?$ [name='account-detail']
-api/ ^requestoff/$ [name='requestedtimeoff-list']
-api/ ^requestoff\.(?P<format>[a-z0-9]+)/?$ [name='requestedtimeoff-list']
-api/ ^requestoff/(?P<pk>[^/.]+)/$ [name='requestedtimeoff-detail']
-api/ ^requestoff/(?P<pk>[^/.]+)\.(?P<format>[a-z0-9]+)/?$ [name='requestedtimeoff-detail']
-api/ ^shifts/$ [name='shift-list']
-api/ ^shifts\.(?P<format>[a-z0-9]+)/?$ [name='shift-list']
-api/ ^shifts/(?P<pk>[^/.]+)/$ [name='shift-detail']
-api/ ^shifts/(?P<pk>[^/.]+)\.(?P<format>[a-z0-9]+)/?$ [name='shift-detail']
-api/ ^availabilities/$ [name='availability-list']
-api/ ^availabilities\.(?P<format>[a-z0-9]+)/?$ [name='availability-list']
-api/ ^availabilities/(?P<pk>[^/.]+)/$ [name='availability-detail']
-api/ ^availabilities/(?P<pk>[^/.]+)\.(?P<format>[a-z0-9]+)/?$ [name='availability-detail']
-api/ ^hoo/$ [name='hourofoperation-list']
-api/ ^hoo\.(?P<format>[a-z0-9]+)/?$ [name='hourofoperation-list']
-api/ ^hoo/(?P<pk>[^/.]+)/$ [name='hourofoperation-detail']
-api/ ^hoo/(?P<pk>[^/.]+)\.(?P<format>[a-z0-9]+)/?$ [name='hourofoperation-detail']
-api/ ^$ [name='api-root']
-api/ ^\.(?P<format>[a-z0-9]+)/?$ [name='api-root']
-api/sign_up/
-create-charge/ [name='cout']
-payments/ [name='pay']
+Myshift API provides programmatic solution to schedule and maintain business operations and employees.
+Myshift website's functionality: Account Info, Hours of Operation, Employees, Shifts Info,, as well as user profiles.
 
 
-* The following is a list of all of the endpoints that are available for use with our API.
+MyShift follows Django's [REST FRAMEWORK]https://www.django-rest-framework.org/)
+and uses [OAuth2](https://www.django-rest-framework.org/api-guide/authentication/) for user authentication purposes.
+Currently, return format for all endpoints is [JSON](http://json.org/ "JSON").
 
-### `api/users`
-
-| TYPE   | DATA                       | DESCRIPTION                              |
-| ----   | -------------------------- | ---------------------------------------- |
-| GET    |                            | View a list of all metas in the database |
-| POST   | name, location, password\* | Create a new meta [password optional]    |
-| PUT    | name, location, password\* | Create a new meta [password optional]    |
-| DELETE | name, location, password\* | Create a new meta [password optional]    |
+***
 
 
-### `api/users`
+## Endpoints
 
-| TYPE   | DATA                       | DESCRIPTION                              |
-| ----   | -------------------------- | ---------------------------------------- |
-| GET    |                            | View a list of all metas in the database |
-| POST   | name, location, password\* | Create a new meta [password optional]    |
-| PUT    | name, location, password\* | Create a new meta [password optional]    |
-| DELETE | name, location, password\* | Create a new meta [password optional]    |
+#### API Resources
 
+- **[<code>GET</code> /api/users/]**
+- **[<code>POST</code> /api/users/]**
+- **[<code>DELETE</code> /api/users/:id/]**
+- **[<code>PUT</code> /api/users/:id/]**
+- **[<code>Patch</code> /api/users/:id/]**
 
-### `api/profiles/`
+- **[<code>GET</code> /api/profiles/]**
+- **[<code>POST</code> /api/profiles/]**
+- **[<code>DELETE</code> /api/profiles/:id/]**
+- **[<code>PUT</code> /api/profiles/:id/]**
+- **[<code>Patch</code> /api/profiles/:id/]**
 
-| TYPE   | DATA                       | DESCRIPTION                              |
-| ----   | -------------------------- | ---------------------------------------- |
-| GET    |                            | View a list of all metas in the database |
-| POST   | name, location, password\* | Create a new meta [password optional]    |
-| PUT    | name, location, password\* | Create a new meta [password optional]    |
-| DELETE | name, location, password\* | Create a new meta [password optional]    |
+- **[<code>GET</code> /api/accounts/]**
+- **[<code>POST</code> /api/accounts/]**
+- **[<code>DELETE</code> /api/accounts/:id/]**
+- **[<code>PUT</code> /api/accounts/:id/]**
+- **[<code>Patch</code> /api/accounts:id/]**
 
-### `api/accounts/`
+- **[<code>GET</code> /api/requestoff/]**
+- **[<code>POST</code> /api/requestoff/]**
+- **[<code>DELETE</code> /api/requestoff/:id/]**
+- **[<code>PUT</code> /api/requestoff/:id/]**
+- **[<code>Patch</code> /api/requestoff/:id/]**
 
-| TYPE   | DATA                       | DESCRIPTION                              |
-| ----   | -------------------------- | ---------------------------------------- |
-| GET    |                            | View a list of all metas in the database |
-| POST   | name, location, password\* | Create a new meta [password optional]    |
-| PUT    | name, location, password\* | Create a new meta [password optional]    |
-| DELETE | name, location, password\* | Create a new meta [password optional]    |
+- **[<code>GET</code> /api/shifts/]**
+- **[<code>POST</code> /api/shifts/]**
+- **[<code>DELETE</code> /api/shifts/:id/]**
+- **[<code>PUT</code> /api/shifts/:id/]**
+- **[<code>Patch</code> /api/shifts/:id/]**
 
+- **[<code>GET</code> /api/availabilities/]**
+- **[<code>POST</code> /api/availabilities/]**
+- **[<code>DELETE</code> /api/availabilities/:id/]**
+- **[<code>PUT</code> /api/availabilities/:id/]**
+- **[<code>Patch</code> /api/availabilities/:id/]**
 
-### `api/requestoff/`
+- **[<code>GET</code> /api/hoos/]**
+- **[<code>POST</code> /api/hoos/]**
+- **[<code>DELETE</code> /api/hoos/:id/]**
+- **[<code>PUT</code> /api/hoos/:id/]**
+- **[<code>Patch</code> /api/hoos/:id/]**
 
-| TYPE   | DATA                       | DESCRIPTION                              |
-| ----   | -------------------------- | ---------------------------------------- |
-| GET    |                            | View a list of all metas in the database |
-| POST   | name, location, password\* | Create a new meta [password optional]    |
-| PUT    | name, location, password\* | Create a new meta [password optional]    |
-| DELETE | name, location, password\* | Create a new meta [password optional]    |
-
-
-### `api/shifts/`
-
-| TYPE   | DATA                       | DESCRIPTION                              |
-| ----   | -------------------------- | ---------------------------------------- |
-| GET    |                            | View a list of all metas in the database |
-| POST   | name, location, password\* | Create a new meta [password optional]    |
-| PUT    | name, location, password\* | Create a new meta [password optional]    |
-| DELETE | name, location, password\* | Create a new meta [password optional]    |
-
-
-### `api/availabilities/`
-
-| TYPE   | DATA                       | DESCRIPTION                              |
-| ----   | -------------------------- | ---------------------------------------- |
-| GET    |                            | View a list of all metas in the database |
-| POST   | name, location, password\* | Create a new meta [password optional]    |
-| PUT    | name, location, password\* | Create a new meta [password optional]    |
-| DELETE | name, location, password\* | Create a new meta [password optional]    |
+- **[<code>GET</code> /api/sign_up/]**
+- **[<code>POST</code> /api/sign_up/]**
+- **[<code>DELETE</code> /api/sign_up/:id/]**
+- **[<code>PUT</code> /api/sign_up/:id/]**
+- **[<code>Patch</code> /api/sign_up/:id/]**
 
 
+* password is needed as parameter provided by the meta creator to require verification when performing any non-GET operations on their meta
 
-### `api/^hoos/`
+## Stripe
+- **[<code>POST</code> /api/creat-charge/]**
 
-| TYPE   | DATA                       | DESCRIPTION                              |
-| ----   | -------------------------- | ---------------------------------------- |
-| GET    |                            | View a list of all metas in the database |
-| POST   | name, location, password\* | Create a new meta [password optional]    |
-| PUT    | name, location, password\* | Create a new meta [password optional]    |
-| DELETE | name, location, password\* | Create a new meta [password optional]    |
+## Twilio
+- **[<code>POST</code> /api/sms/]**
 
-
-### `api/`
-
-| TYPE   | DATA                       | DESCRIPTION                              |
-| ----   | -------------------------- | ---------------------------------------- |
-| GET    |                            | View a list of all metas in the database |
-| POST   | name, location, password\* | Create a new meta [password optional]    |
-| PUT    | name, location, password\* | Create a new meta [password optional]    |
-| DELETE | name, location, password\* | Create a new meta [password optional]    |
+## Sendgrid
+- **[<code>POST</code> /api/sendgrid/]**
 
 
-### `api/sign_up/`
+## Authentication
 
-| TYPE   | DATA                       | DESCRIPTION                              |
-| ----   | -------------------------- | ---------------------------------------- |
-| GET    |                            | View a list of all metas in the database |
-| POST   | name, location, password\* | Create a new meta [password optional]    |
-| PUT    | name, location, password\* | Create a new meta [password optional]    |
-| DELETE | name, location, password\* | Create a new meta [password optional]    |
+- **[<code>POST</code> o/application/]**
+- **[<code>POST</code> o/token]**
+- **[<code>POST</code> o/authorize]**
 
+## FAQ
+### What do I need to know before I start using the API?
+Got rust on your skills? No worries. Here are the docs you might need to get started:
 
+- HTTPS protocol
+- [https://www.django-rest-framework.org/][]
+- Authentication with [OAuth][] (or the official [Beginner’s Guide][])
+- Data serialization with [JSON][] (or see a [quick tutorial][])
 
-* passwords are an optional parameter provided by the meta creator to require verification when performing any non-GET operations on their meta
+### How do I connect to the Myshift API?
+The API is only available to authenticated clients. Clients should authenticate users using [OAuth][]. Once authenticated, you need to request a resource from one of the endpoints using HTTPS. Generally, reading any data is done through a request with GET method. If you want our server to create, update or delete a given resource, POST or PUT methods are required.
+
+### What return formats do you support?
+Myshift API currently returns data in [JSON](http://json.org/ "JSON") format.
+W

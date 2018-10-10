@@ -89,7 +89,7 @@ export const updateAvailabilities = (
     start_time,
     end_time,
   });
-
+  console.log(body);
   axios({
     method: "put",
     url: `${process.env.REACT_APP_ROOT_URL}/api/availabilities/${id}/`,

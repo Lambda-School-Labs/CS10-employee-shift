@@ -5,7 +5,6 @@ import {
   updateAvailabilities,
   deleteAvailabilities,
 } from "../../store/Availability/actions.js";
-
 import {
   updateHoursOfOperation,
   deleteHoursOfOperation,
@@ -13,8 +12,9 @@ import {
 
 import TimePicker from "../Atoms/TimePicker.js";
 
-import { Icon, Portal, Accordion } from "semantic-ui-react";
+import { Icon, Portal, Accordion, Segment, Label } from "semantic-ui-react";
 
+// Function to convert 24hour time to 12hour time
 const convertTime24to12 = time24h => {
   let [hours, minutes] = time24h.split(":");
   let modifier;
@@ -22,11 +22,10 @@ const convertTime24to12 = time24h => {
   if (hours > 11) modifier = "PM";
   else modifier = "AM";
 
-  if (modifier === "PM") hours = hours - 12;
+  if (modifier === "PM" && hours > 12) hours = hours - 12;
   else if (hours === "00") hours = "12";
 
   if (hours[0] === "0") hours = hours[1];
-
   return `${hours}:${minutes} ${modifier}`;
 };
 
@@ -55,9 +54,15 @@ class Availability extends Component {
         clickX: this.state.clickX + 100,
       });
     } else if (this.state.open === 2) {
+      const new_end_time24 =
+        time24.length === 5
+          ? time24 + ":00"
+          : time24.length === 8
+            ? time24
+            : "0" + time24 + ":00";
       this.setState({
         end_time: time12,
-        end_time24: time24.length === 5 ? time24 + ":00" : "0" + time24 + ":00",
+        end_time24: new_end_time24,
       });
       if (this.props.type === "availability")
         this.props.updateAvailabilities(
@@ -65,15 +70,16 @@ class Availability extends Component {
           this.props.profile,
           this.state.day,
           this.state.start_time24,
-          this.state.end_time24
+          new_end_time24
         );
-      else if (this.props.type === "hoursOfOperation")
+      else if (this.props.type === "hoursOfOperation") {
         this.props.updateHoursOfOperation(
           this.props.id,
           this.state.day,
           this.state.start_time24,
-          this.state.end_time24
+          new_end_time24
         );
+      }
     }
   };
 
@@ -99,15 +105,18 @@ class Availability extends Component {
   render() {
     this.submitTimeChange = this.submitTimeChange.bind(this);
     return (
-      <div
+      <Segment
         style={{
           width: "100%",
           display: "flex",
           justifyContent: "space-evenly",
+          alignItems: "center",
+          padding: "4px",
+          margin: "4px",
         }}
       >
         <Accordion.Title index={1} onClick={this.handleOpen}>
-          {this.state.start_time}
+          <Label as="a">{this.state.start_time}</Label>
         </Accordion.Title>
         <Portal open={this.state.open === 1} onClose={this.handleClose}>
           <div
@@ -127,9 +136,9 @@ class Availability extends Component {
             />
           </div>
         </Portal>
-        <span> - </span>
+        <span> to </span>
         <Accordion.Title index={2} onClick={this.handleOpen}>
-          {this.state.end_time}
+          <Label as="a">{this.state.end_time}</Label>
         </Accordion.Title>
         <Portal open={this.state.open === 2} onClose={this.handleClose}>
           <div
@@ -149,8 +158,17 @@ class Availability extends Component {
             />
           </div>
         </Portal>
-        <Icon name="close" color="red" link onClick={this.handleDelete} />
-      </div>
+        <Icon
+          size="tiny"
+          circular
+          inverted
+          fitted
+          name="close"
+          color="red"
+          link
+          onClick={this.handleDelete}
+        />
+      </Segment>
     );
   }
 }

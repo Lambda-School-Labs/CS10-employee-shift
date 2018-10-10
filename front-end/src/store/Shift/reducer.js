@@ -21,7 +21,7 @@ export default (state = initialState, action) => {
     case "UPDATE_SHIFT":
       const updatedShift = action.data;
       const indexToUpdate = shifts.indexOf(
-        shifts.filter(shift => shift.id === updatedShift.id)
+        shifts.filter(shift => shift.id === updatedShift.id)[0]
       );
       shifts.splice(indexToUpdate, 1, updatedShift);
       return { ...state, allShifts: shifts, shiftsLoading: false };

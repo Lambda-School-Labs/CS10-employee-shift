@@ -1,12 +1,12 @@
 from django.shortcuts import render
 import os
-
+from django.views.decorators.csrf import csrf_exempt
 from django.http import HttpResponse
 
 import sendgrid
 from sendgrid.helpers.mail import *
 
-
+@csrf_exempt
 def index(request):
     sg = sendgrid.SendGridAPIClient(
         apikey=os.environ.get('SENDGRID_API_KEY')

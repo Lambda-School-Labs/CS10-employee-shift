@@ -4,11 +4,11 @@ import Availability from "../Molecules/Availability.js";
 import PostAvailability from "../Molecules/PostAvailability.js";
 
 import {
-  AdminHoursContainer,
-  Day,
+  GridContainer,
+  RowHeader,
   HorizontalContainer,
-} from "../../styles/Admin.js";
-import { Segment, Header, Divider } from "semantic-ui-react";
+} from "../../styles/Employees.js";
+import { Segment } from "semantic-ui-react";
 
 const EmployeeAvailability = props => {
   const fillTimes = () => {
@@ -41,9 +41,9 @@ const EmployeeAvailability = props => {
 
   return (
     <Segment>
-      <Day>
-        <h4>Monday</h4>
-        <HorizontalContainer>
+      <GridContainer>
+        <RowHeader row={1}>Monday</RowHeader>
+        <HorizontalContainer row={1}>
           {times[0].map((time, index) => {
             return (
               <Availability
@@ -57,16 +57,16 @@ const EmployeeAvailability = props => {
               />
             );
           })}
-          <PostAvailability
-            profile={props.profile}
-            type="availability"
-            day="M"
-          />
         </HorizontalContainer>
-      </Day>
-      <Day>
-        <h4>Tuesday</h4>
-        <HorizontalContainer>
+        <PostAvailability
+          row={2}
+          profile={props.profile}
+          type="availability"
+          day="M"
+        />
+
+        <RowHeader row={3}>Tuesday</RowHeader>
+        <HorizontalContainer row={3}>
           {times[1].map((time, index) => {
             return (
               <Availability
@@ -80,16 +80,16 @@ const EmployeeAvailability = props => {
               />
             );
           })}
-          <PostAvailability
-            profile={props.profile}
-            type="availability"
-            day="T"
-          />
         </HorizontalContainer>
-      </Day>
-      <Day>
-        <h4>Wednesday</h4>
-        <HorizontalContainer>
+        <PostAvailability
+          row={4}
+          profile={props.profile}
+          type="availability"
+          day="T"
+        />
+
+        <RowHeader row={5}>Wednesday </RowHeader>
+        <HorizontalContainer row={5}>
           {times[2].map((time, index) => {
             return (
               <Availability
@@ -103,16 +103,16 @@ const EmployeeAvailability = props => {
               />
             );
           })}
-          <PostAvailability
-            profile={props.profile}
-            type="availability"
-            day="W"
-          />
         </HorizontalContainer>
-      </Day>
-      <Day>
-        <h4>Thursday</h4>
-        <HorizontalContainer>
+        <PostAvailability
+          row={6}
+          profile={props.profile}
+          type="availability"
+          day="W"
+        />
+
+        <RowHeader row={7}>Thursday</RowHeader>
+        <HorizontalContainer row={7}>
           {times[3].map((time, index) => {
             return (
               <Availability
@@ -126,16 +126,16 @@ const EmployeeAvailability = props => {
               />
             );
           })}
-          <PostAvailability
-            profile={props.profile}
-            type="availability"
-            day="R"
-          />
         </HorizontalContainer>
-      </Day>
-      <Day>
-        <h4>Friday</h4>
-        <HorizontalContainer>
+        <PostAvailability
+          row={8}
+          profile={props.profile}
+          type="availability"
+          day="R"
+        />
+
+        <RowHeader row={9}>Friday</RowHeader>
+        <HorizontalContainer row={9}>
           {times[4].map((time, index) => {
             return (
               <Availability
@@ -149,16 +149,16 @@ const EmployeeAvailability = props => {
               />
             );
           })}
-          <PostAvailability
-            profile={props.profile}
-            type="availability"
-            day="F"
-          />
         </HorizontalContainer>
-      </Day>
-      <Day>
-        <h4>Saturday</h4>
-        <HorizontalContainer>
+        <PostAvailability
+          row={10}
+          profile={props.profile}
+          type="availability"
+          day="F"
+        />
+
+        <RowHeader row={11}>Saturday</RowHeader>
+        <HorizontalContainer row={11}>
           {times[5].map((time, index) => {
             return (
               <Availability
@@ -172,16 +172,16 @@ const EmployeeAvailability = props => {
               />
             );
           })}
-          <PostAvailability
-            profile={props.profile}
-            type="availability"
-            day="S"
-          />
         </HorizontalContainer>
-      </Day>
-      <Day>
-        <h4>Sunday</h4>
-        <HorizontalContainer>
+        <PostAvailability
+          row={12}
+          profile={props.profile}
+          type="availability"
+          day="S"
+        />
+
+        <RowHeader row={13}>Sunday</RowHeader>
+        <HorizontalContainer row={13}>
           {times[6].map((time, index) => {
             return (
               <Availability
@@ -195,13 +195,14 @@ const EmployeeAvailability = props => {
               />
             );
           })}
-          <PostAvailability
-            profile={props.profile}
-            type="availability"
-            day="U"
-          />
         </HorizontalContainer>
-      </Day>
+        <PostAvailability
+          row={14}
+          profile={props.profile}
+          type="availability"
+          day="U"
+        />
+      </GridContainer>
     </Segment>
   );
 };
