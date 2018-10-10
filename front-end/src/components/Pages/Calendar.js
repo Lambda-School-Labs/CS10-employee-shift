@@ -380,18 +380,24 @@ class Calendar extends Component {
                   )[0]
                 ) + 3;
               const currentDayAvailability = this.props.allAvailabilities.filter(
-                availability => {
+                availability =>
                   availability.profile === shift.profile &&
-                    dayLookupTable[availability.day] ===
-                      moment(shift.start_datetime).isoWeekday();
-                }
+                  dayLookupTable[availability.day] ===
+                    moment(shift.start_datetime).isoWeekday()
+              );
+              console.log(
+                currentDayAvailability[0],
+                moment(shift.start_datetime).format("k:mm:ss"),
+                moment(shift.end_datetime).format("k:mm:ss")
               );
               // TODO: better errors on conflict, floating tooltip with conflict times
               const hasScheduleConflict = currentDayAvailability.length
-                ? currentDayAvailability[0].start_time <=
-                    moment(shift.start_datetime).format("k:mm:ss") &&
-                  currentDayAvailability[0].end_time >=
-                    moment(shift.end_datetime).format("k:mm:ss")
+                ? !(
+                    currentDayAvailability[0].start_time <=
+                      moment(shift.start_datetime).format("k:mm:ss") &&
+                    currentDayAvailability[0].end_time >=
+                      moment(shift.end_datetime).format("k:mm:ss")
+                  )
                 : true;
               return (
                 <ScheduleShiftUpdate
