@@ -35,3 +35,12 @@ export const MainLogo = styled.img`
     left: calc(50% - 70px);
   }
 `;
+
+export const LoadingContainer = styled.div`
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  background-color: #bfd4ea;
+`;

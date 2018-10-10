@@ -9,6 +9,7 @@ import PostShiftTime from "./PostShiftTime.js";
 import {
   GridItemActiveShiftInner,
   GridItemActiveShift,
+  ModalBackground,
 } from "../../styles/Calendar.js";
 import {
   Portal,
@@ -17,6 +18,7 @@ import {
   Button,
   Input,
   Divider,
+  Segment,
 } from "semantic-ui-react";
 
 class ScheduleShiftUpdate extends React.Component {
@@ -154,70 +156,78 @@ class ScheduleShiftUpdate extends React.Component {
           onClose={this.handleClose}
           closeOnDocumentClick={false}
         >
-          <div
-            style={{
-              position: "fixed",
-              left: `${
-                this.state.clickX > window.innerWidth - 142
-                  ? this.state.clickX - 262
-                  : this.state.clickX + 20
-              }px`,
-              top: `${
-                this.state.clickY > window.innerHeight - 242
-                  ? this.state.clickY - 362
-                  : this.state.clickY - 100
-              }px`,
-              zIndex: 1005,
-              minWidth: "300px",
-            }}
-          >
-            <Label
-              as="a"
-              corner={"left"}
-              color="red"
-              onClick={this.handleClose}
-              icon="close"
-            />
-            <Label
-              as="a"
-              color="red"
-              ribbon={"right"}
-              onClick={this.handleDelete}
+          <div>
+            <ModalBackground onClick={this.handleClose} />
+            <Segment
+              style={{
+                position: "fixed",
+                left: `${
+                  this.state.clickX > window.innerWidth - 142
+                    ? this.state.clickX - 262
+                    : this.state.clickX - 50
+                }px`,
+                top: `${
+                  this.state.clickY > window.innerHeight - 242
+                    ? this.state.clickY - 362
+                    : this.state.clickY - 100
+                }px`,
+                zIndex: 1005,
+                minWidth: "300px",
+              }}
             >
-              Delete
-            </Label>
-            <Header as="h2" textAlign={"center"}>
-              Update Shift
-            </Header>
-            <Divider />
-            <PostShiftTime
-              day={"Start Time"}
-              start={this.state.start_time}
-              data={"start"}
-              inputChangeHandler={this.inputChangeHandler}
-            />
-            <PostShiftTime
-              day={"End Time"}
-              end={this.state.end_time}
-              data={"end"}
-              inputChangeHandler={this.inputChangeHandler}
-            />
-            <Input
-              label={{ tag: true, content: "Note" }}
-              labelPosition="left"
-              style={{ width: "70%", padding: "8% 8%" }}
-              value={this.state.notes}
-              onChange={this.inputChangeHandler}
-              name={"notes"}
-            />
-            <Button
-              fluid
-              size="large"
-              color="teal"
-              onClick={this.submitHandler}
-            >
-              Submit
-            </Button>
+              <Label
+                as="a"
+                corner={"left"}
+                color="red"
+                onClick={this.handleClose}
+                icon="close"
+              />
+              <Label
+                as="a"
+                color="red"
+                ribbon={"right"}
+                onClick={this.handleDelete}
+              >
+                Delete
+              </Label>
+              <Header as="h2" textAlign={"center"}>
+                Update Shift
+              </Header>
+              <Divider />
+              <PostShiftTime
+                day={"Start Time"}
+                start={this.state.start_time}
+                data={"start"}
+                inputChangeHandler={this.inputChangeHandler}
+              />
+              <PostShiftTime
+                day={"End Time"}
+                end={this.state.end_time}
+                data={"end"}
+                inputChangeHandler={this.inputChangeHandler}
+              />
+              <Input
+                label={{ tag: true, content: "Note" }}
+                labelPosition="left"
+                style={{ width: "70%", padding: "8% 8%" }}
+                value={this.state.notes}
+                onChange={this.inputChangeHandler}
+                name={"notes"}
+              />
+              <Button
+                fluid
+                size="large"
+                color="teal"
+                onClick={this.submitHandler}
+                onKeyPress={event => {
+                  if (event.key === "Enter") {
+                    this.submitHandler();
+                  }
+                }}
+              >
+                Submit
+              </Button>
+            </Segment>
           </div>
         </Portal>
       </GridItemActiveShift>

@@ -38,16 +38,38 @@ class PostShiftTime extends React.Component {
       <div>
         <PortalButton onClick={this.handleOpen}>
           <h4>{this.props.day}</h4>
-          {this.props.start ? <h5>{this.props.start}</h5> : null}
-          {this.props.end ? <h5>{this.props.end}</h5> : null}
+          {this.props.start ? (
+            <span style={{ width: "60px" }}>{this.props.start}</span>
+          ) : this.props.day === "Start Time" ? (
+            <input
+              placeholder="00:00"
+              style={{ width: "60px", padding: "0", margin: "0" }}
+            />
+          ) : null}
+          {this.props.end ? (
+            <span style={{ width: "60px" }}>{this.props.end}</span>
+          ) : this.props.day === "End Time" ? (
+            <input
+              placeholder="00:00"
+              style={{ width: "60px", padding: "0", margin: "0" }}
+            />
+          ) : null}
         </PortalButton>
         <Portal open={this.state.open} onClose={this.handleClose}>
           <div
             style={{
               position: "absolute",
-              top: `${this.state.clickY - 230}px`,
-              left: `${this.state.clickX - 354}px`,
-              zIndex: 1000,
+              top: `${
+                this.state.clickY > window.innerHeight - 262
+                  ? this.state.clickY - 362
+                  : this.state.clickY - 100
+              }px`,
+              left: `${
+                this.state.clickX > window.innerWidth - 242
+                  ? this.state.clickX - 262
+                  : this.state.clickX + 20
+              }px`,
+              zIndex: 5000,
               minWidth: "120px",
             }}
           >

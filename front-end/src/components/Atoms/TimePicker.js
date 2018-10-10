@@ -22,7 +22,7 @@ class TimePicker extends React.Component {
         switchToMinuteOnHourSelect={true}
         onChange={this.handleTimeChange}
         config={{
-          // https://github.com/catc/react-timekeeper/blob/master/src/helpers/config.js
+          // Custom stylings: https://github.com/catc/react-timekeeper/blob/master/src/helpers/config.js
           TIMEPICKER_BACKGROUND: "white",
           DONE_BUTTON_COLOR: "#64c9f1",
           DONE_BUTTON_BORDER_COLOR: "#ededed",

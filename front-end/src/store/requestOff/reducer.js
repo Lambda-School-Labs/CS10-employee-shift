@@ -32,7 +32,7 @@ export default (state = initialState, action) => {
       const indexToUpdate = newRequestOffs.indexOf(
         newRequestOffs.filter(
           requestOff => requestOff.id === updatedRequestsOff.id
-        )
+        )[0]
       );
       newRequestOffs.splice(indexToUpdate, 1, updatedRequestsOff);
       return {

@@ -18,7 +18,10 @@ import {
 
 import Template from "./Templates/main.js";
 
-// NOTE: This component is for handling our App's routing.
+import { LoadingContainer } from "../styles/Template--main";
+import { Dimmer, Loader } from "semantic-ui-react";
+
+// NOTE: This component handles our App's routing.
 // It checks authentication (getUser) and reroutes accordingly.
 
 class App extends Component {
@@ -33,7 +36,13 @@ class App extends Component {
         render={() => {
           if (this.props.user.isLoading) {
             // TODO: better loading screen in a separate component
-            return <em>Loading something great...</em>;
+            return (
+              <LoadingContainer>
+                <Dimmer active>
+                  <Loader size="huge">Loading</Loader>
+                </Dimmer>
+              </LoadingContainer>
+            );
           } else if (!this.props.user.isAuthenticated) {
             return <Redirect to="/signin" />;
           } else {

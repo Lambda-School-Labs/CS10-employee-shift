@@ -31,18 +31,35 @@ class AssignedShift extends Component {
                     .utc()
                     .format() && (
                   <Segment.Group key={index}>
-                    <Segment>
+                    <Segment
+                      style={{
+                        display: "flex",
+                        justifyContent: "space-around",
+                      }}
+                    >
                       <Label>Start :</Label>
                       {moment(shift.start_datetime).format("MMM Do h:mm a")}
                     </Segment>
-                    <Segment>
+                    <Segment
+                      style={{
+                        display: "flex",
+                        justifyContent: "space-around",
+                      }}
+                    >
                       <Label>End :</Label>
                       {moment(shift.end_datetime).format("MMM Do h:mm a")}
                     </Segment>
-                    <Segment>
-                      <Label>Notes :</Label>
-                      {shift.notes}
-                    </Segment>
+                    {shift.notes ? (
+                      <Segment
+                        style={{
+                          display: "flex",
+                          justifyContent: "space-around",
+                        }}
+                      >
+                        <Label>Notes :</Label>
+                        {shift.notes}
+                      </Segment>
+                    ) : null}
                   </Segment.Group>
                 )
             )}

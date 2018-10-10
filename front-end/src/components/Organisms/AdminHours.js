@@ -1,201 +1,155 @@
-import React, { Component } from "react";
+import React from "react";
 import { connect } from "react-redux";
 
-import {
-  getHoursOfOperation,
-  updateHoursOfOperation,
-} from "../../store/hourOfOperation/actions.js";
+import { updateHoursOfOperation } from "../../store/hourOfOperation/actions.js";
 
 import Availability from "../Molecules/Availability.js";
 import PostAvailability from "../Molecules/PostAvailability.js";
 
 import {
   AdminHoursContainer,
-  Day,
+  GridContainer,
+  RowHeader,
   HorizontalContainer,
 } from "../../styles/Admin.js";
 import { Segment, Header, Divider } from "semantic-ui-react";
 
-class AdminHours extends Component {
-  componentDidMount() {
-    this.props.getHoursOfOperation();
-  }
+const AdminHours = props => {
+  return (
+    <AdminHoursContainer>
+      <Segment padded="very">
+        <Header textAlign="center">Hours of Operation</Header>
+        <Divider />
+        <GridContainer>
+          <RowHeader row={1}>Monday</RowHeader>
+          <HorizontalContainer row={1}>
+            {props.times[0].map((time, index) => {
+              // DEV CONSOLE LOG: REMOVE ME
+              // BUG: HoOs not updating correctly
+              console.log(time);
+              return (
+                <Availability
+                  type="hoursOfOperation"
+                  id={time.id}
+                  day={time.day}
+                  start_time={time.open_time}
+                  end_time={time.close_time}
+                  key={time.day + index}
+                />
+              );
+            })}
+          </HorizontalContainer>
+          <PostAvailability row={2} type="hoursOfOperation" day="M" />
 
-  fillTimes = () => {
-    const hoosByDay = [[], [], [], [], [], [], []];
+          <RowHeader row={3}>Tuesday</RowHeader>
+          <HorizontalContainer row={3}>
+            {props.times[1].map((time, index) => {
+              return (
+                <Availability
+                  type="hoursOfOperation"
+                  id={time.id}
+                  day={time.day}
+                  start_time={time.open_time}
+                  end_time={time.close_time}
+                  key={time.day + index}
+                />
+              );
+            })}
+          </HorizontalContainer>
+          <PostAvailability row={4} type="hoursOfOperation" day="T" />
 
-    const dayLookupTable = {
-      M: 1,
-      T: 2,
-      W: 3,
-      R: 4,
-      F: 5,
-      S: 6,
-      U: 7,
-    };
+          <RowHeader row={5}>Wednesday</RowHeader>
+          <HorizontalContainer row={5}>
+            {props.times[2].map((time, index) => {
+              return (
+                <Availability
+                  type="hoursOfOperation"
+                  id={time.id}
+                  day={time.day}
+                  start_time={time.open_time}
+                  end_time={time.close_time}
+                  key={time.day + index}
+                />
+              );
+            })}
+          </HorizontalContainer>
+          <PostAvailability row={6} type="hoursOfOperation" day="W" />
 
-    const sorted = this.props.allHoOs.slice().sort(function(a, b) {
-      if (a.open_time > b.open_time) return 1;
-      else return -1;
-    });
+          <RowHeader row={7}>Thursday</RowHeader>
+          <HorizontalContainer row={7}>
+            {props.times[3].map((time, index) => {
+              return (
+                <Availability
+                  type="hoursOfOperation"
+                  id={time.id}
+                  day={time.day}
+                  start_time={time.open_time}
+                  end_time={time.close_time}
+                  key={time.day + index}
+                />
+              );
+            })}
+          </HorizontalContainer>
+          <PostAvailability row={8} type="hoursOfOperation" day="R" />
 
-    sorted.forEach((hoo, index) => {
-      hoosByDay[dayLookupTable[hoo.day] - 1].push(hoo);
-    });
-    return hoosByDay;
-  };
+          <RowHeader row={9}>Friday</RowHeader>
+          <HorizontalContainer row={9}>
+            {props.times[4].map((time, index) => {
+              return (
+                <Availability
+                  type="hoursOfOperation"
+                  id={time.id}
+                  day={time.day}
+                  start_time={time.open_time}
+                  end_time={time.close_time}
+                  key={time.day + index}
+                />
+              );
+            })}
+          </HorizontalContainer>
+          <PostAvailability row={10} type="hoursOfOperation" day="F" />
 
-  render() {
-    const times = this.fillTimes();
+          <RowHeader row={11}>Saturday</RowHeader>
+          <HorizontalContainer row={11}>
+            {props.times[5].map((time, index) => {
+              return (
+                <Availability
+                  type="hoursOfOperation"
+                  id={time.id}
+                  day={time.day}
+                  start_time={time.open_time}
+                  end_time={time.close_time}
+                  key={time.day + index}
+                />
+              );
+            })}
+          </HorizontalContainer>
+          <PostAvailability row={12} type="hoursOfOperation" day="S" />
 
-    return (
-      <AdminHoursContainer>
-        <Segment padded="very">
-          <Header textAlign="center">Hours of Operation</Header>
-          <Divider />
-          <Day>
-            <h4>Monday</h4>
-            <HorizontalContainer>
-              {times[0].map((time, index) => {
-                return (
-                  <Availability
-                    type="hoursOfOperation"
-                    id={time.id}
-                    day={time.day}
-                    start_time={time.open_time}
-                    end_time={time.close_time}
-                    key={time.day + index}
-                  />
-                );
-              })}
-              <PostAvailability type="hoursOfOperation" day="M" />
-            </HorizontalContainer>
-          </Day>
-          <Day>
-            <h4>Tuesday</h4>
-            <HorizontalContainer>
-              {times[1].map((time, index) => {
-                return (
-                  <Availability
-                    type="hoursOfOperation"
-                    id={time.id}
-                    day={time.day}
-                    start_time={time.open_time}
-                    end_time={time.close_time}
-                    key={time.day + index}
-                  />
-                );
-              })}
-              <PostAvailability type="hoursOfOperation" day="T" />
-            </HorizontalContainer>
-          </Day>
-          <Day>
-            <h4>Wednesday</h4>
-            <HorizontalContainer>
-              {times[2].map((time, index) => {
-                return (
-                  <Availability
-                    type="hoursOfOperation"
-                    id={time.id}
-                    day={time.day}
-                    start_time={time.open_time}
-                    end_time={time.close_time}
-                    key={time.day + index}
-                  />
-                );
-              })}
-              <PostAvailability type="hoursOfOperation" day="W" />
-            </HorizontalContainer>
-          </Day>
-          <Day>
-            <h4>Thursday</h4>
-            <HorizontalContainer>
-              {times[3].map((time, index) => {
-                return (
-                  <Availability
-                    type="hoursOfOperation"
-                    id={time.id}
-                    day={time.day}
-                    start_time={time.open_time}
-                    end_time={time.close_time}
-                    key={time.day + index}
-                  />
-                );
-              })}
-              <PostAvailability type="hoursOfOperation" day="R" />
-            </HorizontalContainer>
-          </Day>
-          <Day>
-            <h4>Friday</h4>
-            <HorizontalContainer>
-              {times[4].map((time, index) => {
-                return (
-                  <Availability
-                    type="hoursOfOperation"
-                    id={time.id}
-                    day={time.day}
-                    start_time={time.open_time}
-                    end_time={time.close_time}
-                    key={time.day + index}
-                  />
-                );
-              })}
-              <PostAvailability type="hoursOfOperation" day="F" />
-            </HorizontalContainer>
-          </Day>
-          <Day>
-            <h4>Saturday</h4>
-            <HorizontalContainer>
-              {times[5].map((time, index) => {
-                return (
-                  <Availability
-                    type="hoursOfOperation"
-                    id={time.id}
-                    day={time.day}
-                    start_time={time.open_time}
-                    end_time={time.close_time}
-                    key={time.day + index}
-                  />
-                );
-              })}
-              <PostAvailability type="hoursOfOperation" day="S" />
-            </HorizontalContainer>
-          </Day>
-          <Day>
-            <h4>Sunday</h4>
-            <HorizontalContainer>
-              {times[6].map((time, index) => {
-                return (
-                  <Availability
-                    type="hoursOfOperation"
-                    id={time.id}
-                    day={time.day}
-                    start_time={time.open_time}
-                    end_time={time.close_time}
-                    key={time.day + index}
-                  />
-                );
-              })}
-              <PostAvailability type="hoursOfOperation" day="U" />
-            </HorizontalContainer>
-          </Day>
-        </Segment>
-      </AdminHoursContainer>
-    );
-  }
-}
-
-const mapStateToProps = state => {
-  return {
-    allHoOs: state.hourOfOperation.allHoOs,
-  };
+          <RowHeader row={13}>Sunday</RowHeader>
+          <HorizontalContainer row={13}>
+            {props.times[6].map((time, index) => {
+              return (
+                <Availability
+                  type="hoursOfOperation"
+                  id={time.id}
+                  day={time.day}
+                  start_time={time.open_time}
+                  end_time={time.close_time}
+                  key={time.day + index}
+                />
+              );
+            })}
+          </HorizontalContainer>
+          <PostAvailability row={14} type="hoursOfOperation" day="U" />
+        </GridContainer>
+      </Segment>
+    </AdminHoursContainer>
+  );
 };
 
 const mapDispatchToProps = dispatch => {
   return {
-    getHoursOfOperation: () => {
-      return dispatch(getHoursOfOperation());
-    },
     updateHoursOfOperation: (id, day, open_time, close_time) => {
       return dispatch(updateHoursOfOperation(id, day, open_time, close_time));
     },
@@ -203,6 +157,6 @@ const mapDispatchToProps = dispatch => {
 };
 
 export default connect(
-  mapStateToProps,
+  null,
   mapDispatchToProps
 )(AdminHours);

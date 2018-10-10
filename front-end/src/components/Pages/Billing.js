@@ -9,7 +9,7 @@ import {
   StripeContainer,
   BillingHeader,
 } from "../../styles/Billing.js";
-import { Segment, Header } from "semantic-ui-react";
+import { Segment } from "semantic-ui-react";
 
 //StripeProvider gives us access to the Stripe Object
 //i.e Stripe.createToken, stripe.elements() etc

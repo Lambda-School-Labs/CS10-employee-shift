@@ -6,7 +6,7 @@ import { postHoursOfOperation } from "../../store/hourOfOperation/actions.js";
 
 import TimePicker from "../Atoms/TimePicker.js";
 
-import { Portal, Accordion, Icon, Button } from "semantic-ui-react";
+import { Portal, Accordion, Icon, Label, Segment } from "semantic-ui-react";
 
 class PostAvailability extends Component {
   constructor(props) {
@@ -57,68 +57,83 @@ class PostAvailability extends Component {
   };
 
   handleSubmit = () => {
-    this.handleClose();
+    this.setState({ open: 0, revealed: false });
 
-    // handle error of end time less than start time
+    // TODO: handle validation better
+    if (
+      this.state.start_time24 < this.state.end_time24 &&
+      this.state.start_time24 &&
+      this.state.end_time24
+    ) {
+      if (this.props.type === "availability") {
+        this.props.postAvailabilities(
+          this.props.profile,
+          this.state.day,
+          this.state.start_time24 + ":00",
+          this.state.end_time24 + ":00"
+        );
+      } else if (this.props.type === "hoursOfOperation")
+        this.props.postHoursOfOperation(
+          this.state.day,
+          this.state.start_time24,
+          this.state.end_time24 + ":00"
+        );
 
-    if (this.props.type === "availability") {
-      console.log(
-        this.props.profile,
-        this.state.day,
-        this.state.start_time24 + ":00",
-        this.state.end_time24 + ":00"
-      );
-      this.props.postAvailabilities(
-        this.props.profile,
-        this.state.day,
-        this.state.start_time24 + ":00",
-        this.state.end_time24 + ":00"
-      );
-    } else if (this.props.type === "hoursOfOperation")
-      this.props.postHoursOfOperation(
-        this.state.day,
-        this.state.start_time24,
-        this.state.end_time24 + ":00"
-      );
-
-    this.setState({
-      day: this.props.day,
-      start_time: "",
-      end_time: "",
-      open: 0,
-      clickX: 0,
-      clickY: 0,
-      revealed: false,
-    });
+      this.setState({
+        day: this.props.day,
+        start_time: "",
+        end_time: "",
+        open: 0,
+        clickX: 0,
+        clickY: 0,
+        revealed: false,
+      });
+    }
   };
 
   render() {
     this.submitTimeChange = this.submitTimeChange.bind(this);
     return (
+      // TODO: refactor with styled components
       <div
         style={{
-          minWidth: "130px",
-          minHeight: "22px",
+          width: "100%",
           display: "flex",
-          padding: "5px 0",
+          alignItems: "baseline",
+          justifyContent: this.state.revealed ? "center" : "flex-start",
+          paddingLeft: this.state.revealed ? "calc(50% - 66px)" : "0",
+          gridRowStart: this.props.row,
+          gridRowEnd: this.props.row,
+          gridColumn: "1 / span 2",
+          minHeight: "26px",
+          borderBottom: "1px solid #eee",
         }}
       >
-        <Icon name="plus" link onClick={this.handleReveal} />{" "}
-        <span>{this.state.revealed ? null : "add"}</span>
+        <Icon
+          style={{
+            visibility: this.state.revealed ? "hidden" : "visible",
+          }}
+          name="plus"
+          link
+          onClick={this.handleReveal}
+        />
+
         {!this.state.revealed ? null : (
-          <div
+          <Segment
             style={{
               width: "100%",
               display: "flex",
-              justifyContent: "center",
+              justifyContent: "space-evenly",
               alignItems: "center",
+              margin: 0,
+              padding: "3px",
             }}
           >
             <Accordion.Title index={1} onClick={this.handleOpen}>
               {this.state.start_time ? (
-                this.state.start_time
+                <Label as="a">{this.state.start_time}</Label>
               ) : (
-                <input style={{ width: "40px" }} />
+                <Label as="a" style={{ minWidth: "64px" }} size="huge" />
               )}
             </Accordion.Title>
             <Portal open={this.state.open === 1} onClose={this.handleClose}>
@@ -137,19 +152,12 @@ class PostAvailability extends Component {
                 />
               </div>
             </Portal>
-            <span
-              style={{
-                padding: "0 14px",
-              }}
-            >
-              {" "}
-              -{" "}
-            </span>
+            <span>to</span>
             <Accordion.Title index={2} onClick={this.handleOpen}>
               {this.state.end_time ? (
-                this.state.end_time
+                <Label as="a">{this.state.end_time}</Label>
               ) : (
-                <input style={{ width: "40px" }} />
+                <Label as="a" style={{ minWidth: "64px" }} size="huge" />
               )}
             </Accordion.Title>
             <Portal open={this.state.open === 2} onClose={this.handleClose}>
@@ -168,8 +176,8 @@ class PostAvailability extends Component {
                 />
               </div>
             </Portal>
-            <Icon name="check" color="green" onClick={this.handleSubmit} />
-          </div>
+            <Icon link name="check" color="green" onClick={this.handleSubmit} />
+          </Segment>
         )}
       </div>
     );
