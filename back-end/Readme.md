@@ -9,6 +9,8 @@ and uses [OAuth2](https://www.django-rest-framework.org/api-guide/authentication
 Currently, return format for all endpoints is [JSON](http://json.org/ "JSON").
 
 ***
+![alt text](C:\Users\brand\Lambda School\CS10-employee-shift\back-end\images\database.png)
+
 
 
 ## Endpoints
@@ -68,6 +70,7 @@ Currently, return format for all endpoints is [JSON](http://json.org/ "JSON").
 
 ## Stripe
 - **[<code>POST</code> /api/creat-charge/]**
+![alt text](C:\Users\brand\Lambda School\CS10-employee-shift\back-end\images\stripe flow.png)
 
 ## Twilio
 - **[<code>POST</code> /api/sms/]**
@@ -96,4 +99,3 @@ The API is only available to authenticated clients. Clients should authenticate 
 
 ### What return formats do you support?
 Myshift API currently returns data in [JSON](http://json.org/ "JSON") format.
-W
