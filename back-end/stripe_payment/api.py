@@ -106,10 +106,11 @@ def checkout(request):
         }))
 
 # Add endpoint_secretkey here in localhost
-
-
+# You can find your endpoint's secret in your webhook settings
 endpoint_secret = settings.STRIPE_WEBHOOK_SECRET
 
+# Using Django
+@csrf_exempt
 def my_webhook_view(request):
   payload = request.body
   sig_header = request.META['HTTP_STRIPE_SIGNATURE']
