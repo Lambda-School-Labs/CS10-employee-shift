@@ -38,7 +38,7 @@ class Landing_Card extends Component {
     render(){
         const { visible } = this.state
         return (
-            <div className="container">
+            <div className="container" data-test="component-LandingCard">
                 <WelcomeHolder>
                     <WelcomeSide>
                         <MainLogo src={main_logo} />
@@ -48,7 +48,7 @@ class Landing_Card extends Component {
                         </WelcomeText> */}
                         <ScheduleButton>
                             <Link to="/signup">
-                                <ScheduleButton className="btn">Schedule Now</ScheduleButton>
+                                <ScheduleButton className="btn" data-test="schedule-button">Schedule Now</ScheduleButton>
                             </Link>
                         </ScheduleButton>
                     </WelcomeSide>
@@ -56,12 +56,12 @@ class Landing_Card extends Component {
                         <LandingNavBar>
                             <NavButton>
                                 <Link to="/signup">
-                                    <NavButton className="signup_btn">Sign up</NavButton>
+                                    <NavButton className="signup_btn" data-test="signup-button">Sign up</NavButton>
                                 </Link>
                             </NavButton>
                             <NavButton>
                                 <Link to="/signin">
-                                    <NavButton className="signin_btn">Sign in</NavButton>
+                                    <NavButton className="signin_btn" data-test="signin-button">Sign in</NavButton>
                                 </Link>
                             </NavButton>
                         </LandingNavBar>
