@@ -24,7 +24,7 @@ const AdminDetails = props => {
           <Card.Header>{props.account.company}</Card.Header>
           <Card.Meta style={{ padding: "10px" }}>
             <Icon name="user" />
-            {`  Size:  ${props.account ? props.account.profile_set.length : 0}`}
+            {/* {`  Size:  ${props.account ? props.account.profile_set.length : 0}`} */}
           </Card.Meta>
         </Card.Content>
         <Card.Content extra>
