@@ -204,6 +204,7 @@ export const updateUser = (
       .then(res => {
         if (res.status === 200) {
           dispatch({ type: "UPDATE_SUCCESS", data: res.data });
+          dispatch(getUser());
           return res.data;
         }
       })

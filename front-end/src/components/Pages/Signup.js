@@ -5,7 +5,7 @@ import { connect } from "react-redux";
 import { Segment, Input, Button, Icon, Form } from "semantic-ui-react";
 import { Container, FormItem, Header } from "../../styles/signin.js";
 
-import { signup } from "../../store/User/actions.js";
+import { signup, signin } from "../../store/User/actions.js";
 
 // TODO: Add in asking about HoO and stuff.
 // TODO: Needs more styling
@@ -136,7 +136,7 @@ class Signup extends Component {
 
   render() {
     if (this.props.isAuthenticated) {
-      // TODO: employee redirect
+      this.props.signin(this.state.username, this.state.password);
       return <Redirect to="/calendar" />;
     }
 
@@ -319,6 +319,9 @@ const mapDispatchToProps = dispatch => {
       return dispatch(
         signup(username, password, re_password, email, firstName, lastName, company)
       );
+    },
+    signin: (username, password) => {
+      return dispatch(signin(username, password));
     },
   };
 };
