@@ -34,7 +34,6 @@ import { Label } from "semantic-ui-react";
 const moment = extendMoment(Moment);
 
 // TODO: Make me more stylish
-// TODO: Turn cell red if conflict with employee's time off
 // TODO: Span shifts to multiple days
 
 const dayLookupTable = {
@@ -137,7 +136,7 @@ class Calendar extends Component {
         return;
       }
 
-      // Otherwise join together shifts for the day
+      // Join together shifts for the day
       const sortedRanges = ranges.slice().sort(function(a, b) {
         if (a.start.format() > b.start.format()) return 1;
         else return -1;
@@ -155,22 +154,34 @@ class Calendar extends Component {
           joinedRanges.push(newTail.add(head, { adjacent: true }));
         } else joinedRanges.push(head);
       }
+
       // TODO: Maybe handle shifts out of HoO here
       // push gaps between shifts to day of gapsByDay using the day's index
       if (joinedRanges.length) {
+        // If shift covers HoO_start
         if (HoO_start >= joinedRanges[0].start) {
-          if (HoO_end <= joinedRanges[[joinedRanges.length - 1]].end) return;
-          // if no gaps return
+          // and covers HoO_end in one shift, there are no gaps
+          if (
+            HoO_end <= joinedRanges[[joinedRanges.length - 1]].end &&
+            joinedRanges.length === 1
+          )
+            return;
 
+          // otherwise find gaps in between shifts
           for (let i = 0; i < joinedRanges.length - 1; i++) {
             gapsByDay[index - 1].push(
               moment.range(joinedRanges[i].end, joinedRanges[i + 1].start)
             );
           }
-          gapsByDay[index - 1].push(
-            moment.range(joinedRanges[joinedRanges.length - 1].end, HoO_end)
-          );
-        } else if (HoO_end <= joinedRanges[joinedRanges.length - 1].end) {
+          // if HoO_end is not covered, find end gap
+          if (HoO_end > joinedRanges[[joinedRanges.length - 1]].end)
+            gapsByDay[index - 1].push(
+              moment.range(joinedRanges[joinedRanges.length - 1].end, HoO_end)
+            );
+        }
+
+        // If shift doesn't cover HoO_start, but covers HoO_end, find gaps between shifts
+        else if (HoO_end <= joinedRanges[joinedRanges.length - 1].end) {
           gapsByDay[index - 1].push(
             moment.range(HoO_start, joinedRanges[0].start)
           );
@@ -179,7 +190,10 @@ class Calendar extends Component {
               moment.range(joinedRanges[i].end, joinedRanges[i + 1].start)
             );
           }
-        } else {
+        }
+
+        // If shift doesn't cover HoO_start or HoO_end, find gaps between shifts
+        else {
           gapsByDay[index - 1].push(
             moment.range(HoO_start, joinedRanges[0].start)
           );
@@ -226,9 +240,9 @@ class Calendar extends Component {
           displayDate={this.state.date}
         />
         <GridContainer rows={this.props.allProfiles.length + 2}>
-          {/* Refactor into molecules - Column Header */}
+          {/* TODO: Refactor into molecules - Column Header */}
           <GridItemHeader column="1" />
-          {/* Refactor - Dynamic */}
+          {/* TODO: Refactor - Dynamic */}
           <GridItemHeader column="2">
             <GridItemHeaderDay>Monday</GridItemHeaderDay>
             <GridItemHeaderDate>
@@ -299,13 +313,13 @@ class Calendar extends Component {
               }
             </GridItemHeaderDate>
           </GridItemHeader>
-          {/* Refactor into molecules - Row Header  */}
+
+          {/* TODO: Refactor into molecules - Row Header  */}
           <GridItemEmployee row="1" />
           <GridItemOpenShift row="2">
             <GridItemOpenShiftHeader>Open Shifts</GridItemOpenShiftHeader>
           </GridItemOpenShift>
           {this.props.allProfiles.map((profile, index) => {
-            // Shift counter for this week
             let shiftCount = 0;
             this.props.allShifts.forEach((shift, index) => {
               const shiftInCurrentWeek = moment(shift.start_datetime).isBetween(
@@ -332,7 +346,7 @@ class Calendar extends Component {
                 row={index + 3}
                 key={profile.user.last_name + index}
               >
-                <ProfileIcon hue={260 - (index % 10) * 36}>
+                <ProfileIcon hue={240 - (index % 10) * 36}>
                   {shiftCount}
                 </ProfileIcon>
                 <h5>
@@ -342,9 +356,11 @@ class Calendar extends Component {
             );
           })}
 
-          {/* Refactor into molecules - Body */}
+          {/* TODO: Refactor into molecules - Body */}
+          {/* Fills Grid with empty squares that add shifts when clicked */}
           {this.fillGrid(this.props.allProfiles.length)}
 
+          {/* Maps Grid with the current week's shifts that update shift when clicked*/}
           {this.props.allShifts.map((shift, index) => {
             const shiftInCurrentWeek = moment(shift.start_datetime).isBetween(
               currentDate
@@ -363,9 +379,23 @@ class Calendar extends Component {
                     profile => profile.id === shift.profile
                   )[0]
                 ) + 3;
+              const currentDayAvailability = this.props.allAvailabilities.filter(
+                availability => {
+                  availability.profile === shift.profile &&
+                    dayLookupTable[availability.day] ===
+                      moment(shift.start_datetime).isoWeekday();
+                }
+              );
+              // TODO: better errors on conflict, floating tooltip with conflict times
+              const hasScheduleConflict = currentDayAvailability.length
+                ? currentDayAvailability[0].start_time <=
+                    moment(shift.start_datetime).format("k:mm:ss") &&
+                  currentDayAvailability[0].end_time >=
+                    moment(shift.end_datetime).format("k:mm:ss")
+                : true;
               return (
                 <ScheduleShiftUpdate
-                  hue={profileRow ? 260 - ((profileRow - 3) % 10) * 36 : 102}
+                  hue={profileRow ? 240 - ((profileRow - 3) % 10) * 36 : 102}
                   key={shift.id}
                   row={profileRow}
                   // TODO: add span to second day
@@ -377,11 +407,13 @@ class Calendar extends Component {
                   notes={shift.notes}
                   profile={shift.profile}
                   id={shift.id}
+                  conflict={hasScheduleConflict}
                 />
               );
             } else return null;
           })}
 
+          {/* Renders approved employee requests off */}
           {this.props.allRequestOffs.map(requestOff => {
             if (requestOff.status === "A") {
               const startMoment = moment(requestOff.start_datetime);
@@ -439,6 +471,8 @@ class Calendar extends Component {
               }
             }
           })}
+
+          {/* Renders Gaps in the business account's Hours of Operations versus what shifts are scheduled */}
           {this.findGaps().map((dayOfGaps, index) => {
             const renderedGaps = [];
             if (dayOfGaps.length) {
@@ -472,6 +506,7 @@ class Calendar extends Component {
             return renderedGaps;
           })}
 
+          {/* Turns columns grey if the business account has no Hours of Operation for that day */}
           {this.fillClosedDays().map((day, index) => {
             if (day.length === 0) {
               return (

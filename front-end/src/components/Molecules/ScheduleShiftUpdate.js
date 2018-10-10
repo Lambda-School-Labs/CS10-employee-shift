@@ -148,6 +148,7 @@ class ScheduleShiftUpdate extends React.Component {
           hue={this.props.hue}
           start={this.props.startHour}
           end={this.props.endHour}
+          conflict={this.props.conflict}
         >
           {moment(this.props.start).format("h:mm A")} -
           {moment(this.props.end).format("h:mm A")}
