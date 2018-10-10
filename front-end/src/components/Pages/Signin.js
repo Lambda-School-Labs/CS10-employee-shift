@@ -11,7 +11,7 @@ class Signin extends Component {
   state = {
     username: "",
     password: "",
-    validated: false,
+    // validated: false,
     errors: {}
   };
 

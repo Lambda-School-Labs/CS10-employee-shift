@@ -87,7 +87,7 @@ export const signout = () => dispatch => {
         }
       })
       .catch(err => {
-        if (err.status < 500) {
+        if (err.status >= 500) {
           console.log("Server Error!");
           return { status: err.status, data: err.data };
         } else if (err.status === 403 || err.status === 401) {
@@ -110,16 +110,26 @@ export const signup = (
   company,
 ) => dispatch => {
   const body = JSON.stringify({
-    username,
-    password,
+    user: {
+      username,
+      password,
+      first_name,
+      last_name,
+      email,
+      is_staff: "false",
+      groups: [2]
+    },
     re_password,
-    email,
-    first_name,
-    last_name,
-    company,
-    groups: [1],
-    is_staff: "false",
-  });
+    account: {
+      logo: "https://logo-core.clearbit.com/lamdaschool.com/",
+      company,
+      plan_expires: "2018-09-20T18:00:00Z"
+    },
+    notes: "",
+    phone_number: "",
+    email_enabled: "true",
+    text_enabled: "false"
+  })
 
   axios({
     method: "post",
@@ -137,12 +147,11 @@ export const signup = (
     })
     .catch(err => {
       // TODO: Render error message
-      if (err.status < 500) {
+      if (err.response.status >= 500) {
         console.log("Server Error!");
         return { status: err.status, data: err.data };
-      } else if (err.status === 403 || err.status === 401) {
-        dispatch({ type: "ERROR", data: err.data });
-        throw err.data;
+      } else if (err.response.status >= 400) {
+        dispatch({ type: "ERROR", data: err.response.data });
       }
     });
 };

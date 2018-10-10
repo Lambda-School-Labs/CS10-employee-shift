@@ -57,7 +57,8 @@ class UserSerializer(ModelSerializer):
       try:
         validate_password(value)
       except ValidationError as exc:
-        raise serializers.ValidationError(str(exc))
+        print(exc)
+        raise exc
       return value
 
     def create(self, validated_data):

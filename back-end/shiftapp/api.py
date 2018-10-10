@@ -49,7 +49,7 @@ class GroupViewSet(viewsets.ModelViewSet):
     serializer_class = GroupSerializer
 
 
-class SignUp(generics.ListCreateAPIView):
+class SignUp(generics.CreateAPIView):
     # permission_classes = (IsAuthenticatedOrCreate,)
     permission_classes = [permissions.AllowAny]
     # permission_classes = [permissions.IsAuthenticated, TokenHasReadWriteScope]
