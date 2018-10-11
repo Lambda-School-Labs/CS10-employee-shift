@@ -45,6 +45,8 @@ class Employees extends Component {
             active={this.state.activeIndex === 0}
             index={0}
             click={this.handleTitleClick}
+            employeesNumber={this.props.allProfiles.length}
+            isPremium={this.props.account ? this.props.account.enabled : false}
           />
           {this.props.allProfiles.map((profile, index) => (
             <Segment key={index + 1}>
@@ -85,6 +87,7 @@ const mapStateToProps = state => {
     allProfiles: state.profile.allProfiles,
     allAvailabilities: state.availability.allAvailabilities,
     allRequestOffs: state.requestOff.allRequestOffs,
+    account: state.user.currentUser.account,
   };
 };
 
