@@ -12,47 +12,50 @@ class Signin extends Component {
     username: "",
     password: "",
     // validated: false,
-    errors: {}
+    errors: {},
   };
 
-  handleValidation(){
-      let errors = {};
-      let formIsValid = true;
-      let isEmail = false;
+  handleValidation() {
+    let errors = {};
+    let formIsValid = true;
+    let isEmail = false;
 
-      //Username
-      if(!this.state.username){
-        formIsValid = false;
-        errors["username"] = "Username or Email is required";
+    //Username
+    if (!this.state.username) {
+      formIsValid = false;
+      errors["username"] = "Username or Email is required";
+    }
+
+    if (this.state.username) {
+      if (
+        this.state.username.match(
+          /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
+        )
+      ) {
+        isEmail = true;
+        // errors["username"] = "Valid email";
       }
+    }
 
-      
-      if(this.state.username){
-        if(this.state.username.match(/^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/)){
-            isEmail = true;
-            // errors["username"] = "Valid email";
-        }       
-      }
+    // if(this.state.username){
+    //   if(!this.state.username.match(/^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/)){
+    //       formIsValid = false;
+    //       errors["username"] = "Invalid email";
+    //   }
+    // }
 
-      // if(this.state.username){
-      //   if(!this.state.username.match(/^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/)){
-      //       formIsValid = false;
-      //       errors["username"] = "Invalid email";
-      //   }        
-      // }
+    if (!this.state.password) {
+      formIsValid = false;
+      errors["password"] = "Password is required";
+    }
 
-      if(!this.state.password){
-        formIsValid = false;
-        errors["password"] = "Password is required";
-      }
-  
-    this.setState({errors: errors});
+    this.setState({ errors: errors });
     return formIsValid;
   }
 
   submitHandler = e => {
     e.preventDefault();
-    if(this.handleValidation())
+    if (this.handleValidation())
       this.props.signin(this.state.username, this.state.password);
   };
 
@@ -78,7 +81,11 @@ class Signin extends Component {
               }}
             >
               <Header>Welcome back!</Header>
-              {this.props.errors && <span style={{color: "red"}}>{this.props.errors.error_description}</span>}
+              {this.props.errors && (
+                <span style={{ color: "red" }}>
+                  {this.props.errors.error_description}
+                </span>
+              )}
               <Form onSubmit={this.submitHandler}>
                 <FormItem>
                   <h3>Username</h3>
@@ -91,7 +98,9 @@ class Signin extends Component {
                     iconPosition="left"
                     placeholder="Username or Email"
                   />
-                  <span style={{color: "red"}}>{this.state.errors["username"]}</span>
+                  <span style={{ color: "red" }}>
+                    {this.state.errors["username"]}
+                  </span>
                 </FormItem>
                 <FormItem>
                   <h3>Password</h3>
@@ -105,11 +114,13 @@ class Signin extends Component {
                     placeholder="Password"
                     type="password"
                   />
-                  <span style={{color: "red"}}>{this.state.errors["password"]}</span>
+                  <span style={{ color: "red" }}>
+                    {this.state.errors["password"]}
+                  </span>
                 </FormItem>
                 <FormItem>
                   <Button
-                    color='blue'
+                    color="blue"
                     fluid
                     size="large"
                     onClick={this.submitHandler}
