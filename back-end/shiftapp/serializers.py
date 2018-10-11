@@ -200,6 +200,8 @@ class AccountUserProfileSerializer(ModelSerializer):
 
     def create(self, validated_data):
       user_data = validated_data.pop('user')
+      group = Group.objects.filter(name='manager')
+      user_data['groups'] = group
       account_data = validated_data.pop('account')
       user = UserSerializer.create(UserSerializer(), validated_data=user_data)
       account = AccountSerializer.create(AccountSerializer(), validated_data=account_data)
