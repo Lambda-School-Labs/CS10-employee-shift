@@ -33,14 +33,17 @@ class NewEmployee extends Component {
   };
 
   handleSubmit = event => {
-    this.props.click({ index: 0 });
-    if (this.props.employeesNumber && this.props.isPremium) {
-      this.props.postProfile(this.state);
-    }
+    this.props.click(event, { index: 0 });
+    // TODO: better validation
+    let needsPremium = false;
+    if (this.props.employeesNumber > 4) needsPremium = !this.props.isPremium;
+
+    if (!needsPremium)
+      if (this.state.email && this.state.password && this.state.re_password)
+        this.props.postProfile(this.state);
   };
 
   render() {
-    // TODO: Check employee number & account flag : if more than 3 employees and no flag error
     let needsPremium = false;
     if (this.props.employeesNumber > 4) needsPremium = !this.props.isPremium;
 
