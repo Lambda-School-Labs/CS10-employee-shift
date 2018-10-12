@@ -27,7 +27,6 @@ export const getProfile = () => (dispatch, getState) => {
     });
 };
 
-/* Implement me on back-end */
 export const getAllProfiles = () => (dispatch, getState) => {
   dispatch({ type: "LOADING_PROFILE" });
   const headers = { "Content-Type": "application/json" };
@@ -55,7 +54,6 @@ export const getAllProfiles = () => (dispatch, getState) => {
     });
 };
 
-// TODO: fill in correct data to send
 export const postProfile = data => (dispatch, getState) => {
   dispatch({ type: "LOADING_PROFILE" });
   const token = getState().user.token;
@@ -67,11 +65,7 @@ export const postProfile = data => (dispatch, getState) => {
     headers["Authorization"] = `Bearer ${token}`;
   }
 
-  // fill me
-  // const body = JSON.stringify({ data });
-
   const body = {
-    // username: "admin", 500 error when you send "username" and "password"
     user: {
       username: data.email,
       password: "password.123",
@@ -95,7 +89,7 @@ export const postProfile = data => (dispatch, getState) => {
     data: body,
   })
     .then(res => {
-      if (res.status === 200) {
+      if (res.status === 201) {
         return dispatch({ type: "CREATE_PROFILE", data: res.data });
       }
     })
@@ -128,7 +122,7 @@ export const updateProfile = data => (dispatch, getState) => {
     data: body,
   })
     .then(res => {
-      if (res.status === 200) {
+      if (res.status === 200 || res.status === 204) {
         return dispatch({ type: "UPDATE_PROFILE", data: res.data });
       }
     })
@@ -161,7 +155,7 @@ export const deleteProfile = data => (dispatch, getState) => {
     data: body,
   })
     .then(res => {
-      if (res.status === 200) {
+      if (res.status === 200 || res.status === 204) {
         return dispatch({ type: "DELETE_PROFILE", data: res.data });
       }
     })

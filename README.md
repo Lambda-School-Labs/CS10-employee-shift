@@ -4,9 +4,16 @@
 
 Managing work shifts made easy. Quickly see the gaps in your schedule that need to be filled.
 
-Made with small business users in mind :blue_heart:. Only pay per employee once you grow beyond 2.
+Made with small business users in mind :blue_heart:. Only pay once you grow beyond 5 users!
 
 Premium features include text and email notifications for managers and your employees.
+
+### Main Tech Stack
+
+React ![alt text](https://upload.wikimedia.org/wikipedia/commons/a/a7/React-icon.svg "React logo"){:height="50px" width="50px"}
+Redux ![alt text](https://avatars0.githubusercontent.com/u/13142323?s=400&v=4 "Redux logo"){:height="50px" width="50px"}
+PostgreSQL ![alt text](https://upload.wikimedia.org/wikipedia/commons/thumb/2/29/Postgresql_elephant.svg/1200px-Postgresql_elephant.svg.png "PostgreSQL logo"){:height="50px" width="50px"}
+Django ![alt text](https://www.djangoproject.com/s/img/logos/django-logo-negative.png "Django logo"){:height="50px" width="50px"}
 
 ### Specific documentation:
 
