@@ -10,10 +10,13 @@ Premium features include text and email notifications for managers and your empl
 
 ### Main Tech Stack
 
-React ![alt text](https://upload.wikimedia.org/wikipedia/commons/a/a7/React-icon.svg "React logo"){:height="50px" width="50px"}
-Redux ![alt text](https://avatars0.githubusercontent.com/u/13142323?s=400&v=4 "Redux logo"){:height="50px" width="50px"}
-PostgreSQL ![alt text](https://upload.wikimedia.org/wikipedia/commons/thumb/2/29/Postgresql_elephant.svg/1200px-Postgresql_elephant.svg.png "PostgreSQL logo"){:height="50px" width="50px"}
-Django ![alt text](https://www.djangoproject.com/s/img/logos/django-logo-negative.png "Django logo"){:height="50px" width="50px"}
+React <img src="https://upload.wikimedia.org/wikipedia/commons/a/a7/React-icon.svg" alt="React logo" height="50px" />
+
+Redux <img src="https://avatars0.githubusercontent.com/u/13142323?s=400&v=4" alt="Redux logo" width="50px" />
+
+PostgreSQL <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/2/29/Postgresql_elephant.svg/1200px-Postgresql_elephant.svg.png" alt="PostgreSQL logo" width="50px" />
+
+Django <img src="https://www.djangoproject.com/s/img/logos/django-logo-negative.png" alt="Django logo" width="50px" />
 
 ### Specific documentation:
 
