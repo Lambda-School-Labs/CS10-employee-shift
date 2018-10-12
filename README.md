@@ -1,4 +1,4 @@
-![alt text](https://github.com/Lambda-School-Labs/CS10-employee-shift/blob/master/front-end/src/styles/logos/employee_scheduler2.png "myShifts.app Logo Title Text")
+<img src="https://github.com/Lambda-School-Labs/CS10-employee-shift/blob/master/front-end/src/styles/logos/employee_scheduler2.png" alt="myShifts.app Logo Title Text" />
 
 ### The scheduling solution that grows with your business
 
