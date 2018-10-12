@@ -18,8 +18,6 @@ import {
 class NewEmployee extends Component {
   state = {
     username: "",
-    password: "",
-    re_password: "",
     first_name: "",
     last_name: "",
     email: "",
@@ -39,7 +37,7 @@ class NewEmployee extends Component {
     if (this.props.employeesNumber > 4) needsPremium = !this.props.isPremium;
 
     if (!needsPremium)
-      if (this.state.email && this.state.password && this.state.re_password)
+      if (this.state.email && this.state.first_name && this.state.last_name)
         this.props.postProfile(this.state);
   };
 

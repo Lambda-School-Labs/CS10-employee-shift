@@ -44,6 +44,7 @@ class Admin extends Component {
   };
 
   render() {
+    const times = this.fillTimes();
     return (
       <AdminContainer>
         <AdminHeader>
@@ -54,7 +55,7 @@ class Admin extends Component {
         <Segment padded="very" style={{ width: "100%", margin: "0 10% 0 10%" }}>
           <AdminBody>
             <AdminDetails />
-            <AdminHours times={this.fillTimes()} />
+            <AdminHours times={times} />
           </AdminBody>
         </Segment>
       </AdminContainer>

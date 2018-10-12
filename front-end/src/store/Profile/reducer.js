@@ -29,13 +29,13 @@ export default (state = initialState, action) => {
         newProfiles.filter(profile => profile.id === updatedProfile.id)[0]
       );
       newProfiles.splice(indexToUpdate, 1, updatedProfile);
-      return { ...state, currentProfile: newProfiles, profileLoading: false };
+      return { ...state, allProfiles: newProfiles, profileLoading: false };
 
     case "DELETE_PROFILE":
       const new_profiles = newProfiles.filter(
         profile => profile.id !== action.data
       );
-      return { ...state, currentProfile: new_profiles, profileLoading: false };
+      return { ...state, allProfiles: new_profiles, profileLoading: false };
 
     // TODO: double check this
     case "ERROR":
