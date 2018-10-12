@@ -127,8 +127,9 @@ class ProfileSerializer(ModelSerializer):
         fields = ('url', 'id', 'user', 'account', 'phone_number', 'notes', 'email_enabled', 'text_enabled')
 
     def create(self, validated_data):
-      user_data = validated_data.pop('user')
-      print("here ", user_data)
+      user_data = validated_data.pop('user')      
+      group = Group.objects.filter(name='employee')
+      user_data['groups'] = group
       user = UserSerializer.create(UserSerializer(), validated_data=user_data)
       # profile = super(ProfileSerializer, self).create(user=user)
       profile, created = Profile.objects.update_or_create(user=user,
