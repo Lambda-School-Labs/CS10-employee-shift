@@ -6,7 +6,7 @@ const initialState = {
 
 export default (state = initialState, action) => {
   // return shallow copy of hoos
-  const newHoO = state.allHoOs.slice();
+  const oldHoO = state.allHoOs.slice();
 
   switch (action.type) {
     case "LOADING_HOO":
@@ -16,20 +16,19 @@ export default (state = initialState, action) => {
       return { ...state, allHoOs: action.data, HoOLoading: false };
 
     case "CREATE_HOO":
-      newHoO.push(action.data);
-      return { ...state, allHoOs: newHoO, HoOLoading: false };
+      oldHoO.push(action.data);
+      return { ...state, allHoOs: oldHoO, HoOLoading: false };
 
     case "UPDATE_HOO":
       const updatedHoO = action.data;
-      const indexToUpdate = newHoO.indexOf(
-        newHoO.filter(shift => shift.id === updatedHoO.id)[0]
+      const indexToUpdate = oldHoO.indexOf(
+        oldHoO.filter(shift => shift.id === updatedHoO.id)[0]
       );
-      newHoO.splice(indexToUpdate, 1, updatedHoO);
-      return { ...state, allHoOs: newHoO, newHoOLoading: false };
+      oldHoO.splice(indexToUpdate, 1, updatedHoO);
+      return { ...state, allHoOs: oldHoO, HoOLoading: false };
 
     case "DELETE_HOO":
-      const new_hoO = newHoO.filter(HoO => HoO.id !== action.data);
-      console.log(new_hoO, action.data);
+      const new_hoO = oldHoO.filter(HoO => HoO.id !== action.data);
       return { ...state, allHoOs: new_hoO, HoOLoading: false };
 
     // TODO: double check this

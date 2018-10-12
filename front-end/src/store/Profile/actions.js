@@ -107,7 +107,7 @@ export const postProfile = data => (dispatch, getState) => {
 export const updateProfile = data => (dispatch, getState) => {
   dispatch({ type: "LOADING_PROFILE" });
   const { token } = getState().user.token;
-  const headers = { "Content-Type": "application/x-www-form-urlencoded" };
+  const headers = { "Content-Type": "application/json" };
 
   if (token) {
     headers["Authorization"] = `Bearer ${token}`;
@@ -139,24 +139,21 @@ export const updateProfile = data => (dispatch, getState) => {
 
 export const deleteProfile = data => (dispatch, getState) => {
   dispatch({ type: "LOADING_PROFILE" });
-  const { token } = getState().user.token;
-  const headers = { "Content-Type": "application/x-www-form-urlencoded" };
+  const token = getState().user.token;
+  const headers = { "Content-Type": "application/json" };
 
   if (token) {
     headers["Authorization"] = `Bearer ${token}`;
   }
 
-  const body = JSON.stringify({ data });
-
   axios({
     method: "delete",
-    url: `${process.env.REACT_APP_ROOT_URL}/api/profiles/`,
+    url: `${process.env.REACT_APP_ROOT_URL}/api/profiles/${data}/`,
     headers: headers,
-    data: body,
   })
     .then(res => {
       if (res.status === 200 || res.status === 204) {
-        return dispatch({ type: "DELETE_PROFILE", data: res.data });
+        return dispatch({ type: "DELETE_PROFILE", data: data });
       }
     })
     .catch(err => {

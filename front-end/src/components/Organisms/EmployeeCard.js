@@ -10,6 +10,9 @@ import {
   Icon,
   Segment,
   Grid,
+  Input,
+  Button,
+  Dropdown,
 } from "../../../node_modules/semantic-ui-react";
 
 import { EmployeeCardContainer, CardInner } from "../../styles/Employees";
@@ -20,22 +23,36 @@ import EmployeeAvailability from "./EmployeeAvailability";
 class EmployeeCard extends Component {
   constructor(props) {
     super(props);
-    this.state = {};
+    this.state = {
+      email: this.props.profile.user.email,
+      phone_number: this.props.profile.user.phone_number,
+      first_name: this.props.profile.user.first_name,
+      last_name: this.props.profile.user.last_name,
+      visible: false,
+    };
   }
 
+  handleReveal = () => {
+    if (!this.state.visible) {
+      this.setState({ visible: true });
+    } else {
+      this.setState({ visible: false });
+    }
+  };
+
   handleUpdate = () => {
+    this.setState({ visible: false });
     console.log("update");
   };
 
   handleDelete = () => {
-    console.log("delete");
+    this.props.deleteProfile(this.props.profile.id);
   };
 
   render() {
     const profile = this.props.profile;
     return (
       // TODO: REDO grid for media queries
-
       <Grid columns={3} divided>
         <Grid.Column verticalAlign="middle">
           <Card centered color="blue">
@@ -48,8 +65,23 @@ class EmployeeCard extends Component {
                   justifyContent: "flex-end",
                 }}
               >
+                {this.state.visible ? (
+                  <p
+                    style={{ position: "absolute", top: "10px", left: "10px" }}
+                  >
+                    <Dropdown
+                      defaultValue={profile.user.first_name}
+                      fluid
+                      selection
+                      options={[
+                        { text: "Employee", value: "Employee" },
+                        { text: "Manager", value: "Manager" },
+                      ]}
+                    />
+                  </p>
+                ) : null}
                 <Icon
-                  onClick={this.handleUpdate}
+                  onClick={this.handleReveal}
                   link
                   name="pencil"
                   color="blue"
@@ -67,22 +99,80 @@ class EmployeeCard extends Component {
                 size="tiny"
                 src="https://react.semantic-ui.com/images/avatar/large/matthew.png"
               />
-              <Card.Header textAlign="center" style={{ marginTop: "10px" }}>
-                {profile.user.first_name}
-                {"  "}
-                {profile.user.last_name}
-              </Card.Header>
+              {this.state.visible ? (
+                <div>
+                  <Input
+                    fluid
+                    value={this.state.first_name}
+                    onChange={this.inputChangeHandler}
+                    name="first_name"
+                    iconPosition="left"
+                    placeholder="First name"
+                    style={{ paddingBottom: "10px" }}
+                  />
+                  <Input
+                    fluid
+                    value={this.state.last_name}
+                    onChange={this.inputChangeHandler}
+                    name="last_name"
+                    iconPosition="left"
+                    placeholder="Last name"
+                  />
+                </div>
+              ) : (
+                <Card.Header textAlign="center" style={{ marginTop: "10px" }}>
+                  {profile.user.first_name}
+                  {"  "}
+                  {profile.user.last_name}
+                </Card.Header>
+              )}
             </Card.Content>
-            <Card.Content>
-              <Card.Description>
-                <Icon name="mail" />
-                {profile.user.email}
-              </Card.Description>
-              <Card.Description>
-                <Icon name="phone" />
-                {profile.phone_number}
-              </Card.Description>
-            </Card.Content>
+            {this.state.visible ? (
+              <Card.Content>
+                <Card.Description>
+                  <Input
+                    fluid
+                    value={this.state.email}
+                    onChange={this.inputChangeHandler}
+                    name="email"
+                    icon="mail"
+                    iconPosition="left"
+                    placeholder="E-mail address"
+                    style={{ paddingBottom: "10px" }}
+                  />
+                </Card.Description>
+                <Card.Description>
+                  <Input
+                    fluid
+                    value={this.state.phone_number}
+                    onChange={this.inputChangeHandler}
+                    name="phone_number"
+                    icon="phone"
+                    iconPosition="left"
+                    placeholder="Phone number"
+                  />
+                </Card.Description>
+                <Button
+                  onClick={this.handleUpdate}
+                  fluid
+                  color="green"
+                  style={{ marginTop: "10px" }}
+                >
+                  Submit
+                </Button>
+              </Card.Content>
+            ) : (
+              <Card.Content>
+                <Card.Description style={{ padding: "5%" }}>
+                  <Icon name="mail" />
+                  {profile.user.email}
+                </Card.Description>
+                <Card.Description style={{ padding: "5%" }}>
+                  <Icon name="phone" />
+                  {profile.phone_number}
+                </Card.Description>
+              </Card.Content>
+            )}
           </Card>
         </Grid.Column>
         <Grid.Column>
