@@ -136,10 +136,9 @@ class Signup extends Component {
   };
 
   render() {
-    if (this.props.isAuthenticated && this.props.user.currentUser) {
-      if (this.props.user.currentUser.user.groups[0].name === "manager")
-        return <Redirect to="/calendar" />;
-      else return <Redirect to="/dashboard" />;
+    if (this.props.isAuthenticated) {
+      this.props.signin(this.state.username, this.state.password);
+      return <Redirect to="/calendar" />;
     } else
       return (
         <Container>
