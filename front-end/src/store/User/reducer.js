@@ -49,7 +49,7 @@ export default (state = initialState, action) => {
     case "SIGNUP_SUCCESS":
       return {
         ...state,
-        ...action.data,
+        currentUser: action.data,
         isAuthenticated: true,
         isLoading: false,
         errors: null,
