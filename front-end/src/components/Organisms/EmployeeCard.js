@@ -191,11 +191,14 @@ class EmployeeCard extends Component {
           <Segment style={{ minHeight: "92%" }}>
             {// TODO: Also filter by dates
             this.props.allRequestOffs
-              .filter(
-                requestOff =>
+              .filter(requestOff => {
+                return (
                   requestOff.profile === profile.id &&
-                  moment() < requestOff.end_datetime
-              )
+                  moment()
+                    .utc()
+                    .format() < requestOff.end_datetime
+                );
+              })
               .map(requestOff => (
                 <RequestedTimeOff
                   key={requestOff.id}

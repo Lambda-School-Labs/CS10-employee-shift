@@ -23,13 +23,14 @@ class AssignedShift extends Component {
               if (a.start_datetime > b.start_datetime) return 1;
               else return -1;
             })
-            .map(
-              (shift, index) =>
-                shift.is_open === false &&
+            .map((shift, index) => {
+              if (
                 shift.end_datetime >
-                  moment()
-                    .utc()
-                    .format() && (
+                moment()
+                  .utc()
+                  .format()
+              )
+                return (
                   <Segment.Group key={index}>
                     <Segment
                       style={{
@@ -61,8 +62,8 @@ class AssignedShift extends Component {
                       </Segment>
                     ) : null}
                   </Segment.Group>
-                )
-            )}
+                );
+            })}
         </Segment>
       </AssignedShiftsContainer>
     );
