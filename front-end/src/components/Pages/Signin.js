@@ -3,7 +3,7 @@ import { connect } from "react-redux";
 import { Link, Redirect } from "react-router-dom";
 
 import { Segment, Input, Button, Form } from "semantic-ui-react";
-import { Container, FormItem, Header } from "../../styles/signin.js";
+import { Container, FormItem, Header } from "../../styles/Signin.js";
 
 import { signin } from "../../store/User/actions.js";
 
@@ -65,7 +65,6 @@ class Signin extends Component {
   };
 
   render() {
-    console.log("render login : ", this.props.errors);
     if (this.props.isAuthenticated && this.props.user.currentUser) {
       if (this.props.user.currentUser.user.groups[0].name === "manager")
         return <Redirect to="/calendar" />;
@@ -147,14 +146,6 @@ class Signin extends Component {
 }
 
 const mapStateToProps = state => {
-  // console.log('erroirrrrrrrr',state.user.errors);
-  // let errors = [];
-  // if (state.user.errors) {
-  //   console.log('erroirrrrrrrr',state.user.errors);
-  //   errors = Object.keys(state.user.errors).map(field => {
-  //     return { field, message: state.user.errors[field] };
-  //   });
-  // }
   return {
     errors: state.user.errors,
     isAuthenticated: state.user.isAuthenticated,

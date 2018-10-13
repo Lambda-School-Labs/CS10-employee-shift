@@ -10,7 +10,7 @@ import {
   deleteHoursOfOperation,
 } from "../../store/hourOfOperation/actions.js";
 
-import TimePicker from "../Atoms/TimePicker.js";
+import TimePicker from "./TimePicker.js";
 
 import { Icon, Portal, Accordion, Segment, Label } from "semantic-ui-react";
 

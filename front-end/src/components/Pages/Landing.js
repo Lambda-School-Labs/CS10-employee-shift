@@ -1,20 +1,19 @@
 import React from "react";
 
-import Landing_Card from "../Organisms/landing_card.js";
-import Landing_Detail from "../Organisms/landing_detail.js";
-import LandingLearning from "../Organisms/landingLearn.js";
-import LandingFooter from "../Organisms/landingFooter.js";
+import LandingCard from "../Organisms/LandingCard.js";
+import LandingDetail from "../Organisms/LandingDetails.js";
+import LandingLearning from "../Organisms/LandingLearn.js";
+import LandingFooter from "../Organisms/LandingFooter.js";
 
 const Landing = () => {
   return (
     <div>
-      <Landing_Card/>
-      <Landing_Detail/>
-      <LandingLearning/>
-      <LandingFooter/>
+      <LandingCard />
+      <LandingDetail />
+      <LandingLearning />
+      <LandingFooter />
     </div>
-  )
+  );
 };
 
 export default Landing;
-

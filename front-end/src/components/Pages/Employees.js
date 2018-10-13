@@ -12,8 +12,8 @@ import { getAllProfiles } from "../../store/Profile/actions";
 import { getAvailabilities } from "../../store/Availability/actions";
 import { getRequestOffs } from "../../store/requestOff/actions";
 
-import EmployeeCard from "../Organisms/EmployeeCard.js";
-import NewEmployee from "../Organisms/NewEmployee.js";
+import EmployeeCard from "../Organisms/EmployeesEmployeeCard";
+import NewEmployee from "../Organisms/EmployeesNewEmployee";
 
 import { EmployeesContainer, EmployeeHeader } from "../../styles/Employees.js";
 

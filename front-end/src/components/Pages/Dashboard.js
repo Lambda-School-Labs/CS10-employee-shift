@@ -1,8 +1,8 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import AssignedShift from "../Organisms/AssignedShift.js";
-import TimeOffApproved from "../Organisms/TimeOffApproved.js";
-import TimeOffRequests from "../Organisms/TimeOffRequests.js";
+import AssignedShift from "../Organisms/DashboardAssignedShift.js";
+import TimeOffApproved from "../Organisms/DashboardTimeOffApproved.js";
+import TimeOffRequests from "../Organisms/DashboardTimeOffRequests.js";
 
 import {
   DashboardContainer,

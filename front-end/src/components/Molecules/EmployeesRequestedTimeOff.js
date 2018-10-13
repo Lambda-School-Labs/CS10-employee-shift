@@ -5,14 +5,8 @@ import { updateRequestOff } from "../../store/requestOff/actions.js";
 
 import moment from "moment";
 
-import { EmployeesRequestedTimeOffContainer } from "../../styles/Employees";
-import {
-  Form,
-  Divider,
-  Checkbox,
-  Accordion,
-  Label,
-} from "../../../node_modules/semantic-ui-react";
+import { EmployeesRequestedTimeOffContainer } from "../../styles/Employees.js";
+import { Form, Divider, Checkbox, Accordion, Label } from "semantic-ui-react";
 
 // STATUS_CHOICES = (
 //   ('P', 'Pending'),

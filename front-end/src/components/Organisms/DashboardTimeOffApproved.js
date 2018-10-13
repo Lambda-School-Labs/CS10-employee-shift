@@ -57,6 +57,7 @@ class TimeOffApproved extends Component {
                     ) : null}
                   </Segment.Group>
                 );
+              else return null;
             })}
         </Segment>
       </TimeOffApprovedContainer>

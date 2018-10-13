@@ -7,7 +7,7 @@ import { getShifts } from "../../store/Shift/actions.js";
 import { AssignedShiftsContainer } from "../../styles/Dashboard.js";
 import { Segment, Header, Label } from "semantic-ui-react";
 
-class AssignedShift extends Component {
+class DashboardAssignedShift extends Component {
   componentDidMount() {
     this.props.getShifts();
   }
@@ -63,6 +63,7 @@ class AssignedShift extends Component {
                     ) : null}
                   </Segment.Group>
                 );
+              else return null;
             })}
         </Segment>
       </AssignedShiftsContainer>
@@ -87,4 +88,4 @@ const mapDispatchToProps = dispatch => {
 export default connect(
   mapStateToProps,
   mapDispatchToProps
-)(AssignedShift);
+)(DashboardAssignedShift);

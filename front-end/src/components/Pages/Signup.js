@@ -3,7 +3,7 @@ import { Link, Redirect } from "react-router-dom";
 import { connect } from "react-redux";
 
 import { Segment, Input, Button, Icon, Form } from "semantic-ui-react";
-import { Container, FormItem, Header } from "../../styles/signin.js";
+import { Container, FormItem, Header } from "../../styles/Signin.js";
 
 import { signup, signin } from "../../store/User/actions.js";
 
@@ -95,12 +95,6 @@ class Signup extends Component {
     ];
     this.setState({ error: newError });
     if (this.handleValidation(this.state.currentPage))
-      // if (
-      //   this.state.password === this.state.re_password &&
-      //   !newError[4] &&
-      //   !newError[5] &&
-      //   !newError[6]
-      // )
       this.props.signup(
         this.state.username,
         this.state.password,
@@ -239,8 +233,6 @@ class Signup extends Component {
               {this.props.errors &&
                 Object.keys(this.props.errors.user).map(field => {
                   return this.props.errors.user[field].map(message => {
-                    // <span style={{color: "red"}}>{message}</span>
-                    console.log(message);
                     return <div style={{ color: "red" }}>{message}</div>;
                   });
                 })}

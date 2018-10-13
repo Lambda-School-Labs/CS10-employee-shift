@@ -13,12 +13,10 @@ import {
   Input,
   Button,
   Dropdown,
-} from "../../../node_modules/semantic-ui-react";
+} from "semantic-ui-react";
 
-import { EmployeeCardContainer, CardInner } from "../../styles/Employees";
-
-import RequestedTimeOff from "../Molecules/RequestedTimeOff";
-import EmployeeAvailability from "./EmployeeAvailability";
+import RequestedTimeOff from "../Molecules/EmployeesRequestedTimeOff.js";
+import EmployeeAvailability from "../Molecules/EmployeesEmployeeAvailability.js";
 
 class EmployeeCard extends Component {
   constructor(props) {
