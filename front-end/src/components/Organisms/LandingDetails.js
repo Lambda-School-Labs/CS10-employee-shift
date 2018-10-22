@@ -1,45 +1,38 @@
 import React from "react";
-import styled from "styled-components";
 
-
-import { 
-  BackgroundHolder, 
-  TopContainer, 
+import {
+  BackgroundHolder,
+  TopContainer,
   FontTitle,
   TextBox,
   MidContainer,
   InnerText,
   TitleText,
-}
-from "../../styles/Landing.js";
+} from "../../styles/Landing.js";
 
 import "../../styles/LandingRef.css";
 
-import Accountability from "../../styles/icons/benefits-accountability.png";
-import Changes from "../../styles/icons/benefits-changes.png";
-import Time from "../../styles/icons/benefits-time.png";
+import Accountability from "../../assets/icons/benefits-accountability.png";
+import Changes from "../../assets/icons/benefits-changes.png";
+import Time from "../../assets/icons/benefits-time.png";
 
 const divStyle = {
   // backgroundColor: '#b8b8b8'
   backgroundColor: "#e6e6e6",
 };
 
-const Landing_Details = () => {
+const LandingDetails = () => {
   return (
     <div>
       <BackgroundHolder style={divStyle}>
         <TopContainer>
-          <FontTitle>
-            The Benefits of MyShifts
-          </FontTitle>
+          <FontTitle>The Benefits of MyShifts</FontTitle>
         </TopContainer>
 
         <MidContainer>
           <TextBox>
             <img className="ouricon" src={Time} alt="time" />
-            <TitleText>
-              Spend More Time Growing Your Business
-            </TitleText>
+            <TitleText>Spend More Time Growing Your Business</TitleText>
             <InnerText>
               Spend more time working to grow your business and less time
               fighting fires.
@@ -47,10 +40,12 @@ const Landing_Details = () => {
           </TextBox>
 
           <TextBox>
-            <img className="ouricon" src={Accountability} alt="accountability" />
-            <TitleText>
-              Increase Employee Accountability
-            </TitleText>
+            <img
+              className="ouricon"
+              src={Accountability}
+              alt="accountability"
+            />
+            <TitleText>Increase Employee Accountability</TitleText>
             <InnerText>
               Reduce employee no-shows and improve accountability across your
               team by 25%
@@ -71,4 +66,4 @@ const Landing_Details = () => {
   );
 };
 
-export default Landing_Details;
+export default LandingDetails;

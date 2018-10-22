@@ -4,7 +4,7 @@ import { connect } from "react-redux";
 import { postAvailabilities } from "../../store/Availability/actions.js";
 import { postHoursOfOperation } from "../../store/hourOfOperation/actions.js";
 
-import TimePicker from "../Atoms/TimePicker.js";
+import TimePicker from "./TimePicker.js";
 
 import { Portal, Accordion, Icon, Label, Segment } from "semantic-ui-react";
 

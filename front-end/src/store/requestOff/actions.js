@@ -40,7 +40,6 @@ export const postRequestOff = (
   if (token) {
     headers["Authorization"] = `Bearer ${token}`;
   }
-
   const body = JSON.stringify({
     profile,
     start_datetime,

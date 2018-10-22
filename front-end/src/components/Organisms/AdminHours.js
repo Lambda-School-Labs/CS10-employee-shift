@@ -3,8 +3,8 @@ import { connect } from "react-redux";
 
 import { updateHoursOfOperation } from "../../store/hourOfOperation/actions.js";
 
-import Availability from "../Molecules/Availability.js";
-import PostAvailability from "../Molecules/PostAvailability.js";
+import Availability from "../Atoms/Availability.js";
+import PostAvailability from "../Atoms/PostAvailability.js";
 
 import {
   AdminHoursContainer,

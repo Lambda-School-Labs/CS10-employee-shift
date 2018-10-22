@@ -1,22 +1,3 @@
-export const colors = [
-  // open shift color [0]
-  "#e0f6d8",
-  // user profile colors
-  "red",
-  "orange",
-  "yellow",
-  "olive",
-  "green",
-  "teal",
-  "blue",
-  "violet",
-  "purple",
-  "pink",
-  "brown",
-  "grey",
-  "black",
-];
-
 const size = {
   mobileS: "320px",
   mobileM: "375px",

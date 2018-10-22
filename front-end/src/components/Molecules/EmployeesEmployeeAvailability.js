@@ -1,7 +1,7 @@
 import React from "react";
 
-import Availability from "../Molecules/Availability.js";
-import PostAvailability from "../Molecules/PostAvailability.js";
+import Availability from "../Atoms/Availability.js";
+import PostAvailability from "../Atoms/PostAvailability.js";
 
 import {
   GridContainer,

@@ -28,13 +28,16 @@ class TimeOffApproved extends Component {
               if (a.start_datetime > b.start_datetime) return 1;
               else return -1;
             })
-            .map(
-              (requestOff, index) =>
-                requestOff.is_open === false &&
+            .map((requestOff, index) => {
+              if (
+                // TODO: handle is_open shift
+                requestOff.status === "A" &&
                 requestOff.end_datetime >
                   moment()
                     .utc()
-                    .format() && (
+                    .format()
+              )
+                return (
                   <Segment.Group key={index}>
                     <Segment>
                       <Label>Start :</Label>
@@ -46,13 +49,16 @@ class TimeOffApproved extends Component {
                       <Label>End :</Label>
                       {moment(requestOff.end_datetime).format("MMM Do h:mm a")}
                     </Segment>
-                    {/* <Segment>
-                    <Label>Notes :</Label>
-                    {requestOff.notes}
-                  </Segment> */}
+                    {requestOff.notes ? (
+                      <Segment>
+                        <Label>Notes :</Label>
+                        {requestOff.notes}
+                      </Segment>
+                    ) : null}
                   </Segment.Group>
-                )
-            )}
+                );
+              else return null;
+            })}
         </Segment>
       </TimeOffApprovedContainer>
     );

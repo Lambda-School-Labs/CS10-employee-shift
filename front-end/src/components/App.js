@@ -18,7 +18,7 @@ import {
 
 import Template from "./Templates/main.js";
 
-import { LoadingContainer } from "../styles/Template--main";
+import { LoadingContainer } from "../styles/Template.js";
 import { Dimmer, Loader } from "semantic-ui-react";
 
 // NOTE: This component handles our App's routing.

@@ -2,18 +2,18 @@ import React from "react";
 
 import { injectStripe, CardElement } from "react-stripe-elements";
 
-//CheckoutForm renders the input field and a button and injects
-//this.props.stripe.createToken  via props
-//The token with the encrypted credit card info is sent to my backend
+// CheckoutForm renders the input field and a button and injects
+// this.props.stripe.createToken  via props
+// The token with the encrypted credit card info is sent to my backend
 // So I can send it to stripe
 
-class CheckoutForm extends React.Component {
+class BillingCheckoutForm extends React.Component {
   state = {
     resp_message: "",
-    card_errors: ""
+    card_errors: "",
   };
   handleCardErrors = card_dets => {
-    console.log("Card Section dets", card_dets);
+    // console.log("Card Section dets", card_dets);
     if (card_dets.error) {
       this.setState({ card_errors: card_dets.error.message });
     } else {
@@ -32,13 +32,13 @@ class CheckoutForm extends React.Component {
       .createToken({ type: "card", name: " " })
       .then(result => {
         if (result.error) {
-          console.log("THERE IS AN ERROR IN YOUR FORM", result.error);
+          // console.log("THERE IS AN ERROR IN YOUR FORM", result.error);
           return this.setState({ card_errors: result.error.message });
         } else {
-          console.log(
-            "Received Stripe token ---> SENDING TO SERVER: ",
-            result.token
-          );
+          // console.log(
+          //   "Received Stripe token ---> SENDING TO SERVER: ",
+          //   result.token
+          // );
           let formData = new FormData();
           formData.append("description", "Payment for services");
           formData.append("currency", "usd");
@@ -47,9 +47,9 @@ class CheckoutForm extends React.Component {
           return fetch(`https://employeeshift.herokuapp.com/create-charge/`, {
             method: "POST",
             headers: {
-              accept: "application/json"
+              accept: "application/json",
             },
-            body: formData
+            body: formData,
           })
             .then(resp => resp.json())
             .then(json => this.setState({ resp_message: json.message }));
@@ -73,14 +73,13 @@ class CheckoutForm extends React.Component {
                   fontSmoothing: "antialiased",
                   fontSize: "16px",
                   "::placeholder": {
-                    color: "#aab7c4"
-                  }
+                    color: "#aab7c4",
+                  },
                 },
                 invalid: {
                   color: "#fa755a",
-                  iconColor: "#fa755a"
-                }
-                
+                  iconColor: "#fa755a",
+                },
               }}
               onChange={this.handleCardErrors}
             />
@@ -98,4 +97,4 @@ class CheckoutForm extends React.Component {
 //The injectStripe HOC provides the this.props.stripe property
 //You can call this.props.stripe.createToken within a component that has been
 // injected in order to submit payment data to Stripe.
-export default injectStripe(CheckoutForm);
+export default injectStripe(BillingCheckoutForm);

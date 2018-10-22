@@ -1,6 +1,6 @@
 import React, { Component } from "react";
-import SideNav from "../Organisms/SideNav.js";
-import TopNav from "../Organisms/TopNav.js";
+import SideNav from "../Organisms/SideNavigation.js";
+import TopNav from "../Organisms/TopNavigation.js";
 
 import { Link } from "react-router-dom";
 
@@ -8,9 +8,9 @@ import {
   MainContainer,
   ComponentContainer,
   MainLogo,
-} from "../../styles/Template--main.js";
+} from "../../styles/Template.js";
 
-import main_logo from "../../styles/logos/employee_scheduler2.png";
+import main_logo from "../../assets/logos/employee_scheduler2.png";
 
 import { Button, Segment, Sidebar, Icon } from "semantic-ui-react";
 

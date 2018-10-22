@@ -11,8 +11,8 @@ import { getRequestOffs } from "../../store/requestOff/actions.js";
 import { getAvailabilities } from "../../store/Availability/actions.js";
 
 import CalendarTopNav from "../Organisms/CalendarTopNav.js";
-import ScheduleShift from "../Molecules/ScheduleShift.js";
-import ScheduleShiftUpdate from "../Molecules/ScheduleShiftUpdate";
+import ScheduleShift from "../Organisms/CalendarShift.js";
+import ScheduleShiftUpdate from "../Organisms/CalendarShiftUpdate.js";
 
 import {
   GridItemHeader,
